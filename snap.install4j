@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="5.1.15" transformSequenceNumber="4">
-  <directoryPresets config="./images" />
-  <application name="ESA SNAP" distributionSourceDir="" applicationId="6882-0784-9959-6198" mediaDir="./target/snap-desktop" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="2.0" allPathsRelative="true" backupOnSave="false" autoSave="true" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="JDK 1.8">
+  <directoryPresets config="../snap-desktop/snap-application/target/snap" />
+  <application name="ESA SNAP" distributionSourceDir="" applicationId="6882-0784-9959-6198" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="2.0" allPathsRelative="true" backupOnSave="false" autoSave="true" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="JDK 1.8">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
       <additionalLanguages />
@@ -23,7 +23,16 @@
       <mountPoint id="157" root="" location="bin" mode="755" />
     </mountPoints>
     <entries>
-      <dirEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="snap" excludeSuffixes="" dirMode="755" overrideDirMode="false">
+      <dirEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/snap" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="snap" excludeSuffixes="" dirMode="755" overrideDirMode="false">
+        <exclude />
+      </dirEntry>
+      <dirEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/platform" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="platform" excludeSuffixes="" dirMode="755" overrideDirMode="false">
+        <exclude />
+      </dirEntry>
+      <dirEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/ide" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="ide" excludeSuffixes="" dirMode="755" overrideDirMode="false">
+        <exclude />
+      </dirEntry>
+      <dirEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/etc" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="etc" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
       <dirEntry mountPoint="58" file="../s3tbx/target/nbm/netbeans/s3tbx" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="s1tbx" excludeSuffixes="" dirMode="755" overrideDirMode="false">
@@ -35,7 +44,6 @@
       <dirEntry mountPoint="58" file="../s3tbx/target/nbm/netbeans/s3tbx" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="s3tbx" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
-      <fileEntry mountPoint="157" file="./target/snap.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
     </entries>
     <components>
       <component name="Sentinel-3 Toolbox" id="68" customizedId="S3TBX" displayDescription="true" hideHelpButton="false" selected="false" changeable="true" downloadable="true" hidden="false">
@@ -79,11 +87,8 @@
     </components>
   </files>
   <launchers>
-    <launcher name="Windows 64bit" id="59" customizedId="" external="true" excludeFromMenu="false" unixMode="755" menuName="SNAP Desktop" externalFile="bin\snap64.exe" />
-    <launcher name="Windows 32bit" id="60" customizedId="" external="true" excludeFromMenu="false" unixMode="755" menuName="SNAP Desktop" externalFile="bin\snap" />
-    <launcher name="Unix" id="61" customizedId="" external="true" excludeFromMenu="false" unixMode="755" menuName="SNAPO Desktop" externalFile="bin\snap.exe" />
-    <launcher name="runsnap" id="171" customizedId="" external="false" excludeFromMenu="false" unixMode="755" menuName="" icnsFile="./images/SNAP_Icon_128.icns" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="false" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="">
-      <executable name="runsnap" type="1" iconSet="true" iconFile="./images/SNAP_Icon_128.ico" executableDir="bin" redirectStderr="true" stderrFile="error.log" stderrMode="overwrite" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory=".." singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false" singleInstanceActivate="true">
+    <launcher name="snap-desktop" id="171" customizedId="" external="false" excludeFromMenu="false" unixMode="755" menuName="" icnsFile="./images/SNAP_Icon_128.icns" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="false" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="">
+      <executable name="snap-desktop" type="1" iconSet="true" iconFile="./images/SNAP_Icon_128.ico" executableDir="bin" redirectStderr="true" stderrFile="error.log" stderrMode="overwrite" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory=".." singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false" singleInstanceActivate="true">
         <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="" productName="" />
       </executable>
       <splashScreen show="false" autoOff="true" alwaysOnTop="true" width="0" height="0" bitmapFile="" java6SplashScreen="false">
@@ -92,7 +97,7 @@
           <versionLine x="20" y="40" text="version ${compiler:sys.version}" font="Arial" fontSize="8" fontColor="0,0,0" fontWeight="500" />
         </text>
       </splashScreen>
-      <java mainClass="org.esa.snap.nbexec.Launcher" vmParameters="&quot;-Dsnap.home=${installer:sys.installationDir}&quot;" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
+      <java mainClass="org.esa.snap.nbexec.Launcher" vmParameters="&quot;-Dsnap.home=${installer:sys.installationDir}&quot;" arguments="--branding snap --locale en_GB" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
         <classPath>
           <archive location="snap/modules/ext/org.esa.snap.snap-rcp/org-esa-snap/nbexec.jar" failOnError="false" />
         </classPath>
@@ -100,8 +105,22 @@
       </java>
       <includedFiles />
       <unextractableFiles />
-      <vmOptionsFile mode="template" overwriteMode="0" fileMode="644">
-        <content />
+      <vmOptionsFile mode="content" overwriteMode="0" fileMode="644">
+        <content># Enter one VM parameter per line
+# For example, to adjust the maximum memory usage to 512 MB, uncomment the following line:
+# -Xmx512m
+# To include another file, uncomment the following line:
+# -include-options [path to other .vmoption file]
+# 
+# Default options:
+-Xms24m
+-Dsun.java2d.noddraw=true
+-Dsun.awt.nopixfmt=true
+-Dsun.java2d.dpiaware=false
+#
+# for development purposes you may wish to append:
+#-Dnetbeans.logger.console=true
+#-ea</content>
       </vmOptionsFile>
       <customScript mode="1" file="">
         <content />
@@ -443,7 +462,7 @@
                     <object class="com.install4j.runtime.beans.actions.desktop.AddToDockAction">
                       <void property="executable">
                         <object class="java.io.File">
-                          <string>bin/snap</string>
+                          <string>bin/snap-desktop</string>
                         </object>
                       </void>
                     </object>
@@ -451,101 +470,26 @@
                 </serializedBean>
                 <condition>context.getBooleanVariable("addToDockAction")</condition>
               </action>
-              <action name="Execute Windows 32bit launcher" id="147" customizedId="" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" enabled="true" commentSet="false" comment="" actionElevationType="none" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+              <action name="" id="181" customizedId="" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" enabled="true" commentSet="false" comment="" actionElevationType="none" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction">
                       <void property="launcherId">
-                        <string>60</string>
+                        <string>171</string>
                       </void>
                     </object>
                   </java>
                 </serializedBean>
-                <condition>context.getBooleanVariable("executeWin32Launcher") &amp;&amp; !context.isUnattended()</condition>
-              </action>
-              <action name="Execute Windows 64bit launcher" id="148" customizedId="" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" enabled="true" commentSet="false" comment="" actionElevationType="none" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction">
-                      <void property="launcherId">
-                        <string>59</string>
-                      </void>
-                    </object>
-                  </java>
-                </serializedBean>
-                <condition>context.getBooleanVariable("executeWin64Launcher") &amp;&amp; !context.isUnattended()</condition>
-              </action>
-              <action name="Execute Unix launcher" id="144" customizedId="" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" enabled="true" commentSet="false" comment="" actionElevationType="none" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction">
-                      <void property="launcherId">
-                        <string>61</string>
-                      </void>
-                    </object>
-                  </java>
-                </serializedBean>
-                <condition>context.getBooleanVariable("executeUnixLauncher") &amp;&amp; !context.isUnattended()</condition>
+                <condition>context.getBooleanVariable("executeLauncherAction") &amp;&amp; (!context.isUnattended())</condition>
               </action>
             </actions>
             <formComponents>
-              <formComponent name="Execute Windows 32bit launcher" id="146" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
-                      <void property="checkboxText">
-                        <string>Run SNAP Desktop</string>
-                      </void>
-                      <void property="variableName">
-                        <string>executeWin32Launcher</string>
-                      </void>
-                    </object>
-                  </java>
-                </serializedBean>
-                <initScript />
-                <visibilityScript>Util.isWindowsInstaller() &amp;&amp; !Util.is64BitWindows()</visibilityScript>
-              </formComponent>
-              <formComponent name="Execute Windows 64bit launcher" id="145" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
-                      <void property="checkboxText">
-                        <string>Run SNAP Desktop</string>
-                      </void>
-                      <void property="variableName">
-                        <string>executeWin64Launcher</string>
-                      </void>
-                    </object>
-                  </java>
-                </serializedBean>
-                <initScript />
-                <visibilityScript>Util.is64BitWindows()</visibilityScript>
-              </formComponent>
-              <formComponent name="Execute Unix launcher" id="135" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
-                      <void property="checkboxText">
-                        <string>Run SNAP Desktop</string>
-                      </void>
-                      <void property="variableName">
-                        <string>executeUnixLauncher</string>
-                      </void>
-                    </object>
-                  </java>
-                </serializedBean>
-                <initScript />
-                <visibilityScript>!Util.isWindowsInstaller()</visibilityScript>
-              </formComponent>
               <formComponent name="Add an executable to the dock" id="143" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
                       <void property="checkboxText">
                         <string>${i18n:AddToDock}</string>
-                      </void>
-                      <void property="initiallySelected">
-                        <boolean>true</boolean>
                       </void>
                       <void property="variableName">
                         <string>addToDockAction</string>
@@ -556,15 +500,12 @@
                 <initScript />
                 <visibilityScript>Util.isMacOS()</visibilityScript>
               </formComponent>
-              <formComponent name="Execute launcher" id="161" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+              <formComponent name="Execute launcher" id="182" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
                       <void property="checkboxText">
                         <string>${i18n:RunEntryExec("${compiler:sys.fullName}")}</string>
-                      </void>
-                      <void property="helpText">
-                        <string>The real launcher!</string>
                       </void>
                       <void property="initiallySelected">
                         <boolean>true</boolean>
