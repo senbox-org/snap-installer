@@ -1,0 +1,11 @@
+* Components screen:
+*- Ask Luis for downloadable components, so we don't need to bundle them
+
+* Python screen:
+*- Check for valid python executable: does it execute? Is 32bit/64bit-ness ok (on windows)?
+*- Use pythonExecutable from installer --> replace ${pythonExecutable} in config/snap.config
+
+* File associations screen:
+*- Must allow nbexec to have arguments and snap-rcp to honour these
+*- Can we have sessions in SNAP 2?
+
