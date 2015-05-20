@@ -87,9 +87,9 @@
     </components>
   </files>
   <launchers>
-    <launcher name="snap-desktop" id="171" customizedId="" external="false" excludeFromMenu="false" unixMode="755" menuName="" icnsFile="./images/SNAP_Icon_128.icns" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="false" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="">
-      <executable name="snap-desktop" type="1" iconSet="true" iconFile="./images/SNAP_Icon_128.ico" executableDir="bin" redirectStderr="true" stderrFile="error.log" stderrMode="overwrite" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory=".." singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false" singleInstanceActivate="true">
-        <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="" productName="" />
+    <launcher name="snap-desktop" id="171" customizedId="" external="false" excludeFromMenu="false" unixMode="755" menuName="SNAP Desktop" icnsFile="./images/SNAP_Icon_128.icns" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="false" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="">
+      <executable name="snap-desktop" type="1" iconSet="true" iconFile="./images/SNAP_Icon_128.ico" executableDir="bin" redirectStderr="true" stderrFile="snap-desktop.log" stderrMode="overwrite" redirectStdout="true" stdoutFile="snap-desktop.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory=".." singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false" singleInstanceActivate="true">
+        <versionInfo include="true" fileVersion="${compiler:sys.version}" fileDescription="SNAP Desktop Application" legalCopyright="Copyright (C) 2015-2017 by European Space Agency (ESA) " internalName="org.esa.snap.snap-desktop" productName="${compiler:sys.fullName}" />
       </executable>
       <splashScreen show="false" autoOff="true" alwaysOnTop="true" width="0" height="0" bitmapFile="" java6SplashScreen="false">
         <text>
@@ -97,7 +97,7 @@
           <versionLine x="20" y="40" text="version ${compiler:sys.version}" font="Arial" fontSize="8" fontColor="0,0,0" fontWeight="500" />
         </text>
       </splashScreen>
-      <java mainClass="org.esa.snap.nbexec.Launcher" vmParameters="&quot;-Dsnap.home=${installer:sys.installationDir}&quot;" arguments="--branding snap --locale en_GB" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
+      <java mainClass="org.esa.snap.nbexec.Launcher" vmParameters="&quot;-Dsnap.home=${installer:sys.installationDir}&quot;" arguments="--branding snap --locale en_GB --userdir &quot;${installer:sys.userHome}/.snap&quot;" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
         <classPath>
           <archive location="snap/modules/ext/org.esa.snap.snap-rcp/org-esa-snap/nbexec.jar" failOnError="false" />
         </classPath>
@@ -326,22 +326,46 @@
             <postActivation />
             <actions />
             <formComponents>
-              <formComponent name="" id="234" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+              <group name="" id="249" customizedId="" beanClass="com.install4j.runtime.beans.groups.HorizontalFormComponentGroup" enabled="true" commentSet="false" comment="" actionElevationType="inherit">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
-                      <void property="labelHtml">
-                        <string>&lt;html&gt;If you are a Python developer, you can use the SNAP Java API from Python or you can 
+                    <object class="com.install4j.runtime.beans.groups.HorizontalFormComponentGroup" />
+                  </java>
+                </serializedBean>
+                <beans>
+                  <formComponent name="" id="248" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.LabelComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+                    <serializedBean>
+                      <java class="java.beans.XMLDecoder">
+                        <object class="com.install4j.runtime.beans.formcomponents.LabelComponent">
+                          <void property="labelIconFile">
+                            <object class="com.install4j.api.beans.ExternalFile">
+                              <string>./images/python-powered.png</string>
+                            </object>
+                          </void>
+                        </object>
+                      </java>
+                    </serializedBean>
+                    <initScript />
+                    <visibilityScript />
+                  </formComponent>
+                  <formComponent name="" id="234" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+                    <serializedBean>
+                      <java class="java.beans.XMLDecoder">
+                        <object class="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
+                          <void property="labelHtml">
+                            <string>&lt;html&gt;If you are a Python developer, you can use the SNAP Java API from Python or you can 
 even develop Python extensions for SNAP. Here you can specify your preferred Python version by 
 the given Python executable to be used. Only &lt;a href="https://www.python.org/downloads/"&gt;Python&lt;/a&gt; versions &lt;b&gt;2.7&lt;/b&gt;, &lt;b&gt;3.3&lt;/b&gt; and &lt;b&gt;3.4&lt;/b&gt; 
 are supported.</string>
-                      </void>
-                    </object>
-                  </java>
-                </serializedBean>
-                <initScript />
-                <visibilityScript />
-              </formComponent>
+                          </void>
+                        </object>
+                      </java>
+                    </serializedBean>
+                    <initScript />
+                    <visibilityScript />
+                  </formComponent>
+                </beans>
+              </group>
               <formComponent name="" id="233" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
@@ -378,27 +402,24 @@ are supported.</string>
                           <void property="value">
                             <string>boolean success = true;
 
-Util.dumpVariables(context);
-Object value = context.getVariable("pythonExecutable");
-Util.showMessage(value != null ? value.getClass().getName() : "null");
-
-String pythonExecutable = (String) context.getVariable("pythonExecutable");
-if (pythonExecutable != null &amp;&amp; !pythonExecutable.isEmpty()) {
-    ProcessBuilder pb = new ProcessBuilder().command(new String[]{pythonExecutable});
-    // TODO: redirect Python output and display in a form
+String pythonExecutable = file.getPath();
+if (!pythonExecutable.isEmpty()) {
+    ProcessBuilder pb = new ProcessBuilder().command(new String[]{file.getPath(), "--version"});
     try {
-        pb.start();
+        Process p = pb.start();
+        // TODO: redirect Python output (= Python version) and validate
+        int exitCode = p.waitFor();
+        if (exitCode != 0) {
+            Util.showErrorMessage("'" + file.getName() + "' failed with exit code " + exitCode);
+            success = false;
+        }
     } catch (Throwable t) {
-        Util.showWarningMessage("ERROR: " + t.getMessage());
-        Util.printAnnotatedStackTrace(t);
+        Util.showErrorMessage("'" + file.getName() + "' failed: " + t.getMessage());
         success = false;
     }
 }
 
 return success;
-
-
-
 </string>
                           </void>
                         </object>
@@ -526,35 +547,6 @@ return success;
                   </action>
                 </beans>
               </group>
-              <action name="" id="156" customizedId="" beanClass="com.install4j.runtime.beans.actions.files.SetModeAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.actions.files.SetModeAction">
-                      <void property="files">
-                        <array class="java.io.File" length="2">
-                          <void index="0">
-                            <object class="java.io.File">
-                              <string>bin</string>
-                            </object>
-                          </void>
-                          <void index="1">
-                            <object class="java.io.File">
-                              <string>bin/snap</string>
-                            </object>
-                          </void>
-                        </array>
-                      </void>
-                      <void property="mode">
-                        <string>777</string>
-                      </void>
-                      <void property="recursive">
-                        <boolean>true</boolean>
-                      </void>
-                    </object>
-                  </java>
-                </serializedBean>
-                <condition />
-              </action>
             </actions>
             <formComponents />
           </screen>
