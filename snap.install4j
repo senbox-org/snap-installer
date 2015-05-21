@@ -39,7 +39,7 @@
       <dirEntry mountPoint="58" file="../s1tbx/target/nbm/netbeans/s1tbx" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="s1tbx" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
-      <dirEntry mountPoint="58" file="../s2tbx/target/nbm/netbeans/s2tbx" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="s2tbx" excludeSuffixes="" dirMode="755" overrideDirMode="false">
+      <dirEntry mountPoint="58" file="../s2tbx/target/nbm/netbeans/extra" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="s2tbx" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
       <dirEntry mountPoint="58" file="../s3tbx/target/nbm/netbeans/s3tbx" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="s3tbx" excludeSuffixes="" dirMode="755" overrideDirMode="false">
@@ -927,7 +927,7 @@ return success;
     </applications>
   </installerGui>
   <mediaSets>
-    <windows name="Windows 64bit" id="56" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="windows-amd64-1.8.0_45" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" downloadURL="" verifyIntegrity="true">
+    <windows name="Windows 64bit" id="56" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="windows-amd64-1.8.0_45" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="3" downloadURL="http://s3.amazonaws.com/esa_snap/release/2.0/" verifyIntegrity="true">
       <excludedLaunchers>
         <launcher id="60" />
         <launcher id="61" />
@@ -946,7 +946,7 @@ return success;
       <excludedComponents />
       <includedDownloadableComponents />
     </windows>
-    <windows name="Windows 32bit" id="63" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="32" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="windows-x86-1.8.0_45" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" downloadURL="" verifyIntegrity="true">
+    <windows name="Windows 32bit" id="63" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="32" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="windows-x86-1.8.0_45" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="3" downloadURL="http://s3.amazonaws.com/esa_snap/release/2.0/" verifyIntegrity="true">
       <excludedLaunchers>
         <launcher id="59" />
         <launcher id="61" />
@@ -965,7 +965,7 @@ return success;
       <excludedComponents />
       <includedDownloadableComponents />
     </windows>
-    <macosFolder name="Mac OS X Folder" id="64" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="macosx-amd64-1.8.0_45" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" appleJre="false" requiredVmIdPrefix="" customInstallBaseDir="" contentFilesType="1" downloadURL="" signLaunchers="false">
+    <macosFolder name="Mac OS X Folder" id="64" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="macosx-amd64-1.8.0_45" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" appleJre="false" requiredVmIdPrefix="" customInstallBaseDir="" contentFilesType="3" downloadURL="http://s3.amazonaws.com/esa_snap/release/2.0/" signLaunchers="false">
       <excludedLaunchers>
         <launcher id="59" />
         <launcher id="60" />
@@ -984,7 +984,7 @@ return success;
       <excludedComponents />
       <includedDownloadableComponents />
     </macosFolder>
-    <unixInstaller name="Unix Installer" id="65" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="" manualJREEntry="false" bundleType="2" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" downloadURL="">
+    <unixInstaller name="Unix Installer" id="65" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="" manualJREEntry="false" bundleType="2" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="3" downloadURL="http://s3.amazonaws.com/esa_snap/release/2.0/">
       <excludedLaunchers>
         <launcher id="59" />
         <launcher id="60" />
@@ -1007,7 +1007,7 @@ return success;
       </installerScript>
     </unixInstaller>
   </mediaSets>
-  <buildIds buildAll="false">
+  <buildIds buildAll="true">
     <mediaSet refId="56" />
   </buildIds>
   <buildOptions verbose="false" faster="false" disableSigning="false" debug="false" />
