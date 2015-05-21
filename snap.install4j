@@ -158,7 +158,7 @@
           <versionLine x="20" y="40" text="version ${compiler:sys.version}" font="Arial" fontSize="8" fontColor="0,0,0" fontWeight="500" />
         </text>
       </splashScreen>
-      <java mainClass="org.esa.snap.core.Launcher" vmParameters="&quot;-Dsnap.home=${installer:sys.installationDir}&quot; -Dsnap.mainClass=org.esa.snap.framework.gpf.main.GPT" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
+      <java mainClass="org.esa.snap.core.engine.Launcher" vmParameters="&quot;-Dsnap.home=${installer:sys.installationDir}&quot; -Dsnap.mainClass=org.esa.snap.framework.gpf.main.GPT" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
         <classPath>
           <archive location="bin/snap-launcher.jar" failOnError="false" />
         </classPath>
