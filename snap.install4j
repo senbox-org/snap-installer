@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="5.1.15" transformSequenceNumber="4">
-  <directoryPresets config="../snap-engine/snap-launcher/target/snap-launcher.jar" />
+  <directoryPresets config="../snap-desktop/nbexec/bin/restart.sh" />
   <application name="ESA SNAP" distributionSourceDir="" applicationId="6882-0784-9959-6198" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="true" createMd5Sums="true" shrinkRuntime="true" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="2.0" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="JDK 1.8">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
@@ -11,7 +11,10 @@
       <envVar name="JAVA_HOME" />
       <envVar name="JDK_HOME" />
     </searchSequence>
-    <variables />
+    <variables>
+      <variable name="snapDesktopName" value="snap-desktop" description="" category="" />
+      <variable name="snapGptName" value="snap-gpt" description="" category="" />
+    </variables>
     <mergedProjects />
     <codeSigning macEnabled="false" macPkcs12File="" windowsEnabled="false" windowsKeySource="pkcs12" windowsPvkFile="" windowsSpcFile="" windowsPkcs12File="" />
   </application>
@@ -24,6 +27,8 @@
     </mountPoints>
     <entries>
       <fileEntry mountPoint="157" file="../snap-engine/snap-launcher/target/snap-launcher.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="157" file="../snap-desktop/nbexec/bin/restart.sh" overwriteMode="4" shared="false" fileMode="755" uninstallMode="0" overrideFileMode="true" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="157" file="../snap-desktop/nbexec/bin/restart.bat" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <dirEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/snap" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="snap" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
@@ -88,7 +93,7 @@
           <component id="76" />
         </dependencies>
       </component>
-      <component name="Radarsat-2 Toolbox" id="306" customizedId="" displayDescription="true" hideHelpButton="false" selected="false" changeable="true" downloadable="true" hidden="false">
+      <component name="Radarsat-2 Toolbox" id="306" customizedId="RSTB" displayDescription="true" hideHelpButton="false" selected="false" changeable="true" downloadable="true" hidden="false">
         <description>SAR Polarimetric Tools</description>
         <include all="false">
           <entry location="rstb" fileType="regular" />
@@ -102,7 +107,7 @@
   </files>
   <launchers>
     <launcher name="snap-desktop" id="171" customizedId="" external="false" excludeFromMenu="false" unixMode="755" menuName="SNAP Desktop" icnsFile="./images/SNAP_Icon_128.icns" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="false" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="">
-      <executable name="snap-desktop" type="1" iconSet="true" iconFile="./images/SNAP_Icon_128.ico" executableDir="bin" redirectStderr="true" stderrFile="snap-desktop.log" stderrMode="overwrite" redirectStdout="true" stdoutFile="snap-desktop.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory=".." singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false" singleInstanceActivate="true">
+      <executable name="${compiler:snapDesktopName}" type="1" iconSet="true" iconFile="./images/SNAP_Icon_128.ico" executableDir="bin" redirectStderr="true" stderrFile="snap-desktop.log" stderrMode="overwrite" redirectStdout="true" stdoutFile="snap-desktop.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory=".." singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false" singleInstanceActivate="true">
         <versionInfo include="true" fileVersion="${compiler:sys.version}" fileDescription="SNAP Desktop Application" legalCopyright="Copyright (C) 2015-2017 by European Space Agency (ESA) " internalName="org.esa.snap.snap-desktop" productName="${compiler:sys.fullName}" />
       </executable>
       <splashScreen show="false" autoOff="true" alwaysOnTop="true" width="0" height="0" bitmapFile="" java6SplashScreen="false">
@@ -149,7 +154,7 @@
       </iconImageFiles>
     </launcher>
     <launcher name="snap-gpt" id="305" customizedId="" external="false" excludeFromMenu="false" unixMode="755" menuName="" icnsFile="./images/SNAP_Icon_128.icns" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="false" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="">
-      <executable name="snap-gpt" type="1" iconSet="true" iconFile="./images/SNAP_Icon_128.ico" executableDir="bin" redirectStderr="false" stderrFile="error.log" stderrMode="overwrite" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="2" changeWorkingDirectory="true" workingDirectory=".." singleInstance="false" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false" singleInstanceActivate="true">
+      <executable name="${compiler:snapGptName}" type="1" iconSet="true" iconFile="./images/SNAP_Icon_128.ico" executableDir="bin" redirectStderr="false" stderrFile="error.log" stderrMode="overwrite" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="2" changeWorkingDirectory="true" workingDirectory=".." singleInstance="false" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false" singleInstanceActivate="true">
         <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="" productName="" />
       </executable>
       <splashScreen show="false" autoOff="true" alwaysOnTop="true" width="0" height="0" bitmapFile="" java6SplashScreen="false">
@@ -270,11 +275,11 @@
           <screen name="" id="133" customizedId="" beanClass="com.install4j.runtime.beans.screens.LicenseScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
             <serializedBean>
               <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.screens.LicenseScreen" id="LicenseScreen0">
+                <object class="com.install4j.runtime.beans.screens.LicenseScreen">
                   <void property="acceptInitiallySelected">
                     <boolean>true</boolean>
                   </void>
-                  <void id="LocalizedExternalFile0" property="displayedTextFile">
+                  <void property="displayedTextFile">
                     <void property="languageIdToExternalFile">
                       <void method="put">
                         <string>en</string>
@@ -416,7 +421,7 @@ are supported.</string>
               <formComponent name="" id="233" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent" id="CheckboxComponent0">
+                    <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
                       <void property="checkboxText">
                         <string>Force SNAP to use the given Python version </string>
                       </void>
@@ -614,6 +619,29 @@ return success;
                   </action>
                 </beans>
               </group>
+              <action name="Add restarter" id="419" customizedId="" beanClass="com.install4j.runtime.beans.actions.text.ReplaceInstallerVariablesAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.text.ReplaceInstallerVariablesAction">
+                      <void property="files">
+                        <array class="java.io.File" length="2">
+                          <void index="0">
+                            <object class="java.io.File">
+                              <string>bin/restart.bat</string>
+                            </object>
+                          </void>
+                          <void index="1">
+                            <object class="java.io.File">
+                              <string>bin/restart.sh</string>
+                            </object>
+                          </void>
+                        </array>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition />
+              </action>
             </actions>
             <formComponents />
           </screen>
@@ -935,8 +963,7 @@ return success;
       <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
-        <entry location="bin/snap" fileType="regular" />
-        <entry location="bin/snap.exe" fileType="regular" />
+        <entry location="bin/restart.sh" fileType="regular" />
       </exclude>
       <variables />
       <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
@@ -954,8 +981,7 @@ return success;
       <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
-        <entry location="bin/snap" fileType="regular" />
-        <entry location="bin/snap64.exe" fileType="regular" />
+        <entry location="bin/restart.sh" fileType="regular" />
       </exclude>
       <variables />
       <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
@@ -965,7 +991,7 @@ return success;
       <excludedComponents />
       <includedDownloadableComponents />
     </windows>
-    <macosFolder name="Mac OS X Folder" id="64" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="macosx-amd64-1.8.0_45" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" appleJre="false" requiredVmIdPrefix="" customInstallBaseDir="" contentFilesType="3" downloadURL="http://s3.amazonaws.com/esa_snap/release/2.0/" signLaunchers="false">
+    <macosFolder name="Mac OS X Folder" id="64" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="macosx-amd64-1.8.0_45_unpacked" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" appleJre="false" requiredVmIdPrefix="" customInstallBaseDir="" contentFilesType="3" downloadURL="http://s3.amazonaws.com/esa_snap/release/2.0/" signLaunchers="false">
       <excludedLaunchers>
         <launcher id="59" />
         <launcher id="60" />
@@ -973,8 +999,7 @@ return success;
       <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
-        <entry location="bin/snap.exe" fileType="regular" />
-        <entry location="bin/snap64.exe" fileType="regular" />
+        <entry location="bin/restart.bat" fileType="regular" />
       </exclude>
       <variables />
       <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
@@ -992,8 +1017,7 @@ return success;
       <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
-        <entry location="bin/snap.exe" fileType="regular" />
-        <entry location="bin/snap64.exe" fileType="regular" />
+        <entry location="bin/restart.bat" fileType="regular" />
       </exclude>
       <variables />
       <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
@@ -1007,7 +1031,7 @@ return success;
       </installerScript>
     </unixInstaller>
   </mediaSets>
-  <buildIds buildAll="true">
+  <buildIds buildAll="false">
     <mediaSet refId="56" />
   </buildIds>
   <buildOptions verbose="false" faster="false" disableSigning="false" debug="false" />
