@@ -12,8 +12,8 @@
       <envVar name="JDK_HOME" />
     </searchSequence>
     <variables>
-      <variable name="snapDesktopName" value="snap-desktop" description="" category="" />
-      <variable name="snapGptName" value="snap-gpt" description="" category="" />
+      <variable name="snapDesktopName" value="snap" description="" category="" />
+      <variable name="snapGptName" value="gpt" description="" category="" />
     </variables>
     <mergedProjects />
     <codeSigning macEnabled="false" macPkcs12File="" windowsEnabled="false" windowsKeySource="pkcs12" windowsPvkFile="" windowsSpcFile="" windowsPkcs12File="" />
@@ -1032,7 +1032,7 @@ return success;
     </unixInstaller>
   </mediaSets>
   <buildIds buildAll="false">
-    <mediaSet refId="56" />
+    <mediaSet refId="64" />
   </buildIds>
   <buildOptions verbose="false" faster="false" disableSigning="false" debug="false" />
 </install4j>
