@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="5.1.15" transformSequenceNumber="4">
-  <directoryPresets config="./images" />
+  <directoryPresets config="../snap-engine/etc/snap..properties" />
   <application name="ESA SNAP" distributionSourceDir="" applicationId="0941-5747-6134-5911" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="true" createMd5Sums="true" shrinkRuntime="true" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="2.0-alpha-01" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="JDK 1.8">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
@@ -16,6 +16,7 @@
       <variable name="snapGptName" value="gpt" description="" category="" />
       <variable name="snapPconvertName" value="pconvert" description="" category="" />
       <variable name="snapDesktopMenuName" value="SNAP Desktop" description="" category="" />
+      <variable name="snapGptMenuName" value="SNAP GPT" description="" category="" />
     </variables>
     <mergedProjects />
     <codeSigning macEnabled="false" macPkcs12File="" windowsEnabled="false" windowsKeySource="pkcs12" windowsPvkFile="" windowsSpcFile="" windowsPkcs12File="" />
@@ -44,6 +45,7 @@
     </mountPoints>
     <entries>
       <fileEntry mountPoint="646" file="../snap-desktop/snap-application/target/snap/etc/snap.clusters" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="646" file="../snap-engine/etc/snap..properties" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <dirEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/snap" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="snap" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
@@ -82,11 +84,12 @@
       <component name="SNAP" id="76" customizedId="SNAP" displayDescription="true" hideHelpButton="false" selected="true" changeable="false" downloadable="false" hidden="false">
         <description>Sentinels Application Platform.</description>
         <include all="false">
+          <entry location="bin" fileType="regular" />
+          <entry location="etc" fileType="regular" />
           <entry location="snap" fileType="regular" />
           <entry location="platform" fileType="regular" />
           <entry location="ide" fileType="regular" />
-          <entry location="bin" fileType="regular" />
-          <entry location="etc" fileType="regular" />
+          <entry location="${compiler:snapGptName}" fileType="launcher" />
           <entry location=".i4j_fileset_634" fileType="regular" />
           <entry location=".i4j_fileset_637" fileType="regular" />
           <entry location=".i4j_fileset_639" fileType="regular" />
@@ -138,6 +141,35 @@
     <launcher name="SNAP Desktop Unix" id="539" customizedId="" external="true" excludeFromMenu="false" unixMode="755" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap" />
     <launcher name="SNAP Desktop Mac OS" id="618" customizedId="" external="true" excludeFromMenu="false" unixMode="755" menuName="${compiler:snapDesktopMenuName}" externalFile="bin/snap.app" />
     <launcher name="SNAP Desktop Win x64" id="656" customizedId="" external="true" excludeFromMenu="false" unixMode="755" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap64.exe" />
+    <launcher name="SNAP GPT" id="781" customizedId="" external="false" excludeFromMenu="false" unixMode="755" menuName="${compiler:snapGptMenuName}" icnsFile="" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="false" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="">
+      <executable name="${compiler:snapGptName}" type="1" iconSet="false" iconFile="" executableDir="bin" redirectStderr="false" stderrFile="error.log" stderrMode="overwrite" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="2" changeWorkingDirectory="true" workingDirectory=".." singleInstance="false" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false" singleInstanceActivate="true">
+        <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="" productName="" />
+      </executable>
+      <splashScreen show="false" autoOff="true" alwaysOnTop="true" width="0" height="0" bitmapFile="" java6SplashScreen="false">
+        <text>
+          <statusLine x="20" y="20" text="" font="Arial" fontSize="8" fontColor="0,0,0" fontWeight="500" />
+          <versionLine x="20" y="40" text="version ${compiler:sys.version}" font="Arial" fontSize="8" fontColor="0,0,0" fontWeight="500" />
+        </text>
+      </splashScreen>
+      <java mainClass="org.esa.snap.runtime.Launcher" vmParameters="-Dsnap.mainClass=org.esa.snap.framework.gpf.main.GPT &quot;-Dsnap.home=${installer:sys.installationDir}&quot;" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
+        <classPath>
+          <archive location="snap/modules/ext/org.esa.snap.snap-core/org-esa-snap/snap-runtime.jar" failOnError="false" />
+        </classPath>
+        <nativeLibraryDirectories />
+      </java>
+      <includedFiles />
+      <unextractableFiles />
+      <vmOptionsFile mode="template" overwriteMode="0" fileMode="644">
+        <content />
+      </vmOptionsFile>
+      <customScript mode="1" file="">
+        <content />
+      </customScript>
+      <infoPlist mode="1" file="">
+        <content />
+      </infoPlist>
+      <iconImageFiles />
+    </launcher>
   </launchers>
   <installerGui installerType="1" addOnAppId="" suggestPreviousLocations="true" autoUpdateDescriptorUrl="" useAutoUpdateBaseUrl="false" autoUpdateBaseUrl="">
     <customCode />
@@ -713,6 +745,18 @@ return success;
                 </serializedBean>
                 <condition>context.getBooleanVariable("executeLauncherAction") &amp;&amp; (!context.isUnattended()) &amp;&amp; Util.isMacosInstaller()</condition>
               </action>
+              <action name="Win x86" id="858" customizedId="" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" enabled="true" commentSet="false" comment="" actionElevationType="none" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction">
+                      <void property="launcherId">
+                        <string>538</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition>context.getBooleanVariable("executeLauncherAction") &amp;&amp; (!context.isUnattended()) &amp;&amp; Util.isWindowsInstaller() &amp;&amp; !Util.is64BitWindows()</condition>
+              </action>
               <action name="Win x64" id="660" customizedId="" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" enabled="true" commentSet="false" comment="" actionElevationType="none" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
@@ -724,33 +768,6 @@ return success;
                   </java>
                 </serializedBean>
                 <condition>context.getBooleanVariable("executeLauncherAction") &amp;&amp; (!context.isUnattended()) &amp;&amp; Util.isWindowsInstaller() &amp;&amp; Util.is64BitWindows()</condition>
-              </action>
-              <action name="Win x64" id="673" customizedId="" beanClass="com.install4j.runtime.beans.actions.desktop.CreateDesktopLinkAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.actions.desktop.CreateDesktopLinkAction">
-                      <void property="file">
-                        <object class="java.io.File">
-                          <string>bin/snap64.exe</string>
-                        </object>
-                      </void>
-                      <void property="name">
-                        <string>${compiler:snapDesktopMenuName}</string>
-                      </void>
-                      <void property="startIn">
-                        <object class="java.io.File">
-                          <string>.</string>
-                        </object>
-                      </void>
-                      <void property="winIconFile">
-                        <object class="com.install4j.api.beans.ExternalFile">
-                          <string>./images/SNAP_Icon_128.ico</string>
-                        </object>
-                      </void>
-                    </object>
-                  </java>
-                </serializedBean>
-                <condition>context.getBooleanVariable("createDesktopLinkAction") &amp;&amp; Util.isWindowsInstaller() &amp;&amp; Util.is64BitWindows()</condition>
               </action>
               <action name="Win x86" id="675" customizedId="" beanClass="com.install4j.runtime.beans.actions.desktop.CreateDesktopLinkAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
@@ -778,6 +795,33 @@ return success;
                   </java>
                 </serializedBean>
                 <condition>context.getBooleanVariable("createDesktopLinkAction") &amp;&amp; Util.isWindowsInstaller() &amp;&amp; !Util.is64BitWindows()</condition>
+              </action>
+              <action name="Win x64" id="673" customizedId="" beanClass="com.install4j.runtime.beans.actions.desktop.CreateDesktopLinkAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.desktop.CreateDesktopLinkAction">
+                      <void property="file">
+                        <object class="java.io.File">
+                          <string>bin/snap64.exe</string>
+                        </object>
+                      </void>
+                      <void property="name">
+                        <string>${compiler:snapDesktopMenuName}</string>
+                      </void>
+                      <void property="startIn">
+                        <object class="java.io.File">
+                          <string>.</string>
+                        </object>
+                      </void>
+                      <void property="winIconFile">
+                        <object class="com.install4j.api.beans.ExternalFile">
+                          <string>./images/SNAP_Icon_128.ico</string>
+                        </object>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition>context.getBooleanVariable("createDesktopLinkAction") &amp;&amp; Util.isWindowsInstaller() &amp;&amp; Util.is64BitWindows()</condition>
               </action>
             </actions>
             <formComponents>
@@ -945,7 +989,7 @@ return success;
     </applications>
   </installerGui>
   <mediaSets>
-    <windows name="Windows 64bit" id="56" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="windows-amd64-1.8.0_45" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="3" downloadURL="http://s3.amazonaws.com/esa_snap/release/2.0/" verifyIntegrity="true">
+    <windows name="Windows x64" id="56" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="windows-amd64-1.8.0_45" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="3" downloadURL="http://s3.amazonaws.com/esa_snap/release/2.0/" verifyIntegrity="true">
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="539" />
@@ -1015,9 +1059,66 @@ return success;
         <content />
       </installerScript>
     </unixInstaller>
+    <windows name="Windows x86" id="854" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="32" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="windows-x86-1.8.0_45" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="3" downloadURL="http://s3.amazonaws.com/esa_snap/release/2.0/" verifyIntegrity="true">
+      <excludedLaunchers>
+        <launcher id="539" />
+        <launcher id="618" />
+        <launcher id="656" />
+      </excludedLaunchers>
+      <excludedBeans />
+      <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
+      <exclude>
+        <entry location=".i4j_fileset_634" fileType="regular" />
+        <entry location=".i4j_fileset_639" fileType="regular" />
+        <entry location=".i4j_fileset_641" fileType="regular" />
+      </exclude>
+      <variables />
+      <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
+        <commentFiles />
+        <customAttributes />
+      </autoUpdate>
+      <excludedComponents />
+      <includedDownloadableComponents />
+    </windows>
+    <unixArchive name="Engine Unix Archive" id="859" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="" manualJREEntry="false">
+      <excludedLaunchers>
+        <launcher id="538" />
+        <launcher id="539" />
+        <launcher id="618" />
+        <launcher id="656" />
+      </excludedLaunchers>
+      <excludedBeans />
+      <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
+      <exclude>
+        <entry location="snap/modules/ext/org.esa.snap.ceres-ui" fileType="regular" />
+        <entry location="snap/modules/ext/org.esa.snap.snap-rcp" fileType="regular" />
+        <entry location="snap/modules/ext/org.esa.snap.snap-sta-ui" fileType="regular" />
+        <entry location="snap/modules/org-esa-snap-ceres-ui.jar" fileType="regular" />
+        <entry location="snap/modules/org-esa-snap-netbeans-docwin.jar" fileType="regular" />
+        <entry location="snap/modules/org-esa-snap-netbeans-tile.jar" fileType="regular" />
+        <entry location="snap/modules/org-esa-snap-snap-dem-ui.jar" fileType="regular" />
+        <entry location="snap/modules/org-esa-snap-snap-gpf-ui.jar" fileType="regular" />
+        <entry location="snap/modules/org-esa-snap-snap-gui-utilities.jar" fileType="regular" />
+        <entry location="snap/modules/org-esa-snap-snap-help.jar" fileType="regular" />
+        <entry location="snap/modules/org-esa-snap-snap-rcp.jar" fileType="regular" />
+        <entry location="snap/modules/org-esa-snap-snap-sta-ui.jar" fileType="regular" />
+        <entry location="snap/modules/org-esa-snap-snap-ui.jar" fileType="regular" />
+        <entry location="platform" fileType="regular" />
+        <entry location="ide" fileType="regular" />
+        <entry location="s3tbx/modules/org-esa-s3tbx-s3tbx-flhmci-ui.jar" fileType="regular" />
+        <entry location=".i4j_fileset_634" fileType="regular" />
+        <entry location=".i4j_fileset_637" fileType="regular" />
+        <entry location=".i4j_fileset_639" fileType="regular" />
+      </exclude>
+      <variables />
+      <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
+        <commentFiles />
+        <customAttributes />
+      </autoUpdate>
+    </unixArchive>
   </mediaSets>
   <buildIds buildAll="false">
-    <mediaSet refId="64" />
+    <mediaSet refId="56" />
   </buildIds>
   <buildOptions verbose="false" faster="false" disableSigning="false" debug="false" />
 </install4j>
