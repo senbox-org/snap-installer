@@ -391,8 +391,8 @@
                           <void property="labelHtml">
                             <string>&lt;html&gt;If you are a Python developer, you can use the SNAP Java API from Python or you can 
 even develop Python extensions for SNAP. Here you can specify your preferred Python version by 
-the given Python executable to be used. Only &lt;a href="https://www.python.org/downloads/"&gt;Python&lt;/a&gt; versions &lt;b&gt;2.7&lt;/b&gt;, &lt;b&gt;3.3&lt;/b&gt; and &lt;b&gt;3.4&lt;/b&gt; 
-are supported.</string>
+the given Python executable to be used. Only &lt;a href="https://www.python.org/downloads/"&gt;Python&lt;/a&gt;
+versions &lt;b&gt;2.7&lt;/b&gt;, &lt;b&gt;3.3&lt;/b&gt; and &lt;b&gt;3.4&lt;/b&gt; are supported.</string>
                           </void>
                         </object>
                       </java>
@@ -466,8 +466,56 @@ return success;
                     </object>
                   </java>
                 </serializedBean>
-                <initScript />
+                <initScript>if (Util.isWindowsInstaller()) {
+    String[] paths = new String[]{"C:\\Python34", "C:\\Python33", "C:\\Python27"};
+    for (String path : paths) {
+        File file = new File(path, "python.exe");
+        if (file.exists()) {
+            configurationObject.setText(file.getPath());
+            break;
+        }    
+    }    
+} else {
+    String[] commands = new String[]{"python3", "python"};
+    for (String command : commands) {
+        try {
+            Runtime.getRuntime().exec(command);
+            configurationObject.setText(command);
+            break;
+        } catch (Exception e) {
+            // ok
+        }    
+    }    
+}
+</initScript>
                 <visibilityScript />
+              </formComponent>
+              <formComponent name="Win" id="955" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
+                      <void property="labelHtml">
+                        <string>Python interpreter exectables are likely installed in directories such as &lt;b&gt;C:\Python27&lt;/b&gt; or &lt;b&gt;C:\Python34&lt;/b&gt;.</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <initScript />
+                <visibilityScript>Util.isWindowsInstaller()</visibilityScript>
+              </formComponent>
+              <formComponent name="Unix" id="954" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
+                      <void property="labelHtml">
+                        <string>Depending on your system, you can type &lt;b&gt;python&lt;/b&gt;, &lt;b&gt;python3&lt;/b&gt;, or an absolute
+ path to a python interpreter execuatble.</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <initScript />
+                <visibilityScript>Util.isMacosInstaller() || Util.isUnixInstaller()</visibilityScript>
               </formComponent>
             </formComponents>
           </screen>
@@ -519,7 +567,7 @@ return success;
                 </serializedBean>
                 <condition />
               </action>
-              <action name="" id="631" customizedId="" beanClass="com.install4j.runtime.beans.actions.text.ReplaceInstallerVariablesAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+              <action name="Replace snap.conf" id="631" customizedId="" beanClass="com.install4j.runtime.beans.actions.text.ReplaceInstallerVariablesAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.actions.text.ReplaceInstallerVariablesAction">
@@ -528,6 +576,30 @@ return success;
                           <void index="0">
                             <object class="java.io.File">
                               <string>etc/snap.conf</string>
+                            </object>
+                          </void>
+                        </array>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition />
+              </action>
+              <action name="Replace snap.properties" id="899" customizedId="" beanClass="com.install4j.runtime.beans.actions.text.ReplaceInstallerVariablesAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.text.ReplaceInstallerVariablesAction">
+                      <void property="encoding">
+                        <string />
+                      </void>
+                      <void property="escapeForPropertyFile">
+                        <boolean>true</boolean>
+                      </void>
+                      <void property="files">
+                        <array class="java.io.File" length="1">
+                          <void index="0">
+                            <object class="java.io.File">
+                              <string>etc/snap.properties</string>
                             </object>
                           </void>
                         </array>
@@ -1090,6 +1162,7 @@ return success;
       <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
+        <entry location="etc/snap.clusters" fileType="regular" />
         <entry location="snap/modules/ext/org.esa.snap.ceres-ui" fileType="regular" />
         <entry location="snap/modules/ext/org.esa.snap.snap-rcp" fileType="regular" />
         <entry location="snap/modules/ext/org.esa.snap.snap-sta-ui" fileType="regular" />
