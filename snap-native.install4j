@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="5.1.15" transformSequenceNumber="4">
-  <directoryPresets config="../snap-desktop/snap-main/target/snap.jar" />
+  <directoryPresets config="./images/SNAP_Icon_48.png" />
   <application name="ESA SNAP" distributionSourceDir="" applicationId="0941-5747-6134-5911" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="true" createMd5Sums="true" shrinkRuntime="true" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="2.0-alpha-01" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="JDK 1.8">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
@@ -37,17 +37,19 @@
     <mountPoints>
       <mountPoint id="611" root="" location="bin" mode="755" />
       <mountPoint id="646" root="" location="etc" mode="755" />
-      <mountPoint id="58" root="" location="" mode="755" />
       <mountPoint id="1016" root="" location="platform" mode="755" />
       <mountPoint id="1017" root="" location="platform/core" mode="755" />
+      <mountPoint id="58" root="" location="" mode="755" />
       <mountPoint id="636" root="635" location="" mode="755" />
       <mountPoint id="643" root="638" location="" mode="755" />
       <mountPoint id="644" root="640" location="" mode="755" />
       <mountPoint id="645" root="642" location="" mode="755" />
     </mountPoints>
     <entries>
+      <fileEntry mountPoint="611" file="./images/SNAP_Icon_48.png" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="646" file="../snap-desktop/snap-application/target/snap/etc/snap.clusters" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="646" file="../snap-engine/etc/snap.properties" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="1017" file="../snap-desktop/snap-main/target/snap.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <dirEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/snap" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="snap" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
@@ -69,7 +71,6 @@
       <dirEntry mountPoint="58" file="../s1tbx/rstb/target/nbm/netbeans/rstb" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="rstb" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
-      <fileEntry mountPoint="1017" file="../snap-desktop/snap-main/target/snap.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <dirEntry mountPoint="636" file="./files/macosx" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="macosx" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
@@ -898,6 +899,89 @@ return success;
                 </serializedBean>
                 <condition>context.getBooleanVariable("createDesktopLinkAction") &amp;&amp; Util.isWindowsInstaller() &amp;&amp; Util.is64BitWindows()</condition>
               </action>
+              <group name="Add a desktop link (Unity)" id="1032" customizedId="" beanClass="com.install4j.runtime.beans.groups.ActionGroup" enabled="true" commentSet="false" comment="" actionElevationType="inherit">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.groups.ActionGroup">
+                      <void property="conditionExpression">
+                        <object class="com.install4j.api.beans.ScriptProperty">
+                          <void property="value">
+                            <string>Util.isUnixInstaller() &amp;&amp; !(Util.isMacosInstaller() || Util.isMacOS())</string>
+                          </void>
+                        </object>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <beans>
+                  <action name="" id="1030" customizedId="" beanClass="com.install4j.runtime.beans.actions.files.MoveFileAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                    <serializedBean>
+                      <java class="java.beans.XMLDecoder">
+                        <object class="com.install4j.runtime.beans.actions.files.MoveFileAction">
+                          <void property="destinationFile">
+                            <object class="java.io.File">
+                              <string>bin/icon.png</string>
+                            </object>
+                          </void>
+                          <void property="files">
+                            <array class="java.io.File" length="1">
+                              <void index="0">
+                                <object class="java.io.File">
+                                  <string>bin/SNAP_Icon_48.png</string>
+                                </object>
+                              </void>
+                            </array>
+                          </void>
+                        </object>
+                      </java>
+                    </serializedBean>
+                    <condition>Util.isUnixInstaller() &amp;&amp; !(Util.isMacosInstaller() || Util.isMacOS())</condition>
+                  </action>
+                  <action name="" id="1031" customizedId="" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                    <serializedBean>
+                      <java class="java.beans.XMLDecoder">
+                        <object class="com.install4j.runtime.beans.actions.files.DeleteFileAction">
+                          <void property="files">
+                            <array class="java.io.File" length="1">
+                              <void index="0">
+                                <object class="java.io.File">
+                                  <string>bin/SNAP_Icon_48.png</string>
+                                </object>
+                              </void>
+                            </array>
+                          </void>
+                        </object>
+                      </java>
+                    </serializedBean>
+                    <condition>Util.isUnixInstaller() &amp;&amp; !(Util.isMacosInstaller() || Util.isMacOS())</condition>
+                  </action>
+                  <action name="" id="1023" customizedId="" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                    <serializedBean>
+                      <java class="java.beans.XMLDecoder">
+                        <object class="com.install4j.runtime.beans.actions.text.WriteTextFileAction">
+                          <void property="file">
+                            <object class="java.io.File">
+                              <string>~/Desktop/snap.desktop</string>
+                            </object>
+                          </void>
+                          <void property="text">
+                            <string>[Desktop Entry]
+Version=1.0
+Name=${installer:snapDesktopMenuName}
+Comment=Launches ${installer:snapDesktopMenuName}
+Exec=${installer:sys.installationDir}/bin/snap
+Icon=${installer:sys.installationDir}/bin/icon.png
+Terminal=false
+Type=Application
+Categories=Utility;Application;</string>
+                          </void>
+                        </object>
+                      </java>
+                    </serializedBean>
+                    <condition>Util.isUnixInstaller() &amp;&amp; !(Util.isMacosInstaller() || Util.isMacOS())</condition>
+                  </action>
+                </beans>
+              </group>
             </actions>
             <formComponents>
               <formComponent name="Execute launcher" id="182" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
@@ -1073,6 +1157,7 @@ return success;
       <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
+        <entry location="bin/SNAP_Icon_48.png" fileType="regular" />
         <entry location=".i4j_fileset_634" fileType="regular" />
         <entry location=".i4j_fileset_637" fileType="regular" />
         <entry location=".i4j_fileset_641" fileType="regular" />
@@ -1085,7 +1170,7 @@ return success;
       <excludedComponents />
       <includedDownloadableComponents />
     </windows>
-    <macosFolder name="Mac OS X Folder" id="64" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="macosx-amd64-1.8.0_45_unpacked" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" appleJre="false" requiredVmIdPrefix="" customInstallBaseDir="" contentFilesType="3" downloadURL="http://s3.amazonaws.com/esa_snap/release/2.0/" signLaunchers="false">
+    <macosFolder name="Mac OS X Folder" id="64" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="macosx-amd64-1.8.0_45" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" appleJre="false" requiredVmIdPrefix="" customInstallBaseDir="" contentFilesType="3" downloadURL="http://s3.amazonaws.com/esa_snap/release/2.0/" signLaunchers="false">
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="539" />
@@ -1094,6 +1179,7 @@ return success;
       <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
+        <entry location="bin/SNAP_Icon_48.png" fileType="regular" />
         <entry location=".i4j_fileset_637" fileType="regular" />
         <entry location=".i4j_fileset_639" fileType="regular" />
         <entry location=".i4j_fileset_641" fileType="regular" />
@@ -1106,7 +1192,7 @@ return success;
       <excludedComponents />
       <includedDownloadableComponents />
     </macosFolder>
-    <unixInstaller name="Unix Installer" id="65" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="" manualJREEntry="false" bundleType="2" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="3" downloadURL="http://s3.amazonaws.com/esa_snap/release/2.0/">
+    <unixInstaller name="Unix Installer" id="65" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="linux-amd64-1.8.0_45" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="3" downloadURL="http://s3.amazonaws.com/esa_snap/release/2.0/">
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="618" />
@@ -1143,6 +1229,7 @@ return success;
       <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
+        <entry location="bin/SNAP_Icon_48.png" fileType="regular" />
         <entry location=".i4j_fileset_634" fileType="regular" />
         <entry location=".i4j_fileset_639" fileType="regular" />
         <entry location=".i4j_fileset_641" fileType="regular" />
@@ -1165,6 +1252,7 @@ return success;
       <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
+        <entry location="bin/SNAP_Icon_48.png" fileType="regular" />
         <entry location="etc/snap.clusters" fileType="regular" />
         <entry location="snap/modules/ext/org.esa.snap.ceres-ui" fileType="regular" />
         <entry location="snap/modules/ext/org.esa.snap.snap-rcp" fileType="regular" />
@@ -1179,9 +1267,9 @@ return success;
         <entry location="snap/modules/org-esa-snap-snap-rcp.jar" fileType="regular" />
         <entry location="snap/modules/org-esa-snap-snap-sta-ui.jar" fileType="regular" />
         <entry location="snap/modules/org-esa-snap-snap-ui.jar" fileType="regular" />
-        <entry location="platform" fileType="regular" />
         <entry location="ide" fileType="regular" />
         <entry location="s3tbx/modules/org-esa-s3tbx-s3tbx-flhmci-ui.jar" fileType="regular" />
+        <entry location="platform" fileType="regular" />
         <entry location=".i4j_fileset_634" fileType="regular" />
         <entry location=".i4j_fileset_637" fileType="regular" />
         <entry location=".i4j_fileset_639" fileType="regular" />
@@ -1194,7 +1282,7 @@ return success;
     </unixArchive>
   </mediaSets>
   <buildIds buildAll="false">
-    <mediaSet refId="56" />
+    <mediaSet refId="65" />
   </buildIds>
   <buildOptions verbose="false" faster="false" disableSigning="false" debug="false" />
 </install4j>
