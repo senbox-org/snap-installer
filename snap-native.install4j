@@ -1294,9 +1294,12 @@ Categories=Utility;Application;</string>
       </autoUpdate>
     </unixArchive>
   </mediaSets>
-  <buildIds buildAll="false">
+  <buildIds buildAll="true">
     <mediaSet refId="56" />
     <mediaSet refId="64" />
+    <mediaSet refId="65" />
+    <mediaSet refId="854" />
+    <mediaSet refId="859" />
   </buildIds>
   <buildOptions verbose="false" faster="false" disableSigning="false" debug="false" />
 </install4j>
