@@ -632,7 +632,7 @@ return success;
                 </serializedBean>
                 <condition>Util.isMacOS() || Util.isMacosInstaller()</condition>
               </action>
-              <action name="" id="654" customizedId="" beanClass="com.install4j.runtime.beans.actions.files.SetModeAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="${compiler:snapDesktopMenuName}">
+              <action name="" id="654" customizedId="" beanClass="com.install4j.runtime.beans.actions.files.SetModeAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.actions.files.SetModeAction">
@@ -656,7 +656,7 @@ return success;
                     </object>
                   </java>
                 </serializedBean>
-                <condition />
+                <condition>Util.isLinux() || Util.isUnixInstaller() || Util.isMacOS() || Util.isMacosInstaller()</condition>
               </action>
               <action name="" id="733" customizedId="" beanClass="com.install4j.runtime.beans.actions.text.ReplaceInstallerVariablesAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
