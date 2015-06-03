@@ -37,6 +37,11 @@ if exist s3tbx\.git (
     call git pull
     cd ..
 )
+if exist testdata\.git (
+    cd testdata
+    call git pull
+    cd ..
+)
 
 echo Maven builds...
 
@@ -48,7 +53,9 @@ if exist snap-engine\pom.xml (
 if exist snap-desktop\pom.xml (
     cd snap-desktop
     call mvn clean install -T 4 -DskipTests=true
-    cd ..
+    cd snap-application
+    call mvn nbm:cluster-app
+    cd ..\..
 )
 if exist snap-examples\pom.xml (
     cd snap-examples
@@ -57,7 +64,8 @@ if exist snap-examples\pom.xml (
 )
 if exist s1tbx\pom.xml (
     cd s1tbx
-    call mvn clean install -T 4
+    call mvn clean 
+    call mvn install -T 4 -DskipTests=true
     cd ..
 )
 if exist s2tbx\pom.xml (
