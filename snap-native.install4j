@@ -62,7 +62,7 @@
       <dirEntry mountPoint="58" file="../s1tbx/target/nbm/netbeans/s1tbx" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="s1tbx" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
-      <dirEntry mountPoint="58" file="../s2tbx/target/nbm/netbeans/extra" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="s2tbx" excludeSuffixes="" dirMode="755" overrideDirMode="false">
+      <dirEntry mountPoint="58" file="../s2tbx/target/nbm/netbeans/s2tbx" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="s2tbx" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
       <dirEntry mountPoint="58" file="../s3tbx/target/nbm/netbeans/s3tbx" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="s3tbx" excludeSuffixes="" dirMode="755" overrideDirMode="false">
