@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="5.1.15" transformSequenceNumber="4">
   <directoryPresets config="../snap-desktop/nbexec/bin/restart.sh" />
-  <application name="ESA SNAP" distributionSourceDir="" applicationId="6882-0784-9959-6198" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="true" createMd5Sums="true" shrinkRuntime="true" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="2.0-alpha-02" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="JDK 1.8">
+  <application name="ESA SNAP" distributionSourceDir="" applicationId="6882-0784-9959-6198" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="true" createMd5Sums="true" shrinkRuntime="true" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="2.0-alpha-03" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="JDK 1.8">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
       <additionalLanguages />
@@ -308,11 +308,11 @@
           <screen name="" id="133" customizedId="" beanClass="com.install4j.runtime.beans.screens.LicenseScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
             <serializedBean>
               <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.screens.LicenseScreen">
+                <object class="com.install4j.runtime.beans.screens.LicenseScreen" id="LicenseScreen0">
                   <void property="acceptInitiallySelected">
                     <boolean>true</boolean>
                   </void>
-                  <void property="displayedTextFile">
+                  <void id="LocalizedExternalFile0" property="displayedTextFile">
                     <void property="languageIdToExternalFile">
                       <void method="put">
                         <string>en</string>
@@ -454,7 +454,7 @@ are supported.</string>
               <formComponent name="" id="233" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
+                    <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent" id="CheckboxComponent0">
                       <void property="checkboxText">
                         <string>Force SNAP to use the given Python version </string>
                       </void>
@@ -1064,7 +1064,10 @@ return success;
       </installerScript>
     </unixInstaller>
   </mediaSets>
-  <buildIds buildAll="false">
+  <buildIds buildAll="true">
+    <mediaSet refId="56" />
+    <mediaSet refId="63" />
+    <mediaSet refId="64" />
     <mediaSet refId="65" />
   </buildIds>
   <buildOptions verbose="false" faster="false" disableSigning="false" debug="false" />
