@@ -24,4 +24,22 @@
     <packaging>jar</packaging>    
     <name>SNAP Installer Project</name>
 
+    <build>
+    	<plugins>
+			<plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.6.1</version>
+                <configuration>
+                    <filesets>
+						<fileset>
+                            <directory>target</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+        </plugins>	
+    </build>
 </project>
