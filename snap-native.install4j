@@ -141,7 +141,7 @@
           <component id="73" />
         </dependencies>
       </component>
-      <component name="SMOS-Box" id="1253" customizedId="SMOS" displayDescription="true" hideHelpButton="false" selected="true" changeable="true" downloadable="true" hidden="false">
+      <component name="SMOS-Box" id="1253" customizedId="SMOS" displayDescription="true" hideHelpButton="false" selected="false" changeable="true" downloadable="true" hidden="false">
         <description>Ingestion of SMOS data products and dedicated support tools.</description>
         <include all="false">
           <entry location="smos" fileType="regular" />
