@@ -157,7 +157,7 @@
     <launcher name="SNAP Desktop Unix" id="539" customizedId="" external="true" excludeFromMenu="false" unixMode="755" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap" />
     <launcher name="SNAP Desktop Mac OS" id="618" customizedId="" external="true" excludeFromMenu="false" unixMode="755" menuName="${compiler:snapDesktopMenuName}" externalFile="bin/snap.app" />
     <launcher name="SNAP Desktop Win x64" id="656" customizedId="" external="true" excludeFromMenu="false" unixMode="755" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap64.exe" />
-    <launcher name="SNAP GPT" id="781" customizedId="" external="false" excludeFromMenu="false" unixMode="755" menuName="${compiler:snapGptMenuName}" icnsFile="" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="false" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="">
+    <launcher name="SNAP GPT" id="781" customizedId="" external="false" excludeFromMenu="true" unixMode="755" menuName="" icnsFile="" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="false" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="">
       <executable name="${compiler:snapGptName}" type="1" iconSet="false" iconFile="" executableDir="bin" redirectStderr="false" stderrFile="error.log" stderrMode="overwrite" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="2" changeWorkingDirectory="true" workingDirectory=".." singleInstance="false" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false" singleInstanceActivate="true">
         <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="" productName="" />
       </executable>
@@ -186,7 +186,7 @@
       </infoPlist>
       <iconImageFiles />
     </launcher>
-    <launcher name="SNAP PConvert" id="1113" customizedId="" external="false" excludeFromMenu="false" unixMode="755" menuName="${compiler:snapPconvertName}" icnsFile="" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="false" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="">
+    <launcher name="SNAP PConvert" id="1113" customizedId="" external="false" excludeFromMenu="true" unixMode="755" menuName="" icnsFile="" customMacBundleIdentifier="false" macBundleIdentifier="" swtApp="false" fileset="" macBundleBinary="JavaApplicationStub" addMacEntitlements="false" macEntitlementsFile="">
       <executable name="${compiler:snapPconvertName}" type="1" iconSet="false" iconFile="" executableDir="bin" redirectStderr="false" stderrFile="error.log" stderrMode="overwrite" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="2" changeWorkingDirectory="true" workingDirectory=".." singleInstance="false" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false" singleInstanceActivate="true">
         <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="" productName="" />
       </executable>
@@ -586,7 +586,22 @@ return success;
               <action name="" id="10" customizedId="" beanClass="com.install4j.runtime.beans.actions.desktop.CreateProgramGroupAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.actions.desktop.CreateProgramGroupAction">
+                    <object class="com.install4j.runtime.beans.actions.desktop.CreateProgramGroupAction" id="CreateProgramGroupAction0">
+                      <void property="programGroupEntryConfigs">
+                        <void method="add">
+                          <object class="com.install4j.runtime.beans.screens.components.ProgramGroupUrlConfig">
+                            <void property="favicon">
+                              <boolean>true</boolean>
+                            </void>
+                            <void property="name">
+                              <string>ESA STEP Website</string>
+                            </void>
+                            <void property="url">
+                              <string>step.esa.int</string>
+                            </void>
+                          </object>
+                        </void>
+                      </void>
                       <void property="uninstallerMenuName">
                         <string>${i18n:UninstallerMenuEntry(${compiler:sys.fullName})}</string>
                       </void>
