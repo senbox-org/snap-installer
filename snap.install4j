@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="5.1.15" transformSequenceNumber="4">
-  <directoryPresets config="../snap-engine" />
+  <directoryPresets config="../snap-desktop/LICENSE.txt" />
   <application name="ESA SNAP" distributionSourceDir="" applicationId="0941-5747-6134-5911" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="9" lzmaCompression="true" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="true" createMd5Sums="true" shrinkRuntime="true" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="2.0-beta-05" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="JDK 1.8">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
@@ -73,6 +73,8 @@
       <dirEntry mountPoint="58" file="../s1tbx/s1tbx-kit/target/netbeans_clusters/rstb" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="rstb" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
+      <fileEntry mountPoint="58" file="../snap-desktop/README.md" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="58" file="../snap-desktop/LICENSE.txt" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <dirEntry mountPoint="636" file="./files/macosx" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="macosx" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
@@ -95,7 +97,8 @@
           <entry location="snap" fileType="regular" />
           <entry location="platform" fileType="regular" />
           <entry location="ide" fileType="regular" />
-          <entry location="${compiler:snapGptName}" fileType="launcher" />
+          <entry location="README.md" fileType="regular" />
+          <entry location="LICENSE.txt" fileType="regular" />
           <entry location=".i4j_fileset_634" fileType="regular" />
           <entry location=".i4j_fileset_637" fileType="regular" />
           <entry location=".i4j_fileset_639" fileType="regular" />
@@ -933,6 +936,23 @@ return success;
                 </serializedBean>
                 <condition>return context.getVariable("snapUserDir") != null;</condition>
               </action>
+              <action name="" id="1407" customizedId="" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.text.WriteTextFileAction">
+                      <void property="file">
+                        <object class="java.io.File">
+                          <string>VERSION.txt</string>
+                        </object>
+                      </void>
+                      <void property="text">
+                        <string>${compiler:sys.version}</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition />
+              </action>
             </actions>
             <formComponents />
           </screen>
@@ -1427,7 +1447,7 @@ Do you wish the uninstaller to also remove the user data directory too?</string>
       <excludedComponents />
       <includedDownloadableComponents />
     </windows>
-    <macosFolder name="Mac OS X Folder" id="64" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="macosx-amd64-1.8.0_45" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" appleJre="false" requiredVmIdPrefix="" customInstallBaseDir="" contentFilesType="3" downloadURL="http://step.esa.int/downloads/2.0" signLaunchers="false">
+    <macosFolder name="Mac OS X Folder" id="64" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" includedJRE="" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" appleJre="false" requiredVmIdPrefix="" customInstallBaseDir="" contentFilesType="3" downloadURL="http://step.esa.int/downloads/2.0" signLaunchers="false">
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="539" />
@@ -1534,9 +1554,9 @@ Do you wish the uninstaller to also remove the user data directory too?</string>
       </autoUpdate>
     </unixArchive>
   </mediaSets>
-  <buildIds buildAll="true">
+  <buildIds buildAll="false">
     <mediaSet refId="56" />
   </buildIds>
-  <buildOptions verbose="false" faster="false" disableSigning="false" debug="false" />
+  <buildOptions verbose="false" faster="true" disableSigning="true" debug="false" />
 </install4j>
 
