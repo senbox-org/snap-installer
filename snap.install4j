@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="5.1.15" transformSequenceNumber="4">
   <directoryPresets config="../snap-engine" />
-  <application name="ESA SNAP" distributionSourceDir="" applicationId="0941-5747-6134-5911" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="9" lzmaCompression="true" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="true" createMd5Sums="true" shrinkRuntime="true" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="2.0-beta-04" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="JDK 1.8">
+  <application name="ESA SNAP" distributionSourceDir="" applicationId="0941-5747-6134-5911" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="9" lzmaCompression="true" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="true" createMd5Sums="true" shrinkRuntime="true" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="2.0-beta-05" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="JDK 1.8">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
       <additionalLanguages />
@@ -320,11 +320,11 @@ return null;</string>
           <screen name="" id="133" customizedId="" beanClass="com.install4j.runtime.beans.screens.LicenseScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
             <serializedBean>
               <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.screens.LicenseScreen" id="LicenseScreen0">
+                <object class="com.install4j.runtime.beans.screens.LicenseScreen">
                   <void property="acceptInitiallySelected">
                     <boolean>true</boolean>
                   </void>
-                  <void id="LocalizedExternalFile0" property="displayedTextFile">
+                  <void property="displayedTextFile">
                     <void property="languageIdToExternalFile">
                       <void method="put">
                         <string>en</string>
@@ -466,7 +466,7 @@ versions &lt;b&gt;2.7&lt;/b&gt;, &lt;b&gt;3.3&lt;/b&gt; and &lt;b&gt;3.4&lt;/b&g
               <formComponent name="" id="233" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent" id="CheckboxComponent0">
+                    <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
                       <void property="checkboxText">
                         <string>Force SNAP to use the given Python version </string>
                       </void>
@@ -602,7 +602,7 @@ return success;
               <action name="" id="10" customizedId="" beanClass="com.install4j.runtime.beans.actions.desktop.CreateProgramGroupAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.actions.desktop.CreateProgramGroupAction" id="CreateProgramGroupAction0">
+                    <object class="com.install4j.runtime.beans.actions.desktop.CreateProgramGroupAction">
                       <void property="programGroupEntryConfigs">
                         <void method="add">
                           <object class="com.install4j.runtime.beans.screens.components.ProgramGroupUrlConfig">
