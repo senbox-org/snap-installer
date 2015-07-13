@@ -84,13 +84,13 @@ if exist s1tbx\pom.xml (
 )
 if exist s2tbx\pom.xml (
     cd s2tbx
-    call mvn clean install -T 4
+    call mvn clean install -T 4 -DskipTests=true
     if %errorlevel% neq 0 exit /B %errorlevel%
     cd ..
 )
 if exist s3tbx\pom.xml (
     cd s3tbx
-    call mvn clean install -T 4
+    call mvn clean install -T 4 -DskipTests=true
     if %errorlevel% neq 0 exit /B %errorlevel%
     cd ..
 )
