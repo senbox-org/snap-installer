@@ -689,6 +689,9 @@ return success;
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.actions.text.ReplaceInstallerVariablesAction">
+                      <void property="escapeForPropertyFile">
+                        <boolean>true</boolean>
+                      </void>
                       <void property="files">
                         <array class="java.io.File" length="1">
                           <void index="0">
