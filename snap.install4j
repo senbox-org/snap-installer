@@ -637,7 +637,7 @@ return success;
                         <string>/K "${installer:sys.installationDir}\bin\snap-cli.bat"</string>
                       </void>
                       <void property="entryName">
-                        <string>${installer:sys.programGroupDir}\SNAP Command Line</string>
+                        <string>${installer:sys.programGroupDir}\SNAP Command-Line</string>
                       </void>
                       <void property="file">
                         <object class="java.io.File">
@@ -1158,27 +1158,26 @@ Categories=Utility;Application;</string>
                   </action>
                 </beans>
               </group>
-            </actions>
-            <formComponents>
-              <formComponent name="Execute launcher" id="182" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+              <action name="Extend PATH" id="1466" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.ModifyEnvironmentVariableAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
-                      <void property="checkboxText">
-                        <string>${i18n:RunEntryExec("${compiler:sys.fullName}")}</string>
+                    <object class="com.install4j.runtime.beans.actions.misc.ModifyEnvironmentVariableAction">
+                      <void property="type">
+                        <object class="com.install4j.runtime.beans.actions.misc.ModifyStringType" field="APPEND" />
                       </void>
-                      <void property="initiallySelected">
-                        <boolean>true</boolean>
+                      <void property="value">
+                        <string>${installer:sys.installationDir}\bin</string>
                       </void>
                       <void property="variableName">
-                        <string>executeLauncherAction</string>
+                        <string>PATH</string>
                       </void>
                     </object>
                   </java>
                 </serializedBean>
-                <initScript />
-                <visibilityScript />
-              </formComponent>
+                <condition>context.getBooleanVariable("extendPathEnvVar")</condition>
+              </action>
+            </actions>
+            <formComponents>
               <formComponent name="Add a desktop link" id="674" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
@@ -1197,6 +1196,60 @@ Categories=Utility;Application;</string>
                 </serializedBean>
                 <initScript />
                 <visibilityScript>Util.isWindowsInstaller()</visibilityScript>
+              </formComponent>
+              <formComponent name="Extend PATH" id="1465" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
+                      <void property="checkboxText">
+                        <string>&lt;html&gt;Extend &lt;b&gt;PATH&lt;/b&gt; environment variable</string>
+                      </void>
+                      <void property="helpText">
+                        <string> Select this if you want be able to call SNAP's command-line tools from any current working directory</string>
+                      </void>
+                      <void property="initiallySelected">
+                        <boolean>true</boolean>
+                      </void>
+                      <void property="variableName">
+                        <string>extendPathEnvVar</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <initScript />
+                <visibilityScript>return Util.isWindowsInstaller();</visibilityScript>
+              </formComponent>
+              <formComponent name="" id="1510" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.SpacerComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.formcomponents.SpacerComponent">
+                      <void property="height">
+                        <int>24</int>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <initScript />
+                <visibilityScript />
+              </formComponent>
+              <formComponent name="Execute launcher" id="182" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
+                      <void property="checkboxText">
+                        <string>Run SNAP Desktop</string>
+                      </void>
+                      <void property="initiallySelected">
+                        <boolean>true</boolean>
+                      </void>
+                      <void property="variableName">
+                        <string>executeLauncherAction</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <initScript />
+                <visibilityScript />
               </formComponent>
             </formComponents>
           </screen>
