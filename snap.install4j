@@ -1336,7 +1336,7 @@ Categories=Utility;Application;</string>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
                       <void property="checkboxText">
-                        <string>&lt;html&gt;Extend &lt;b&gt;PATH&lt;/b&gt; environment variable</string>
+                        <string>&lt;html&gt;Extend my PATH environment variable</string>
                       </void>
                       <void property="helpText">
                         <string> Select this if you want be able to call SNAP's command-line tools from any current working directory</string>
@@ -1353,14 +1353,10 @@ Categories=Utility;Application;</string>
                 <initScript />
                 <visibilityScript>return Util.isWindowsInstaller();</visibilityScript>
               </formComponent>
-              <formComponent name="" id="1510" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.SpacerComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+              <formComponent name="" id="1636" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.SpacerComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.SpacerComponent">
-                      <void property="height">
-                        <int>24</int>
-                      </void>
-                    </object>
+                    <object class="com.install4j.runtime.beans.formcomponents.SpacerComponent" />
                   </java>
                 </serializedBean>
                 <initScript />
@@ -1378,6 +1374,31 @@ Categories=Utility;Application;</string>
                       </void>
                       <void property="variableName">
                         <string>executeLauncherAction</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <initScript />
+                <visibilityScript />
+              </formComponent>
+              <formComponent name="" id="1641" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.SpacerComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.formcomponents.SpacerComponent" />
+                  </java>
+                </serializedBean>
+                <initScript />
+                <visibilityScript />
+              </formComponent>
+              <formComponent name="" id="1640" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
+                      <void property="labelHtml">
+                        <string>&lt;html&gt;Please also consider visiting the &lt;b&gt;&lt;a href="http://step.esa.int/"&gt;STEP website&lt;/a&gt;&lt;/b&gt;. 
+STEP is the Science Toolbox Exploitation Platform which provides news, 
+documentation, tutorials, and a vibrant user forum for ESA's free open source Earth Observation 
+toolboxes.&lt;/html&gt;</string>
                       </void>
                     </object>
                   </java>
