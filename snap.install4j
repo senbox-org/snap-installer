@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="5.1.15" transformSequenceNumber="4">
-  <directoryPresets config="../snap-desktop/LICENSE.txt" />
+  <directoryPresets config="./images" />
   <application name="ESA SNAP" distributionSourceDir="" applicationId="0941-5747-6134-5911" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="9" lzmaCompression="true" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="true" createMd5Sums="true" shrinkRuntime="true" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="2.0-beta-05" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="JDK 1.8">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
@@ -947,6 +947,140 @@ return success;
                       </void>
                       <void property="text">
                         <string>${compiler:sys.version}</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition />
+              </action>
+            </actions>
+            <formComponents />
+          </screen>
+          <screen name="" id="1564" customizedId="" beanClass="com.install4j.runtime.beans.screens.FileAssociationsScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
+            <serializedBean>
+              <java class="java.beans.XMLDecoder">
+                <object class="com.install4j.runtime.beans.screens.FileAssociationsScreen">
+                  <void property="showSelectionButtons">
+                    <boolean>true</boolean>
+                  </void>
+                </object>
+              </java>
+            </serializedBean>
+            <condition />
+            <validation />
+            <preActivation />
+            <postActivation />
+            <actions>
+              <action name="Win x64 (.snap)" id="1565" customizedId="" beanClass="com.install4j.runtime.beans.actions.desktop.CreateFileAssociationAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.desktop.CreateFileAssociationAction">
+                      <void property="description">
+                        <string>Session file saved by SNAP</string>
+                      </void>
+                      <void property="extension">
+                        <string>snap</string>
+                      </void>
+                      <void property="launcherId">
+                        <string>656</string>
+                      </void>
+                      <void property="mac">
+                        <boolean>false</boolean>
+                      </void>
+                      <void property="winAdditionalParameters">
+                        <string>--open</string>
+                      </void>
+                      <void property="windowsIconFile">
+                        <object class="com.install4j.api.beans.ExternalFile">
+                          <string>./images/SNAP_Icon_128.ico</string>
+                        </object>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition />
+              </action>
+              <action name="Win x86 (.snap)" id="1569" customizedId="" beanClass="com.install4j.runtime.beans.actions.desktop.CreateFileAssociationAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.desktop.CreateFileAssociationAction">
+                      <void property="description">
+                        <string>Session file saved by SNAP</string>
+                      </void>
+                      <void property="extension">
+                        <string>snap</string>
+                      </void>
+                      <void property="launcherId">
+                        <string>538</string>
+                      </void>
+                      <void property="mac">
+                        <boolean>false</boolean>
+                      </void>
+                      <void property="winAdditionalParameters">
+                        <string>--open</string>
+                      </void>
+                      <void property="windowsIconFile">
+                        <object class="com.install4j.api.beans.ExternalFile">
+                          <string>./images/SNAP_Icon_128.ico</string>
+                        </object>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition />
+              </action>
+              <action name="Win x64 (.dim)" id="1568" customizedId="" beanClass="com.install4j.runtime.beans.actions.desktop.CreateFileAssociationAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.desktop.CreateFileAssociationAction">
+                      <void property="description">
+                        <string>SNAP standard I/O file (BEAM-DIMAP format)</string>
+                      </void>
+                      <void property="extension">
+                        <string>dim</string>
+                      </void>
+                      <void property="launcherId">
+                        <string>656</string>
+                      </void>
+                      <void property="mac">
+                        <boolean>false</boolean>
+                      </void>
+                      <void property="winAdditionalParameters">
+                        <string>--open</string>
+                      </void>
+                      <void property="windowsIconFile">
+                        <object class="com.install4j.api.beans.ExternalFile">
+                          <string>./images/SNAP_Icon_128.ico</string>
+                        </object>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition />
+              </action>
+              <action name="Win x86 (.dim)" id="1570" customizedId="" beanClass="com.install4j.runtime.beans.actions.desktop.CreateFileAssociationAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.desktop.CreateFileAssociationAction">
+                      <void property="description">
+                        <string>SNAP standard I/O file (BEAM-DIMAP format)</string>
+                      </void>
+                      <void property="extension">
+                        <string>dim</string>
+                      </void>
+                      <void property="launcherId">
+                        <string>538</string>
+                      </void>
+                      <void property="mac">
+                        <boolean>false</boolean>
+                      </void>
+                      <void property="winAdditionalParameters">
+                        <string>--open</string>
+                      </void>
+                      <void property="windowsIconFile">
+                        <object class="com.install4j.api.beans.ExternalFile">
+                          <string>./images/SNAP_Icon_128.ico</string>
+                        </object>
                       </void>
                     </object>
                   </java>
