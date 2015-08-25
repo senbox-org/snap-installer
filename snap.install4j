@@ -1590,7 +1590,7 @@ Do you wish the uninstaller to also remove the user data directory too?</string>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
                       <void property="checkboxText">
-                        <string>Yes, delete user directory recursively.</string>
+                        <string>Yes, delete user .snap directory recursively.</string>
                       </void>
                       <void property="variableName">
                         <string>deleteSnapUserDir</string>
