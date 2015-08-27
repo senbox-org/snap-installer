@@ -3,4 +3,5 @@
 *.iws
 .idea/
 target/
+updateall.log
 
