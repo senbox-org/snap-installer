@@ -97,8 +97,8 @@
           <entry location="snap" fileType="regular" />
           <entry location="platform" fileType="regular" />
           <entry location="ide" fileType="regular" />
-          <entry location="README.md" fileType="regular" />
           <entry location="LICENSE.txt" fileType="regular" />
+          <entry location="VERSION.txt" fileType="regular" />
           <entry location=".i4j_fileset_634" fileType="regular" />
           <entry location=".i4j_fileset_637" fileType="regular" />
           <entry location=".i4j_fileset_639" fileType="regular" />
@@ -323,11 +323,11 @@ return null;</string>
           <screen name="" id="133" customizedId="" beanClass="com.install4j.runtime.beans.screens.LicenseScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
             <serializedBean>
               <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.screens.LicenseScreen" id="LicenseScreen0">
+                <object class="com.install4j.runtime.beans.screens.LicenseScreen">
                   <void property="acceptInitiallySelected">
                     <boolean>true</boolean>
                   </void>
-                  <void id="LocalizedExternalFile0" property="displayedTextFile">
+                  <void property="displayedTextFile">
                     <void property="languageIdToExternalFile">
                       <void method="put">
                         <string>en</string>
@@ -469,7 +469,7 @@ versions &lt;b&gt;2.7&lt;/b&gt;, &lt;b&gt;3.3&lt;/b&gt; and &lt;b&gt;3.4&lt;/b&g
               <formComponent name="" id="233" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent" id="CheckboxComponent0">
+                    <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
                       <void property="checkboxText">
                         <string>Force SNAP to use the given Python version </string>
                       </void>
@@ -605,7 +605,7 @@ return success;
               <action name="" id="10" customizedId="" beanClass="com.install4j.runtime.beans.actions.desktop.CreateProgramGroupAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.actions.desktop.CreateProgramGroupAction" id="CreateProgramGroupAction0">
+                    <object class="com.install4j.runtime.beans.actions.desktop.CreateProgramGroupAction">
                       <void property="programGroupEntryConfigs">
                         <void method="add">
                           <object class="com.install4j.runtime.beans.screens.components.ProgramGroupUrlConfig">
@@ -1590,7 +1590,7 @@ Do you wish the uninstaller to also remove the user data directory too?</string>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
                       <void property="checkboxText">
-                        <string>Yes, delete user .snap directory recursively.</string>
+                        <string>Yes, delete user directory '.snap' recursively.</string>
                       </void>
                       <void property="variableName">
                         <string>deleteSnapUserDir</string>
@@ -1763,7 +1763,7 @@ Do you wish the uninstaller to also remove the user data directory too?</string>
       </autoUpdate>
     </unixArchive>
   </mediaSets>
-  <buildIds buildAll="false">
+  <buildIds buildAll="true">
     <mediaSet refId="56" />
   </buildIds>
   <buildOptions verbose="false" faster="true" disableSigning="true" debug="false" />
