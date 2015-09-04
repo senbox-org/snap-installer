@@ -573,7 +573,7 @@ return success;
                     <object class="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
                       <void property="labelHtml">
                         <string>Depending on your system, you can type &lt;b&gt;python&lt;/b&gt;, &lt;b&gt;python3&lt;/b&gt;, or an absolute
- path to a python interpreter execuatble.</string>
+ path to a python interpreter executable.</string>
                       </void>
                     </object>
                   </java>
