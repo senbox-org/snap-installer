@@ -3,12 +3,13 @@
 set SNAP_HOME=${installer:sys.installationDir}
 
 echo.
-@echo Welcome to the SNAP command-line interface!
+@echo Welcome to the SNAP command-line interface.
 @echo The following command-line tools are available:
 @echo   gpt         - Graph Processing Tool
 @echo   pconvert    - Data product conversion and quicklook generation
 @echo   snap        - SNAP Desktop launcher
-@echo Typing the name of the tool will output its usage information.
+@echo   snappy      - SNAP-Python configuration tool
+@echo Typing the name of each tool will output its usage information.
 echo.
 
 cd "%SNAP_HOME%\bin"
