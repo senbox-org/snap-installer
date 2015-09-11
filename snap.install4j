@@ -774,12 +774,12 @@ return success;
                 </serializedBean>
                 <condition>Util.isMacOS() || Util.isMacosInstaller()</condition>
               </action>
-              <action name="" id="654" customizedId="" beanClass="com.install4j.runtime.beans.actions.files.SetModeAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+              <action name="Set executable mode" id="654" customizedId="" beanClass="com.install4j.runtime.beans.actions.files.SetModeAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.actions.files.SetModeAction">
                       <void property="files">
-                        <array class="java.io.File" length="2">
+                        <array class="java.io.File" length="3">
                           <void index="0">
                             <object class="java.io.File">
                               <string>bin/snap</string>
@@ -790,6 +790,11 @@ return success;
                               <string>bin/snap.app/Contents/MacOS/snap</string>
                             </object>
                           </void>
+                          <void index="2">
+                            <object class="java.io.File">
+                              <string>bin/snappy-conf</string>
+                            </object>
+                          </void>
                         </array>
                       </void>
                       <void property="mode">
@@ -798,7 +803,7 @@ return success;
                     </object>
                   </java>
                 </serializedBean>
-                <condition>Util.isLinux() || Util.isUnixInstaller() || Util.isMacOS() || Util.isMacosInstaller()</condition>
+                <condition />
               </action>
               <action name="" id="733" customizedId="" beanClass="com.install4j.runtime.beans.actions.text.ReplaceInstallerVariablesAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
@@ -912,7 +917,7 @@ return success;
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.actions.files.DeleteFileAction">
                       <void property="files">
-                        <array class="java.io.File" length="4">
+                        <array class="java.io.File" length="5">
                           <void index="0">
                             <object class="java.io.File">
                               <string>${installer:snapUserDir}/var</string>
@@ -931,6 +936,11 @@ return success;
                           <void index="3">
                             <object class="java.io.File">
                               <string>${installer:snapUserDir}/tmp</string>
+                            </object>
+                          </void>
+                          <void index="4">
+                            <object class="java.io.File">
+                              <string>lock</string>
                             </object>
                           </void>
                         </array>
@@ -961,7 +971,7 @@ return success;
                 </serializedBean>
                 <condition />
               </action>
-              <action name="" id="1750" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.RunExecutableAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+              <action name="Run python-conf on Win" id="1750" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.RunExecutableAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.actions.misc.RunExecutableAction">
@@ -974,13 +984,51 @@ return success;
                       </void>
                       <void property="executable">
                         <object class="java.io.File">
-                          <string>bin/snappy.bat</string>
+                          <string>bin/snappy-conf.bat</string>
+                        </object>
+                      </void>
+                      <void property="showWindowsConsole">
+                        <boolean>true</boolean>
+                      </void>
+                      <void property="workingDirectory">
+                        <object class="java.io.File">
+                          <string>bin</string>
                         </object>
                       </void>
                     </object>
                   </java>
                 </serializedBean>
-                <condition>Util.isWindowsInstaller() &amp;&amp; context.getVariable("pythonExecutable") != null &amp;&amp; context.getBooleanVariable("forcePython")</condition>
+                <condition>Util.isWindowsInstaller() 
+   &amp;&amp; context.getVariable("pythonExecutable") != null 
+   &amp;&amp; context.getBooleanVariable("forcePython")</condition>
+              </action>
+              <action name="Run python-conf on Unix" id="1814" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.RunExecutableAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.misc.RunExecutableAction">
+                      <void property="arguments">
+                        <array class="java.lang.String" length="1">
+                          <void index="0">
+                            <string>${installer:pythonExecutable}</string>
+                          </void>
+                        </array>
+                      </void>
+                      <void property="executable">
+                        <object class="java.io.File">
+                          <string>bin/snappy-conf</string>
+                        </object>
+                      </void>
+                      <void property="workingDirectory">
+                        <object class="java.io.File">
+                          <string>bin</string>
+                        </object>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition>(Util.isUnixInstaller() || Util.isMacosInstaller()) 
+  &amp;&amp; context.getVariable("pythonExecutable") != null 
+  &amp;&amp; context.getBooleanVariable("forcePython")</condition>
               </action>
             </actions>
             <formComponents />
