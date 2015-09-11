@@ -961,6 +961,27 @@ return success;
                 </serializedBean>
                 <condition />
               </action>
+              <action name="" id="1750" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.RunExecutableAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.misc.RunExecutableAction">
+                      <void property="arguments">
+                        <array class="java.lang.String" length="1">
+                          <void index="0">
+                            <string>${installer:pythonExecutable}</string>
+                          </void>
+                        </array>
+                      </void>
+                      <void property="executable">
+                        <object class="java.io.File">
+                          <string>bin/snappy.bat</string>
+                        </object>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition>Util.isWindowsInstaller() &amp;&amp; context.getVariable("pythonExecutable") != null &amp;&amp; context.getBooleanVariable("forcePython")</condition>
+              </action>
             </actions>
             <formComponents />
           </screen>
@@ -1650,7 +1671,7 @@ Do you wish the uninstaller to also remove the user data directory too?</string>
     </applications>
   </installerGui>
   <mediaSets>
-    <windows name="Windows x64" id="56" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="windows-amd64-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="3" verifyIntegrity="true">
+    <windows name="Windows x64" id="56" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="3" verifyIntegrity="true">
       <excludedComponents />
       <includedDownloadableComponents />
       <excludedLaunchers>
@@ -1695,7 +1716,7 @@ Do you wish the uninstaller to also remove the user data directory too?</string>
       </autoUpdate>
       <topLevelFiles />
     </macosFolder>
-    <unixInstaller name="Unix Installer" id="65" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="linux-amd64-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="3">
+    <unixInstaller name="Unix Installer" id="65" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="jres/linux-amd64-1.8.0_60.tar.gz" manualJREEntry="true" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="3">
       <excludedComponents />
       <includedDownloadableComponents />
       <excludedLaunchers>
