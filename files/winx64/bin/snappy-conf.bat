@@ -4,7 +4,7 @@ if [%1] == [] goto Usage
 if [%1] == [/?] goto Usage
 if not [%3] == [] goto Usage
 
-%~dp0\snap64.exe --nogui --nosplash --python %1 %2
+"%~dp0\snap64.exe" --nogui --nosplash --python %1 %2
 goto End
 
 :Usage
