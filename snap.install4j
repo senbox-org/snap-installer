@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="6.0.4" transformSequenceNumber="5">
   <directoryPresets config="./LICENSE.txt" />
-  <application name="ESA SNAP" distributionSourceDir="" applicationId="0941-5747-6134-5911" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="9" lzmaCompression="true" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="true" createMd5Sums="true" shrinkRuntime="true" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="2.0-beta-07" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" macVolumeId="69e291547ea53333" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="JDK 1.8">
+  <application name="ESA SNAP" distributionSourceDir="" applicationId="0941-5747-6134-5911" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="9" lzmaCompression="true" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="true" createMd5Sums="true" shrinkRuntime="true" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="2.0-beta-08" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" macVolumeId="69e291547ea53333" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="JDK 1.8">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
       <additionalLanguages />
@@ -455,7 +455,7 @@ return null;</string>
                         <object class="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
                           <void property="labelHtml">
                             <string>&lt;html&gt;If you are a Python developer, you can use the SNAP Java API from Python or you can 
-even develop Python extensions for SNAP. Here you can specify your preferred Python version by 
+even develop SNAP processor plugins using Python. Here you can specify your preferred Python version by 
 the given Python executable to be used. Only &lt;a href="https://www.python.org/downloads/"&gt;Python&lt;/a&gt;
 versions &lt;b&gt;2.7&lt;/b&gt;, &lt;b&gt;3.3&lt;/b&gt; and &lt;b&gt;3.4&lt;/b&gt; are supported.</string>
                           </void>
@@ -472,7 +472,7 @@ versions &lt;b&gt;2.7&lt;/b&gt;, &lt;b&gt;3.3&lt;/b&gt; and &lt;b&gt;3.4&lt;/b&g
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent" id="CheckboxComponent0">
                       <void property="checkboxText">
-                        <string>Force SNAP to use the given Python version </string>
+                        <string>Configure SNAP for use with Python</string>
                       </void>
                       <void property="coupledComponentIds">
                         <void method="add">
@@ -560,7 +560,7 @@ return success;
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
                       <void property="labelHtml">
-                        <string>Python interpreter exectables are likely installed in directories such as &lt;b&gt;C:\Python27&lt;/b&gt; or &lt;b&gt;C:\Python34&lt;/b&gt;.</string>
+                        <string>Python interpreter exectables are likely found in &lt;b&gt;C:\Python27&lt;/b&gt; or &lt;b&gt;C:\Python34&lt;/b&gt;.</string>
                       </void>
                     </object>
                   </java>
@@ -573,14 +573,29 @@ return success;
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
                       <void property="labelHtml">
-                        <string>Depending on your system, you can type &lt;b&gt;python&lt;/b&gt;, &lt;b&gt;python3&lt;/b&gt;, or an absolute
- path to a python interpreter executable.</string>
+                        <string>You may type &lt;b&gt;which python&lt;/b&gt; in a terminal window to find the path to your preferred Python version.</string>
                       </void>
                     </object>
                   </java>
                 </serializedBean>
                 <initScript />
                 <visibilityScript>Util.isMacosInstaller() || Util.isUnixInstaller()</visibilityScript>
+              </formComponent>
+              <formComponent name="" id="1878" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
+                      <void property="labelHtml">
+                        <string> After successful configuration you will find the SNAP Python module &lt;b&gt;snappy&lt;/b&gt; in the directory
+ &lt;b&gt;${installer:sys.userHome}/.snap/snap-python&lt;/b&gt;. The Python interpreter and the location of the 
+ snappy module can be changed any time using the &lt;b&gt;bin/snappy-conf&lt;/b&gt; tool. 
+</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <initScript />
+                <visibilityScript />
               </formComponent>
             </formComponents>
           </screen>
@@ -971,7 +986,7 @@ return success;
                 </serializedBean>
                 <condition />
               </action>
-              <action name="Run python-conf on Win" id="1750" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.RunExecutableAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+              <action name="Run python-conf on Win" id="1750" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.RunExecutableAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="true" failureStrategy="1" errorMessage="">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.actions.misc.RunExecutableAction">
@@ -990,6 +1005,12 @@ return success;
                       <void property="showWindowsConsole">
                         <boolean>true</boolean>
                       </void>
+                      <void property="timeout">
+                        <int>10</int>
+                      </void>
+                      <void property="wait">
+                        <boolean>true</boolean>
+                      </void>
                       <void property="workingDirectory">
                         <object class="java.io.File">
                           <string>bin</string>
@@ -1002,7 +1023,7 @@ return success;
    &amp;&amp; context.getVariable("pythonExecutable") != null 
    &amp;&amp; context.getBooleanVariable("forcePython")</condition>
               </action>
-              <action name="Run python-conf on Unix" id="1814" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.RunExecutableAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+              <action name="Run python-conf on Unix" id="1814" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.RunExecutableAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="true" failureStrategy="1" errorMessage="">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.actions.misc.RunExecutableAction">
@@ -1017,6 +1038,15 @@ return success;
                         <object class="java.io.File">
                           <string>bin/snappy-conf</string>
                         </object>
+                      </void>
+                      <void property="showWindowsConsole">
+                        <boolean>true</boolean>
+                      </void>
+                      <void property="timeout">
+                        <int>10</int>
+                      </void>
+                      <void property="wait">
+                        <boolean>true</boolean>
                       </void>
                       <void property="workingDirectory">
                         <object class="java.io.File">
@@ -1719,7 +1749,7 @@ Do you wish the uninstaller to also remove the user data directory too?</string>
     </applications>
   </installerGui>
   <mediaSets>
-    <windows name="Windows x64" id="56" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="3" verifyIntegrity="true">
+    <windows name="Windows x64" id="56" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="windows-amd64-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="3" verifyIntegrity="true">
       <excludedComponents />
       <includedDownloadableComponents />
       <excludedLaunchers>
@@ -1741,7 +1771,7 @@ Do you wish the uninstaller to also remove the user data directory too?</string>
         <customAttributes />
       </autoUpdate>
     </windows>
-    <macosFolder name="Mac OS X Folder" id="64" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" appleJre="false" requiredVmIdPrefix="" customInstallBaseDir="" contentFilesType="3" installerName="${i18n:InstallerName(${compiler:sys.fullName})}" volumeName="${compiler:sys.shortName}" compressDmg="false" signLaunchers="false">
+    <macosFolder name="Mac OS X Folder" id="64" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="macosx-amd64-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" appleJre="false" requiredVmIdPrefix="" customInstallBaseDir="" contentFilesType="3" installerName="${i18n:InstallerName(${compiler:sys.fullName})}" volumeName="${compiler:sys.shortName}" compressDmg="false" signLaunchers="false">
       <excludedComponents />
       <includedDownloadableComponents />
       <excludedLaunchers>
@@ -1851,7 +1881,7 @@ Do you wish the uninstaller to also remove the user data directory too?</string>
       </autoUpdate>
     </unixArchive>
   </mediaSets>
-  <buildIds buildAll="true">
+  <buildIds buildAll="false">
     <mediaSet refId="56" />
   </buildIds>
   <buildOptions verbose="false" faster="true" disableSigning="true" disableJreBundling="false" debug="false" />
