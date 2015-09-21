@@ -44,6 +44,12 @@ if exist s3tbx\.git (
     if %errorlevel% neq 0 exit /B %errorlevel%
     cd ..
 )
+if exist smos-box\.git (
+    cd smos-box
+    call git pull
+    if %errorlevel% neq 0 exit /B %errorlevel%
+    cd ..
+)
 if exist testdata\.git (
     cd testdata
     call git pull
@@ -90,6 +96,12 @@ if exist s2tbx\pom.xml (
 )
 if exist s3tbx\pom.xml (
     cd s3tbx
+    call mvn clean install -T 4 -DskipTests=true
+    if %errorlevel% neq 0 exit /B %errorlevel%
+    cd ..
+)
+if exist smos-box\pom.xml (
+    cd smos-box
     call mvn clean install -T 4 -DskipTests=true
     if %errorlevel% neq 0 exit /B %errorlevel%
     cd ..

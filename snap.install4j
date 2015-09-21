@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="6.0.4" transformSequenceNumber="5">
-  <directoryPresets config="./LICENSE.txt" />
+  <directoryPresets config="../smos-box/smos-kit/target/netbeans_clusters" />
   <application name="ESA SNAP" distributionSourceDir="" applicationId="0941-5747-6134-5911" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="9" lzmaCompression="true" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="true" createMd5Sums="true" shrinkRuntime="true" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="2.0-beta-08" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" macVolumeId="69e291547ea53333" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="JDK 1.8">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
@@ -73,6 +73,9 @@
       <dirEntry mountPoint="58" file="../s1tbx/s1tbx-kit/target/netbeans_clusters/rstb" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="rstb" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
+      <dirEntry mountPoint="58" file="../smos-box/smos-kit/target/netbeans_clusters/smos" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="smos" excludeSuffixes="" dirMode="755" overrideDirMode="false">
+        <exclude />
+      </dirEntry>
       <fileEntry mountPoint="58" file="./LICENSE.txt" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="58" file="./VERSION.txt" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <dirEntry mountPoint="636" file="./files/macosx" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="macosx" excludeSuffixes="" dirMode="755" overrideDirMode="false">
@@ -141,6 +144,15 @@
         <dependencies>
           <component id="76" />
           <component id="73" />
+        </dependencies>
+      </component>
+      <component name="SMOS-Box" id="1963" customizedId="" displayDescription="true" hideHelpButton="false" selected="false" changeable="true" downloadable="true" hidden="false">
+        <description>Ingestion of SMOS data products and dedicated support tools.</description>
+        <include all="false">
+          <entry location="smos" fileType="regular" />
+        </include>
+        <dependencies>
+          <component id="76" />
         </dependencies>
       </component>
     </components>
@@ -924,6 +936,26 @@ return success;
                       </java>
                     </serializedBean>
                     <condition>new File(context.getInstallationDirectory(), "rstb").isDirectory()</condition>
+                  </action>
+                  <action name="Add smos NB cluster" id="2074" customizedId="" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                    <serializedBean>
+                      <java class="java.beans.XMLDecoder">
+                        <object class="com.install4j.runtime.beans.actions.text.WriteTextFileAction">
+                          <void property="append">
+                            <boolean>true</boolean>
+                          </void>
+                          <void property="file">
+                            <object class="java.io.File">
+                              <string>etc/snap.clusters</string>
+                            </object>
+                          </void>
+                          <void property="text">
+                            <string>smos</string>
+                          </void>
+                        </object>
+                      </java>
+                    </serializedBean>
+                    <condition>new File(context.getInstallationDirectory(), "smos").isDirectory()</condition>
                   </action>
                 </beans>
               </group>
@@ -1881,7 +1913,7 @@ Do you wish the uninstaller to also remove the user data directory too?</string>
       </autoUpdate>
     </unixArchive>
   </mediaSets>
-  <buildIds buildAll="false">
+  <buildIds buildAll="true">
     <mediaSet refId="56" />
   </buildIds>
   <buildOptions verbose="false" faster="true" disableSigning="true" disableJreBundling="false" debug="false" />
