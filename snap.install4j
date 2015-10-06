@@ -2000,7 +2000,7 @@ Do you wish the uninstaller to also remove the user data directory too?</string>
       </autoUpdate>
     </unixArchive>
   </mediaSets>
-  <buildIds buildAll="false">
+  <buildIds buildAll="true">
     <mediaSet refId="56" />
   </buildIds>
   <buildOptions verbose="false" faster="true" disableSigning="true" disableJreBundling="false" debug="false" />
