@@ -1558,9 +1558,6 @@ Categories=Utility;Application;</string>
                       <void property="checkboxText">
                         <string>Run Configuration Optimiser</string>
                       </void>
-                      <void property="initiallySelected">
-                        <boolean>true</boolean>
-                      </void>
                       <void property="variableName">
                         <string>executeConfOptimiserAction</string>
                       </void>
