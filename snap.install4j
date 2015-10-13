@@ -328,7 +328,7 @@ return null;</string>
                         </object>
                       </void>
                       <void property="variableName">
-                        <string>snapUserDir</string>
+                        <string>snapEngineUserDirs</string>
                       </void>
                     </object>
                   </java>
@@ -1880,7 +1880,7 @@ toolboxes.&lt;/html&gt;</string>
                         <array class="java.io.File" length="1">
                           <void index="0">
                             <object class="java.io.File">
-                              <string>${installer:snapUserDir}</string>
+                              <string>${installer:snapEngineUserDirs}</string>
                             </object>
                           </void>
                         </array>
