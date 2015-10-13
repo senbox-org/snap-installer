@@ -450,12 +450,12 @@ return null;</string>
                 </object>
               </java>
             </serializedBean>
-            <condition>context.getVariable("snapDesktopUserDirs") != null</condition>
+            <condition>context.getVariable("snapEngineUserDirs") != null || context.getVariable("snapDesktopUserDirs") != null </condition>
             <validation />
             <preActivation />
             <postActivation />
             <actions>
-              <action name="" id="2353" customizedId="" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+              <action name="Delete SNAP Desktop dirs" id="2353" customizedId="" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.actions.files.DeleteFileAction">
@@ -474,7 +474,28 @@ return null;</string>
                     </object>
                   </java>
                 </serializedBean>
-                <condition>context.getBooleanVariable("deleteSnapUserDir")</condition>
+                <condition>context.getBooleanVariable("deleteOnlySnapDesktopDirs")</condition>
+              </action>
+              <action name="Delete all SNAP Engine dirs" id="2467" customizedId="" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.files.DeleteFileAction">
+                      <void property="files">
+                        <array class="java.io.File" length="1">
+                          <void index="0">
+                            <object class="java.io.File">
+                              <string>${installer:snapEngineUserDirs}</string>
+                            </object>
+                          </void>
+                        </array>
+                      </void>
+                      <void property="recursive">
+                        <boolean>true</boolean>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition>context.getBooleanVariable("deleteAllSnapEngineDirs")</condition>
               </action>
             </actions>
             <formComponents>
@@ -484,9 +505,9 @@ return null;</string>
                     <object class="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
                       <void property="labelHtml">
                         <string>The installer detected SNAP user data directories from a previous installation. These directories contain 
-cached data files used by the application. The data stored in these directories might not be compatible with 
-this new SNAP version anymore. This will not affect your stored graphs, RGB profiles or other auxiliary 
-data.
+system file used by the application and also stored graphs, RGB profiles or other auxiliary data.
+The data stored in these directories might not be compatible with 
+this new SNAP version anymore. 
 &lt;p&gt;
 Shall the installer try to remove these directories for all users?</string>
                       </void>
@@ -496,15 +517,42 @@ Shall the installer try to remove these directories for all users?</string>
                 <initScript />
                 <visibilityScript />
               </formComponent>
-              <formComponent name="" id="2355" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+              <formComponent name="Delete all SNAP Engine files" id="2355" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
                       <void property="checkboxText">
-                        <string>Yes, delete SNAP user directories for all users.</string>
+                        <string>Yes, delete all SNAP related files for all users. (Be Careful)</string>
+                      </void>
+                      <void property="helpText">
+                        <string>&lt;html&gt;All files generated by a previous SNAP installation will be deleted.&lt;br&gt; 
+This will affect also stored GPF graph files, RGB profiles or other auxiliary data</string>
                       </void>
                       <void property="variableName">
-                        <string>deleteSnapUserDir</string>
+                        <string>deleteAllSnapEngineDirs</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <initScript />
+                <visibilityScript />
+              </formComponent>
+              <formComponent name="Delete only SNAP Desktop files" id="2466" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
+                      <void property="checkboxText">
+                        <string>Delete only SNAP system files for all users.</string>
+                      </void>
+                      <void property="helpText">
+                        <string>&lt;html&gt;This will only delete files used by SNAP Desktop like the &lt;br&gt;
+application layout and also modules installed via an update.</string>
+                      </void>
+                      <void property="initiallySelected">
+                        <boolean>true</boolean>
+                      </void>
+                      <void property="variableName">
+                        <string>deleteOnlySnapDesktopDirs</string>
                       </void>
                     </object>
                   </java>
@@ -1854,81 +1902,7 @@ toolboxes.&lt;/html&gt;</string>
             </actions>
             <formComponents />
           </screen>
-          <screen name="Remove user data" id="2363" customizedId="" beanClass="com.install4j.runtime.beans.screens.FormScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
-            <serializedBean>
-              <java class="java.beans.XMLDecoder">
-                <object class="com.install4j.runtime.beans.screens.FormScreen">
-                  <void property="subTitle">
-                    <string>Delete SNAP's configuration data and user settings?</string>
-                  </void>
-                  <void property="title">
-                    <string>SNAP User data</string>
-                  </void>
-                </object>
-              </java>
-            </serializedBean>
-            <condition>return context.getVariable("snapUserDir") != null;</condition>
-            <validation />
-            <preActivation />
-            <postActivation />
-            <actions>
-              <action name="" id="2364" customizedId="" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.actions.files.DeleteFileAction">
-                      <void property="files">
-                        <array class="java.io.File" length="1">
-                          <void index="0">
-                            <object class="java.io.File">
-                              <string>${installer:snapEngineUserDirs}</string>
-                            </object>
-                          </void>
-                        </array>
-                      </void>
-                      <void property="recursive">
-                        <boolean>true</boolean>
-                      </void>
-                    </object>
-                  </java>
-                </serializedBean>
-                <condition>context.getBooleanVariable("deleteSnapUserDir")</condition>
-              </action>
-            </actions>
-            <formComponents>
-              <formComponent name="" id="2365" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
-                      <void property="labelHtml">
-                        <string>SNAP created a user data directory which contains cached data files used by the application but also
-configuration data such as SNAP's &lt;b&gt;user preferences&lt;/b&gt; and &lt;b&gt;auxillary data files&lt;/b&gt; for plugin modules.
-&lt;p&gt;
-Do you wish the uninstaller to also remove the user data directory too?</string>
-                      </void>
-                    </object>
-                  </java>
-                </serializedBean>
-                <initScript />
-                <visibilityScript />
-              </formComponent>
-              <formComponent name="" id="2366" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
-                      <void property="checkboxText">
-                        <string>Yes, delete user directory '.snap' recursively.</string>
-                      </void>
-                      <void property="variableName">
-                        <string>deleteSnapUserDir</string>
-                      </void>
-                    </object>
-                  </java>
-                </serializedBean>
-                <initScript />
-                <visibilityScript />
-              </formComponent>
-            </formComponents>
-          </screen>
+          <link name="" id="2468" customizedId="" beanClass="" enabled="true" targetId="2352" mergedProjectId="" />
           <screen name="" id="19" customizedId="" beanClass="com.install4j.runtime.beans.screens.UninstallFailureScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" backButton="2" finishScreen="true" wizardIndexChangeType="unchanged" wizardIndexKey="">
             <serializedBean>
               <java class="java.beans.XMLDecoder">
