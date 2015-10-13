@@ -460,7 +460,7 @@ return null;</string>
             <actions />
             <formComponents />
           </screen>
-          <screen name="Remove user data" id="2352" customizedId="" beanClass="com.install4j.runtime.beans.screens.FormScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
+          <screen name="Remove SNAP desktop data" id="2352" customizedId="" beanClass="com.install4j.runtime.beans.screens.FormScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
             <serializedBean>
               <java class="java.beans.XMLDecoder">
                 <object class="com.install4j.runtime.beans.screens.FormScreen">
@@ -473,7 +473,7 @@ return null;</string>
                 </object>
               </java>
             </serializedBean>
-            <condition>return context.getVariable("snapUserDir") != null || context.getVariable("snapDesktopUserDir") != null;</condition>
+            <condition>context.getVariable("snapDesktopUserDir") != null;</condition>
             <validation />
             <preActivation />
             <postActivation />
@@ -483,13 +483,8 @@ return null;</string>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.actions.files.DeleteFileAction">
                       <void property="files">
-                        <array class="java.io.File" length="2">
+                        <array class="java.io.File" length="1">
                           <void index="0">
-                            <object class="java.io.File">
-                              <string>${installer:snapUserDir}</string>
-                            </object>
-                          </void>
-                          <void index="1">
                             <object class="java.io.File">
                               <string>${installer:snapDesktopUserDir}</string>
                             </object>
@@ -511,10 +506,9 @@ return null;</string>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
                       <void property="labelHtml">
-                        <string>The installer detected SNAP user data directories from a previous instllation. These directories contain 
-cached data files used by the application but also configuration data such as SNAP's &lt;b&gt;user preferences&lt;/b&gt; 
-and &lt;b&gt;auxillary data files&lt;/b&gt; for plugin modules. The data stored in these directories might not be compatible 
-anymore with this new SNAP version. 
+                        <string>The installer detected SNAP user data directories from a previous installation. These directories contain 
+cached data files used by the application. The data stored in these directories might not be compatible 
+anymore with this new SNAP version. This will not affect your stored graphs, rgb profiles or other auxiliary data
 &lt;p&gt;
 Shall the installer try to remove these directories for all users?</string>
                       </void>
@@ -1896,7 +1890,7 @@ toolboxes.&lt;/html&gt;</string>
                 </object>
               </java>
             </serializedBean>
-            <condition>return context.getVariable("snapUserDir") != null || context.getVariable("snapDesktopUserDir") != null;</condition>
+            <condition>return context.getVariable("snapUserDir") != null;</condition>
             <validation />
             <preActivation />
             <postActivation />
@@ -1906,15 +1900,10 @@ toolboxes.&lt;/html&gt;</string>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.actions.files.DeleteFileAction">
                       <void property="files">
-                        <array class="java.io.File" length="2">
+                        <array class="java.io.File" length="1">
                           <void index="0">
                             <object class="java.io.File">
                               <string>${installer:snapUserDir}</string>
-                            </object>
-                          </void>
-                          <void index="1">
-                            <object class="java.io.File">
-                              <string>${installer:snapDesktopUserDir}</string>
                             </object>
                           </void>
                         </array>
