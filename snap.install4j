@@ -310,10 +310,21 @@
                           <void property="value">
                             <string>String userHome = System.getProperty("user.home");
 if (userHome != null) {
-    File snapUserDir = new File(userHome, ".snap");
-    if (snapUserDir.exists() &amp;&amp; snapUserDir.isDirectory()) {
-        return snapUserDir.getPath();
+    File userParentDir = new File(userHome).getParentFile();
+    File[] userHomes = userParentDir.listFiles(new FileFilter() {
+        public boolean accept(File file) {
+            return file.isDirectory() &amp;&amp; file.canRead();
+        }
+    });
+    List&lt;File&gt; snapUserDirs = new ArrayList&lt;File&gt;(); 
+    for( int i = 0; i &lt; userHomes.length; i++) {
+        File currentUserHome = userHomes[i];
+        File snapUserDir = new File(currentUserHome, ".snap");
+        if (snapUserDir.exists() &amp;&amp; snapUserDir.isDirectory()) {
+            snapUserDirs.add(snapUserDir);
+        }
     }
+    return snapUserDirs.toArray(new File[snapUserDirs.size()]);
 }
 return null;</string>
                           </void>
@@ -326,6 +337,60 @@ return null;</string>
                   </java>
                 </serializedBean>
                 <condition />
+              </action>
+              <action name="set snapDesktopUserDir on Windows" id="2356" customizedId="" beanClass="com.install4j.runtime.beans.actions.control.SetVariableAction" enabled="true" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.control.SetVariableAction">
+                      <void property="script">
+                        <object class="com.install4j.api.beans.ScriptProperty">
+                          <void property="value">
+                            <string>String userHome = System.getProperty("user.home");
+if (userHome != null) {
+    // Windows
+    File snapDesktopUserDirWin = new File(userHome, "AppData/Roaming/.snap-desktop");
+    if (snapDesktopUserDirWin.exists() &amp;&amp; snapDesktopUserDirWin.isDirectory()) {
+        return snapDesktopUserDirWin.getPath();
+    }
+}
+return null;</string>
+                          </void>
+                        </object>
+                      </void>
+                      <void property="variableName">
+                        <string>snapDesktopUserDir</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition>Util.isWindowsInstaller()</condition>
+              </action>
+              <action name="set snapDesktopUserDir on Unix" id="2361" customizedId="" beanClass="com.install4j.runtime.beans.actions.control.SetVariableAction" enabled="true" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.control.SetVariableAction">
+                      <void property="script">
+                        <object class="com.install4j.api.beans.ScriptProperty">
+                          <void property="value">
+                            <string>String userHome = System.getProperty("user.home");
+if (userHome != null) {
+    // Unix
+    File snapDesktopUserDirWin = new File(userHome, ".snap-desktop");
+    if (snapDesktopUserDirWin.exists() &amp;&amp; snapDesktopUserDirWin.isDirectory()) {
+        return snapDesktopUserDirWin.getPath();
+    }
+}
+return null;</string>
+                          </void>
+                        </object>
+                      </void>
+                      <void property="variableName">
+                        <string>snapDesktopUserDir</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition>Util.isUnixInstaller()</condition>
               </action>
             </actions>
             <formComponents />
@@ -394,6 +459,88 @@ return null;</string>
             <postActivation />
             <actions />
             <formComponents />
+          </screen>
+          <screen name="Remove user data" id="2352" customizedId="" beanClass="com.install4j.runtime.beans.screens.FormScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
+            <serializedBean>
+              <java class="java.beans.XMLDecoder">
+                <object class="com.install4j.runtime.beans.screens.FormScreen">
+                  <void property="subTitle">
+                    <string>Delete SNAP's configuration data and user settings?</string>
+                  </void>
+                  <void property="title">
+                    <string>SNAP User data</string>
+                  </void>
+                </object>
+              </java>
+            </serializedBean>
+            <condition>return context.getVariable("snapUserDir") != null || context.getVariable("snapDesktopUserDir") != null;</condition>
+            <validation />
+            <preActivation />
+            <postActivation />
+            <actions>
+              <action name="" id="2353" customizedId="" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.files.DeleteFileAction">
+                      <void property="files">
+                        <array class="java.io.File" length="2">
+                          <void index="0">
+                            <object class="java.io.File">
+                              <string>${installer:snapUserDir}</string>
+                            </object>
+                          </void>
+                          <void index="1">
+                            <object class="java.io.File">
+                              <string>${installer:snapDesktopUserDir}</string>
+                            </object>
+                          </void>
+                        </array>
+                      </void>
+                      <void property="recursive">
+                        <boolean>true</boolean>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition>context.getBooleanVariable("deleteSnapUserDir")</condition>
+              </action>
+            </actions>
+            <formComponents>
+              <formComponent name="" id="2354" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
+                      <void property="labelHtml">
+                        <string>The installer detected SNAP user data directories from a previous instllation. These directories contain 
+cached data files used by the application but also configuration data such as SNAP's &lt;b&gt;user preferences&lt;/b&gt; 
+and &lt;b&gt;auxillary data files&lt;/b&gt; for plugin modules. The data stored in these directories might not be compatible 
+anymore with this new SNAP version. 
+&lt;p&gt;
+Shall the installer try to remove these directories for all users?</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <initScript />
+                <visibilityScript />
+              </formComponent>
+              <formComponent name="" id="2355" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
+                      <void property="checkboxText">
+                        <string>Yes, delete SNAP user directories for all users.</string>
+                      </void>
+                      <void property="variableName">
+                        <string>deleteSnapUserDir</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <initScript />
+                <visibilityScript />
+              </formComponent>
+            </formComponents>
           </screen>
           <screen name="" id="4" customizedId="" beanClass="com.install4j.runtime.beans.screens.InstallationDirectoryScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
             <serializedBean>
@@ -1666,32 +1813,9 @@ toolboxes.&lt;/html&gt;</string>
                 </serializedBean>
                 <condition />
               </action>
-              <action name="set snapUserDir" id="1319" customizedId="" beanClass="com.install4j.runtime.beans.actions.control.SetVariableAction" enabled="true" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.actions.control.SetVariableAction">
-                      <void property="script">
-                        <object class="com.install4j.api.beans.ScriptProperty">
-                          <void property="value">
-                            <string>String userHome = System.getProperty("user.home");
-if (userHome != null) {
-    File snapUserDir = new File(userHome, ".snap");
-    if (snapUserDir.exists() &amp;&amp; snapUserDir.isDirectory()) {
-        return snapUserDir.getPath();
-    }
-}
-return null;</string>
-                          </void>
-                        </object>
-                      </void>
-                      <void property="variableName">
-                        <string>snapUserDir</string>
-                      </void>
-                    </object>
-                  </java>
-                </serializedBean>
-                <condition />
-              </action>
+              <link name="" id="2358" customizedId="" beanClass="" enabled="true" targetId="1320" mergedProjectId="" />
+              <link name="" id="2359" customizedId="" beanClass="" enabled="true" targetId="2356" mergedProjectId="" />
+              <link name="" id="2362" customizedId="" beanClass="" enabled="true" targetId="2361" mergedProjectId="" />
             </actions>
             <formComponents />
           </screen>
@@ -1759,7 +1883,7 @@ return null;</string>
             </actions>
             <formComponents />
           </screen>
-          <screen name="Remove user data" id="1315" customizedId="" beanClass="com.install4j.runtime.beans.screens.FormScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
+          <screen name="Remove user data" id="2363" customizedId="" beanClass="com.install4j.runtime.beans.screens.FormScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
             <serializedBean>
               <java class="java.beans.XMLDecoder">
                 <object class="com.install4j.runtime.beans.screens.FormScreen">
@@ -1772,20 +1896,25 @@ return null;</string>
                 </object>
               </java>
             </serializedBean>
-            <condition>return context.getVariable("snapUserDir") != null;</condition>
+            <condition>return context.getVariable("snapUserDir") != null || context.getVariable("snapDesktopUserDir") != null;</condition>
             <validation />
             <preActivation />
             <postActivation />
             <actions>
-              <action name="" id="1322" customizedId="" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+              <action name="" id="2364" customizedId="" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.actions.files.DeleteFileAction">
                       <void property="files">
-                        <array class="java.io.File" length="1">
+                        <array class="java.io.File" length="2">
                           <void index="0">
                             <object class="java.io.File">
                               <string>${installer:snapUserDir}</string>
+                            </object>
+                          </void>
+                          <void index="1">
+                            <object class="java.io.File">
+                              <string>${installer:snapDesktopUserDir}</string>
                             </object>
                           </void>
                         </array>
@@ -1800,7 +1929,7 @@ return null;</string>
               </action>
             </actions>
             <formComponents>
-              <formComponent name="" id="1316" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+              <formComponent name="" id="2365" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
@@ -1816,7 +1945,7 @@ Do you wish the uninstaller to also remove the user data directory too?</string>
                 <initScript />
                 <visibilityScript />
               </formComponent>
-              <formComponent name="" id="1317" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+              <formComponent name="" id="2366" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
