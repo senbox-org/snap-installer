@@ -404,7 +404,7 @@ return new File(userHome, Util.isWindowsInstaller() ? "AppData\\Roaming\\SNAP" :
                 </object>
               </java>
             </serializedBean>
-            <condition />
+            <condition>!context.isConsole()</condition>
             <validation />
             <preActivation />
             <postActivation />
