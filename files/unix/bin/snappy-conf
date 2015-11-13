@@ -1,8 +1,8 @@
 #!/bin/sh
 
 me=`basename "$0"`
-temp=`readlink -f "$0"`
-dir=`dirname "$temp"`
+temp=`dirname "$0"`
+dir=`cd "$temp" && pwd -P`
 
 usage() {
     echo "Configures the SNAP-Python interface 'snappy'."
