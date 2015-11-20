@@ -2042,5 +2042,5 @@ toolboxes.&lt;/html&gt;</string>
   <buildIds buildAll="true">
     <mediaSet refId="56" />
   </buildIds>
-  <buildOptions verbose="true" faster="true" disableSigning="true" disableJreBundling="false" debug="false" />
+  <buildOptions verbose="false" faster="true" disableSigning="true" disableJreBundling="false" debug="false" />
 </install4j>
