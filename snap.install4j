@@ -2039,7 +2039,7 @@ toolboxes.&lt;/html&gt;</string>
       </autoUpdate>
     </unixArchive>
   </mediaSets>
-  <buildIds buildAll="false">
+  <buildIds buildAll="true">
     <mediaSet refId="64" />
   </buildIds>
   <buildOptions verbose="false" faster="true" disableSigning="true" disableJreBundling="false" debug="false" />
