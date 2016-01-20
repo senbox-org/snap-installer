@@ -1,6 +1,6 @@
 @echo off
 
-set SNAP_HOME=${installer:sys.installationDir}
+set SNAP_HOME=..
 
 echo.
 @echo Welcome to the SNAP command-line interface.
