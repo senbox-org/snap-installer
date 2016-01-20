@@ -172,7 +172,7 @@
           <versionLine x="20" y="40" text="version ${compiler:sys.version}" fontSize="8" fontColor="0,0,0" bold="false" />
         </text>
       </splashScreen>
-      <java mainClass="org.esa.snap.runtime.Launcher" vmParameters="-Dsnap.mainClass=org.esa.snap.core.gpf.main.GPT &quot;-Dsnap.home=${installer:sys.installationDir}&quot; -Djava.awt.headless=true" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
+      <java mainClass="org.esa.snap.runtime.Launcher" vmParameters="-Dsnap.mainClass=org.esa.snap.core.gpf.main.GPT &quot;-Dsnap.home=.&quot; -Djava.awt.headless=true" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
         <classPath>
           <archive location="snap/modules/ext/org.esa.snap.snap-core/org-esa-snap/snap-runtime.jar" failOnError="false" />
         </classPath>
@@ -201,7 +201,7 @@
           <versionLine x="20" y="40" text="version ${compiler:sys.version}" fontSize="8" fontColor="0,0,0" bold="false" />
         </text>
       </splashScreen>
-      <java mainClass="org.esa.snap.runtime.Launcher" vmParameters="-Dsnap.mainClass=org.esa.snap.pconvert.PConvertMain &quot;-Dsnap.home=${installer:sys.installationDir}&quot;  -Djava.awt.headless=true" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
+      <java mainClass="org.esa.snap.runtime.Launcher" vmParameters="-Dsnap.mainClass=org.esa.snap.pconvert.PConvertMain &quot;-Dsnap.home=.&quot;  -Djava.awt.headless=true" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
         <classPath>
           <archive location="snap/modules/ext/org.esa.snap.snap-core/org-esa-snap/snap-runtime.jar" failOnError="false" />
         </classPath>
@@ -230,7 +230,7 @@
           <versionLine x="20" y="40" text="version ${compiler:sys.version}" fontSize="8" fontColor="0,0,0" bold="false" />
         </text>
       </splashScreen>
-      <java mainClass="org.esa.snap.smart.configurator.ui.SmartConfigurator" vmParameters="-Dsnap.home=${installer:sys.installationDir}" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
+      <java mainClass="org.esa.snap.smart.configurator.ui.SmartConfigurator" vmParameters="&quot;-Dsnap.home=..&quot;" arguments="" allowVMPassthroughParameters="true" preferredVM="" bundleRuntime="true">
         <classPath>
           <archive location="snap/modules/org-esa-snap-snap-smart-configurator-ui.jar" failOnError="false" />
           <scanDirectory location="platform/modules" failOnError="false" />
@@ -1929,6 +1929,28 @@ toolboxes.&lt;/html&gt;</string>
         <customAttributes />
       </autoUpdate>
     </windows>
+    <windows name="Windows x86" id="854" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="32" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="windows-x86-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="3" verifyIntegrity="true">
+      <excludedComponents />
+      <includedDownloadableComponents />
+      <excludedLaunchers>
+        <launcher id="539" />
+        <launcher id="618" />
+        <launcher id="656" />
+      </excludedLaunchers>
+      <excludedBeans />
+      <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
+      <exclude>
+        <entry location="bin/SNAP_Icon_48.png" fileType="regular" />
+        <entry location=".i4j_fileset_634" fileType="regular" />
+        <entry location=".i4j_fileset_639" fileType="regular" />
+        <entry location=".i4j_fileset_641" fileType="regular" />
+      </exclude>
+      <variables />
+      <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
+        <commentFiles />
+        <customAttributes />
+      </autoUpdate>
+    </windows>
     <macosFolder name="Mac OS X Folder" id="64" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="macosx-amd64-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" appleJre="false" requiredVmIdPrefix="" customInstallBaseDir="" contentFilesType="3" installerName="${i18n:InstallerName(${compiler:sys.fullName})}" volumeName="${compiler:sys.shortName}" compressDmg="false" signLaunchers="false">
       <excludedComponents />
       <includedDownloadableComponents />
@@ -1976,28 +1998,6 @@ toolboxes.&lt;/html&gt;</string>
         <content />
       </installerScript>
     </unixInstaller>
-    <windows name="Windows x86" id="854" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="32" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="windows-x86-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="3" verifyIntegrity="true">
-      <excludedComponents />
-      <includedDownloadableComponents />
-      <excludedLaunchers>
-        <launcher id="539" />
-        <launcher id="618" />
-        <launcher id="656" />
-      </excludedLaunchers>
-      <excludedBeans />
-      <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
-      <exclude>
-        <entry location="bin/SNAP_Icon_48.png" fileType="regular" />
-        <entry location=".i4j_fileset_634" fileType="regular" />
-        <entry location=".i4j_fileset_639" fileType="regular" />
-        <entry location=".i4j_fileset_641" fileType="regular" />
-      </exclude>
-      <variables />
-      <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
-        <commentFiles />
-        <customAttributes />
-      </autoUpdate>
-    </windows>
     <unixArchive name="Engine Unix Archive" id="859" customizedId="" mediaFileName="" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="" includeAllDownloadableComponents="true" includedJRE="" manualJREEntry="false">
       <excludedComponents />
       <includedDownloadableComponents />
@@ -2039,8 +2039,8 @@ toolboxes.&lt;/html&gt;</string>
       </autoUpdate>
     </unixArchive>
   </mediaSets>
-  <buildIds buildAll="true">
-    <mediaSet refId="56" />
+  <buildIds buildAll="false">
+    <mediaSet refId="64" />
   </buildIds>
   <buildOptions verbose="false" faster="true" disableSigning="true" disableJreBundling="false" debug="false" />
 </install4j>
