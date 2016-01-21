@@ -1,7 +1,5 @@
 @echo off
 
-set SNAP_HOME=..
-
 echo.
 @echo Welcome to the SNAP command-line interface.
 @echo The following command-line tools are available:
@@ -12,6 +10,6 @@ echo.
 @echo Typing the name of each tool will output its usage information.
 echo.
 
-cd "%SNAP_HOME%\bin"
+cd /d %~dp0
 
 prompt $G$S
