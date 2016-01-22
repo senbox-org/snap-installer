@@ -109,7 +109,7 @@
         </include>
         <dependencies />
       </component>
-      <component name="Sentinel-1 Toolbox" id="73" customizedId="S1TBX" displayDescription="true" hideHelpButton="false" selected="true" changeable="false" downloadable="true" hidden="false">
+      <component name="Sentinel-1 Toolbox" id="73" customizedId="S1TBX" displayDescription="true" hideHelpButton="false" selected="true" changeable="true" downloadable="true" hidden="false">
         <description>Ingestion of SAR data products and dedicated support tools.</description>
         <include all="false">
           <entry location="s1tbx" fileType="regular" />
@@ -118,7 +118,7 @@
           <component id="76" />
         </dependencies>
       </component>
-      <component name="Sentinel-2 Toolbox" id="72" customizedId="S2TBX" displayDescription="true" hideHelpButton="false" selected="true" changeable="false" downloadable="true" hidden="false">
+      <component name="Sentinel-2 Toolbox" id="72" customizedId="S2TBX" displayDescription="true" hideHelpButton="false" selected="true" changeable="true" downloadable="true" hidden="false">
         <description>Ingestion of Sentinel-2 MSI data products and dedicated support tools.</description>
         <include all="false">
           <entry location="s2tbx" fileType="regular" />
@@ -127,7 +127,7 @@
           <component id="76" />
         </dependencies>
       </component>
-      <component name="Sentinel-3 Toolbox" id="68" customizedId="S3TBX" displayDescription="true" hideHelpButton="false" selected="true" changeable="false" downloadable="true" hidden="false">
+      <component name="Sentinel-3 Toolbox" id="68" customizedId="S3TBX" displayDescription="true" hideHelpButton="false" selected="true" changeable="true" downloadable="true" hidden="false">
         <description>Ingestion of Sentinel-3 OLCI and SLSTR data products and dedicated support tools.</description>
         <include all="false">
           <entry location="s3tbx" fileType="regular" />
@@ -136,7 +136,7 @@
           <component id="76" />
         </dependencies>
       </component>
-      <component name="Radarsat-2 Toolbox" id="306" customizedId="RSTB" displayDescription="true" hideHelpButton="false" selected="true" changeable="false" downloadable="true" hidden="false">
+      <component name="Radarsat-2 Toolbox" id="306" customizedId="RSTB" displayDescription="true" hideHelpButton="false" selected="true" changeable="true" downloadable="true" hidden="false">
         <description>SAR Polarimetric Tools</description>
         <include all="false">
           <entry location="rstb" fileType="regular" />
@@ -590,7 +590,7 @@ problems after SNAP version upgrades.</string>
             </actions>
             <formComponents />
           </screen>
-          <screen name="" id="6" customizedId="" beanClass="com.install4j.runtime.beans.screens.ComponentsScreen" enabled="false" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
+          <screen name="" id="6" customizedId="" beanClass="com.install4j.runtime.beans.screens.ComponentsScreen" enabled="true" commentSet="false" comment="" actionElevationType="inherit" rollbackBarrier="false" backButton="2" finishScreen="false" wizardIndexChangeType="unchanged" wizardIndexKey="">
             <serializedBean>
               <java class="java.beans.XMLDecoder">
                 <object class="com.install4j.runtime.beans.screens.ComponentsScreen" />
@@ -2099,9 +2099,7 @@ toolboxes.&lt;/html&gt;</string>
         <launcher id="618" />
         <launcher id="656" />
       </excludedLaunchers>
-      <excludedBeans>
-        <bean refId="6" />
-      </excludedBeans>
+      <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
         <entry location="bin/SNAP_Icon_48.png" fileType="regular" />
@@ -2131,9 +2129,7 @@ toolboxes.&lt;/html&gt;</string>
         <launcher id="539" />
         <launcher id="656" />
       </excludedLaunchers>
-      <excludedBeans>
-        <bean refId="6" />
-      </excludedBeans>
+      <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
         <entry location="bin/SNAP_Icon_48.png" fileType="regular" />
@@ -2164,9 +2160,7 @@ toolboxes.&lt;/html&gt;</string>
         <launcher id="618" />
         <launcher id="656" />
       </excludedLaunchers>
-      <excludedBeans>
-        <bean refId="6" />
-      </excludedBeans>
+      <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
         <entry location="smos" fileType="regular" />
@@ -2372,11 +2366,16 @@ toolboxes.&lt;/html&gt;</string>
       </autoUpdate>
     </unixArchive>
   </mediaSets>
-  <buildIds buildAll="true">
+  <buildIds buildAll="false">
+    <mediaSet refId="2589" />
+    <mediaSet refId="2603" />
     <mediaSet refId="2592" />
     <mediaSet refId="2598" />
+    <mediaSet refId="2609" />
+    <mediaSet refId="2620" />
     <mediaSet refId="2612" />
     <mediaSet refId="2617" />
+    <mediaSet refId="859" />
   </buildIds>
   <buildOptions verbose="false" faster="true" disableSigning="true" disableJreBundling="false" debug="false" />
 </install4j>
