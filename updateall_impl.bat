@@ -92,7 +92,7 @@ if exist s1tbx\pom.xml (
     if %errorlevel% neq 0 exit /B %errorlevel%
     call mvn install -T 4 -DskipTests=true
     if %errorlevel% neq 0 exit /B %errorlevel%
-    call mvn org.codehaus.mojo:nbm-maven-plugin:autoupdate -T 4
+    call mvn org.codehaus.mojo:nbm-maven-plugin:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
     cd ..
 )
