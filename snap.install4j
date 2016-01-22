@@ -2368,6 +2368,14 @@ toolboxes.&lt;/html&gt;</string>
   </mediaSets>
   <buildIds buildAll="false">
     <mediaSet refId="2589" />
+    <mediaSet refId="2603" />
+    <mediaSet refId="2592" />
+    <mediaSet refId="2598" />
+    <mediaSet refId="2609" />
+    <mediaSet refId="2620" />
+    <mediaSet refId="2612" />
+    <mediaSet refId="2617" />
+    <mediaSet refId="859" />
   </buildIds>
   <buildOptions verbose="false" faster="true" disableSigning="true" disableJreBundling="false" debug="false" />
 </install4j>
