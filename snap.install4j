@@ -2372,7 +2372,7 @@ toolboxes.&lt;/html&gt;</string>
       </autoUpdate>
     </unixArchive>
   </mediaSets>
-  <buildIds buildAll="false">
+  <buildIds buildAll="true">
     <mediaSet refId="2592" />
     <mediaSet refId="2598" />
     <mediaSet refId="2612" />
