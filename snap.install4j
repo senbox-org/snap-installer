@@ -1955,31 +1955,18 @@ toolboxes.&lt;/html&gt;</string>
         <customAttributes />
       </autoUpdate>
     </windows>
-    <macosFolder name="Full SNAP Mac OS X Folder" id="2575" customizedId="" mediaFileName="${compiler:sys.shortName}_full_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="macosx-amd64-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" appleJre="false" requiredVmIdPrefix="" customInstallBaseDir="" contentFilesType="1" installerName="${i18n:InstallerName(${compiler:sys.fullName})}" volumeName="${compiler:sys.shortName}" compressDmg="false" signLaunchers="false">
-      <excludedComponents>
-        <component id="73" />
-        <component id="72" />
-        <component id="68" />
-        <component id="306" />
-        <component id="1963" />
-      </excludedComponents>
+    <macosFolder name="Full SNAP Mac OS X Folder" id="2575" customizedId="" mediaFileName="${compiler:sys.shortName}_full_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" includedJRE="macosx-amd64-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" appleJre="false" requiredVmIdPrefix="" customInstallBaseDir="" contentFilesType="1" installerName="${i18n:InstallerName(${compiler:sys.fullName})}" volumeName="${compiler:sys.shortName}" compressDmg="false" signLaunchers="false">
+      <excludedComponents />
       <includedDownloadableComponents />
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="539" />
         <launcher id="656" />
       </excludedLaunchers>
-      <excludedBeans>
-        <bean refId="6" />
-      </excludedBeans>
+      <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
         <entry location="bin/SNAP_Icon_48.png" fileType="regular" />
-        <entry location="s1tbx" fileType="regular" />
-        <entry location="s2tbx" fileType="regular" />
-        <entry location="s3tbx" fileType="regular" />
-        <entry location="rstb" fileType="regular" />
-        <entry location="smos" fileType="regular" />
         <entry location=".i4j_fileset_637" fileType="regular" />
         <entry location=".i4j_fileset_639" fileType="regular" />
         <entry location=".i4j_fileset_641" fileType="regular" />
@@ -2327,7 +2314,7 @@ toolboxes.&lt;/html&gt;</string>
       </autoUpdate>
     </unixArchive>
   </mediaSets>
-  <buildIds buildAll="false">
+  <buildIds buildAll="true">
     <mediaSet refId="2571" />
     <mediaSet refId="2584" />
     <mediaSet refId="2575" />
