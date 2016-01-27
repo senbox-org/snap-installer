@@ -146,7 +146,7 @@
           <component id="73" />
         </dependencies>
       </component>
-      <component name="SMOS-Box" id="1963" customizedId="SMOS" displayDescription="true" hideHelpButton="false" selected="true" changeable="false" downloadable="true" hidden="false">
+      <component name="SMOS-Box" id="1963" customizedId="SMOS" displayDescription="true" hideHelpButton="false" selected="true" changeable="true" downloadable="true" hidden="false">
         <description>Ingestion of SMOS data products and dedicated support tools.</description>
         <include all="false">
           <entry location="smos" fileType="regular" />
@@ -1911,31 +1911,18 @@ toolboxes.&lt;/html&gt;</string>
     </applications>
   </installerGui>
   <mediaSets>
-    <windows name="Plain SNAP Windows x64" id="2571" customizedId="" mediaFileName="${compiler:sys.shortName}_plain_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="windows-amd64-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" verifyIntegrity="true">
-      <excludedComponents>
-        <component id="73" />
-        <component id="72" />
-        <component id="68" />
-        <component id="306" />
-        <component id="1963" />
-      </excludedComponents>
+    <windows name="Full SNAP Windows x64" id="2571" customizedId="" mediaFileName="${compiler:sys.shortName}_full_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" includedJRE="windows-amd64-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" verifyIntegrity="true">
+      <excludedComponents />
       <includedDownloadableComponents />
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="539" />
         <launcher id="618" />
       </excludedLaunchers>
-      <excludedBeans>
-        <bean refId="6" />
-      </excludedBeans>
+      <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
         <entry location="bin/SNAP_Icon_48.png" fileType="regular" />
-        <entry location="s1tbx" fileType="regular" />
-        <entry location="s2tbx" fileType="regular" />
-        <entry location="s3tbx" fileType="regular" />
-        <entry location="rstb" fileType="regular" />
-        <entry location="smos" fileType="regular" />
         <entry location=".i4j_fileset_634" fileType="regular" />
         <entry location=".i4j_fileset_637" fileType="regular" />
         <entry location=".i4j_fileset_641" fileType="regular" />
@@ -1946,31 +1933,18 @@ toolboxes.&lt;/html&gt;</string>
         <customAttributes />
       </autoUpdate>
     </windows>
-    <windows name="Plain SNAP Windows x86" id="2584" customizedId="" mediaFileName="${compiler:sys.shortName}_plain_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="32" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="windows-x86-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" verifyIntegrity="true">
-      <excludedComponents>
-        <component id="73" />
-        <component id="72" />
-        <component id="68" />
-        <component id="306" />
-        <component id="1963" />
-      </excludedComponents>
+    <windows name="Full SNAP Windows x86" id="2584" customizedId="" mediaFileName="${compiler:sys.shortName}_full_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="32" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" includedJRE="windows-x86-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" verifyIntegrity="true">
+      <excludedComponents />
       <includedDownloadableComponents />
       <excludedLaunchers>
         <launcher id="539" />
         <launcher id="618" />
         <launcher id="656" />
       </excludedLaunchers>
-      <excludedBeans>
-        <bean refId="6" />
-      </excludedBeans>
+      <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
         <entry location="bin/SNAP_Icon_48.png" fileType="regular" />
-        <entry location="s1tbx" fileType="regular" />
-        <entry location="s2tbx" fileType="regular" />
-        <entry location="s3tbx" fileType="regular" />
-        <entry location="rstb" fileType="regular" />
-        <entry location="smos" fileType="regular" />
         <entry location=".i4j_fileset_634" fileType="regular" />
         <entry location=".i4j_fileset_639" fileType="regular" />
         <entry location=".i4j_fileset_641" fileType="regular" />
@@ -1981,31 +1955,18 @@ toolboxes.&lt;/html&gt;</string>
         <customAttributes />
       </autoUpdate>
     </windows>
-    <macosFolder name="Plain SNAP Mac OS X Folder" id="2575" customizedId="" mediaFileName="${compiler:sys.shortName}_plain_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="macosx-amd64-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" appleJre="false" requiredVmIdPrefix="" customInstallBaseDir="" contentFilesType="1" installerName="${i18n:InstallerName(${compiler:sys.fullName})}" volumeName="${compiler:sys.shortName}" compressDmg="false" signLaunchers="false">
-      <excludedComponents>
-        <component id="73" />
-        <component id="72" />
-        <component id="68" />
-        <component id="306" />
-        <component id="1963" />
-      </excludedComponents>
+    <macosFolder name="Full SNAP Mac OS X Folder" id="2575" customizedId="" mediaFileName="${compiler:sys.shortName}_full_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" includedJRE="macosx-amd64-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" appleJre="false" requiredVmIdPrefix="" customInstallBaseDir="" contentFilesType="1" installerName="${i18n:InstallerName(${compiler:sys.fullName})}" volumeName="${compiler:sys.shortName}" compressDmg="false" signLaunchers="false">
+      <excludedComponents />
       <includedDownloadableComponents />
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="539" />
         <launcher id="656" />
       </excludedLaunchers>
-      <excludedBeans>
-        <bean refId="6" />
-      </excludedBeans>
+      <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
         <entry location="bin/SNAP_Icon_48.png" fileType="regular" />
-        <entry location="s1tbx" fileType="regular" />
-        <entry location="s2tbx" fileType="regular" />
-        <entry location="s3tbx" fileType="regular" />
-        <entry location="rstb" fileType="regular" />
-        <entry location="smos" fileType="regular" />
         <entry location=".i4j_fileset_637" fileType="regular" />
         <entry location=".i4j_fileset_639" fileType="regular" />
         <entry location=".i4j_fileset_641" fileType="regular" />
@@ -2017,30 +1978,17 @@ toolboxes.&lt;/html&gt;</string>
       </autoUpdate>
       <topLevelFiles />
     </macosFolder>
-    <unixInstaller name="Plain SNAP Unix" id="2578" customizedId="" mediaFileName="${compiler:sys.shortName}_plain_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="jres/linux-amd64-1.8.0_60.tar.gz" manualJREEntry="true" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1">
-      <excludedComponents>
-        <component id="73" />
-        <component id="72" />
-        <component id="68" />
-        <component id="306" />
-        <component id="1963" />
-      </excludedComponents>
+    <unixInstaller name="Full SNAP Unix" id="2578" customizedId="" mediaFileName="${compiler:sys.shortName}_full_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" includedJRE="jres/linux-amd64-1.8.0_60.tar.gz" manualJREEntry="true" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1">
+      <excludedComponents />
       <includedDownloadableComponents />
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="618" />
         <launcher id="656" />
       </excludedLaunchers>
-      <excludedBeans>
-        <bean refId="6" />
-      </excludedBeans>
+      <excludedBeans />
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
-        <entry location="s1tbx" fileType="regular" />
-        <entry location="s2tbx" fileType="regular" />
-        <entry location="s3tbx" fileType="regular" />
-        <entry location="rstb" fileType="regular" />
-        <entry location="smos" fileType="regular" />
         <entry location=".i4j_fileset_634" fileType="regular" />
         <entry location=".i4j_fileset_637" fileType="regular" />
         <entry location=".i4j_fileset_639" fileType="regular" />
@@ -2367,15 +2315,10 @@ toolboxes.&lt;/html&gt;</string>
     </unixArchive>
   </mediaSets>
   <buildIds buildAll="false">
-    <mediaSet refId="2589" />
-    <mediaSet refId="2603" />
-    <mediaSet refId="2592" />
-    <mediaSet refId="2598" />
-    <mediaSet refId="2609" />
-    <mediaSet refId="2620" />
-    <mediaSet refId="2612" />
-    <mediaSet refId="2617" />
-    <mediaSet refId="859" />
+    <mediaSet refId="2571" />
+    <mediaSet refId="2584" />
+    <mediaSet refId="2575" />
+    <mediaSet refId="2578" />
   </buildIds>
   <buildOptions verbose="false" faster="true" disableSigning="true" disableJreBundling="false" debug="false" />
 </install4j>
