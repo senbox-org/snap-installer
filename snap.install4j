@@ -1529,7 +1529,7 @@ return success;
                             <string>--python</string>
                           </void>
                           <void index="1">
-                            <string>"${installer:pythonExecutable}</string>
+                            <string>${installer:pythonExecutable}</string>
                           </void>
                         </array>
                       </void>
@@ -2037,7 +2037,7 @@ toolboxes.&lt;/html&gt;</string>
     </applications>
   </installerGui>
   <mediaSets>
-    <windows name="Full SNAP Windows x64" id="2571" customizedId="" mediaFileName="${compiler:sys.shortName}_full_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" includedJRE="windows-amd64-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" verifyIntegrity="true">
+    <windows name="All SNAP Windows x64" id="2571" customizedId="" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" includedJRE="windows-amd64-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" verifyIntegrity="true">
       <excludedComponents />
       <includedDownloadableComponents />
       <excludedLaunchers>
@@ -2059,7 +2059,7 @@ toolboxes.&lt;/html&gt;</string>
         <customAttributes />
       </autoUpdate>
     </windows>
-    <windows name="Full SNAP Windows x86" id="2584" customizedId="" mediaFileName="${compiler:sys.shortName}_full_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="32" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" includedJRE="windows-x86-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" verifyIntegrity="true">
+    <windows name="All SNAP Windows x86" id="2584" customizedId="" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="32" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" includedJRE="windows-x86-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" verifyIntegrity="true">
       <excludedComponents />
       <includedDownloadableComponents />
       <excludedLaunchers>
@@ -2081,7 +2081,7 @@ toolboxes.&lt;/html&gt;</string>
         <customAttributes />
       </autoUpdate>
     </windows>
-    <macosFolder name="Full SNAP Mac OS X Folder" id="2575" customizedId="" mediaFileName="${compiler:sys.shortName}_full_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" includedJRE="macosx-amd64-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" appleJre="false" requiredVmIdPrefix="" customInstallBaseDir="" contentFilesType="1" installerName="${i18n:InstallerName(${compiler:sys.fullName})}" volumeName="${compiler:sys.shortName}" compressDmg="false" signLaunchers="false">
+    <macosFolder name="All SNAP Mac OS X Folder" id="2575" customizedId="" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" includedJRE="macosx-amd64-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" appleJre="false" requiredVmIdPrefix="" customInstallBaseDir="" contentFilesType="1" installerName="${i18n:InstallerName(${compiler:sys.fullName})}" volumeName="${compiler:sys.shortName}" compressDmg="false" signLaunchers="false">
       <excludedComponents />
       <includedDownloadableComponents />
       <excludedLaunchers>
@@ -2104,7 +2104,7 @@ toolboxes.&lt;/html&gt;</string>
       </autoUpdate>
       <topLevelFiles />
     </macosFolder>
-    <unixInstaller name="Full SNAP Unix" id="2578" customizedId="" mediaFileName="${compiler:sys.shortName}_full_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" includedJRE="jres/linux-amd64-1.8.0_60.tar.gz" manualJREEntry="true" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1">
+    <unixInstaller name="All SNAP Unix" id="2578" customizedId="" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" includedJRE="jres/linux-amd64-1.8.0_60.tar.gz" manualJREEntry="true" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1">
       <excludedComponents />
       <includedDownloadableComponents />
       <excludedLaunchers>
@@ -2440,9 +2440,8 @@ toolboxes.&lt;/html&gt;</string>
       </autoUpdate>
     </unixArchive>
   </mediaSets>
-  <buildIds buildAll="true">
-    <mediaSet refId="2609" />
-    <mediaSet refId="2612" />
+  <buildIds buildAll="false">
+    <mediaSet refId="2620" />
   </buildIds>
   <buildOptions verbose="false" faster="true" disableSigning="true" disableJreBundling="false" debug="false" />
 </install4j>
