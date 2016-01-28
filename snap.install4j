@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="6.0.4" transformSequenceNumber="5">
   <directoryPresets config="./images" />
-  <application name="ESA SNAP" distributionSourceDir="" applicationId="0941-5747-6134-5911" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="9" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="true" createMd5Sums="true" shrinkRuntime="false" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="2.0.2-alpha-01" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" macVolumeId="69e291547ea53333" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="JDK 1.8">
+  <application name="ESA SNAP" distributionSourceDir="" applicationId="0941-5747-6134-5911" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="9" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="true" createMd5Sums="true" shrinkRuntime="false" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="2.0.2" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" macVolumeId="69e291547ea53333" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="JDK 1.8">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
       <additionalLanguages />
@@ -1197,7 +1197,7 @@ return success;
                 </serializedBean>
                 <condition />
               </action>
-              <action name="Run python-conf on Win" id="1750" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.RunExecutableAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="true" failureStrategy="1" errorMessage="">
+              <action name="Run python-conf on Win" id="1750" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.RunExecutableAction" enabled="false" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="true" failureStrategy="1" errorMessage="">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.actions.misc.RunExecutableAction">
@@ -1234,7 +1234,7 @@ return success;
    &amp;&amp; context.getVariable("pythonExecutable") != null 
    &amp;&amp; context.getBooleanVariable("forcePython")</condition>
               </action>
-              <action name="Run python-conf on Unix" id="1814" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.RunExecutableAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="true" failureStrategy="1" errorMessage="">
+              <action name="Run python-conf on Unix" id="1814" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.RunExecutableAction" enabled="false" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="true" failureStrategy="1" errorMessage="">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.actions.misc.RunExecutableAction">
@@ -1449,6 +1449,29 @@ return success;
                 </serializedBean>
                 <condition>context.getBooleanVariable("executeLauncherAction") &amp;&amp; (!context.isUnattended()) &amp;&amp; Util.isUnixInstaller()</condition>
               </action>
+              <action name="Unix with Python" id="2637" customizedId="" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" enabled="true" commentSet="false" comment="" actionElevationType="none" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction">
+                      <void property="arguments">
+                        <array class="java.lang.String" length="2">
+                          <void index="0">
+                            <string>--python</string>
+                          </void>
+                          <void index="1">
+                            <string>${installer:pythonExecutable}</string>
+                          </void>
+                        </array>
+                      </void>
+                      <void property="launcherId">
+                        <string>539</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition>context.getBooleanVariable("executeLauncherWithPythonAction") &amp;&amp; (!context.isUnattended()) &amp;&amp; context.getVariable("pythonExecutable") != null 
+   &amp;&amp; context.getBooleanVariable("forcePython") &amp;&amp; Util.isUnixInstaller()</condition>
+              </action>
               <action name="Mac OS" id="626" customizedId="" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" enabled="true" commentSet="false" comment="" actionElevationType="none" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
@@ -1460,6 +1483,29 @@ return success;
                   </java>
                 </serializedBean>
                 <condition>context.getBooleanVariable("executeLauncherAction") &amp;&amp; (!context.isUnattended()) &amp;&amp; Util.isMacosInstaller()</condition>
+              </action>
+              <action name="Mac OS with Python" id="2629" customizedId="" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction">
+                      <void property="arguments">
+                        <array class="java.lang.String" length="2">
+                          <void index="0">
+                            <string>--python</string>
+                          </void>
+                          <void index="1">
+                            <string>${installer:pythonExecutable}</string>
+                          </void>
+                        </array>
+                      </void>
+                      <void property="launcherId">
+                        <string>618</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition>context.getBooleanVariable("executeLauncherWithPythonAction") &amp;&amp; (!context.isUnattended()) &amp;&amp; context.getVariable("pythonExecutable") != null 
+   &amp;&amp; context.getBooleanVariable("forcePython") &amp;&amp; Util.isMacosInstaller() </condition>
               </action>
               <action name="Win x86" id="858" customizedId="" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" enabled="true" commentSet="false" comment="" actionElevationType="none" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
@@ -1473,6 +1519,29 @@ return success;
                 </serializedBean>
                 <condition>context.getBooleanVariable("executeLauncherAction") &amp;&amp; (!context.isUnattended()) &amp;&amp; Util.isWindowsInstaller() &amp;&amp; !Util.is64BitWindows()</condition>
               </action>
+              <action name="Win x86 with Python" id="2638" customizedId="" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" enabled="true" commentSet="false" comment="" actionElevationType="none" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction">
+                      <void property="arguments">
+                        <array class="java.lang.String" length="2">
+                          <void index="0">
+                            <string>--python</string>
+                          </void>
+                          <void index="1">
+                            <string>"${installer:pythonExecutable}</string>
+                          </void>
+                        </array>
+                      </void>
+                      <void property="launcherId">
+                        <string>538</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition>context.getBooleanVariable("executeLauncherWithPythonAction") &amp;&amp; (!context.isUnattended()) &amp;&amp; context.getVariable("pythonExecutable") != null 
+   &amp;&amp; context.getBooleanVariable("forcePython") &amp;&amp; Util.isWindowsInstaller() &amp;&amp; !Util.is64BitWindows()</condition>
+              </action>
               <action name="Win x64" id="660" customizedId="" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" enabled="true" commentSet="false" comment="" actionElevationType="none" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
@@ -1484,6 +1553,29 @@ return success;
                   </java>
                 </serializedBean>
                 <condition>context.getBooleanVariable("executeLauncherAction") &amp;&amp; (!context.isUnattended()) &amp;&amp; Util.isWindowsInstaller() &amp;&amp; Util.is64BitWindows()</condition>
+              </action>
+              <action name="Win x64 with Python" id="2632" customizedId="" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction">
+                      <void property="arguments">
+                        <array class="java.lang.String" length="2">
+                          <void index="0">
+                            <string>--python</string>
+                          </void>
+                          <void index="1">
+                            <string>"${installer:pythonExecutable}</string>
+                          </void>
+                        </array>
+                      </void>
+                      <void property="launcherId">
+                        <string>656</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition>context.getBooleanVariable("executeLauncherWithPythonAction") &amp;&amp; (!context.isUnattended()) &amp;&amp; context.getVariable("pythonExecutable") != null 
+   &amp;&amp; context.getBooleanVariable("forcePython") &amp;&amp; Util.isWindowsInstaller() &amp;&amp; Util.is64BitWindows()</condition>
               </action>
               <action name="Win x86" id="675" customizedId="" beanClass="com.install4j.runtime.beans.actions.desktop.CreateDesktopLinkAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
@@ -1728,7 +1820,41 @@ Categories=Utility;Application;</string>
                   </java>
                 </serializedBean>
                 <initScript />
-                <visibilityScript />
+                <visibilityScript>context.getVariable("pythonExecutable") == null || !context.getBooleanVariable("forcePython")</visibilityScript>
+              </formComponent>
+              <formComponent name="Execute launcher with Python" id="2630" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
+                      <void property="checkboxText">
+                        <string>Run SNAP Desktop and configure Python</string>
+                      </void>
+                      <void property="initiallySelected">
+                        <boolean>true</boolean>
+                      </void>
+                      <void property="variableName">
+                        <string>executeLauncherWithPythonAction</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <initScript />
+                <visibilityScript>context.getVariable("pythonExecutable") != null &amp;&amp; context.getBooleanVariable("forcePython")</visibilityScript>
+              </formComponent>
+              <formComponent name="" id="2639" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
+                      <void property="labelHtml">
+                        <string>&lt;html&gt;If you don't run SNAP Desktop and the Python configuration now you can run the configuration 
+manually later. This is documented in the &lt;b&gt;&lt;a href="https://senbox.atlassian.net/wiki/display/SNAP/How+to+use+the+SNAP+API+from+Python"&gt;SNAP Wiki&lt;/a&gt;&lt;/b&gt;&lt;/html&gt;
+</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <initScript />
+                <visibilityScript>context.getVariable("pythonExecutable") != null &amp;&amp; context.getBooleanVariable("forcePython")</visibilityScript>
               </formComponent>
               <formComponent name="" id="1641" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.SpacerComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
                 <serializedBean>
@@ -2002,7 +2128,7 @@ toolboxes.&lt;/html&gt;</string>
         <content />
       </installerScript>
     </unixInstaller>
-    <windows name="Toolbox SNAP Windows x64" id="2589" customizedId="" mediaFileName="${compiler:sys.shortName}_toolboxes_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" includedJRE="windows-amd64-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" verifyIntegrity="true">
+    <windows name="Sentinel SNAP Windows x64" id="2589" customizedId="" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" includedJRE="windows-amd64-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" verifyIntegrity="true">
       <excludedComponents>
         <component id="1963" />
       </excludedComponents>
@@ -2032,7 +2158,7 @@ toolboxes.&lt;/html&gt;</string>
         <customAttributes />
       </autoUpdate>
     </windows>
-    <windows name="Toolbox SNAP Windows x86" id="2603" customizedId="" mediaFileName="${compiler:sys.shortName}_toolboxes_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="32" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="windows-x86-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" verifyIntegrity="true">
+    <windows name="Sentinel SNAP Windows x86" id="2603" customizedId="" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="32" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="windows-x86-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" verifyIntegrity="true">
       <excludedComponents>
         <component id="1963" />
       </excludedComponents>
@@ -2062,7 +2188,7 @@ toolboxes.&lt;/html&gt;</string>
         <customAttributes />
       </autoUpdate>
     </windows>
-    <macosFolder name="Toolbox SNAP Mac OS X Folder" id="2592" customizedId="" mediaFileName="${compiler:sys.shortName}_toolboxes_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="macosx-amd64-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" appleJre="false" requiredVmIdPrefix="" customInstallBaseDir="" contentFilesType="1" installerName="${i18n:InstallerName(${compiler:sys.fullName})}" volumeName="${compiler:sys.shortName}" compressDmg="false" signLaunchers="false">
+    <macosFolder name="Sentinel SNAP Mac OS X Folder" id="2592" customizedId="" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="macosx-amd64-1.8.0_60" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" appleJre="false" requiredVmIdPrefix="" customInstallBaseDir="" contentFilesType="1" installerName="${i18n:InstallerName(${compiler:sys.fullName})}" volumeName="${compiler:sys.shortName}" compressDmg="false" signLaunchers="false">
       <excludedComponents>
         <component id="1963" />
       </excludedComponents>
@@ -2093,7 +2219,7 @@ toolboxes.&lt;/html&gt;</string>
       </autoUpdate>
       <topLevelFiles />
     </macosFolder>
-    <unixInstaller name="Toolbox SNAP Unix" id="2598" customizedId="" mediaFileName="${compiler:sys.shortName}_toolboxes_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="jres/linux-amd64-1.8.0_60.tar.gz" manualJREEntry="true" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1">
+    <unixInstaller name="Sentinel SNAP Unix" id="2598" customizedId="" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="jres/linux-amd64-1.8.0_60.tar.gz" manualJREEntry="true" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1">
       <excludedComponents>
         <component id="1963" />
       </excludedComponents>
@@ -2315,10 +2441,8 @@ toolboxes.&lt;/html&gt;</string>
     </unixArchive>
   </mediaSets>
   <buildIds buildAll="true">
-    <mediaSet refId="2571" />
-    <mediaSet refId="2584" />
-    <mediaSet refId="2575" />
-    <mediaSet refId="2578" />
+    <mediaSet refId="2609" />
+    <mediaSet refId="2612" />
   </buildIds>
   <buildOptions verbose="false" faster="true" disableSigning="true" disableJreBundling="false" debug="false" />
 </install4j>
