@@ -473,17 +473,22 @@ return new File(userHome, Util.isWindowsInstaller() ? "AppData\\Roaming\\SNAP" :
                     </object>
                   </java>
                 </serializedBean>
-                <condition>context.getBooleanVariable("deleteOnlySnapDesktopDir")</condition>
+                <condition>context.getVariable("deleteSnapDir").equals("DESKTOP")</condition>
               </action>
               <action name="Delete all SNAP Engine dirs" id="2467" customizedId="" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.actions.files.DeleteFileAction">
                       <void property="files">
-                        <array class="java.io.File" length="1">
+                        <array class="java.io.File" length="2">
                           <void index="0">
                             <object class="java.io.File">
                               <string>${installer:snapEngineUserDir}</string>
+                            </object>
+                          </void>
+                          <void index="1">
+                            <object class="java.io.File">
+                              <string>${installer:snapDesktopUserDir}</string>
                             </object>
                           </void>
                         </array>
@@ -494,7 +499,7 @@ return new File(userHome, Util.isWindowsInstaller() ? "AppData\\Roaming\\SNAP" :
                     </object>
                   </java>
                 </serializedBean>
-                <condition>context.getBooleanVariable("deleteAllSnapEngineDir")</condition>
+                <condition>context.getVariable("deleteSnapDir").equals("ALL")</condition>
               </action>
             </actions>
             <formComponents>
@@ -515,7 +520,7 @@ Shall the installer try to remove these directories?</string>
                 <initScript />
                 <visibilityScript />
               </formComponent>
-              <formComponent name="Delete all SNAP Engine files" id="2355" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+              <formComponent name="Delete all SNAP Engine files" id="2355" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="false" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
@@ -535,7 +540,7 @@ This will affect also stored GPF graph files, RGB profiles or other auxiliary da
                 <initScript />
                 <visibilityScript />
               </formComponent>
-              <formComponent name="Delete only SNAP Desktop files" id="2466" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+              <formComponent name="Delete only SNAP Desktop files" id="2466" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="false" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
@@ -551,6 +556,55 @@ problems after SNAP version upgrades.</string>
                       </void>
                       <void property="variableName">
                         <string>deleteOnlySnapDesktopDir</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <initScript />
+                <visibilityScript />
+              </formComponent>
+              <formComponent name="Delete all SNAP Engine files" id="2708" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.SingleRadiobuttonComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.formcomponents.SingleRadiobuttonComponent">
+                      <void property="helpText">
+                        <string>&lt;html&gt;All files generated by a previous SNAP installation will be deleted.&lt;br&gt;
+              This will affect also stored GPF graph files, RGB profiles or other auxiliary data</string>
+                      </void>
+                      <void property="radioButtonLabel">
+                        <string>Yes, try deleting all SNAP user data</string>
+                      </void>
+                      <void property="variableName">
+                        <string>deleteSnapDir</string>
+                      </void>
+                      <void property="variableValue">
+                        <string>ALL</string>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <initScript />
+                <visibilityScript />
+              </formComponent>
+              <formComponent name="Delete only SNAP Desktop files" id="2709" customizedId="" beanClass="com.install4j.runtime.beans.formcomponents.SingleRadiobuttonComponent" enabled="true" commentSet="false" comment="" insetTop="" insetLeft="" insetBottom="" insetRight="" resetInitOnPrevious="false">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.formcomponents.SingleRadiobuttonComponent">
+                      <void property="helpText">
+                        <string>&lt;html&gt;This will only delete files known to cause incompatibility&lt;br&gt;
+              problems after SNAP version upgrades.</string>
+                      </void>
+                      <void property="initiallySelected">
+                        <boolean>true</boolean>
+                      </void>
+                      <void property="radioButtonLabel">
+                        <string>Delete only SNAP-internal configuration data (recommended).</string>
+                      </void>
+                      <void property="variableName">
+                        <string>deleteSnapDir</string>
+                      </void>
+                      <void property="variableValue">
+                        <string>DESKTOP</string>
                       </void>
                     </object>
                   </java>
@@ -2441,6 +2495,7 @@ toolboxes.&lt;/html&gt;</string>
     </unixArchive>
   </mediaSets>
   <buildIds buildAll="false">
+    <mediaSet refId="2571" />
     <mediaSet refId="2620" />
   </buildIds>
   <buildOptions verbose="false" faster="true" disableSigning="true" disableJreBundling="false" debug="false" />
