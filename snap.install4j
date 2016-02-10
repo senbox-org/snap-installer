@@ -1281,79 +1281,29 @@ return success;
                 </serializedBean>
                 <condition />
               </action>
-              <action name="Run python-conf on Win" id="1750" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.RunExecutableAction" enabled="false" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="true" failureStrategy="1" errorMessage="">
+              <action name="Delete grid-point-exporter if smos not installed" id="2951" customizedId="" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
                 <serializedBean>
                   <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.actions.misc.RunExecutableAction">
-                      <void property="arguments">
-                        <array class="java.lang.String" length="1">
+                    <object class="com.install4j.runtime.beans.actions.files.DeleteFileAction">
+                      <void property="files">
+                        <array class="java.io.File" length="2">
                           <void index="0">
-                            <string>${installer:pythonExecutable}</string>
+                            <object class="java.io.File">
+                              <string>bin/smos-grid-point-exporter</string>
+                            </object>
+                          </void>
+                          <void index="1">
+                            <object class="java.io.File">
+                              <string>bin/smos-grid-point-exporter.vmoptions</string>
+                            </object>
                           </void>
                         </array>
-                      </void>
-                      <void property="executable">
-                        <object class="java.io.File">
-                          <string>bin/snappy-conf.bat</string>
-                        </object>
-                      </void>
-                      <void property="showWindowsConsole">
-                        <boolean>true</boolean>
-                      </void>
-                      <void property="timeout">
-                        <int>10</int>
-                      </void>
-                      <void property="wait">
-                        <boolean>true</boolean>
-                      </void>
-                      <void property="workingDirectory">
-                        <object class="java.io.File">
-                          <string>bin</string>
-                        </object>
                       </void>
                     </object>
                   </java>
                 </serializedBean>
-                <condition>Util.isWindowsInstaller()
-   &amp;&amp; context.getVariable("pythonExecutable") != null
-   &amp;&amp; context.getBooleanVariable("forcePython")</condition>
-              </action>
-              <action name="Run python-conf on Unix" id="1814" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.RunExecutableAction" enabled="false" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="true" failureStrategy="1" errorMessage="">
-                <serializedBean>
-                  <java class="java.beans.XMLDecoder">
-                    <object class="com.install4j.runtime.beans.actions.misc.RunExecutableAction">
-                      <void property="arguments">
-                        <array class="java.lang.String" length="1">
-                          <void index="0">
-                            <string>${installer:pythonExecutable}</string>
-                          </void>
-                        </array>
-                      </void>
-                      <void property="executable">
-                        <object class="java.io.File">
-                          <string>bin/snappy-conf</string>
-                        </object>
-                      </void>
-                      <void property="showWindowsConsole">
-                        <boolean>true</boolean>
-                      </void>
-                      <void property="timeout">
-                        <int>10</int>
-                      </void>
-                      <void property="wait">
-                        <boolean>true</boolean>
-                      </void>
-                      <void property="workingDirectory">
-                        <object class="java.io.File">
-                          <string>bin</string>
-                        </object>
-                      </void>
-                    </object>
-                  </java>
-                </serializedBean>
-                <condition>(Util.isUnixInstaller() || Util.isMacosInstaller())
-  &amp;&amp; context.getVariable("pythonExecutable") != null
-  &amp;&amp; context.getBooleanVariable("forcePython")</condition>
+                <condition>!context.getInstallationComponentById("SMOS").isSelected()
+</condition>
               </action>
             </actions>
             <formComponents />
