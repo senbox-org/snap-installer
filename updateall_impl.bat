@@ -63,7 +63,7 @@ if exist snap-engine\pom.xml (
     cd snap-engine
     call mvn clean install -T 4
     if %errorlevel% neq 0 exit /B %errorlevel%
-    call mvn org.codehaus.mojo:nbm-maven-plugin:autoupdate
+    call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
     cd ..
 )
@@ -71,7 +71,7 @@ if exist snap-desktop\pom.xml (
     cd snap-desktop
     call mvn clean install -T 4 -DskipTests=true
     if %errorlevel% neq 0 exit /B %errorlevel%
-    call mvn org.codehaus.mojo:nbm-maven-plugin:autoupdate
+    call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
     cd snap-application
     call mvn nbm:cluster-app
@@ -82,7 +82,7 @@ if exist snap-examples\pom.xml (
     cd snap-examples
     call mvn clean install -T 4
     if %errorlevel% neq 0 exit /B %errorlevel%
-    call mvn org.codehaus.mojo:nbm-maven-plugin:autoupdate
+    call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
     cd ..
 )
@@ -92,7 +92,7 @@ if exist s1tbx\pom.xml (
     if %errorlevel% neq 0 exit /B %errorlevel%
     call mvn install -T 4 -DskipTests=true
     if %errorlevel% neq 0 exit /B %errorlevel%
-    call mvn org.codehaus.mojo:nbm-maven-plugin:autoupdate
+    call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
     cd ..
 )
@@ -100,13 +100,13 @@ if exist s2tbx\pom.xml (
     cd s2tbx
     call mvn clean install -T 4 -DskipTests=true
     if %errorlevel% neq 0 exit /B %errorlevel%
-    call mvn org.codehaus.mojo:nbm-maven-plugin:autoupdate
+    call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
 
     cd s2tbx-sta-adapters\sen2cor
     call mvn clean install -T 4 -DskipTests=true
     if %errorlevel% neq 0 exit /B %errorlevel%
-    call mvn org.codehaus.mojo:nbm-maven-plugin:autoupdate
+    call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
 
     cd ..\..\..
@@ -115,7 +115,7 @@ if exist s3tbx\pom.xml (
     cd s3tbx
     call mvn clean install -T 4 -DskipTests=true
     if %errorlevel% neq 0 exit /B %errorlevel%
-    call mvn org.codehaus.mojo:nbm-maven-plugin:autoupdate
+    call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
     cd ..
 )
@@ -123,7 +123,7 @@ if exist smos-box\pom.xml (
     cd smos-box
     call mvn clean install -T 4 -DskipTests=true
     if %errorlevel% neq 0 exit /B %errorlevel%
-    call mvn org.codehaus.mojo:nbm-maven-plugin:autoupdate
+    call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
     cd ..
 )
