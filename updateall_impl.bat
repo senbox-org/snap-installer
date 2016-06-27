@@ -2,6 +2,14 @@ cd %0\..\..
 
 echo Git updates...
 
+set buildSnapEngine=true
+set buildSnapDesktop=true
+set buildSnapExamples=true
+set buildS1TBX=true
+set buildS2TBX=true
+set buildS3TBX=true
+set buildSMOSBOX=true
+
 if exist snap-engine\.git (
     cd snap-engine
     call git pull
@@ -59,7 +67,7 @@ if exist testdata\.git (
 
 echo Maven builds...
 
-if exist snap-engine\pom.xml (
+if exist snap-engine\pom.xml if %buildSnapEngine% EQU true (
     cd snap-engine
     call mvn clean install -T 4
     if %errorlevel% neq 0 exit /B %errorlevel%
@@ -67,7 +75,7 @@ if exist snap-engine\pom.xml (
     if %errorlevel% neq 0 exit /B %errorlevel%
     cd ..
 )
-if exist snap-desktop\pom.xml (
+if exist snap-desktop\pom.xml if %buildSnapDesktop% EQU true (
     cd snap-desktop
     call mvn clean install -T 4 -DskipTests=true
     if %errorlevel% neq 0 exit /B %errorlevel%
@@ -78,7 +86,7 @@ if exist snap-desktop\pom.xml (
     if %errorlevel% neq 0 exit /B %errorlevel%
     cd ..\..
 )
-if exist snap-examples\pom.xml (
+if exist snap-examples\pom.xml if %buildSnapExamples% EQU true (
     cd snap-examples
     call mvn clean install -T 4
     if %errorlevel% neq 0 exit /B %errorlevel%
@@ -86,7 +94,7 @@ if exist snap-examples\pom.xml (
     if %errorlevel% neq 0 exit /B %errorlevel%
     cd ..
 )
-if exist s1tbx\pom.xml (
+if exist s1tbx\pom.xml if %buildS1TBX% EQU true (
     cd s1tbx
     call mvn clean
     if %errorlevel% neq 0 exit /B %errorlevel%
@@ -96,7 +104,7 @@ if exist s1tbx\pom.xml (
     if %errorlevel% neq 0 exit /B %errorlevel%
     cd ..
 )
-if exist s2tbx\pom.xml (
+if exist s2tbx\pom.xml if %buildS2TBX% EQU true (
     cd s2tbx
     call mvn clean install -T 4 -DskipTests=true
     if %errorlevel% neq 0 exit /B %errorlevel%
@@ -111,7 +119,7 @@ if exist s2tbx\pom.xml (
 
     cd ..\..\..
 )
-if exist s3tbx\pom.xml (
+if exist s3tbx\pom.xml if %buildS3TBX% EQU true (
     cd s3tbx
     call mvn clean install -T 4 -DskipTests=true
     if %errorlevel% neq 0 exit /B %errorlevel%
@@ -119,7 +127,7 @@ if exist s3tbx\pom.xml (
     if %errorlevel% neq 0 exit /B %errorlevel%
     cd ..
 )
-if exist smos-box\pom.xml (
+if exist smos-box\pom.xml if %buildSMOSBOX% EQU true (
     cd smos-box
     call mvn clean install -T 4 -DskipTests=true
     if %errorlevel% neq 0 exit /B %errorlevel%
