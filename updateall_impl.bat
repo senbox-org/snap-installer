@@ -2,7 +2,7 @@ cd %0\..\..
 
 echo Git updates...
 
-set skipTests=true
+set skipTests=false
 
 set buildSnapEngine=true
 set buildSnapDesktop=true
