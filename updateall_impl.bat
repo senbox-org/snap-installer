@@ -2,6 +2,8 @@ cd %0\..\..
 
 echo Git updates...
 
+set skipTests=true
+
 set buildSnapEngine=true
 set buildSnapDesktop=true
 set buildSnapExamples=true
@@ -69,7 +71,7 @@ echo Maven builds...
 
 if exist snap-engine\pom.xml if %buildSnapEngine% EQU true (
     cd snap-engine
-    call mvn clean install -T 4
+    call mvn clean install -T 4 -DskipTests=%skipTests%
     if %errorlevel% neq 0 exit /B %errorlevel%
     call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
@@ -77,7 +79,7 @@ if exist snap-engine\pom.xml if %buildSnapEngine% EQU true (
 )
 if exist snap-desktop\pom.xml if %buildSnapDesktop% EQU true (
     cd snap-desktop
-    call mvn clean install -T 4 -DskipTests=true
+    call mvn clean install -T 4 -DskipTests=%skipTests%
     if %errorlevel% neq 0 exit /B %errorlevel%
     call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
@@ -88,7 +90,7 @@ if exist snap-desktop\pom.xml if %buildSnapDesktop% EQU true (
 )
 if exist snap-examples\pom.xml if %buildSnapExamples% EQU true (
     cd snap-examples
-    call mvn clean install -T 4
+    call mvn clean install -T 4  -DskipTests=%skipTests%
     if %errorlevel% neq 0 exit /B %errorlevel%
     call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
@@ -98,7 +100,7 @@ if exist s1tbx\pom.xml if %buildS1TBX% EQU true (
     cd s1tbx
     call mvn clean
     if %errorlevel% neq 0 exit /B %errorlevel%
-    call mvn install -T 4 -DskipTests=true
+    call mvn install -T 4 -DskipTests=%skipTests%
     if %errorlevel% neq 0 exit /B %errorlevel%
     call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
@@ -106,13 +108,13 @@ if exist s1tbx\pom.xml if %buildS1TBX% EQU true (
 )
 if exist s2tbx\pom.xml if %buildS2TBX% EQU true (
     cd s2tbx
-    call mvn clean install -T 4 -DskipTests=true
+    call mvn clean install -T 4 -DskipTests=%skipTests%
     if %errorlevel% neq 0 exit /B %errorlevel%
     call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
 
     cd s2tbx-sta-adapters\sen2cor
-    call mvn clean install -T 4 -DskipTests=true
+    call mvn clean install -T 4 -DskipTests=%skipTests%
     if %errorlevel% neq 0 exit /B %errorlevel%
     call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
@@ -121,7 +123,7 @@ if exist s2tbx\pom.xml if %buildS2TBX% EQU true (
 )
 if exist s3tbx\pom.xml if %buildS3TBX% EQU true (
     cd s3tbx
-    call mvn clean install -T 4 -DskipTests=true
+    call mvn clean install -T 4 -DskipTests=%skipTests%
     if %errorlevel% neq 0 exit /B %errorlevel%
     call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
@@ -129,7 +131,7 @@ if exist s3tbx\pom.xml if %buildS3TBX% EQU true (
 )
 if exist smos-box\pom.xml if %buildSMOSBOX% EQU true (
     cd smos-box
-    call mvn clean install -T 4 -DskipTests=true
+    call mvn clean install -T 4 -DskipTests=%skipTests%
     if %errorlevel% neq 0 exit /B %errorlevel%
     call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
