@@ -11,6 +11,7 @@ set buildS1TBX=true
 set buildS2TBX=true
 set buildS3TBX=true
 set buildSMOSBOX=true
+set buildProbavBox=true
 
 if exist snap-engine\.git (
     cd snap-engine
@@ -56,6 +57,12 @@ if exist s3tbx\.git (
 )
 if exist smos-box\.git (
     cd smos-box
+    call git pull
+    if %errorlevel% neq 0 exit /B %errorlevel%
+    cd ..
+)
+if exist probavbox\.git (
+    cd probavbox
     call git pull
     if %errorlevel% neq 0 exit /B %errorlevel%
     cd ..
@@ -131,6 +138,14 @@ if exist s3tbx\pom.xml if %buildS3TBX% EQU true (
 )
 if exist smos-box\pom.xml if %buildSMOSBOX% EQU true (
     cd smos-box
+    call mvn clean install -T 4 -DskipTests=%skipTests%
+    if %errorlevel% neq 0 exit /B %errorlevel%
+    call mvn nbm:autoupdate
+    if %errorlevel% neq 0 exit /B %errorlevel%
+    cd ..
+)
+if exist probavbox\pom.xml if %buildProbavBox% EQU true (
+    cd probavbox
     call mvn clean install -T 4 -DskipTests=%skipTests%
     if %errorlevel% neq 0 exit /B %errorlevel%
     call mvn nbm:autoupdate
