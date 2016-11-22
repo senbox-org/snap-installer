@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<install4j version="6.1.3" transformSequenceNumber="5">
+<install4j version="6.1.1" transformSequenceNumber="5">
   <directoryPresets config="./images" />
   <application name="ESA SNAP" distributionSourceDir="" applicationId="0941-5747-6134-5911" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="9" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="true" createMd5Sums="true" shrinkRuntime="false" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="5.0-SNAPSHOT" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" macVolumeId="69e291547ea53333" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="JDK 1.8">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
@@ -49,7 +49,7 @@
     <entries>
       <fileEntry mountPoint="611" file="./images/SNAP_Icon_48.png" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="646" file="../snap-desktop/snap-application/target/snap/etc/snap.clusters" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
-      <dirEntry mountPoint="646" file="../snap-engine/etc" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="etc" excludeSuffixes="" dirMode="755" overrideDirMode="false">
+      <dirEntry mountPoint="646" file="../snap-engine/etc" overwriteMode="4" shared="false" fileMode="666" uninstallMode="0" overrideFileMode="true" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="etc" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
       <fileEntry mountPoint="1017" file="../snap-desktop/snap-main/target/snap-main.jar" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
@@ -77,6 +77,9 @@
       <dirEntry mountPoint="58" file="../smos-box/smos-kit/target/netbeans_clusters/smos" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="smos" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
       </dirEntry>
+      <dirEntry mountPoint="58" file="../probavbox/probavbox-kit/target/netbeans_clusters/probavbox" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="subdir" subDirectory="probavbox" excludeSuffixes="" dirMode="755" overrideDirMode="false">
+        <exclude />
+      </dirEntry>
       <fileEntry mountPoint="58" file="./LICENSE.txt" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="58" file="./VERSION.txt" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <dirEntry mountPoint="636" file="./files/macosx" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="macosx" excludeSuffixes="" dirMode="755" overrideDirMode="false">
@@ -93,7 +96,7 @@
       </dirEntry>
     </entries>
     <components>
-      <component name="SNAP" id="76" customizedId="SNAP" displayDescription="true" hideHelpButton="false" selected="true" changeable="false" downloadable="false" hidden="false">
+      <component name="SNAP" id="76" customizedId="SNAP" displayDescription="true" hideHelpButton="true" selected="true" changeable="false" downloadable="false" hidden="false">
         <description>Sentinels Application Platform.</description>
         <include all="false">
           <entry location="bin" fileType="regular" />
@@ -110,7 +113,7 @@
         </include>
         <dependencies />
       </component>
-      <component name="Sentinel-1 Toolbox" id="73" customizedId="S1TBX" displayDescription="true" hideHelpButton="false" selected="true" changeable="true" downloadable="true" hidden="false">
+      <component name="Sentinel-1 Toolbox" id="73" customizedId="S1TBX" displayDescription="true" hideHelpButton="true" selected="true" changeable="true" downloadable="true" hidden="false">
         <description>Ingestion of SAR data products and dedicated support tools.</description>
         <include all="false">
           <entry location="s1tbx" fileType="regular" />
@@ -119,7 +122,7 @@
           <component id="76" />
         </dependencies>
       </component>
-      <component name="Sentinel-2 Toolbox" id="72" customizedId="S2TBX" displayDescription="true" hideHelpButton="false" selected="true" changeable="true" downloadable="true" hidden="false">
+      <component name="Sentinel-2 Toolbox" id="72" customizedId="S2TBX" displayDescription="true" hideHelpButton="true" selected="true" changeable="true" downloadable="true" hidden="false">
         <description>Ingestion of Sentinel-2 MSI data products and dedicated support tools.</description>
         <include all="false">
           <entry location="s2tbx" fileType="regular" />
@@ -128,7 +131,7 @@
           <component id="76" />
         </dependencies>
       </component>
-      <component name="Sentinel-3 Toolbox" id="68" customizedId="S3TBX" displayDescription="true" hideHelpButton="false" selected="true" changeable="true" downloadable="true" hidden="false">
+      <component name="Sentinel-3 Toolbox" id="68" customizedId="S3TBX" displayDescription="true" hideHelpButton="true" selected="true" changeable="true" downloadable="true" hidden="false">
         <description>Ingestion of Sentinel-3 OLCI and SLSTR data products and dedicated support tools.</description>
         <include all="false">
           <entry location="s3tbx" fileType="regular" />
@@ -137,7 +140,7 @@
           <component id="76" />
         </dependencies>
       </component>
-      <component name="Radarsat-2 Toolbox" id="306" customizedId="RSTB" displayDescription="true" hideHelpButton="false" selected="true" changeable="true" downloadable="true" hidden="false">
+      <component name="Radarsat-2 Toolbox" id="306" customizedId="RSTB" displayDescription="true" hideHelpButton="true" selected="true" changeable="true" downloadable="true" hidden="false">
         <description>SAR Polarimetric Tools</description>
         <include all="false">
           <entry location="rstb" fileType="regular" />
@@ -147,10 +150,19 @@
           <component id="73" />
         </dependencies>
       </component>
-      <component name="SMOS-Box" id="1963" customizedId="SMOS" displayDescription="true" hideHelpButton="false" selected="true" changeable="true" downloadable="true" hidden="false">
+      <component name="SMOS-Box" id="1963" customizedId="SMOS" displayDescription="true" hideHelpButton="true" selected="true" changeable="true" downloadable="true" hidden="false">
         <description>Ingestion of SMOS data products and dedicated support tools.</description>
         <include all="false">
           <entry location="smos" fileType="regular" />
+        </include>
+        <dependencies>
+          <component id="76" />
+        </dependencies>
+      </component>
+      <component name="PROBA-V Toolbox" id="3109" customizedId="" displayDescription="true" hideHelpButton="true" selected="true" changeable="true" downloadable="true" hidden="false">
+        <description>Ingestion of Proba-V data products and dedicated support tools.</description>
+        <include all="false">
+          <entry location="probavbox" fileType="regular" />
         </include>
         <dependencies>
           <component id="76" />
@@ -1224,6 +1236,26 @@ return success;
                     </serializedBean>
                     <condition>new File(context.getInstallationDirectory(), "smos").isDirectory()</condition>
                   </action>
+                  <action name="Add probavbox NB cluster" id="3125" customizedId="" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                    <serializedBean>
+                      <java class="java.beans.XMLDecoder">
+                        <object class="com.install4j.runtime.beans.actions.text.WriteTextFileAction">
+                          <void property="append">
+                            <boolean>true</boolean>
+                          </void>
+                          <void property="file">
+                            <object class="java.io.File">
+                              <string>etc/snap.clusters</string>
+                            </object>
+                          </void>
+                          <void property="text">
+                            <string>probavbox</string>
+                          </void>
+                        </object>
+                      </java>
+                    </serializedBean>
+                    <condition>new File(context.getInstallationDirectory(), "probavbox").isDirectory()</condition>
+                  </action>
                 </beans>
               </group>
               <action name="Delete NB dirs from .snap" id="1321" customizedId="" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
@@ -2189,9 +2221,10 @@ toolboxes.&lt;/html&gt;</string>
         <content />
       </installerScript>
     </unixInstaller>
-    <windows name="Sentinel SNAP Windows x64" id="2589" customizedId="" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" includedJRE="windows-amd64-1.8.0_102" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" verifyIntegrity="true">
+    <windows name="Sentinel SNAP Windows x64" id="2589" customizedId="" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="64" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="windows-amd64-1.8.0_102" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" verifyIntegrity="true">
       <excludedComponents>
         <component id="1963" />
+        <component id="3109" />
       </excludedComponents>
       <includedDownloadableComponents>
         <component id="73" />
@@ -2223,6 +2256,7 @@ toolboxes.&lt;/html&gt;</string>
     <windows name="Sentinel SNAP Windows x86" id="2603" customizedId="" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="32" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="windows-x86-1.8.0_102" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1" verifyIntegrity="true">
       <excludedComponents>
         <component id="1963" />
+        <component id="3109" />
       </excludedComponents>
       <includedDownloadableComponents>
         <component id="73" />
@@ -2254,6 +2288,7 @@ toolboxes.&lt;/html&gt;</string>
     <macosFolder name="Sentinel SNAP Mac OS X Folder" id="2592" customizedId="" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="macosx-amd64-1.8.0_102" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" appleJre="false" requiredVmIdPrefix="" customInstallBaseDir="" contentFilesType="1" installerName="${i18n:InstallerName(${compiler:sys.fullName})}" volumeName="${compiler:sys.shortName}" compressDmg="false" signLaunchers="false">
       <excludedComponents>
         <component id="1963" />
+        <component id="3109" />
       </excludedComponents>
       <includedDownloadableComponents>
         <component id="73" />
@@ -2286,6 +2321,7 @@ toolboxes.&lt;/html&gt;</string>
     <unixInstaller name="Sentinel SNAP Unix" id="2598" customizedId="" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" overridePrincipalLanguage="false" jreBitType="all" runPostProcessor="false" postProcessor="" failOnPostProcessorError="false" useLegacyMediaFileIds="false" legacyMediaFileIds="" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="false" includedJRE="linux-amd64-1.8.0_102" manualJREEntry="false" bundleType="1" jreURL="" jreShared="false" directDownload="false" installOnlyIfNecessary="false" customInstallBaseDir="" contentFilesType="1">
       <excludedComponents>
         <component id="1963" />
+        <component id="3109" />
       </excludedComponents>
       <includedDownloadableComponents>
         <component id="73" />
@@ -2322,6 +2358,7 @@ toolboxes.&lt;/html&gt;</string>
         <component id="72" />
         <component id="68" />
         <component id="306" />
+        <component id="3109" />
       </excludedComponents>
       <includedDownloadableComponents>
         <component id="1963" />
@@ -2357,6 +2394,7 @@ toolboxes.&lt;/html&gt;</string>
         <component id="72" />
         <component id="68" />
         <component id="306" />
+        <component id="3109" />
       </excludedComponents>
       <includedDownloadableComponents>
         <component id="1963" />
@@ -2392,6 +2430,7 @@ toolboxes.&lt;/html&gt;</string>
         <component id="72" />
         <component id="68" />
         <component id="306" />
+        <component id="3109" />
       </excludedComponents>
       <includedDownloadableComponents>
         <component id="1963" />
@@ -2428,6 +2467,7 @@ toolboxes.&lt;/html&gt;</string>
         <component id="72" />
         <component id="68" />
         <component id="306" />
+        <component id="3109" />
       </excludedComponents>
       <includedDownloadableComponents>
         <component id="1963" />
@@ -2506,10 +2546,13 @@ toolboxes.&lt;/html&gt;</string>
     </unixArchive>
   </mediaSets>
   <buildIds buildAll="false">
+    <mediaSet refId="2571" />
+    <mediaSet refId="2575" />
+    <mediaSet refId="2578" />
     <mediaSet refId="2589" />
-    <mediaSet refId="2603" />
     <mediaSet refId="2592" />
     <mediaSet refId="2598" />
+    <mediaSet refId="2609" />
   </buildIds>
   <buildOptions verbose="false" faster="true" disableSigning="true" disableJreBundling="false" debug="false" />
 </install4j>
