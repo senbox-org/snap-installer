@@ -120,7 +120,7 @@ if exist s2tbx\pom.xml if %buildS2TBX% EQU true (
     call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
 
-    cd s2tbx-sta-adapters\sen2cor
+    cd s2tbx-sta-adapters
     call mvn clean install -T 4 -DskipTests=%skipTests%
     if %errorlevel% neq 0 exit /B %errorlevel%
     call mvn nbm:autoupdate
