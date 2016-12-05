@@ -126,7 +126,7 @@ if exist s2tbx\pom.xml if %buildS2TBX% EQU true (
     call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
 
-    cd ..\..\..
+    cd ..\..
 )
 if exist s3tbx\pom.xml if %buildS3TBX% EQU true (
     cd s3tbx
