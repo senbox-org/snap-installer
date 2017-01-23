@@ -872,7 +872,7 @@ return success;
                   <java class="java.beans.XMLDecoder">
                     <object class="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
                       <void property="labelHtml">
-                        <string>Python interpreter exectables are likely found in &lt;b&gt;C:\Python27&lt;/b&gt; or &lt;b&gt;C:\Python34&lt;/b&gt;.</string>
+                        <string>Python interpreter executables are likely found in &lt;b&gt;C:\Python27&lt;/b&gt; or &lt;b&gt;C:\Python34&lt;/b&gt;.</string>
                       </void>
                     </object>
                   </java>
