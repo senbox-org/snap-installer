@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="6.1.1" transformSequenceNumber="5">
   <directoryPresets config="./images" />
-  <application name="ESA SNAP" distributionSourceDir="" applicationId="0941-5747-6134-5911" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="9" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="true" createMd5Sums="true" shrinkRuntime="false" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="6.0-SNAPSHOT" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" macVolumeId="69e291547ea53333" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="JDK 1.8">
+  <application name="ESA SNAP" distributionSourceDir="" applicationId="0941-5747-6134-5911" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="9" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="true" createMd5Sums="true" shrinkRuntime="false" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="6.0-PREVIEW1" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" macVolumeId="69e291547ea53333" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="JDK 1.8">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
       <additionalLanguages />
@@ -2512,28 +2512,9 @@ toolboxes.&lt;/html&gt;</string>
       <overriddenPrincipalLanguage id="en" customLocalizationFile="" />
       <exclude>
         <entry location="bin/SNAP_Icon_48.png" fileType="regular" />
-        <entry location="etc/snap.clusters" fileType="regular" />
-        <entry location="snap/modules/ext/org.esa.snap.ceres-ui" fileType="regular" />
-        <entry location="snap/modules/ext/org.esa.snap.snap-rcp" fileType="regular" />
-        <entry location="snap/modules/ext/org.esa.snap.snap-sta-ui" fileType="regular" />
-        <entry location="snap/modules/org-esa-snap-ceres-ui.jar" fileType="regular" />
-        <entry location="snap/modules/org-esa-snap-netbeans-docwin.jar" fileType="regular" />
-        <entry location="snap/modules/org-esa-snap-netbeans-tile.jar" fileType="regular" />
-        <entry location="snap/modules/org-esa-snap-snap-binning-ui.jar" fileType="regular" />
-        <entry location="snap/modules/org-esa-snap-snap-dem-ui.jar" fileType="regular" />
-        <entry location="snap/modules/org-esa-snap-snap-gpf-ui.jar" fileType="regular" />
-        <entry location="snap/modules/org-esa-snap-snap-help.jar" fileType="regular" />
-        <entry location="snap/modules/org-esa-snap-snap-pixel-extraction-ui.jar" fileType="regular" />
-        <entry location="snap/modules/org-esa-snap-snap-raster-ui.jar" fileType="regular" />
-        <entry location="snap/modules/org-esa-snap-snap-rcp.jar" fileType="regular" />
-        <entry location="snap/modules/org-esa-snap-snap-smart-configurator-ui.jar" fileType="regular" />
-        <entry location="snap/modules/org-esa-snap-snap-sta-ui.jar" fileType="regular" />
-        <entry location="snap/modules/org-esa-snap-snap-ui.jar" fileType="regular" />
-        <entry location="snap/modules/org-esa-snap-snap-unmix-ui.jar" fileType="regular" />
-        <entry location="snap/modules/org-esa-snap-snap-worldwind.jar" fileType="regular" />
-        <entry location="platform" fileType="regular" />
-        <entry location="ide" fileType="regular" />
-        <entry location="s3tbx/modules/org-esa-s3tbx-s3tbx-flhmci-ui.jar" fileType="regular" />
+        <entry location="smos/modules/docs" fileType="regular" />
+        <entry location="smos/modules/ext/org.esa.smostbx.smos-gui" fileType="regular" />
+        <entry location="smos/modules/org-esa-smostbx-smos-gui.jar" fileType="regular" />
         <entry location=".i4j_fileset_634" fileType="regular" />
         <entry location=".i4j_fileset_637" fileType="regular" />
         <entry location=".i4j_fileset_639" fileType="regular" />
