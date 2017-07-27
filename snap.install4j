@@ -195,7 +195,11 @@
       <includedFiles />
       <unextractableFiles />
       <vmOptionsFile mode="template" overwriteMode="0" fileMode="644">
-        <content />
+        <content># Enter one VM parameter per line
+# For example, to adjust the maximum memory usage here:
+-Xmx${installer:maxHeapSize}
+# To include another file, uncomment the following line:
+# -include-options [path to other .vmoption file]</content>
       </vmOptionsFile>
       <customScript mode="1" file="">
         <content />
@@ -225,7 +229,11 @@
       <includedFiles />
       <unextractableFiles />
       <vmOptionsFile mode="template" overwriteMode="0" fileMode="644">
-        <content />
+        <content># Enter one VM parameter per line
+# For example, to adjust the maximum memory usage here:
+-Xmx${installer:maxHeapSize}
+# To include another file, uncomment the following line:
+# -include-options [path to other .vmoption file]</content>
       </vmOptionsFile>
       <customScript mode="1" file="">
         <content />
@@ -1363,6 +1371,44 @@ return success;
                   </java>
                 </serializedBean>
                 <condition>Util.isUnixInstaller()</condition>
+              </action>
+              <action name="Add gpt VM Options" id="3251" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.AddVmOptionsAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.misc.AddVmOptionsAction">
+                      <void property="launcherId">
+                        <string>781</string>
+                      </void>
+                      <void property="vmOptions">
+                        <array class="java.lang.String" length="1">
+                          <void index="0">
+                            <string>-Xmx${installer:maxHeapSize}</string>
+                          </void>
+                        </array>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition />
+              </action>
+              <action name="Add pconvert VM Options" id="3252" customizedId="" beanClass="com.install4j.runtime.beans.actions.misc.AddVmOptionsAction" enabled="true" commentSet="false" comment="" actionElevationType="elevated" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+                <serializedBean>
+                  <java class="java.beans.XMLDecoder">
+                    <object class="com.install4j.runtime.beans.actions.misc.AddVmOptionsAction">
+                      <void property="launcherId">
+                        <string>1113</string>
+                      </void>
+                      <void property="vmOptions">
+                        <array class="java.lang.String" length="1">
+                          <void index="0">
+                            <string>-Xmx${installer:maxHeapSize}</string>
+                          </void>
+                        </array>
+                      </void>
+                    </object>
+                  </java>
+                </serializedBean>
+                <condition />
               </action>
             </actions>
             <formComponents />
