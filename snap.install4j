@@ -260,6 +260,9 @@
           <scanDirectory location="platform/lib" failOnError="false" />
           <scanDirectory location="platform/modules/ext" failOnError="false" />
           <scanDirectory location="snap/modules" failOnError="false" />
+          <scanDirectory location="s1tbx/modules" failOnError="false" />
+          <scanDirectory location="s2tbx/modules" failOnError="false" />
+          <scanDirectory location="s3tbx/modules" failOnError="false" />
         </classPath>
         <nativeLibraryDirectories />
         <vmOptions />
