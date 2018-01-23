@@ -1,3 +1,5 @@
+echo %date% %time%
+
 cd %0\..\..
 
 echo Git updates...
@@ -153,3 +155,4 @@ if exist probavbox\pom.xml if %buildProbavBox% EQU true (
     cd ..
 )
 
+echo %date% %time%
