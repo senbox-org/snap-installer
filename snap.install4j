@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="6.1.1" transformSequenceNumber="5">
   <directoryPresets config="./images" />
-  <application name="ESA SNAP" distributionSourceDir="" applicationId="0941-5747-6134-5911" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="9" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="true" createMd5Sums="true" shrinkRuntime="false" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="6.0" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" macVolumeId="69e291547ea53333" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="">
+  <application name="ESA SNAP" distributionSourceDir="" applicationId="0941-5747-6134-5911" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="9" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="true" createMd5Sums="true" shrinkRuntime="false" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="6.0.1-SNAPSHOT" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" macVolumeId="69e291547ea53333" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
       <additionalLanguages />
@@ -2576,7 +2576,9 @@ toolboxes.&lt;/html&gt;</string>
     </unixArchive>
   </mediaSets>
   <buildIds buildAll="false">
-    <mediaSet refId="2571" />
+    <mediaSet refId="2589" />
+    <mediaSet refId="2592" />
+    <mediaSet refId="2598" />
   </buildIds>
   <buildOptions verbose="false" faster="true" disableSigning="true" disableJreBundling="false" debug="false" />
 </install4j>
