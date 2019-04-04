@@ -29,7 +29,7 @@ pipeline {
             agent {
                 docker {
                     label 'snap-test'
-                    image 'snap-build-server.tilaa.cloud/install4j:7.0.10'
+                    image 'snap-build-server.tilaa.cloud/install4j:6.1.6'
                     args '-v docker_snap-installer:/snap-installer -v /opt/install4j/:/install4j'
                 }
             }
@@ -37,12 +37,11 @@ pipeline {
                 script {
                     // Get snap version from pom file
                     toolVersion = sh(returnStdout: true, script: "cat pom.xml | grep '<version>' | head -1 | cut -d '>' -f 2 | cut -d '-' -f 1").trim()
-                    licenceNum = sh(returnStdout: true, script: "cat /install4j/licence.txt").trim()
                     snapMajorVersion = sh(returnStdout: true, script: "echo ${toolVersion} | cut -d '.' -f 1").trim()
                     deployDirName = "${toolName}/${branchVersion}-${toolVersion}-${env.GIT_COMMIT}"
                 }
                 echo "Build Job ${env.JOB_NAME} from ${env.GIT_BRANCH} with commit ${env.GIT_COMMIT}"
-                sh "/usr/local/bin/install4jc --verbose --license=${licenceNum} $WORKSPACE/snap-installer/snap.install4j"
+                sh "/opt/createSnapInstaller.sh"
             }
         }
     }
