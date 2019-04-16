@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="6.1.1" transformSequenceNumber="5">
-  <directoryPresets config="./images" />
+  <directoryPresets config="../snap-desktop/snap-application/target/snap/THIRDPARTY_LICENSES.txt" />
   <application name="ESA SNAP" distributionSourceDir="" applicationId="0941-5747-6134-5911" mediaDir="./target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="9" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="true" createMd5Sums="true" shrinkRuntime="false" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="7.0-SNAPSHOT" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" macVolumeId="69e291547ea53333" javaMinVersion="1.8" javaMaxVersion="" allowBetaVM="true" jdkMode="jdk" jdkName="">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="en" customLocalizationFile="" />
@@ -81,6 +81,7 @@
         <exclude />
       </dirEntry>
       <fileEntry mountPoint="58" file="./LICENSE.txt" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
+      <fileEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/THIRDPARTY_LICENSES.txt" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <fileEntry mountPoint="58" file="./VERSION.txt" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" />
       <dirEntry mountPoint="636" file="./files/macosx" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="macosx" excludeSuffixes="" dirMode="755" overrideDirMode="false">
         <exclude />
