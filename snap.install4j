@@ -106,6 +106,7 @@
           <entry location="platform" fileType="regular" />
           <entry location="ide" fileType="regular" />
           <entry location="LICENSE.txt" fileType="regular" />
+          <entry location="THIRDPARTY_LICENSES.txt" fileType="regular" />
           <entry location="VERSION.txt" fileType="regular" />
           <entry location=".i4j_fileset_634" fileType="regular" />
           <entry location=".i4j_fileset_637" fileType="regular" />
