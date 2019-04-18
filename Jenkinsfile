@@ -29,7 +29,7 @@ pipeline {
             agent {
                 docker {
                     label 'snap-test'
-                    image 'snap-build-server.tilaa.cloud/install4j:6.1.6'
+                    image 'snap-build-server.tilaa.cloud/install4j:6.1.2'
                     args '-v docker_snap-installer:/snap-installer -v /opt/install4j/:/install4j'
                 }
             }
