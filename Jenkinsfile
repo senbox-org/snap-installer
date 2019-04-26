@@ -24,6 +24,11 @@ pipeline {
         snapMajorVersion = ''
     }*/
     agent { label 'snap-test' }
+    
+    parameters {
+        string(name: 'smosBoxBranch', defaultValue: "5.6.0-rc1", description: 'Smos-box branch to use to build installer')
+        string(name: 'probavboxBranch', defaultValue: "2.1.0-rc1", description: 'Probavbox branch to use to build installer')
+    }
     stages {
         stage('Create installer') {
             agent {
@@ -42,7 +47,7 @@ pipeline {
 
                 }*/
                 echo "Build SNAP intaller ${env.JOB_NAME} from ${env.GIT_BRANCH} with commit ${env.GIT_COMMIT}"
-                sh "/opt/createSnapInstaller.sh ${env.GIT_BRANCH}"
+                sh "/opt/createSnapInstaller.sh ${env.GIT_BRANCH} ${params.smosBoxBranch} ${params.probavboxBranch}"
             }
         }
     }
