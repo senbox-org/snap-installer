@@ -42,7 +42,7 @@ pipeline {
 
                 }*/
                 echo "Build SNAP intaller ${env.JOB_NAME} from ${env.GIT_BRANCH} with commit ${env.GIT_COMMIT}"
-                sh "/opt/createSnapInstaller.sh"
+                sh "/opt/createSnapInstaller.sh ${env.GIT_BRANCH}"
             }
         }
     }
