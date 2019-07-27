@@ -142,7 +142,7 @@
           <component id="76" />
         </dependencies>
       </component>
-      <component name="Radarsat-2 Toolbox" id="306" customizedId="RSTB" displayDescription="false" hideHelpButton="true" selected="true" changeable="true" downloadable="true" hidden="false">
+      <component name="Radarsat Toolbox" id="306" customizedId="RSTB" displayDescription="false" hideHelpButton="true" selected="true" changeable="true" downloadable="true" hidden="false">
         <description>SAR Polarimetric Tools</description>
         <include all="false">
           <entry location="rstb" fileType="regular" />
