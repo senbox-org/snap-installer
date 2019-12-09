@@ -6,18 +6,14 @@ echo Git updates...
 
 set skipTests=true
 
-set buildSnapEngine=false
-set buildSnapDesktop=false
-set buildSnapExamples=false
-set buildS1TBX=false
-set buildS2TBX=false
+set buildSnapEngine=true
+set buildSnapDesktop=true
+set buildSnapExamples=true
+set buildS1TBX=true
+set buildS2TBX=true
 set buildS3TBX=true
-set buildSMOSBOX=false
-set buildProbavBox=false
-
-
-:: set JAVA_HOME=%JAVA_HOME_OJDK%
-set JAVA_HOME=%JAVA_HOME8%
+set buildSMOSBOX=true
+set buildProbavBox=true
 
 if exist snap-engine\.git (
     cd snap-engine
