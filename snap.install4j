@@ -1162,7 +1162,7 @@ return success;
                             </object>
                           </void>
                           <void property="text">
-                            <string>s1tbx</string>
+                            <string>s1tbx&#xD;</string>
                           </void>
                         </object>
                       </java>
@@ -1182,7 +1182,7 @@ return success;
                             </object>
                           </void>
                           <void property="text">
-                            <string>s2tbx</string>
+                            <string>s2tbx&#xD;</string>
                           </void>
                         </object>
                       </java>
@@ -1202,7 +1202,7 @@ return success;
                             </object>
                           </void>
                           <void property="text">
-                            <string>s3tbx</string>
+                            <string>s3tbx&#xD;</string>
                           </void>
                         </object>
                       </java>
@@ -1222,7 +1222,7 @@ return success;
                             </object>
                           </void>
                           <void property="text">
-                            <string>rstb</string>
+                            <string>rstb&#xD;</string>
                           </void>
                         </object>
                       </java>
@@ -1242,7 +1242,7 @@ return success;
                             </object>
                           </void>
                           <void property="text">
-                            <string>smos</string>
+                            <string>smos&#xD;</string>
                           </void>
                         </object>
                       </java>
@@ -1262,7 +1262,7 @@ return success;
                             </object>
                           </void>
                           <void property="text">
-                            <string>probavbox</string>
+                            <string>probavbox&#xD;</string>
                           </void>
                         </object>
                       </java>
