@@ -188,7 +188,7 @@
       <macStaticAssociationActions mode="selected" />
       <vmOptionsFile mode="none" />
       <iconImageFiles>
-        <file path="../snap-desktop/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/Performance32.png" />
+        <file path="./images/Performance32.png" />
       </iconImageFiles>
     </launcher>
     <launcher name="SMOS Grid-Point-Exporter" id="2822" excludeFromMenu="true">
