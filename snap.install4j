@@ -10,9 +10,8 @@
       <variable name="snapGptMenuName" value="SNAP GPT" />
       <variable name="smosGridPointExporter" value="smos-grid-point-exporter" />
     </variables>
-    <jreBundles jdkProviderId="Liberica" release="OpenJDK 8u242+7" />
   </application>
-  <files>
+  <files defaultUninstallMode="2" launcherOverwriteMode="1">
     <filesets>
       <fileset name="Mac OS file set" id="634" />
       <fileset name="Win x32 file set" id="637" />
