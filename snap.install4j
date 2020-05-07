@@ -420,6 +420,18 @@ return console.askOkCancel(message, true);
                 </serializedBean>
                 <condition>context.getVariable("deleteSnapDir").equals("ALL")</condition>
               </action>
+              <action id="3549" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" actionElevationType="elevated" rollbackBarrierExitCode="0">
+                <serializedBean>
+                  <property name="files" type="array" class="java.io.File" length="1">
+                    <element index="0">
+                      <object class="java.io.File">
+                        <string>${installer:sys.installationDir}</string>
+                      </object>
+                    </element>
+                  </property>
+                  <property name="recursive" type="boolean" value="true" />
+                </serializedBean>
+              </action>
             </actions>
             <formComponents>
               <formComponent id="2354" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
