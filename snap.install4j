@@ -1937,7 +1937,7 @@ return console.askYesNo(message, true);
       </exclude>
     </unixArchive>
   </mediaSets>
-  <buildIds buildAll="false">
+  <buildIds>
     <mediaSet refId="2571" />
     <mediaSet refId="2575" />
     <mediaSet refId="2578" />
