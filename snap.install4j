@@ -699,7 +699,7 @@ return success;
                 <serializedBean>
                   <property name="icon">
                     <object class="com.install4j.api.beans.ExternalFile">
-                      <string>./images/SNAP_Icon_256.ico</string>
+                      <string>./images/SNAP_icon_256.ico</string>
                     </object>
                   </property>
                   <property name="iconSource" type="enum" class="com.install4j.runtime.beans.actions.desktop.IconSource" value="CUSTOM" />
@@ -980,7 +980,7 @@ return success;
                   <property name="winAdditionalParameters" type="string">--open</property>
                   <property name="windowsIconFile">
                     <object class="com.install4j.api.beans.ExternalFile">
-                      <string>./images/SNAP_Icon_256.ico</string>
+                      <string>./images/SNAP_icon_256.ico</string>
                     </object>
                   </property>
                 </serializedBean>
@@ -994,7 +994,7 @@ return success;
                   <property name="winAdditionalParameters" type="string">--open</property>
                   <property name="windowsIconFile">
                     <object class="com.install4j.api.beans.ExternalFile">
-                      <string>./images/SNAP_Icon_256.ico</string>
+                      <string>./images/SNAP_icon_256.ico</string>
                     </object>
                   </property>
                 </serializedBean>
@@ -1008,7 +1008,7 @@ return success;
                   <property name="winAdditionalParameters" type="string">--open</property>
                   <property name="windowsIconFile">
                     <object class="com.install4j.api.beans.ExternalFile">
-                      <string>./images/SNAP_Icon_256.ico</string>
+                      <string>./images/SNAP_icon_256.ico</string>
                     </object>
                   </property>
                 </serializedBean>
@@ -1022,7 +1022,7 @@ return success;
                   <property name="winAdditionalParameters" type="string">--open</property>
                   <property name="windowsIconFile">
                     <object class="com.install4j.api.beans.ExternalFile">
-                      <string>./images/SNAP_Icon_256.ico</string>
+                      <string>./images/SNAP_icon_256.ico</string>
                     </object>
                   </property>
                 </serializedBean>
@@ -1158,7 +1158,7 @@ return success;
                   </property>
                   <property name="winIconFile">
                     <object class="com.install4j.api.beans.ExternalFile">
-                      <string>./images/SNAP_Icon_256.ico</string>
+                      <string>./images/SNAP_icon_256.ico</string>
                     </object>
                   </property>
                 </serializedBean>
@@ -1179,7 +1179,7 @@ return success;
                   </property>
                   <property name="winIconFile">
                     <object class="com.install4j.api.beans.ExternalFile">
-                      <string>./images/SNAP_Icon_256.ico</string>
+                      <string>./images/SNAP_icon_256.ico</string>
                     </object>
                   </property>
                 </serializedBean>
