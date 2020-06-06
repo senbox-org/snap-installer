@@ -112,24 +112,6 @@
           <component id="73" />
         </dependencies>
       </component>
-      <component name="SMOS-Box" id="1963" customizedId="SMOS" hideHelpButton="true" downloadable="true">
-        <description>Ingestion of SMOS data products and dedicated support tools.</description>
-        <include>
-          <entry location="smos" />
-        </include>
-        <dependencies>
-          <component id="76" />
-        </dependencies>
-      </component>
-      <component name="PROBA-V Toolbox" id="3109" hideHelpButton="true" downloadable="true">
-        <description>Ingestion of Proba-V data products and dedicated support tools.</description>
-        <include>
-          <entry location="probavbox" />
-        </include>
-        <dependencies>
-          <component id="76" />
-        </dependencies>
-      </component>
     </components>
   </files>
   <launchers>
@@ -194,15 +176,6 @@
         <file path="./images/perf_icon_128.png" />
         <file path="./images/perf_icon_512.png" />
       </iconImageFiles>
-    </launcher>
-    <launcher name="SMOS Grid-Point-Exporter" id="2822" excludeFromMenu="true">
-      <executable name="${compiler:smosGridPointExporter}" executableDir="bin" redirectStderr="false" executableMode="console" changeWorkingDirectory="false" dpiAware="false" />
-      <java mainClass="org.esa.snap.runtime.Launcher" vmParameters="-Dsnap.mainClass=org.esa.smos.gui.export.GridPointExporter &quot;-Dsnap.home=${launcher:sys.launcherDirectory}/..&quot;  -Djava.awt.headless=true -Dinstall4j.noLoggingFix=true">
-        <classPath>
-          <archive location="snap/modules/ext/org.esa.snap.snap-core/org-esa-snap/snap-runtime.jar" failOnError="false" />
-        </classPath>
-      </java>
-      <macStaticAssociationActions mode="selected" />
     </launcher>
   </launchers>
   <installerGui>
@@ -839,30 +812,6 @@ return success;
                     </serializedBean>
                     <condition>new File(context.getInstallationDirectory(), "rstb").isDirectory()</condition>
                   </action>
-                  <action name="Add smos NB cluster" id="2074" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
-                    <serializedBean>
-                      <property name="append" type="boolean" value="true" />
-                      <property name="file">
-                        <object class="java.io.File">
-                          <string>etc/snap.clusters</string>
-                        </object>
-                      </property>
-                      <property name="text" type="string">smos\n</property>
-                    </serializedBean>
-                    <condition>new File(context.getInstallationDirectory(), "smos").isDirectory()</condition>
-                  </action>
-                  <action name="Add probavbox NB cluster" id="3125" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
-                    <serializedBean>
-                      <property name="append" type="boolean" value="true" />
-                      <property name="file">
-                        <object class="java.io.File">
-                          <string>etc/snap.clusters</string>
-                        </object>
-                      </property>
-                      <property name="text" type="string">probavbox\n&#xD;</property>
-                    </serializedBean>
-                    <condition>new File(context.getInstallationDirectory(), "probavbox").isDirectory()</condition>
-                  </action>
                 </beans>
               </group>
               <action name="Delete NB dirs from .snap" id="1321" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" actionElevationType="elevated">
@@ -908,24 +857,6 @@ return success;
                     </element>
                   </property>
                 </serializedBean>
-              </action>
-              <action name="Delete grid-point-exporter if smos not installed" id="2951" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" actionElevationType="elevated">
-                <serializedBean>
-                  <property name="files" type="array" class="java.io.File" length="2">
-                    <element index="0">
-                      <object class="java.io.File">
-                        <string>bin/smos-grid-point-exporter</string>
-                      </object>
-                    </element>
-                    <element index="1">
-                      <object class="java.io.File">
-                        <string>bin/smos-grid-point-exporter.vmoptions</string>
-                      </object>
-                    </element>
-                  </property>
-                </serializedBean>
-                <condition>context.getInstallationComponentById("SMOS") == null || !context.getInstallationComponentById("SMOS").isSelected()
-</condition>
               </action>
               <action id="3030" beanClass="com.install4j.runtime.beans.actions.text.FixCrLfAction" actionElevationType="elevated">
                 <serializedBean>
@@ -1712,7 +1643,6 @@ return console.askYesNo(message, true);
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.jpg" />
-        <entry location="smos" />
         <entry filesetId="634" />
         <entry filesetId="637" />
         <entry filesetId="641" />
@@ -1738,7 +1668,6 @@ return console.askYesNo(message, true);
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.jpg" />
-        <entry location="smos" />
         <entry filesetId="634" />
         <entry filesetId="639" />
         <entry filesetId="641" />
@@ -1764,7 +1693,6 @@ return console.askYesNo(message, true);
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.jpg" />
-        <entry location="smos" />
         <entry filesetId="637" />
         <entry filesetId="639" />
         <entry filesetId="641" />
@@ -1789,7 +1717,6 @@ return console.askYesNo(message, true);
         <launcher id="2822" />
       </excludedLaunchers>
       <exclude>
-        <entry location="smos" />
         <entry filesetId="634" />
         <entry filesetId="637" />
         <entry filesetId="639" />
