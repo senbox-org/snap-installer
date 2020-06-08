@@ -1557,7 +1557,7 @@ return console.askYesNo(message, true);
         <entry filesetId="637" />
         <entry filesetId="639" />
       </exclude>
-      <jreBundle jreBundleSource="preCreated" includedJre="linux-amd64-1.8.0.202" />
+      <jreBundle jreBundleSource="preCreated" includedJre="linux-amd64-1.8.0_202" />
     </unixInstaller>
     <unixInstaller name="Sentinel SNAP Unix" id="2598" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
       <includedDownloadableComponents>
@@ -1571,7 +1571,7 @@ return console.askYesNo(message, true);
         <entry filesetId="637" />
         <entry filesetId="639" />
       </exclude>
-      <jreBundle jreBundleSource="preCreated" includedJre="linux-amd64-1.8.0.202" />
+      <jreBundle jreBundleSource="preCreated" includedJre="linux-amd64-1.8.0_202" />
     </unixInstaller>
     <unixArchive name="Engine Unix Archive" id="859" installDir="snap">
       <excludedLaunchers>
