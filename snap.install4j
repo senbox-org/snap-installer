@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<install4j version="8.0.5" transformSequenceNumber="8">
+<install4j version="8.0.7" transformSequenceNumber="8">
   <directoryPresets config="../snap-desktop/snap-application/target/snap/THIRDPARTY_LICENSES.txt" />
   <application name="ESA SNAP" applicationId="0941-5747-6134-5911" mediaDir="./target" compression="9" commonExternalFiles="true" shrinkRuntime="false" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="8.0-SNAPSHOT" allPathsRelative="true" macVolumeId="69e291547ea53333" javaMinVersion="1.8" allowBetaVM="true" jdkMode="jdk">
     <variables>
@@ -12,15 +12,9 @@
   </application>
   <files missingFilesStrategy="error" defaultUninstallMode="2" launcherOverwriteMode="1">
     <filesets>
-      <fileset name="Mac OS file set" id="634" />
-      <fileset name="Win x32 file set" id="637" />
-      <fileset name="Win x64 file set" id="639" />
       <fileset name="Unix file set" id="641" />
     </filesets>
     <roots>
-      <root id="635" fileset="634" />
-      <root id="638" fileset="637" />
-      <root id="640" fileset="639" />
       <root id="642" fileset="641" />
     </roots>
     <mountPoints>
@@ -29,9 +23,6 @@
       <mountPoint id="1016" location="platform" />
       <mountPoint id="1017" location="platform/core" />
       <mountPoint id="58" />
-      <mountPoint id="636" root="635" />
-      <mountPoint id="643" root="638" />
-      <mountPoint id="644" root="640" />
       <mountPoint id="645" root="642" />
     </mountPoints>
     <entries>
@@ -49,9 +40,6 @@
       <fileEntry mountPoint="58" file="./LICENSE.txt" />
       <fileEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/THIRDPARTY_LICENSES.txt" />
       <fileEntry mountPoint="58" file="./VERSION.txt" />
-      <dirEntry mountPoint="636" file="./files/macosx" subDirectory="macosx" />
-      <dirEntry mountPoint="643" file="./files/winx32" subDirectory="winx32" />
-      <dirEntry mountPoint="644" file="./files/winx64" subDirectory="winx64" />
       <dirEntry mountPoint="645" file="./files/unix" subDirectory="unix" />
     </entries>
     <components>
@@ -112,10 +100,7 @@
     </components>
   </files>
   <launchers>
-    <launcher name="SNAP Desktop Win x86" id="538" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap.exe" />
     <launcher name="SNAP Desktop Unix" id="539" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap" />
-    <launcher name="SNAP Desktop Mac OS" id="618" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin/snap.app" />
-    <launcher name="SNAP Desktop Win x64" id="656" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap64.exe" />
     <launcher name="SNAP GPT" id="781" excludeFromMenu="true">
       <executable name="${compiler:snapGptName}" executableDir="bin" redirectStderr="false" executableMode="console" changeWorkingDirectory="false" dpiAware="false" />
       <java mainClass="org.esa.snap.runtime.Launcher" vmParameters="-Dsnap.mainClass=org.esa.snap.core.gpf.main.GPT &quot;-Dsnap.home=${launcher:sys.launcherDirectory}/..&quot; -Djava.awt.headless=true -Dinstall4j.noLoggingFix=true">
@@ -1566,54 +1551,7 @@ return console.askYesNo(message, true);
     </styles>
   </installerGui>
   <mediaSets>
-    <windows name="All SNAP Windows x64" id="2571" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
-      <excludedLaunchers>
-        <launcher id="538" />
-        <launcher id="539" />
-        <launcher id="618" />
-      </excludedLaunchers>
-      <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
-        <entry filesetId="634" />
-        <entry filesetId="637" />
-        <entry filesetId="641" />
-      </exclude>
-      <jreBundle jreBundleSource="preCreated" includedJre="windows-amd64-1.8.0.202" />
-    </windows>
-    <windows name="All SNAP Windows x86" id="2584" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" jreBitType="32" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
-      <excludedLaunchers>
-        <launcher id="539" />
-        <launcher id="618" />
-        <launcher id="656" />
-      </excludedLaunchers>
-      <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
-        <entry filesetId="634" />
-        <entry filesetId="639" />
-        <entry filesetId="641" />
-      </exclude>
-      <jreBundle jreBundleSource="preCreated" includedJre="windows-x86-1.8.0.202" />
-    </windows>
-    <macosFolder name="All SNAP Mac OS X Folder" id="2575" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
-      <excludedLaunchers>
-        <launcher id="538" />
-        <launcher id="539" />
-        <launcher id="656" />
-      </excludedLaunchers>
-      <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
-        <entry filesetId="637" />
-        <entry filesetId="639" />
-        <entry filesetId="641" />
-      </exclude>
-      <jreBundle jreBundleSource="preCreated" includedJre="macosx-amd64-1.8.0.202" />
-    </macosFolder>
     <unixInstaller name="All SNAP Unix" id="2578" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
-      <excludedLaunchers>
-        <launcher id="538" />
-        <launcher id="618" />
-        <launcher id="656" />
-      </excludedLaunchers>
       <exclude>
         <entry filesetId="634" />
         <entry filesetId="637" />
@@ -1621,98 +1559,13 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle jreBundleSource="preCreated" includedJre="linux-amd64-1.8.0.202" />
     </unixInstaller>
-    <windows name="Sentinel SNAP Windows x64" id="2589" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
-      <excludedComponents>
-        <component id="1963" />
-        <component id="3109" />
-      </excludedComponents>
-      <includedDownloadableComponents>
-        <component id="73" />
-        <component id="72" />
-        <component id="68" />
-        <component id="306" />
-      </includedDownloadableComponents>
-      <excludedLaunchers>
-        <launcher id="538" />
-        <launcher id="539" />
-        <launcher id="618" />
-        <launcher id="2822" />
-      </excludedLaunchers>
-      <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
-        <entry filesetId="634" />
-        <entry filesetId="637" />
-        <entry filesetId="641" />
-      </exclude>
-      <jreBundle jreBundleSource="preCreated" includedJre="windows-amd64-1.8.0.202" />
-    </windows>
-    <windows name="Sentinel SNAP Windows x86" id="2603" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" jreBitType="32" downloadURL="http://step.esa.int/downloads/2.0">
-      <excludedComponents>
-        <component id="1963" />
-        <component id="3109" />
-      </excludedComponents>
-      <includedDownloadableComponents>
-        <component id="73" />
-        <component id="72" />
-        <component id="68" />
-        <component id="306" />
-      </includedDownloadableComponents>
-      <excludedLaunchers>
-        <launcher id="539" />
-        <launcher id="618" />
-        <launcher id="656" />
-        <launcher id="2822" />
-      </excludedLaunchers>
-      <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
-        <entry filesetId="634" />
-        <entry filesetId="639" />
-        <entry filesetId="641" />
-      </exclude>
-      <jreBundle jreBundleSource="preCreated" includedJre="windows-x86-1.8.0.202" />
-    </windows>
-    <macosFolder name="Sentinel SNAP Mac OS X Folder" id="2592" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
-      <excludedComponents>
-        <component id="1963" />
-        <component id="3109" />
-      </excludedComponents>
-      <includedDownloadableComponents>
-        <component id="73" />
-        <component id="72" />
-        <component id="68" />
-        <component id="306" />
-      </includedDownloadableComponents>
-      <excludedLaunchers>
-        <launcher id="538" />
-        <launcher id="539" />
-        <launcher id="656" />
-        <launcher id="2822" />
-      </excludedLaunchers>
-      <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
-        <entry filesetId="637" />
-        <entry filesetId="639" />
-        <entry filesetId="641" />
-      </exclude>
-      <jreBundle jreBundleSource="preCreated" includedJre="macosx-amd64-1.8.0.202" />
-    </macosFolder>
     <unixInstaller name="Sentinel SNAP Unix" id="2598" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
-      <excludedComponents>
-        <component id="1963" />
-        <component id="3109" />
-      </excludedComponents>
       <includedDownloadableComponents>
         <component id="73" />
         <component id="72" />
         <component id="68" />
         <component id="306" />
       </includedDownloadableComponents>
-      <excludedLaunchers>
-        <launcher id="538" />
-        <launcher id="618" />
-        <launcher id="656" />
-        <launcher id="2822" />
-      </excludedLaunchers>
       <exclude>
         <entry filesetId="634" />
         <entry filesetId="637" />
@@ -1722,10 +1575,7 @@ return console.askYesNo(message, true);
     </unixInstaller>
     <unixArchive name="Engine Unix Archive" id="859" installDir="snap">
       <excludedLaunchers>
-        <launcher id="538" />
         <launcher id="539" />
-        <launcher id="618" />
-        <launcher id="656" />
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.jpg" />
