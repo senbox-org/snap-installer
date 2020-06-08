@@ -8,7 +8,6 @@
       <variable name="snapPconvertName" value="pconvert" />
       <variable name="snapDesktopMenuName" value="SNAP Desktop" />
       <variable name="snapGptMenuName" value="SNAP GPT" />
-      <variable name="smosGridPointExporter" value="smos-grid-point-exporter" />
     </variables>
   </application>
   <files missingFilesStrategy="error" defaultUninstallMode="2" launcherOverwriteMode="1">
@@ -47,8 +46,6 @@
       <dirEntry mountPoint="58" file="../s2tbx/s2tbx-kit/target/netbeans_clusters/s2tbx" entryMode="subdir" subDirectory="s2tbx" />
       <dirEntry mountPoint="58" file="../s3tbx/s3tbx-kit/target/netbeans_clusters/s3tbx" entryMode="subdir" subDirectory="s3tbx" />
       <dirEntry mountPoint="58" file="../s1tbx/s1tbx-kit/target/netbeans_clusters/rstb" entryMode="subdir" subDirectory="rstb" />
-      <dirEntry mountPoint="58" file="../smos-box/smos-kit/target/netbeans_clusters/smos" entryMode="subdir" subDirectory="smos" />
-      <dirEntry mountPoint="58" file="../probavbox/probavbox-kit/target/netbeans_clusters/probavbox" entryMode="subdir" subDirectory="probavbox" />
       <fileEntry mountPoint="58" file="./LICENSE.txt" />
       <fileEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/THIRDPARTY_LICENSES.txt" />
       <fileEntry mountPoint="58" file="./VERSION.txt" />
@@ -1723,129 +1720,6 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle jreBundleSource="preCreated" includedJre="linux-amd64-1.8.0.202" />
     </unixInstaller>
-    <windows name="SMOS SNAP Windows x64" id="2609" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
-      <excludedComponents>
-        <component id="73" />
-        <component id="72" />
-        <component id="68" />
-        <component id="306" />
-        <component id="3109" />
-      </excludedComponents>
-      <includedDownloadableComponents>
-        <component id="1963" />
-      </includedDownloadableComponents>
-      <excludedLaunchers>
-        <launcher id="538" />
-        <launcher id="539" />
-        <launcher id="618" />
-      </excludedLaunchers>
-      <excludedBeans>
-        <bean refId="6" />
-      </excludedBeans>
-      <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
-        <entry location="s1tbx" />
-        <entry location="s2tbx" />
-        <entry location="s3tbx" />
-        <entry location="rstb" />
-        <entry filesetId="634" />
-        <entry filesetId="637" />
-        <entry filesetId="641" />
-      </exclude>
-      <jreBundle jreBundleSource="preCreated" includedJre="windows-amd64-1.8.0.202" />
-    </windows>
-    <windows name="SMOS SNAP Windows x86" id="2620" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" jreBitType="32" downloadURL="http://step.esa.int/downloads/2.0">
-      <excludedComponents>
-        <component id="73" />
-        <component id="72" />
-        <component id="68" />
-        <component id="306" />
-        <component id="3109" />
-      </excludedComponents>
-      <includedDownloadableComponents>
-        <component id="1963" />
-      </includedDownloadableComponents>
-      <excludedLaunchers>
-        <launcher id="539" />
-        <launcher id="618" />
-        <launcher id="656" />
-      </excludedLaunchers>
-      <excludedBeans>
-        <bean refId="6" />
-      </excludedBeans>
-      <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
-        <entry location="s1tbx" />
-        <entry location="s2tbx" />
-        <entry location="s3tbx" />
-        <entry location="rstb" />
-        <entry filesetId="634" />
-        <entry filesetId="639" />
-        <entry filesetId="641" />
-      </exclude>
-      <jreBundle jreBundleSource="preCreated" includedJre="windows-x86-1.8.0.202" />
-    </windows>
-    <macosFolder name="SMOS SNAP Mac OS X Folder" id="2612" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
-      <excludedComponents>
-        <component id="73" />
-        <component id="72" />
-        <component id="68" />
-        <component id="306" />
-        <component id="3109" />
-      </excludedComponents>
-      <includedDownloadableComponents>
-        <component id="1963" />
-      </includedDownloadableComponents>
-      <excludedLaunchers>
-        <launcher id="538" />
-        <launcher id="539" />
-        <launcher id="656" />
-      </excludedLaunchers>
-      <excludedBeans>
-        <bean refId="6" />
-      </excludedBeans>
-      <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
-        <entry location="s1tbx" />
-        <entry location="s2tbx" />
-        <entry location="s3tbx" />
-        <entry location="rstb" />
-        <entry filesetId="637" />
-        <entry filesetId="639" />
-        <entry filesetId="641" />
-      </exclude>
-      <jreBundle jreBundleSource="preCreated" includedJre="macosx-amd64-1.8.0.202" />
-    </macosFolder>
-    <unixInstaller name="SMOS SNAP Unix" id="2617" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
-      <excludedComponents>
-        <component id="73" />
-        <component id="72" />
-        <component id="68" />
-        <component id="306" />
-        <component id="3109" />
-      </excludedComponents>
-      <includedDownloadableComponents>
-        <component id="1963" />
-      </includedDownloadableComponents>
-      <excludedLaunchers>
-        <launcher id="538" />
-        <launcher id="618" />
-        <launcher id="656" />
-      </excludedLaunchers>
-      <excludedBeans>
-        <bean refId="6" />
-      </excludedBeans>
-      <exclude>
-        <entry location="s1tbx" />
-        <entry location="s2tbx" />
-        <entry location="s3tbx" />
-        <entry location="rstb" />
-        <entry filesetId="634" />
-        <entry filesetId="637" />
-        <entry filesetId="639" />
-      </exclude>
-      <jreBundle jreBundleSource="preCreated" includedJre="linux-amd64-1.8.0.202" />
-    </unixInstaller>
     <unixArchive name="Engine Unix Archive" id="859" installDir="snap">
       <excludedLaunchers>
         <launcher id="538" />
@@ -1855,9 +1729,6 @@ return console.askYesNo(message, true);
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.jpg" />
-        <entry location="smos/modules/docs" />
-        <entry location="smos/modules/ext/org.esa.smostbx.smos-gui" />
-        <entry location="smos/modules/org-esa-smostbx-smos-gui.jar" />
         <entry filesetId="634" />
         <entry filesetId="637" />
         <entry filesetId="639" />
