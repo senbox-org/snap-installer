@@ -8,12 +8,12 @@ set skipTests=true
 
 set buildSnapEngine=true
 set buildSnapDesktop=true
-set buildSnapExamples=true
-set buildS1TBX=true
-set buildS2TBX=true
-set buildS3TBX=true
-set buildSMOSBOX=true
-set buildProbavBox=true
+set buildSnapExamples=false
+set buildS1TBX=false
+set buildS2TBX=false
+set buildS3TBX=false
+set buildSMOSBOX=false
+set buildProbavBox=false
 
 if exist snap-engine\.git (
     cd snap-engine
