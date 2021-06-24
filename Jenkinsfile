@@ -16,6 +16,10 @@
  */
 
 pipeline {
+    options {
+            buildDiscarder(logRotator(daysToKeepStr: '10', artifactDaysToKeepStr: '10'))
+            timeout(time: 20, unit: 'HOURS')
+    }
     /*environment {
         toolName = sh(returnStdout: true, script: "echo ${env.JOB_NAME} | cut -d '/' -f 1").trim()
         branchVersion = sh(returnStdout: true, script: "echo ${env.GIT_BRANCH} | cut -d '/' -f 2").trim()
