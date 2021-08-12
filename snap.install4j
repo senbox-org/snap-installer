@@ -574,7 +574,7 @@ problems after SNAP version upgrades.</property>
                       <property name="labelHtml" type="string">&lt;html&gt;If you are a Python developer, you can use the SNAP Java API from Python or you can
 even develop SNAP processor plugins using Python. Here you can specify your preferred Python version by
 the given Python executable to be used. Only &lt;a href="https://www.python.org/downloads/"&gt;Python&lt;/a&gt;
-versions &lt;b&gt;2.7&lt;/b&gt;, &lt;b&gt;3.3&lt;/b&gt; and &lt;b&gt;3.4&lt;/b&gt; are supported.</property>
+versions &lt;b&gt;3.4&lt;/b&gt; and later are supported.</property>
                     </serializedBean>
                   </formComponent>
                 </beans>
@@ -644,7 +644,7 @@ return success;
               </formComponent>
               <formComponent name="Win" id="955" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
                 <serializedBean>
-                  <property name="labelHtml" type="string">Python interpreter executables are likely found in &lt;b&gt;C:\Python27&lt;/b&gt; or &lt;b&gt;C:\Python34&lt;/b&gt;.</property>
+                  <property name="labelHtml" type="string">Python interpreter executables are likely found in &lt;b&gt;C:\Python34&lt;/b&gt;.</property>
                 </serializedBean>
                 <visibilityScript>Util.isWindowsInstaller()</visibilityScript>
               </formComponent>
