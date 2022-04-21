@@ -1675,7 +1675,7 @@ return console.askYesNo(message, true);
         </modules>
       </jreBundle>
     </windows>
-    <macosFolder name="All SNAP Mac OS X Folder" id="2575" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
+    <macosFolder name="All SNAP Mac OS X (x64) Folder" id="2575" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_x64_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="539" />
@@ -1693,7 +1693,7 @@ return console.askYesNo(message, true);
         </modules>
       </jreBundle>
     </macosFolder>
-    <unixInstaller name="All SNAP Unix" id="2578" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
+    <unixInstaller name="All SNAP Unix" id="2578" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_amd64_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="618" />
@@ -1770,7 +1770,7 @@ return console.askYesNo(message, true);
         </modules>
       </jreBundle>
     </windows>
-    <macosFolder name="Sentinel SNAP Mac OS X Folder" id="2592" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
+    <macosFolder name="Sentinel SNAP Mac OS X (x64) Folder" id="2592" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_x64_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
         <component id="1963" />
         <component id="3109" />
@@ -1800,7 +1800,7 @@ return console.askYesNo(message, true);
         </modules>
       </jreBundle>
     </macosFolder>
-    <unixInstaller name="Sentinel SNAP Unix" id="2598" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
+    <unixInstaller name="Sentinel SNAP Unix" id="2598" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_amd64_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
         <component id="1963" />
         <component id="3109" />
@@ -1899,7 +1899,7 @@ return console.askYesNo(message, true);
         </modules>
       </jreBundle>
     </windows>
-    <macosFolder name="SMOS SNAP Mac OS X Folder" id="2612" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
+    <macosFolder name="SMOS SNAP Mac OS X (x64) Folder" id="2612" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_x64_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
         <component id="73" />
         <component id="72" />
@@ -2036,6 +2036,89 @@ return console.askYesNo(message, true);
         </modules>
       </jreBundle>
     </unixInstaller>
+    <macosFolder name="Sentinel SNAP Mac OS X (ARM) Folder" id="3629" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_aarch64_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="aarch64">
+      <excludedComponents>
+        <component id="1963" />
+        <component id="3109" />
+      </excludedComponents>
+      <includedDownloadableComponents>
+        <component id="73" />
+        <component id="72" />
+        <component id="68" />
+        <component id="306" />
+      </includedDownloadableComponents>
+      <excludedLaunchers>
+        <launcher id="538" />
+        <launcher id="539" />
+        <launcher id="656" />
+        <launcher id="2822" />
+      </excludedLaunchers>
+      <exclude>
+        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="smos" />
+        <entry filesetId="637" />
+        <entry filesetId="639" />
+        <entry filesetId="641" />
+      </exclude>
+      <jreBundle jdkProviderId="Liberica" release="OpenJDK 8u322+6" overrideJdkRelease="true" jreBundleSource="generated">
+        <modules>
+          <defaultModules set="jre" />
+        </modules>
+      </jreBundle>
+    </macosFolder>
+    <macosFolder name="All SNAP Mac OS X (ARM) Folder" id="3637" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_aarch64_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" architecture="aarch64">
+      <excludedLaunchers>
+        <launcher id="538" />
+        <launcher id="539" />
+        <launcher id="656" />
+      </excludedLaunchers>
+      <exclude>
+        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry filesetId="637" />
+        <entry filesetId="639" />
+        <entry filesetId="641" />
+      </exclude>
+      <jreBundle jdkProviderId="Liberica" release="OpenJDK 8u322+6" overrideJdkRelease="true" jreBundleSource="generated">
+        <modules>
+          <defaultModules set="jre" />
+        </modules>
+      </jreBundle>
+    </macosFolder>
+    <macosFolder name="SMOS SNAP Mac OS X (ARM) Folder" id="3642" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_aarch64_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="aarch64">
+      <excludedComponents>
+        <component id="73" />
+        <component id="72" />
+        <component id="68" />
+        <component id="306" />
+        <component id="3109" />
+      </excludedComponents>
+      <includedDownloadableComponents>
+        <component id="1963" />
+      </includedDownloadableComponents>
+      <excludedLaunchers>
+        <launcher id="538" />
+        <launcher id="539" />
+        <launcher id="656" />
+      </excludedLaunchers>
+      <excludedBeans>
+        <bean refId="6" />
+      </excludedBeans>
+      <exclude>
+        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="s1tbx" />
+        <entry location="s2tbx" />
+        <entry location="s3tbx" />
+        <entry location="rstb" />
+        <entry filesetId="637" />
+        <entry filesetId="639" />
+        <entry filesetId="641" />
+      </exclude>
+      <jreBundle jdkProviderId="AdoptOpenJDK" release="openjdk8/jdk8u322-b06" overrideJdkRelease="true">
+        <modules>
+          <defaultModules set="jre" />
+        </modules>
+      </jreBundle>
+    </macosFolder>
   </mediaSets>
   <buildIds>
     <mediaSet refId="2571" />
