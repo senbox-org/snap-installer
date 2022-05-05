@@ -971,34 +971,6 @@ return success;
           </screen>
           <screen id="1564" beanClass="com.install4j.runtime.beans.screens.FileAssociationsScreen">
             <actions>
-              <action name="Win x64 (.snap)" id="1565" beanClass="com.install4j.runtime.beans.actions.desktop.CreateFileAssociationAction" actionElevationType="elevated">
-                <serializedBean>
-                  <property name="description" type="string">Session file saved by SNAP</property>
-                  <property name="extension" type="string">snap</property>
-                  <property name="launcherId" type="string">656</property>
-                  <property name="mac" type="boolean" value="false" />
-                  <property name="winAdditionalParameters" type="string">--open</property>
-                  <property name="windowsIconFile">
-                    <object class="com.install4j.api.beans.ExternalFile">
-                      <string>./images/SNAP_icon_256.ico</string>
-                    </object>
-                  </property>
-                </serializedBean>
-              </action>
-              <action name="Win x86 (.snap)" id="1569" beanClass="com.install4j.runtime.beans.actions.desktop.CreateFileAssociationAction" actionElevationType="elevated">
-                <serializedBean>
-                  <property name="description" type="string">Session file saved by SNAP</property>
-                  <property name="extension" type="string">snap</property>
-                  <property name="launcherId" type="string">538</property>
-                  <property name="mac" type="boolean" value="false" />
-                  <property name="winAdditionalParameters" type="string">--open</property>
-                  <property name="windowsIconFile">
-                    <object class="com.install4j.api.beans.ExternalFile">
-                      <string>./images/SNAP_icon_256.ico</string>
-                    </object>
-                  </property>
-                </serializedBean>
-              </action>
               <action name="Win x64 (.dim)" id="1568" beanClass="com.install4j.runtime.beans.actions.desktop.CreateFileAssociationAction" actionElevationType="elevated">
                 <serializedBean>
                   <property name="description" type="string">SNAP standard I/O file (BEAM-DIMAP format)</property>
@@ -1017,6 +989,62 @@ return success;
                 <serializedBean>
                   <property name="description" type="string">SNAP standard I/O file (BEAM-DIMAP format)</property>
                   <property name="extension" type="string">dim</property>
+                  <property name="launcherId" type="string">538</property>
+                  <property name="mac" type="boolean" value="false" />
+                  <property name="winAdditionalParameters" type="string">--open</property>
+                  <property name="windowsIconFile">
+                    <object class="com.install4j.api.beans.ExternalFile">
+                      <string>./images/SNAP_icon_256.ico</string>
+                    </object>
+                  </property>
+                </serializedBean>
+              </action>
+              <action name="Win x64 (.znap)" id="3721" beanClass="com.install4j.runtime.beans.actions.desktop.CreateFileAssociationAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="description" type="string">SNAP standard I/O file (Znap format)</property>
+                  <property name="extension" type="string">znap</property>
+                  <property name="launcherId" type="string">656</property>
+                  <property name="mac" type="boolean" value="false" />
+                  <property name="winAdditionalParameters" type="string">--open</property>
+                  <property name="windowsIconFile">
+                    <object class="com.install4j.api.beans.ExternalFile">
+                      <string>./images/SNAP_icon_256.ico</string>
+                    </object>
+                  </property>
+                </serializedBean>
+              </action>
+              <action name="Win x86 (.znap)" id="3722" beanClass="com.install4j.runtime.beans.actions.desktop.CreateFileAssociationAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="description" type="string">SNAP standard I/O file (Znap format)</property>
+                  <property name="extension" type="string">znap</property>
+                  <property name="launcherId" type="string">538</property>
+                  <property name="mac" type="boolean" value="false" />
+                  <property name="winAdditionalParameters" type="string">--open</property>
+                  <property name="windowsIconFile">
+                    <object class="com.install4j.api.beans.ExternalFile">
+                      <string>./images/SNAP_icon_256.ico</string>
+                    </object>
+                  </property>
+                </serializedBean>
+              </action>
+              <action name="Win x64 (.snap)" id="1565" beanClass="com.install4j.runtime.beans.actions.desktop.CreateFileAssociationAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="description" type="string">Session file saved by SNAP</property>
+                  <property name="extension" type="string">snap</property>
+                  <property name="launcherId" type="string">656</property>
+                  <property name="mac" type="boolean" value="false" />
+                  <property name="winAdditionalParameters" type="string">--open</property>
+                  <property name="windowsIconFile">
+                    <object class="com.install4j.api.beans.ExternalFile">
+                      <string>./images/SNAP_icon_256.ico</string>
+                    </object>
+                  </property>
+                </serializedBean>
+              </action>
+              <action name="Win x86 (.snap)" id="1569" beanClass="com.install4j.runtime.beans.actions.desktop.CreateFileAssociationAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="description" type="string">Session file saved by SNAP</property>
+                  <property name="extension" type="string">snap</property>
                   <property name="launcherId" type="string">538</property>
                   <property name="mac" type="boolean" value="false" />
                   <property name="winAdditionalParameters" type="string">--open</property>
