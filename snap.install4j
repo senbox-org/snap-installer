@@ -548,6 +548,7 @@ problems after SNAP version upgrades.</property>
           </screen>
           <screen id="7" beanClass="com.install4j.runtime.beans.screens.StandardProgramGroupScreen">
             <serializedBean>
+              <property name="allUsers" type="boolean" value="false" />
               <property name="programGroupName" type="string">${compiler:sys.fullName}</property>
             </serializedBean>
             <condition>!context.getBooleanVariable("sys.confirmedUpdateInstallation")</condition>
@@ -670,6 +671,7 @@ return success;
               <action id="10" beanClass="com.install4j.runtime.beans.actions.desktop.CreateProgramGroupAction" actionElevationType="elevated">
                 <serializedBean>
                   <property name="addUninstaller" type="boolean" value="true" />
+                  <property name="allUsers" type="boolean" value="false" />
                   <property name="programGroupEntryConfigs">
                     <add>
                       <object class="com.install4j.runtime.beans.screens.components.ProgramGroupUrlConfig">
