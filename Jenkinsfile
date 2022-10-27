@@ -30,8 +30,8 @@ pipeline {
     agent { label 'snap-test' }
     
     parameters {
-        string(name: 'smosBoxBranch', defaultValue: "master", description: 'Smos-box branch to use to build installer')
-        string(name: 'probavboxBranch', defaultValue: "master", description: 'Probavbox branch to use to build installer')
+        string(name: 'smosBoxBranch', defaultValue: "9.x", description: 'Smos-box branch to use to build installer')
+        string(name: 'probavboxBranch', defaultValue: "9.x", description: 'Probavbox branch to use to build installer')
     }
     stages {
         stage('Create installer') {
