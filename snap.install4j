@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<install4j version="8.0.5" transformSequenceNumber="8">
+<install4j version="10.0.5" transformSequenceNumber="10">
   <directoryPresets config="../snap-desktop/snap-application/target/snap/THIRDPARTY_LICENSES.txt" />
   <application name="ESA SNAP" applicationId="0941-5747-6134-5911" mediaDir="./target" compression="9" commonExternalFiles="true" shrinkRuntime="false" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="10.0.0-SNAPSHOT" allPathsRelative="true" macVolumeId="69e291547ea53333" javaMinVersion="1.8" allowBetaVM="true" jdkMode="jdk">
     <variables>
@@ -10,7 +10,7 @@
       <variable name="snapGptMenuName" value="SNAP GPT" />
       <variable name="smosGridPointExporter" value="smos-grid-point-exporter" />
     </variables>
-    <jreBundles jdkProviderId="AdoptOpenJDK" release="openjdk8/jdk8u332-b09" />
+    <jreBundles jdkProviderId="AdoptOpenJDK" release="8/jdk8u332-b09" />
   </application>
   <files missingFilesStrategy="error" defaultUninstallMode="2" launcherOverwriteMode="1">
     <filesets>
@@ -145,7 +145,6 @@
           <archive location="snap/modules/ext/org.esa.snap.snap-core/org-esa-snap/snap-runtime.jar" failOnError="false" />
         </classPath>
       </java>
-      <macStaticAssociationActions mode="selected" />
       <vmOptionsFile>
         <content># Enter one VM parameter per line
 # For example, to adjust the maximum memory usage here:
@@ -161,7 +160,6 @@
           <archive location="snap/modules/ext/org.esa.snap.snap-core/org-esa-snap/snap-runtime.jar" failOnError="false" />
         </classPath>
       </java>
-      <macStaticAssociationActions mode="selected" />
       <vmOptionsFile>
         <content># Enter one VM parameter per line
 # For example, to adjust the maximum memory usage here:
@@ -186,7 +184,6 @@
           <scanDirectory location="s3tbx/modules" failOnError="false" />
         </classPath>
       </java>
-      <macStaticAssociationActions mode="selected" />
       <vmOptionsFile mode="none" />
       <iconImageFiles>
         <file path="./images/perf_icon_16.png" />
@@ -203,7 +200,6 @@
           <archive location="snap/modules/ext/org.esa.snap.snap-core/org-esa-snap/snap-runtime.jar" failOnError="false" />
         </classPath>
       </java>
-      <macStaticAssociationActions mode="selected" />
     </launcher>
   </launchers>
   <installerGui>
@@ -244,11 +240,19 @@
             <group id="3359" beanClass="com.install4j.runtime.beans.groups.VerticalFormComponentGroup">
               <serializedBean>
                 <property name="backgroundColor">
-                  <object class="java.awt.Color">
-                    <int>255</int>
-                    <int>255</int>
-                    <int>255</int>
-                    <int>255</int>
+                  <object class="com.install4j.runtime.beans.LightOrDarkColor">
+                    <object class="java.awt.Color">
+                      <int>255</int>
+                      <int>255</int>
+                      <int>255</int>
+                      <int>255</int>
+                    </object>
+                    <object class="java.awt.Color">
+                      <int>49</int>
+                      <int>52</int>
+                      <int>53</int>
+                      <int>255</int>
+                    </object>
                   </object>
                 </property>
                 <property name="imageAnchor" type="enum" class="com.install4j.api.beans.Anchor" value="NORTHEAST" />
@@ -302,11 +306,19 @@ return new File(userHome, Util.isWindowsInstaller() ? "AppData\\Roaming\\SNAP" :
                 <group id="3352" beanClass="com.install4j.runtime.beans.groups.VerticalFormComponentGroup">
                   <serializedBean>
                     <property name="imageEdgeBackgroundColor">
-                      <object class="java.awt.Color">
-                        <int>25</int>
-                        <int>143</int>
-                        <int>220</int>
-                        <int>255</int>
+                      <object class="com.install4j.runtime.beans.LightOrDarkColor">
+                        <object class="java.awt.Color">
+                          <int>25</int>
+                          <int>143</int>
+                          <int>220</int>
+                          <int>255</int>
+                        </object>
+                        <object class="java.awt.Color">
+                          <int>0</int>
+                          <int>74</int>
+                          <int>151</int>
+                          <int>255</int>
+                        </object>
                       </object>
                     </property>
                     <property name="imageFile">
@@ -980,7 +992,6 @@ return success;
                   <property name="description" type="string">SNAP standard I/O file (BEAM-DIMAP format)</property>
                   <property name="extension" type="string">dim</property>
                   <property name="launcherId" type="string">656</property>
-                  <property name="mac" type="boolean" value="false" />
                   <property name="winAdditionalParameters" type="string">--open</property>
                   <property name="windowsIconFile">
                     <object class="com.install4j.api.beans.ExternalFile">
@@ -994,7 +1005,6 @@ return success;
                   <property name="description" type="string">SNAP standard I/O file (BEAM-DIMAP format)</property>
                   <property name="extension" type="string">dim</property>
                   <property name="launcherId" type="string">538</property>
-                  <property name="mac" type="boolean" value="false" />
                   <property name="winAdditionalParameters" type="string">--open</property>
                   <property name="windowsIconFile">
                     <object class="com.install4j.api.beans.ExternalFile">
@@ -1008,7 +1018,6 @@ return success;
                   <property name="description" type="string">Session file saved by SNAP</property>
                   <property name="extension" type="string">snap</property>
                   <property name="launcherId" type="string">656</property>
-                  <property name="mac" type="boolean" value="false" />
                   <property name="winAdditionalParameters" type="string">--open</property>
                   <property name="windowsIconFile">
                     <object class="com.install4j.api.beans.ExternalFile">
@@ -1022,7 +1031,6 @@ return success;
                   <property name="description" type="string">Session file saved by SNAP</property>
                   <property name="extension" type="string">snap</property>
                   <property name="launcherId" type="string">538</property>
-                  <property name="mac" type="boolean" value="false" />
                   <property name="winAdditionalParameters" type="string">--open</property>
                   <property name="windowsIconFile">
                     <object class="com.install4j.api.beans.ExternalFile">
@@ -1056,11 +1064,19 @@ return success;
                 <group id="3352" beanClass="com.install4j.runtime.beans.groups.VerticalFormComponentGroup">
                   <serializedBean>
                     <property name="imageEdgeBackgroundColor">
-                      <object class="java.awt.Color">
-                        <int>25</int>
-                        <int>143</int>
-                        <int>220</int>
-                        <int>255</int>
+                      <object class="com.install4j.runtime.beans.LightOrDarkColor">
+                        <object class="java.awt.Color">
+                          <int>25</int>
+                          <int>143</int>
+                          <int>220</int>
+                          <int>255</int>
+                        </object>
+                        <object class="java.awt.Color">
+                          <int>0</int>
+                          <int>74</int>
+                          <int>151</int>
+                          <int>255</int>
+                        </object>
                       </object>
                     </property>
                     <property name="imageFile">
@@ -1356,11 +1372,19 @@ toolboxes.&lt;/html&gt;</property>
                 <group id="3352" beanClass="com.install4j.runtime.beans.groups.VerticalFormComponentGroup">
                   <serializedBean>
                     <property name="imageEdgeBackgroundColor">
-                      <object class="java.awt.Color">
-                        <int>25</int>
-                        <int>143</int>
-                        <int>220</int>
-                        <int>255</int>
+                      <object class="com.install4j.runtime.beans.LightOrDarkColor">
+                        <object class="java.awt.Color">
+                          <int>25</int>
+                          <int>143</int>
+                          <int>220</int>
+                          <int>255</int>
+                        </object>
+                        <object class="java.awt.Color">
+                          <int>0</int>
+                          <int>74</int>
+                          <int>151</int>
+                          <int>255</int>
+                        </object>
                       </object>
                     </property>
                     <property name="imageFile">
@@ -1464,11 +1488,19 @@ return console.askYesNo(message, true);
           <group id="3352" beanClass="com.install4j.runtime.beans.groups.VerticalFormComponentGroup" useExternalParametrization="true" externalParametrizationName="Customize banner image" externalParametrizationMode="include">
             <serializedBean>
               <property name="backgroundColor">
-                <object class="java.awt.Color">
-                  <int>255</int>
-                  <int>255</int>
-                  <int>255</int>
-                  <int>255</int>
+                <object class="com.install4j.runtime.beans.LightOrDarkColor">
+                  <object class="java.awt.Color">
+                    <int>255</int>
+                    <int>255</int>
+                    <int>255</int>
+                    <int>255</int>
+                  </object>
+                  <object class="java.awt.Color">
+                    <int>49</int>
+                    <int>52</int>
+                    <int>53</int>
+                    <int>255</int>
+                  </object>
                 </object>
               </property>
               <property name="borderSides">
@@ -1477,11 +1509,19 @@ return console.askYesNo(message, true);
                 </object>
               </property>
               <property name="imageEdgeBackgroundColor">
-                <object class="java.awt.Color">
-                  <int>25</int>
-                  <int>143</int>
-                  <int>220</int>
-                  <int>255</int>
+                <object class="com.install4j.runtime.beans.LightOrDarkColor">
+                  <object class="java.awt.Color">
+                    <int>25</int>
+                    <int>143</int>
+                    <int>220</int>
+                    <int>255</int>
+                  </object>
+                  <object class="java.awt.Color">
+                    <int>0</int>
+                    <int>74</int>
+                    <int>151</int>
+                    <int>255</int>
+                  </object>
                 </object>
               </property>
               <property name="imageEdgeBorder" type="boolean" value="true" />
@@ -1535,11 +1575,19 @@ return console.askYesNo(message, true);
               <group id="3359" beanClass="com.install4j.runtime.beans.groups.VerticalFormComponentGroup" useExternalParametrization="true" externalParametrizationName="Customize title bar" externalParametrizationMode="include">
                 <serializedBean>
                   <property name="backgroundColor">
-                    <object class="java.awt.Color">
-                      <int>255</int>
-                      <int>255</int>
-                      <int>255</int>
-                      <int>255</int>
+                    <object class="com.install4j.runtime.beans.LightOrDarkColor">
+                      <object class="java.awt.Color">
+                        <int>255</int>
+                        <int>255</int>
+                        <int>255</int>
+                        <int>255</int>
+                      </object>
+                      <object class="java.awt.Color">
+                        <int>49</int>
+                        <int>52</int>
+                        <int>53</int>
+                        <int>255</int>
+                      </object>
                     </object>
                   </property>
                   <property name="borderSides">
@@ -1642,7 +1690,7 @@ return console.askYesNo(message, true);
     </styles>
   </installerGui>
   <mediaSets>
-    <windows name="All SNAP Windows x64" id="2571" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
+    <windows name="All SNAP Windows x64" id="2571" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" architecture="64">
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="539" />
@@ -1654,9 +1702,9 @@ return console.askYesNo(message, true);
         <entry filesetId="637" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle jreBundleSource="generated" includedJre="windows-amd64-1.8.0.242" />
+      <jreBundle includedJre="windows-amd64-1.8.0.242" />
     </windows>
-    <windows name="All SNAP Windows x86" id="2584" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" jreBitType="32" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
+    <windows name="All SNAP Windows x86" id="2584" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" architecture="32">
       <excludedLaunchers>
         <launcher id="539" />
         <launcher id="618" />
@@ -1668,7 +1716,7 @@ return console.askYesNo(message, true);
         <entry filesetId="639" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle jreBundleSource="generated" includedJre="windows-x86-1.8.0.242" />
+      <jreBundle includedJre="windows-x86-1.8.0.242" />
     </windows>
     <macosFolder name="All SNAP Mac OS X Folder" id="2575" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
       <excludedLaunchers>
@@ -1682,7 +1730,7 @@ return console.askYesNo(message, true);
         <entry filesetId="639" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle jreBundleSource="generated" includedJre="macosx-amd64-1.8.0.242" />
+      <jreBundle includedJre="macosx-amd64-1.8.0.242" />
     </macosFolder>
     <unixInstaller name="All SNAP Unix" id="2578" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
       <excludedLaunchers>
@@ -1695,9 +1743,9 @@ return console.askYesNo(message, true);
         <entry filesetId="637" />
         <entry filesetId="639" />
       </exclude>
-      <jreBundle jreBundleSource="generated" includedJre="linux-amd64-1.8.0.242" />
+      <jreBundle includedJre="linux-amd64-1.8.0.242" />
     </unixInstaller>
-    <windows name="Sentinel SNAP Windows x64" id="2589" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
+    <windows name="Sentinel SNAP Windows x64" id="2589" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="64">
       <excludedComponents>
         <component id="1963" />
         <component id="3109" />
@@ -1721,9 +1769,9 @@ return console.askYesNo(message, true);
         <entry filesetId="637" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle jreBundleSource="generated" includedJre="windows-amd64-1.8.0.242" />
+      <jreBundle includedJre="windows-amd64-1.8.0.242" />
     </windows>
-    <windows name="Sentinel SNAP Windows x86" id="2603" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" jreBitType="32" downloadURL="http://step.esa.int/downloads/2.0">
+    <windows name="Sentinel SNAP Windows x86" id="2603" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="32">
       <excludedComponents>
         <component id="1963" />
         <component id="3109" />
@@ -1747,7 +1795,7 @@ return console.askYesNo(message, true);
         <entry filesetId="639" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle jreBundleSource="generated" includedJre="windows-x86-1.8.0.242" />
+      <jreBundle includedJre="windows-x86-1.8.0.242" />
     </windows>
     <macosFolder name="Sentinel SNAP Mac OS X Folder" id="2592" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
@@ -1773,7 +1821,7 @@ return console.askYesNo(message, true);
         <entry filesetId="639" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle jreBundleSource="generated" includedJre="macosx-amd64-1.8.0.242" />
+      <jreBundle includedJre="macosx-amd64-1.8.0.242" />
     </macosFolder>
     <unixInstaller name="Sentinel SNAP Unix" id="2598" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
@@ -1798,9 +1846,9 @@ return console.askYesNo(message, true);
         <entry filesetId="637" />
         <entry filesetId="639" />
       </exclude>
-      <jreBundle jreBundleSource="generated" includedJre="linux-amd64-1.8.0.242" />
+      <jreBundle includedJre="linux-amd64-1.8.0.242" />
     </unixInstaller>
-    <windows name="SMOS SNAP Windows x64" id="2609" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
+    <windows name="SMOS SNAP Windows x64" id="2609" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="64">
       <excludedComponents>
         <component id="73" />
         <component id="72" />
@@ -1829,9 +1877,9 @@ return console.askYesNo(message, true);
         <entry filesetId="637" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle jreBundleSource="generated" includedJre="windows-amd64-1.8.0.242" />
+      <jreBundle includedJre="windows-amd64-1.8.0.242" />
     </windows>
-    <windows name="SMOS SNAP Windows x86" id="2620" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" jreBitType="32" downloadURL="http://step.esa.int/downloads/2.0">
+    <windows name="SMOS SNAP Windows x86" id="2620" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="32">
       <excludedComponents>
         <component id="73" />
         <component id="72" />
@@ -1860,7 +1908,7 @@ return console.askYesNo(message, true);
         <entry filesetId="639" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle jreBundleSource="generated" includedJre="windows-x86-1.8.0.242" />
+      <jreBundle includedJre="windows-x86-1.8.0.242" />
     </windows>
     <macosFolder name="SMOS SNAP Mac OS X Folder" id="2612" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
@@ -1891,7 +1939,7 @@ return console.askYesNo(message, true);
         <entry filesetId="639" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle jreBundleSource="generated" includedJre="macosx-amd64-1.8.0.242" />
+      <jreBundle includedJre="macosx-amd64-1.8.0.242" />
     </macosFolder>
     <unixInstaller name="SMOS SNAP Unix" id="2617" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
@@ -1921,7 +1969,7 @@ return console.askYesNo(message, true);
         <entry filesetId="637" />
         <entry filesetId="639" />
       </exclude>
-      <jreBundle jreBundleSource="generated" includedJre="linux-amd64-1.8.0.242" />
+      <jreBundle includedJre="linux-amd64-1.8.0.242" />
     </unixInstaller>
     <unixArchive name="Engine Unix Archive" id="859" installDir="snap">
       <excludedLaunchers>
@@ -1939,10 +1987,10 @@ return console.askYesNo(message, true);
         <entry filesetId="637" />
         <entry filesetId="639" />
       </exclude>
+      <jreBundle jreBundleSource="none" />
     </unixArchive>
   </mediaSets>
   <buildIds buildAll="false">
-    <mediaSet refId="2571" />
     <mediaSet refId="2589" />
   </buildIds>
   <buildOptions faster="true" disableSigning="true" />
