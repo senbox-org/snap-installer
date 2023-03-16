@@ -1992,6 +1992,7 @@ return console.askYesNo(message, true);
   </mediaSets>
   <buildIds buildAll="false">
     <mediaSet refId="2589" />
+    <mediaSet refId="2598" />
   </buildIds>
   <buildOptions faster="true" disableSigning="true" />
 </install4j>
