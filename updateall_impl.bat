@@ -88,7 +88,7 @@ if exist snap-engine\pom.xml if %buildSnapEngine% EQU true (
 )
 if exist snap-desktop\pom.xml if %buildSnapDesktop% EQU true (
     cd snap-desktop
-    call mvn clean install -T 4 -DskipTests=%skipTests%
+    call mvn clean install -U -T 4 -DskipTests=%skipTests%
     if %errorlevel% neq 0 exit /B %errorlevel%
     call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
