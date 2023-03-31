@@ -1,0 +1,112 @@
+include:
+  - project: 'to-be-continuous/docker'
+    ref: '3.5.3'
+    file: '/templates/gitlab-ci-docker.yml'
+
+variables:
+  BUILD_FOR_INSTALLER: "true"
+  MAVEN_OPTS: >-
+    -Dhttps.protocols=TLSv1.2
+    -Dmaven.repo.local=${MAVEN_CFG_DIR}/repository
+    -Dorg.slf4j.simpleLogger.showDateTime=true
+    -Djava.awt.headless=true
+    -Dmaven.test.skip=true
+  DOCKER_REGISTRY_MIRROR: docker.snap-ci.ovh
+  DOCKER_REGISTRY_USER: $NEXUS_USER
+  DOCKER_REGISTRY_PASSWORD: $NEXUS_PASSWORD
+  DOCKER_BUILD_ARGS: "--build-arg LICENSE=${INSTALL4J_LICENSE}"
+  DOCKER_FILE: "docker/build/Dockerfile"
+  DOCKER_CONTEXT_PATH: "${CI_PROJECT_DIR}"
+  DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:latest"
+  DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:$CI_COMMIT_REF_NAME"
+  # COMPILE_BRANCH is computed at 'compile' stage, use BRANCH to override it
+
+stages:
+  - compile
+  - build
+  - package-build
+  - package-test
+  - publish
+
+# Before building the image we need other projects artifacts
+.docker-base:
+  needs: 
+    - job: compile
+      artifacts: true
+  artifacts:
+    expire_in: "1 hour"
+    paths:
+      - "$CI_PROJECT_DIR/target/esa-snap_all_unix.sh"
+      - "$CI_PROJECT_DIR/target/esa-snap_all_macos.dmg"
+      - "$CI_PROJECT_DIR/target/esa-snap_all_windows-x64.exe"
+
+compile:
+  stage: compile
+  variables:
+    VERSION: $(mvn --non-recursive help:evaluate -Dexpression=project.version -q -DforceStdout)
+    COMPILE_BRANCH: master
+  rules:
+    - if: $BRANCH
+      variables:
+        COMPILE_BRANCH: $BRANCH
+  trigger: 
+    project: $PROJECT
+    branch: $COMPILE_BRANCH
+    strategy: depend
+    # job: mvn-build
+    # ref: $COMPILE_BRANCH
+    # artifacts: true
+  parallel:
+    matrix:
+      - PROJECT: senbox-org/snap-engine
+      - PROJECT: senbox-org/snap-desktop
+      - PROJECT: senbox-org/s1tbx
+      - PROJECT: senbox-org/s2tbx
+      - PROJECT: senbox-org/s3tbx
+      - PROJECT: senbox-org/smos-box
+      - PROJECT: senbox-org/probavbox
+  # artifacts:
+  #   expire_in: 1 day
+  #   paths:
+  #     - LICENSE.html
+  #     - etc
+  #     - "${CI_PROJECT_DIR}/snap-application/target"
+  #     - "${CI_PROJECT_DIR}/snap-main/target"
+  #     - "${CI_PROJECT_DIR}/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/Performance32.png"
+  #     - "$CI_PROJECT_DIR/s1tbx-kit/target/netbeans_clusters"
+  #     - "$CI_PROJECT_DIR/s2tbx-kit/target/netbeans_clusters"
+  #     - "$CI_PROJECT_DIR/s3tbx-kit/target/netbeans_clusters"
+  #     - "$CI_PROJECT_DIR/smos-kit/target/netbeans_clusters"
+  #     - "$CI_PROJECT_DIR/probavbox-kit/target/netbeans_clusters"
+
+publish:
+  stage: publish
+  image: registry.hub.docker.com/library/maven:3.6.3-jdk-11
+  needs:
+    - job: docker-kaniko-build
+      artifacts: true
+  variables:
+    ARTIFACT: esa-snap_all_unix.sh
+    OS: unix
+    UPLOAD_URL: https://nexus.snap-ci.ovh/repository/snap-maven-releases/
+  rules:
+    - if: $VERSION =~ /SNAPSHOT$/
+      variables:
+        UPLOAD_URL: https://nexus.snap-ci.ovh/repository/snap-maven-snapshot/
+  parallel:
+    matrix:
+      - ARTIFACT: esa-snap_all_unix.sh
+        OS: unix
+      - ARTIFACT: esa-snap_all_macos.dmg
+        OS: macos
+      - ARTIFACT: esa-snap_all_windows-x64.exe
+        OS: windows
+  script:
+    # Deploy binary file
+    - mvn deploy:deploy-file -DgeneratePom=false \
+      -DgroupId=org.esa.snap \
+      -DartifactId=esa-snap_all_${OS} \
+      -Dversion=${VERSION} \
+      -Dfile=${CI_PROJECT_DIR}/target/${ARTIFACT} \
+      -DrepositoryId=snap-repo-public \
+      -Durl=$UPLOAD_URL
