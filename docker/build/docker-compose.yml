@@ -1,0 +1,16 @@
+version: '3'
+ 
+services:
+  snap-ci:
+    container_name: snap-ci
+    build:
+      context: "."
+      args:
+        user: "snap"
+        dockergid: "999"
+    volumes:
+      - 'local-update-center:/local-update-center'
+      - 'snap-ci:/opt/snap-ci'
+volumes:
+  local-update-center:
+  snap-ci:
