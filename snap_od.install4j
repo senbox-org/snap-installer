@@ -1,0 +1,2006 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<install4j version="10.0.5" transformSequenceNumber="10">
+  <directoryPresets config="../snap-desktop/snap-application/target/snap/THIRDPARTY_LICENSES.txt" />
+  <application name="ESA SNAP" applicationId="0941-5747-6134-5911" mediaDir="./target" compression="9" commonExternalFiles="true" shrinkRuntime="false" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="10.0.0-SNAPSHOT" allPathsRelative="true" macVolumeId="69e291547ea53333" javaMinVersion="1.8" allowBetaVM="true" jdkMode="jdk">
+    <variables>
+      <variable name="snapDesktopName" value="snap" />
+      <variable name="snapGptName" value="gpt" />
+      <variable name="snapPconvertName" value="pconvert" />
+      <variable name="snapDesktopMenuName" value="SNAP Desktop" />
+      <variable name="snapGptMenuName" value="SNAP GPT" />
+      <variable name="smosGridPointExporter" value="smos-grid-point-exporter" />
+    </variables>
+    <jreBundles jdkProviderId="AdoptOpenJDK" release="8/jdk8u332-b09" />
+  </application>
+  <files missingFilesStrategy="error" defaultUninstallMode="2" launcherOverwriteMode="1">
+    <filesets>
+      <fileset name="Mac OS file set" id="634" />
+      <fileset name="Win x32 file set" id="637" />
+      <fileset name="Win x64 file set" id="639" />
+      <fileset name="Unix file set" id="641" />
+    </filesets>
+    <roots>
+      <root id="635" fileset="634" />
+      <root id="638" fileset="637" />
+      <root id="640" fileset="639" />
+      <root id="642" fileset="641" />
+    </roots>
+    <mountPoints>
+      <mountPoint id="611" location="bin" />
+      <mountPoint id="646" location="etc" />
+      <mountPoint id="1016" location="platform" />
+      <mountPoint id="1017" location="platform/core" />
+      <mountPoint id="58" />
+      <mountPoint id="636" root="635" />
+      <mountPoint id="643" root="638" />
+      <mountPoint id="644" root="640" />
+      <mountPoint id="645" root="642" />
+    </mountPoints>
+    <entries>
+      <fileEntry mountPoint="611" file="./images/SNAP_icon_48.jpg" />
+      <fileEntry mountPoint="646" file="../snap-desktop/snap-application/target/snap/etc/snap.clusters" />
+      <dirEntry mountPoint="646" file="../snap-engine/etc" fileMode="666" overrideFileMode="true" subDirectory="etc" />
+      <fileEntry mountPoint="1017" file="../snap-desktop/snap-main/target/snap-main.jar" />
+      <dirEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/snap" entryMode="subdir" subDirectory="snap" />
+      <dirEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/platform" entryMode="subdir" subDirectory="platform" />
+      <dirEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/ide" entryMode="subdir" subDirectory="ide" />
+      <dirEntry mountPoint="58" file="../s1tbx/s1tbx-kit/target/netbeans_clusters/s1tbx" entryMode="subdir" subDirectory="s1tbx" />
+      <dirEntry mountPoint="58" file="../optical-toolbox/opttbx-kit/target/netbeans_clusters/opttbx" entryMode="subdir" subDirectory="opttbx" />
+      <dirEntry mountPoint="58" file="../s1tbx/s1tbx-kit/target/netbeans_clusters/rstb" entryMode="subdir" subDirectory="rstb" />
+      <dirEntry mountPoint="58" file="../smos-box/smos-kit/target/netbeans_clusters/smos" entryMode="subdir" subDirectory="smos" />
+      <dirEntry mountPoint="58" file="../probavbox/probavbox-kit/target/netbeans_clusters/probavbox" entryMode="subdir" subDirectory="probavbox" />
+      <fileEntry mountPoint="58" file="./LICENSE.txt" />
+      <fileEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/THIRDPARTY_LICENSES.txt" />
+      <fileEntry mountPoint="58" file="./VERSION.txt" />
+      <dirEntry mountPoint="636" file="./files/macosx" subDirectory="macosx" />
+      <dirEntry mountPoint="643" file="./files/winx32" subDirectory="winx32" />
+      <dirEntry mountPoint="644" file="./files/winx64" subDirectory="winx64" />
+      <dirEntry mountPoint="645" file="./files/unix" subDirectory="unix" />
+    </entries>
+    <components>
+      <component name="SNAP" id="76" customizedId="SNAP" hideHelpButton="true" changeable="false">
+        <description>Sentinels Application Platform.</description>
+        <include>
+          <entry location="bin" />
+          <entry location="etc" />
+          <entry location="snap" />
+          <entry location="platform" />
+          <entry location="ide" />
+          <entry location="LICENSE.txt" />
+          <entry location="THIRDPARTY_LICENSES.txt" />
+          <entry location="VERSION.txt" />
+          <entry filesetId="634" />
+          <entry filesetId="637" />
+          <entry filesetId="639" />
+          <entry filesetId="641" />
+        </include>
+      </component>
+      <component name="Sentinel-1 Toolbox" id="73" customizedId="S1TBX" hideHelpButton="true" downloadable="true">
+        <description>Ingestion of SAR data products and dedicated support tools.</description>
+        <include>
+          <entry location="s1tbx" />
+        </include>
+        <dependencies>
+          <component id="76" />
+        </dependencies>
+      </component>
+      <component name="Optical Toolbox" id="68" customizedId="S3TBX" hideHelpButton="true" downloadable="true">
+        <description>Ingestion of Sentinel-2 MSI, Sentinel-3 OLCI and SLSTR data products and dedicated support tools.</description>
+        <include>
+          <entry location="opttbx" />
+        </include>
+        <dependencies>
+          <component id="76" />
+        </dependencies>
+      </component>
+      <component name="Radarsat Toolbox" id="306" customizedId="RSTB" hideHelpButton="true" downloadable="true">
+        <description>SAR Polarimetric Tools</description>
+        <include>
+          <entry location="rstb" />
+        </include>
+        <dependencies>
+          <component id="76" />
+          <component id="73" />
+        </dependencies>
+      </component>
+      <component name="SMOS-Box" id="1963" customizedId="SMOS" hideHelpButton="true" downloadable="true">
+        <description>Ingestion of SMOS data products and dedicated support tools.</description>
+        <include>
+          <entry location="smos" />
+        </include>
+        <dependencies>
+          <component id="76" />
+        </dependencies>
+      </component>
+      <component name="PROBA-V Toolbox" id="3109" hideHelpButton="true" downloadable="true">
+        <description>Ingestion of Proba-V data products and dedicated support tools.</description>
+        <include>
+          <entry location="probavbox" />
+        </include>
+        <dependencies>
+          <component id="76" />
+        </dependencies>
+      </component>
+    </components>
+  </files>
+  <launchers>
+    <launcher name="SNAP Desktop Win x86" id="538" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap.exe" />
+    <launcher name="SNAP Desktop Unix" id="539" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap" />
+    <launcher name="SNAP Desktop Mac OS" id="618" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin/snap.app" />
+    <launcher name="SNAP Desktop Win x64" id="656" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap64.exe" />
+    <launcher name="SNAP GPT" id="781" excludeFromMenu="true">
+      <executable name="${compiler:snapGptName}" executableDir="bin" redirectStderr="false" executableMode="console" changeWorkingDirectory="false" dpiAware="false" />
+      <java mainClass="org.esa.snap.runtime.Launcher" vmParameters="-Dsnap.mainClass=org.esa.snap.core.gpf.main.GPT &quot;-Dsnap.home=${launcher:sys.launcherDirectory}/..&quot; -Djava.awt.headless=true -Dinstall4j.noLoggingFix=true">
+        <classPath>
+          <archive location="snap/modules/ext/org.esa.snap.snap-core/org-esa-snap/snap-runtime.jar" failOnError="false" />
+        </classPath>
+      </java>
+      <vmOptionsFile>
+        <content># Enter one VM parameter per line
+# For example, to adjust the maximum memory usage here:
+-Xmx${installer:maxHeapSize}
+# To include another file, uncomment the following line:
+# -include-options [path to other .vmoption file]</content>
+      </vmOptionsFile>
+    </launcher>
+    <launcher name="SNAP PConvert" id="1113" excludeFromMenu="true">
+      <executable name="${compiler:snapPconvertName}" executableDir="bin" redirectStderr="false" executableMode="console" changeWorkingDirectory="false" dpiAware="false" />
+      <java mainClass="org.esa.snap.runtime.Launcher" vmParameters="-Dsnap.mainClass=org.esa.snap.pconvert.PConvertMain &quot;-Dsnap.home=${launcher:sys.launcherDirectory}/..&quot;  -Djava.awt.headless=true -Dinstall4j.noLoggingFix=true">
+        <classPath>
+          <archive location="snap/modules/ext/org.esa.snap.snap-core/org-esa-snap/snap-runtime.jar" failOnError="false" />
+        </classPath>
+      </java>
+      <vmOptionsFile>
+        <content># Enter one VM parameter per line
+# For example, to adjust the maximum memory usage here:
+-Xmx${installer:maxHeapSize}
+# To include another file, uncomment the following line:
+# -include-options [path to other .vmoption file]</content>
+      </vmOptionsFile>
+    </launcher>
+    <launcher name="SNAP Configuration Optimiser" id="2175">
+      <executable name="snap-conf-optimiser" iconSet="true" executableDir="bin" redirectStdout="true" failOnStderrOutput="false" executableMode="gui" changeWorkingDirectory="false" executionLevel="highestAvailable" dpiAware="false">
+        <versionInfo fileVersion="2.0.0" internalName="configuration optimiser" />
+      </executable>
+      <java mainClass="org.esa.snap.smart.configurator.ui.SmartConfigurator" vmParameters="&quot;-Dsnap.home=${launcher:sys.launcherDirectory}/..&quot;">
+        <classPath>
+          <archive location="snap/modules/org-esa-snap-snap-smart-configurator-ui.jar" failOnError="false" />
+          <scanDirectory location="platform/modules" failOnError="false" />
+          <scanDirectory location="platform/lib" failOnError="false" />
+          <scanDirectory location="platform/modules/ext" failOnError="false" />
+          <scanDirectory location="snap/modules" failOnError="false" />
+          <scanDirectory location="s1tbx/modules" failOnError="false" />
+          <scanDirectory location="s2tbx/modules" failOnError="false" />
+          <scanDirectory location="s3tbx/modules" failOnError="false" />
+        </classPath>
+      </java>
+      <vmOptionsFile mode="none" />
+      <iconImageFiles>
+        <file path="./images/perf_icon_16.png" />
+        <file path="./images/perf_icon_32.png" />
+        <file path="./images/perf_icon_48.png" />
+        <file path="./images/perf_icon_128.png" />
+        <file path="./images/perf_icon_512.png" />
+      </iconImageFiles>
+    </launcher>
+    <launcher name="SMOS Grid-Point-Exporter" id="2822" excludeFromMenu="true">
+      <executable name="${compiler:smosGridPointExporter}" executableDir="bin" redirectStderr="false" executableMode="console" changeWorkingDirectory="false" dpiAware="false" />
+      <java mainClass="org.esa.snap.runtime.Launcher" vmParameters="-Dsnap.mainClass=org.esa.smos.gui.export.GridPointExporter &quot;-Dsnap.home=${launcher:sys.launcherDirectory}/..&quot;  -Djava.awt.headless=true -Dinstall4j.noLoggingFix=true">
+        <classPath>
+          <archive location="snap/modules/ext/org.esa.snap.snap-core/org-esa-snap/snap-runtime.jar" failOnError="false" />
+        </classPath>
+      </java>
+    </launcher>
+  </launchers>
+  <installerGui>
+    <applications>
+      <application id="installer" beanClass="com.install4j.runtime.beans.applications.InstallerApplication" styleId="3345" launchInNewProcess="false">
+        <serializedBean>
+          <property name="customIconImageFiles">
+            <add>
+              <object class="com.install4j.api.beans.ExternalFile">
+                <string>./images/SNAP_icon_16.jpg</string>
+              </object>
+            </add>
+            <add>
+              <object class="com.install4j.api.beans.ExternalFile">
+                <string>./images/SNAP_icon_32.jpg</string>
+              </object>
+            </add>
+            <add>
+              <object class="com.install4j.api.beans.ExternalFile">
+                <string>./images/SNAP_icon_48.jpg</string>
+              </object>
+            </add>
+            <add>
+              <object class="com.install4j.api.beans.ExternalFile">
+                <string>./images/SNAP_icon_128.jpg</string>
+              </object>
+            </add>
+            <add>
+              <object class="com.install4j.api.beans.ExternalFile">
+                <string>./images/SNAP_icon_512.jpg</string>
+              </object>
+            </add>
+          </property>
+          <property name="useCustomIcon" type="boolean" value="true" />
+        </serializedBean>
+        <styleOverrides>
+          <styleOverride name="Customize title bar" enabled="true">
+            <group id="3359" beanClass="com.install4j.runtime.beans.groups.VerticalFormComponentGroup">
+              <serializedBean>
+                <property name="backgroundColor">
+                  <object class="com.install4j.runtime.beans.LightOrDarkColor">
+                    <object class="java.awt.Color">
+                      <int>255</int>
+                      <int>255</int>
+                      <int>255</int>
+                      <int>255</int>
+                    </object>
+                    <object class="java.awt.Color">
+                      <int>49</int>
+                      <int>52</int>
+                      <int>53</int>
+                      <int>255</int>
+                    </object>
+                  </object>
+                </property>
+                <property name="imageAnchor" type="enum" class="com.install4j.api.beans.Anchor" value="NORTHEAST" />
+                <property name="imageFile">
+                  <object class="com.install4j.api.beans.ExternalFile">
+                    <string>./images/SNAP_icon_64.jpg</string>
+                  </object>
+                </property>
+              </serializedBean>
+            </group>
+          </styleOverride>
+          <styleOverride name="Custom watermark" enabled="true">
+            <formComponent name="Watermark" id="3349" beanClass="com.install4j.runtime.beans.formcomponents.SeparatorComponent" />
+          </styleOverride>
+        </styleOverrides>
+        <startup>
+          <screen id="1" beanClass="com.install4j.runtime.beans.screens.StartupScreen" rollbackBarrierExitCode="0">
+            <actions>
+              <action id="13" beanClass="com.install4j.runtime.beans.actions.misc.RequestPrivilegesAction" actionElevationType="none" />
+              <action name="Set snapEngineUserDir" id="1320" beanClass="com.install4j.runtime.beans.actions.control.SetVariableAction">
+                <serializedBean>
+                  <property name="script">
+                    <object class="com.install4j.api.beans.ScriptProperty">
+                      <property name="value" type="string">String userHome = System.getProperty("user.home");
+return new File(userHome, ".snap");
+</property>
+                    </object>
+                  </property>
+                  <property name="variableName" type="string">snapEngineUserDir</property>
+                </serializedBean>
+              </action>
+              <action name="Set snapDesktopUserDir" id="2356" beanClass="com.install4j.runtime.beans.actions.control.SetVariableAction">
+                <serializedBean>
+                  <property name="script">
+                    <object class="com.install4j.api.beans.ScriptProperty">
+                      <property name="value" type="string">String userHome = System.getProperty("user.home");
+return new File(userHome, Util.isWindowsInstaller() ? "AppData\\Roaming\\SNAP" : ".snap/system");
+</property>
+                    </object>
+                  </property>
+                  <property name="variableName" type="string">snapDesktopUserDir</property>
+                </serializedBean>
+              </action>
+            </actions>
+          </screen>
+        </startup>
+        <screens>
+          <screen id="2" beanClass="com.install4j.runtime.beans.screens.WelcomeScreen" styleId="3351">
+            <styleOverrides>
+              <styleOverride name="Customize banner image" enabled="true">
+                <group id="3352" beanClass="com.install4j.runtime.beans.groups.VerticalFormComponentGroup">
+                  <serializedBean>
+                    <property name="imageEdgeBackgroundColor">
+                      <object class="com.install4j.runtime.beans.LightOrDarkColor">
+                        <object class="java.awt.Color">
+                          <int>25</int>
+                          <int>143</int>
+                          <int>220</int>
+                          <int>255</int>
+                        </object>
+                        <object class="java.awt.Color">
+                          <int>0</int>
+                          <int>74</int>
+                          <int>151</int>
+                          <int>255</int>
+                        </object>
+                      </object>
+                    </property>
+                    <property name="imageFile">
+                      <object class="com.install4j.api.beans.ExternalFile">
+                        <string>./images/SNAP_Banner.jpg</string>
+                      </object>
+                    </property>
+                  </serializedBean>
+                </group>
+              </styleOverride>
+            </styleOverrides>
+            <actions>
+              <action id="3" beanClass="com.install4j.runtime.beans.actions.misc.LoadResponseFileAction" multiExec="true">
+                <serializedBean>
+                  <property name="excludedVariables" type="array" elementType="string" length="1">
+                    <element index="0">sys.installationDir</element>
+                  </property>
+                </serializedBean>
+                <condition>context.getBooleanVariable("sys.confirmedUpdateInstallation")</condition>
+              </action>
+            </actions>
+            <formComponents>
+              <formComponent id="3129" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent">
+                <serializedBean>
+                  <property name="labelText" type="string">${form:welcomeMessage}</property>
+                </serializedBean>
+                <visibilityScript>!context.isConsole()</visibilityScript>
+              </formComponent>
+              <formComponent id="3130" beanClass="com.install4j.runtime.beans.formcomponents.ConsoleHandlerFormComponent">
+                <serializedBean>
+                  <property name="consoleScript">
+                    <object class="com.install4j.api.beans.ScriptProperty">
+                      <property name="value" type="string">String message = context.getMessage("ConsoleWelcomeLabel", context.getApplicationName());
+return console.askOkCancel(message, true);
+</property>
+                    </object>
+                  </property>
+                </serializedBean>
+              </formComponent>
+              <formComponent id="3131" beanClass="com.install4j.runtime.beans.formcomponents.UpdateAlertComponent" useExternalParametrization="true" externalParametrizationName="Update Alert" externalParametrizationMode="include">
+                <externalParametrizationPropertyNames>
+                  <propertyName>updateCheck</propertyName>
+                </externalParametrizationPropertyNames>
+              </formComponent>
+              <formComponent id="3132" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent" insetTop="20">
+                <serializedBean>
+                  <property name="labelText" type="string">${i18n:ClickNext}</property>
+                </serializedBean>
+              </formComponent>
+            </formComponents>
+          </screen>
+          <screen id="133" beanClass="com.install4j.runtime.beans.screens.LicenseScreen">
+            <condition>!context.isConsole()</condition>
+            <formComponents>
+              <formComponent id="3135" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent">
+                <serializedBean>
+                  <property name="labelText" type="string">${i18n:LicenseLabel3}</property>
+                </serializedBean>
+              </formComponent>
+              <formComponent id="3136" beanClass="com.install4j.runtime.beans.formcomponents.LicenseComponent" useExternalParametrization="true" externalParametrizationName="License Agreement" externalParametrizationMode="include">
+                <serializedBean>
+                  <property name="acceptInitiallySelected" type="boolean" value="true" />
+                  <property name="displayedTextFile" id="LocalizedExternalFile0">
+                    <property name="languageIdToExternalFile">
+                      <entry>
+                        <string>en</string>
+                        <object class="com.install4j.api.beans.ExternalFile">
+                          <string>../snap-engine/LICENSE.html</string>
+                        </object>
+                      </entry>
+                    </property>
+                  </property>
+                  <property name="fillVertical" type="boolean" value="true" />
+                </serializedBean>
+                <externalParametrizationPropertyNames>
+                  <propertyName>textSource</propertyName>
+                  <propertyName>displayedText</propertyName>
+                  <propertyName>displayedTextFile</propertyName>
+                  <propertyName>variableName</propertyName>
+                  <propertyName>acceptInitiallySelected</propertyName>
+                  <propertyName>readAllRequired</propertyName>
+                </externalParametrizationPropertyNames>
+              </formComponent>
+            </formComponents>
+          </screen>
+          <screen name="Remove SNAP desktop data" id="2352" beanClass="com.install4j.runtime.beans.screens.FormScreen">
+            <serializedBean>
+              <property name="subTitle" type="string">Delete SNAP's configuration data and user settings?</property>
+              <property name="title" type="string">SNAP User Data</property>
+            </serializedBean>
+            <condition>context.getVariable("snapEngineUserDir") != null || context.getVariable("snapDesktopUserDir") != null </condition>
+            <actions>
+              <action name="Delete SNAP Desktop dirs" id="2353" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="files" type="array" class="java.io.File" length="1">
+                    <element index="0">
+                      <object class="java.io.File">
+                        <string>${installer:snapDesktopUserDir}</string>
+                      </object>
+                    </element>
+                  </property>
+                  <property name="recursive" type="boolean" value="true" />
+                </serializedBean>
+                <condition>context.getVariable("deleteSnapDir").equals("DESKTOP")</condition>
+              </action>
+              <action name="Delete all SNAP Engine dirs" id="2467" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="files" type="array" class="java.io.File" length="2">
+                    <element index="0">
+                      <object class="java.io.File">
+                        <string>${installer:snapEngineUserDir}</string>
+                      </object>
+                    </element>
+                    <element index="1">
+                      <object class="java.io.File">
+                        <string>${installer:snapDesktopUserDir}</string>
+                      </object>
+                    </element>
+                  </property>
+                  <property name="recursive" type="boolean" value="true" />
+                </serializedBean>
+                <condition>context.getVariable("deleteSnapDir").equals("ALL")</condition>
+              </action>
+              <action id="3549" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" actionElevationType="elevated" rollbackBarrierExitCode="0">
+                <serializedBean>
+                  <property name="files" type="array" class="java.io.File" length="1">
+                    <element index="0">
+                      <object class="java.io.File">
+                        <string>${installer:sys.installationDir}</string>
+                      </object>
+                    </element>
+                  </property>
+                  <property name="recursive" type="boolean" value="true" />
+                </serializedBean>
+              </action>
+            </actions>
+            <formComponents>
+              <formComponent id="2354" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
+                <serializedBean>
+                  <property name="labelHtml" type="string">The installer detected SNAP user data directories from a previous installation. These directories contain
+system file used by the application and also stored graphs, RGB profiles or other auxiliary data.
+The data stored in these directories might not be compatible with this new SNAP version anymore.
+&lt;p&gt;
+Shall the installer try to remove these directories?</property>
+                </serializedBean>
+              </formComponent>
+              <formComponent name="Delete all SNAP Engine files" id="2355" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="false">
+                <serializedBean>
+                  <property name="checkboxText" type="string">Yes, try deleting all SNAP user data</property>
+                  <property name="helpText" type="string">&lt;html&gt;All files generated by a previous SNAP installation will be deleted.&lt;br&gt;
+This will affect also stored GPF graph files, RGB profiles or other auxiliary data</property>
+                  <property name="variableName" type="string">deleteAllSnapEngineDir</property>
+                </serializedBean>
+              </formComponent>
+              <formComponent name="Delete only SNAP Desktop files" id="2466" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="false">
+                <serializedBean>
+                  <property name="checkboxText" type="string">Delete only SNAP-internal configuration data (recommended).</property>
+                  <property name="helpText" type="string">&lt;html&gt;This will only delete files known to cause incompatibility&lt;br&gt;
+problems after SNAP version upgrades.</property>
+                  <property name="initiallySelected" type="boolean" value="true" />
+                  <property name="variableName" type="string">deleteOnlySnapDesktopDir</property>
+                </serializedBean>
+              </formComponent>
+              <formComponent name="Delete all SNAP Engine files" id="2708" beanClass="com.install4j.runtime.beans.formcomponents.SingleRadiobuttonComponent">
+                <serializedBean>
+                  <property name="helpText" type="string">&lt;html&gt;All files generated by a previous SNAP installation will be deleted.&lt;br&gt;
+              This will affect also stored GPF graph files, RGB profiles or other auxiliary data</property>
+                  <property name="radioButtonLabel" type="string">Yes, try deleting all SNAP user data</property>
+                  <property name="variableName" type="string">deleteSnapDir</property>
+                  <property name="variableValue" type="string">ALL</property>
+                </serializedBean>
+              </formComponent>
+              <formComponent name="Delete only SNAP Desktop files" id="2709" beanClass="com.install4j.runtime.beans.formcomponents.SingleRadiobuttonComponent">
+                <serializedBean>
+                  <property name="helpText" type="string">&lt;html&gt;This will only delete files known to cause incompatibility&lt;br&gt;
+              problems after SNAP version upgrades.</property>
+                  <property name="initiallySelected" type="boolean" value="true" />
+                  <property name="radioButtonLabel" type="string">Delete only SNAP-internal configuration data (recommended).</property>
+                  <property name="variableName" type="string">deleteSnapDir</property>
+                  <property name="variableValue" type="string">DESKTOP</property>
+                </serializedBean>
+              </formComponent>
+            </formComponents>
+          </screen>
+          <screen id="4" beanClass="com.install4j.runtime.beans.screens.InstallationDirectoryScreen">
+            <condition>!context.getBooleanVariable("sys.confirmedUpdateInstallation")</condition>
+            <actions>
+              <action id="5" beanClass="com.install4j.runtime.beans.actions.misc.LoadResponseFileAction" multiExec="true">
+                <serializedBean>
+                  <property name="excludedVariables" type="array" elementType="string" length="1">
+                    <element index="0">sys.installationDir</element>
+                  </property>
+                </serializedBean>
+                <condition>context.getVariable("sys.responseFile") == null</condition>
+              </action>
+            </actions>
+            <formComponents>
+              <formComponent id="3148" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent" insetBottom="25">
+                <serializedBean>
+                  <property name="labelText" type="string">${i18n:SelectDirLabel(${compiler:sys.fullName})}</property>
+                </serializedBean>
+              </formComponent>
+              <formComponent id="3149" beanClass="com.install4j.runtime.beans.formcomponents.InstallationDirectoryChooserComponent" useExternalParametrization="true" externalParametrizationName="Installation Directory Chooser" externalParametrizationMode="include">
+                <serializedBean>
+                  <property name="requestFocus" type="boolean" value="true" />
+                </serializedBean>
+                <externalParametrizationPropertyNames>
+                  <propertyName>suggestAppDir</propertyName>
+                  <propertyName>validateApplicationId</propertyName>
+                  <propertyName>existingDirWarning</propertyName>
+                  <propertyName>checkWritable</propertyName>
+                  <propertyName>manualEntryAllowed</propertyName>
+                  <propertyName>checkFreeSpace</propertyName>
+                  <propertyName>showRequiredDiskSpace</propertyName>
+                  <propertyName>showFreeDiskSpace</propertyName>
+                  <propertyName>allowSpacesOnUnix</propertyName>
+                  <propertyName>validationScript</propertyName>
+                  <propertyName>standardValidation</propertyName>
+                </externalParametrizationPropertyNames>
+              </formComponent>
+            </formComponents>
+          </screen>
+          <screen id="6" beanClass="com.install4j.runtime.beans.screens.ComponentsScreen">
+            <formComponents>
+              <formComponent id="3152" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent">
+                <serializedBean>
+                  <property name="labelText" type="string">${i18n:SelectComponentsLabel2}</property>
+                </serializedBean>
+                <visibilityScript>!context.isConsole()</visibilityScript>
+              </formComponent>
+              <formComponent id="3153" beanClass="com.install4j.runtime.beans.formcomponents.ComponentSelectorComponent" useExternalParametrization="true" externalParametrizationName="Installation Components" externalParametrizationMode="include">
+                <serializedBean>
+                  <property name="fillVertical" type="boolean" value="true" />
+                </serializedBean>
+                <externalParametrizationPropertyNames>
+                  <propertyName>selectionChangedScript</propertyName>
+                </externalParametrizationPropertyNames>
+              </formComponent>
+            </formComponents>
+          </screen>
+          <screen id="7" beanClass="com.install4j.runtime.beans.screens.StandardProgramGroupScreen">
+            <serializedBean>
+              <property name="allUsers" type="boolean" value="false" />
+              <property name="programGroupName" type="string">${compiler:sys.fullName}</property>
+            </serializedBean>
+            <condition>!context.getBooleanVariable("sys.confirmedUpdateInstallation")</condition>
+          </screen>
+          <screen name="Python executable" id="230" beanClass="com.install4j.runtime.beans.screens.FormScreen">
+            <serializedBean>
+              <property name="subTitle" type="string">Which is your preferred Python version?</property>
+              <property name="title" type="string">Select Python</property>
+            </serializedBean>
+            <formComponents>
+              <group id="249" beanClass="com.install4j.runtime.beans.groups.HorizontalFormComponentGroup">
+                <beans>
+                  <formComponent id="248" beanClass="com.install4j.runtime.beans.formcomponents.LabelComponent">
+                    <serializedBean>
+                      <property name="labelIconFile">
+                        <object class="com.install4j.api.beans.ExternalFile">
+                          <string>./images/python-powered.png</string>
+                        </object>
+                      </property>
+                    </serializedBean>
+                  </formComponent>
+                  <formComponent id="234" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
+                    <serializedBean>
+                      <property name="labelHtml" type="string">&lt;html&gt;If you are a Python developer, you can use the SNAP Java API from Python or you can
+even develop SNAP processor plugins using Python. Here you can specify your preferred Python version by
+the given Python executable to be used. Only &lt;a href="https://www.python.org/downloads/"&gt;Python&lt;/a&gt;
+versions &lt;b&gt;3.4&lt;/b&gt; and later are supported.</property>
+                    </serializedBean>
+                  </formComponent>
+                </beans>
+              </group>
+              <formComponent id="233" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
+                <serializedBean>
+                  <property name="checkboxText" type="string">Configure SNAP for use with Python</property>
+                  <property name="coupledComponentIds">
+                    <add type="string">232</add>
+                  </property>
+                  <property name="variableName" type="string">forcePython</property>
+                </serializedBean>
+              </formComponent>
+              <formComponent id="232" beanClass="com.install4j.runtime.beans.formcomponents.FileChooserComponent">
+                <serializedBean>
+                  <property name="initialBrowserDirectory" type="string">${installer:sys.userHome}</property>
+                  <property name="labelText" type="string">Python executable:</property>
+                  <property name="validationScript">
+                    <object class="com.install4j.api.beans.ScriptProperty">
+                      <property name="value" type="string">boolean success = true;
+
+String pythonExecutable = file.getPath();
+if (!pythonExecutable.isEmpty()) {
+    ProcessBuilder pb = new ProcessBuilder().command(new String[]{file.getPath(), "--version"});
+    try {
+        Process p = pb.start();
+        // TODO: redirect Python output (= Python version) and validate
+        int exitCode = p.waitFor();
+        if (exitCode != 0) {
+            Util.showErrorMessage("'" + file.getName() + "' failed with exit code " + exitCode);
+            success = false;
+        }
+    } catch (Throwable t) {
+        Util.showErrorMessage("'" + file.getName() + "' failed: " + t.getMessage());
+        success = false;
+    }
+}
+
+return success;
+</property>
+                    </object>
+                  </property>
+                  <property name="variableName" type="string">pythonExecutable</property>
+                </serializedBean>
+                <initScript>if (Util.isWindowsInstaller()) {
+    String[] paths = new String[]{"C:\\Python34", "C:\\Python33", "C:\\Python27"};
+    for (String path : paths) {
+        File file = new File(path, "python.exe");
+        if (file.exists()) {
+            configurationObject.setText(file.getPath());
+            break;
+        }
+    }
+} else {
+    String[] commands = new String[]{"python3", "python"};
+    for (String command : commands) {
+        try {
+            Runtime.getRuntime().exec(command);
+            configurationObject.setText(command);
+            break;
+        } catch (Exception e) {
+            // ok
+        }
+    }
+}
+</initScript>
+              </formComponent>
+              <formComponent name="Win" id="955" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
+                <serializedBean>
+                  <property name="labelHtml" type="string">Python interpreter executables are likely found in &lt;b&gt;C:\Python34&lt;/b&gt;.</property>
+                </serializedBean>
+                <visibilityScript>Util.isWindowsInstaller()</visibilityScript>
+              </formComponent>
+              <formComponent name="Unix" id="954" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
+                <serializedBean>
+                  <property name="labelHtml" type="string">You may type &lt;b&gt;which python&lt;/b&gt; in a terminal window to find the path to your preferred Python version.</property>
+                </serializedBean>
+                <visibilityScript>Util.isMacosInstaller() || Util.isUnixInstaller()</visibilityScript>
+              </formComponent>
+              <formComponent id="1878" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
+                <serializedBean>
+                  <property name="labelHtml" type="string"> After successful configuration you will find the SNAP Python module &lt;b&gt;snappy&lt;/b&gt; in the directory
+ &lt;b&gt;${installer:sys.userHome}/.snap/snap-python&lt;/b&gt;. The Python interpreter and the location of the
+ snappy module can be changed any time using the &lt;b&gt;bin/snappy-conf&lt;/b&gt; tool.
+</property>
+                </serializedBean>
+              </formComponent>
+            </formComponents>
+          </screen>
+          <screen id="8" beanClass="com.install4j.runtime.beans.screens.InstallationScreen" rollbackBarrier="true">
+            <actions>
+              <action id="9" beanClass="com.install4j.runtime.beans.actions.InstallFilesAction" actionElevationType="elevated" failureStrategy="quit" errorMessage="${i18n:FileCorrupted}" />
+              <action id="10" beanClass="com.install4j.runtime.beans.actions.desktop.CreateProgramGroupAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="addUninstaller" type="boolean" value="true" />
+                  <property name="allUsers" type="boolean" value="false" />
+                  <property name="programGroupEntryConfigs">
+                    <add>
+                      <object class="com.install4j.runtime.beans.screens.components.ProgramGroupUrlConfig">
+                        <property name="favicon" type="boolean" value="true" />
+                        <property name="name" type="string">ESA STEP Website</property>
+                        <property name="url" type="string">step.esa.int</property>
+                      </object>
+                    </add>
+                  </property>
+                  <property name="uninstallerMenuName" type="string">${i18n:UninstallerMenuEntry(${compiler:sys.fullName})}</property>
+                </serializedBean>
+                <condition>!context.getBooleanVariable("sys.programGroupDisabled")</condition>
+              </action>
+              <action id="1253" beanClass="com.install4j.runtime.beans.actions.desktop.CreateStartMenuEntryAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="allUsers" type="boolean" value="false" />
+                  <property name="arguments" type="string">/K "${installer:sys.installationDir}\bin\snap-cli.bat"</property>
+                  <property name="entryName" type="string">${installer:sys.programGroupDir}\SNAP Command-Line</property>
+                  <property name="file">
+                    <object class="java.io.File">
+                      <string>${installer:sys.system32Dir}/cmd.exe</string>
+                    </object>
+                  </property>
+                </serializedBean>
+                <condition>!context.getBooleanVariable("sys.programGroupDisabled") &amp;&amp;  Util.isWindowsInstaller()</condition>
+              </action>
+              <action id="11" beanClass="com.install4j.runtime.beans.actions.desktop.RegisterAddRemoveAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="icon">
+                    <object class="com.install4j.api.beans.ExternalFile">
+                      <string>./images/SNAP_icon_256.ico</string>
+                    </object>
+                  </property>
+                  <property name="iconSource" type="enum" class="com.install4j.runtime.beans.actions.desktop.IconSource" value="CUSTOM" />
+                  <property name="itemName" type="string">${compiler:sys.fullName} ${compiler:sys.version}</property>
+                </serializedBean>
+              </action>
+              <action id="1194" beanClass="com.install4j.runtime.beans.actions.control.SetVariableAction">
+                <serializedBean>
+                  <property name="script">
+                    <object class="com.install4j.api.beans.ScriptProperty">
+                      <property name="value" type="string">return new String((int)(Math.max(1, (SystemInfo.getPhysicalMemory() * 0.70f) / (1024 * 1024 * 1024))) + "G");</property>
+                    </object>
+                  </property>
+                  <property name="variableName" type="string">maxHeapSize</property>
+                </serializedBean>
+              </action>
+              <action name="Replace snap.conf" id="631" beanClass="com.install4j.runtime.beans.actions.text.ReplaceInstallerVariablesAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="files" type="array" class="java.io.File" length="1">
+                    <element index="0">
+                      <object class="java.io.File">
+                        <string>etc/snap.conf</string>
+                      </object>
+                    </element>
+                  </property>
+                </serializedBean>
+              </action>
+              <action name="Replace snap.properties" id="899" beanClass="com.install4j.runtime.beans.actions.text.ReplaceInstallerVariablesAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="encoding" type="string" />
+                  <property name="escapeForPropertyFile" type="boolean" value="true" />
+                  <property name="files" type="array" class="java.io.File" length="1">
+                    <element index="0">
+                      <object class="java.io.File">
+                        <string>etc/snap.properties</string>
+                      </object>
+                    </element>
+                  </property>
+                </serializedBean>
+              </action>
+              <action name="Mac OS" id="627" beanClass="com.install4j.runtime.beans.actions.files.CreateSymlinkAction" actionElevationType="elevated" failureStrategy="askRetryQuit">
+                <serializedBean>
+                  <property name="file">
+                    <object class="java.io.File">
+                      <string>bin/snap</string>
+                    </object>
+                  </property>
+                  <property name="linkFile">
+                    <object class="java.io.File">
+                      <string>bin/snap.app/Contents/MacOS/snap</string>
+                    </object>
+                  </property>
+                </serializedBean>
+                <condition>Util.isMacOS() || Util.isMacosInstaller()</condition>
+              </action>
+              <action name="Set executable mode" id="654" beanClass="com.install4j.runtime.beans.actions.files.SetModeAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="files" type="array" class="java.io.File" length="3">
+                    <element index="0">
+                      <object class="java.io.File">
+                        <string>bin/snap</string>
+                      </object>
+                    </element>
+                    <element index="1">
+                      <object class="java.io.File">
+                        <string>bin/snap.app/Contents/MacOS/snap</string>
+                      </object>
+                    </element>
+                    <element index="2">
+                      <object class="java.io.File">
+                        <string>bin/snappy-conf</string>
+                      </object>
+                    </element>
+                  </property>
+                  <property name="mode" type="string">755</property>
+                </serializedBean>
+              </action>
+              <action id="733" beanClass="com.install4j.runtime.beans.actions.text.ReplaceInstallerVariablesAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="files" type="array" class="java.io.File" length="1">
+                    <element index="0">
+                      <object class="java.io.File">
+                        <string>bin/snap.app/Contents/Info.plist</string>
+                      </object>
+                    </element>
+                  </property>
+                </serializedBean>
+                <condition>Util.isMacosInstaller()</condition>
+              </action>
+              <group name="Add NB clusters" id="141" beanClass="com.install4j.runtime.beans.groups.ActionGroup">
+                <beans>
+                  <action name="Add s1tbx NB cluster" id="140" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
+                    <serializedBean>
+                      <property name="append" type="boolean" value="true" />
+                      <property name="file">
+                        <object class="java.io.File">
+                          <string>etc/snap.clusters</string>
+                        </object>
+                      </property>
+                      <property name="text" type="string">s1tbx\n</property>
+                    </serializedBean>
+                    <condition>new File(context.getInstallationDirectory(), "s1tbx").isDirectory()</condition>
+                  </action>
+                  <action name="Add s2tbx NB cluster" id="138" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
+                    <serializedBean>
+                      <property name="append" type="boolean" value="true" />
+                      <property name="file">
+                        <object class="java.io.File">
+                          <string>etc/snap.clusters</string>
+                        </object>
+                      </property>
+                      <property name="text" type="string">s2tbx\n&#xD;</property>
+                    </serializedBean>
+                    <condition>new File(context.getInstallationDirectory(), "s2tbx").isDirectory()</condition>
+                  </action>
+                  <action name="Add s3tbx NB cluster" id="74" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
+                    <serializedBean>
+                      <property name="append" type="boolean" value="true" />
+                      <property name="file">
+                        <object class="java.io.File">
+                          <string>etc/snap.clusters</string>
+                        </object>
+                      </property>
+                      <property name="text" type="string">s3tbx\n&#xD;</property>
+                    </serializedBean>
+                    <condition>new File(context.getInstallationDirectory(), "s3tbx").isDirectory()</condition>
+                  </action>
+                  <action name="Add rstb NB cluster" id="375" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
+                    <serializedBean>
+                      <property name="append" type="boolean" value="true" />
+                      <property name="file">
+                        <object class="java.io.File">
+                          <string>etc/snap.clusters</string>
+                        </object>
+                      </property>
+                      <property name="text" type="string">rstb\n</property>
+                    </serializedBean>
+                    <condition>new File(context.getInstallationDirectory(), "rstb").isDirectory()</condition>
+                  </action>
+                  <action name="Add smos NB cluster" id="2074" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
+                    <serializedBean>
+                      <property name="append" type="boolean" value="true" />
+                      <property name="file">
+                        <object class="java.io.File">
+                          <string>etc/snap.clusters</string>
+                        </object>
+                      </property>
+                      <property name="text" type="string">smos\n</property>
+                    </serializedBean>
+                    <condition>new File(context.getInstallationDirectory(), "smos").isDirectory()</condition>
+                  </action>
+                  <action name="Add probavbox NB cluster" id="3125" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
+                    <serializedBean>
+                      <property name="append" type="boolean" value="true" />
+                      <property name="file">
+                        <object class="java.io.File">
+                          <string>etc/snap.clusters</string>
+                        </object>
+                      </property>
+                      <property name="text" type="string">probavbox\n&#xD;</property>
+                    </serializedBean>
+                    <condition>new File(context.getInstallationDirectory(), "probavbox").isDirectory()</condition>
+                  </action>
+                </beans>
+              </group>
+              <action name="Delete NB dirs from .snap" id="1321" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="files" type="array" class="java.io.File" length="5">
+                    <element index="0">
+                      <object class="java.io.File">
+                        <string>${installer:snapUserDir}/var</string>
+                      </object>
+                    </element>
+                    <element index="1">
+                      <object class="java.io.File">
+                        <string>${installer:snapUserDir}/config</string>
+                      </object>
+                    </element>
+                    <element index="2">
+                      <object class="java.io.File">
+                        <string>${installer:snapUserDir}/modules</string>
+                      </object>
+                    </element>
+                    <element index="3">
+                      <object class="java.io.File">
+                        <string>${installer:snapUserDir}/tmp</string>
+                      </object>
+                    </element>
+                    <element index="4">
+                      <object class="java.io.File">
+                        <string>lock</string>
+                      </object>
+                    </element>
+                  </property>
+                  <property name="recursive" type="boolean" value="true" />
+                </serializedBean>
+                <condition>return context.getVariable("snapUserDir") != null;</condition>
+              </action>
+              <action id="1683" beanClass="com.install4j.runtime.beans.actions.text.ReplaceInstallerVariablesAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="files" type="array" class="java.io.File" length="1">
+                    <element index="0">
+                      <object class="java.io.File">
+                        <string>VERSION.txt</string>
+                      </object>
+                    </element>
+                  </property>
+                </serializedBean>
+              </action>
+              <action name="Delete grid-point-exporter if smos not installed" id="2951" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="files" type="array" class="java.io.File" length="2">
+                    <element index="0">
+                      <object class="java.io.File">
+                        <string>bin/smos-grid-point-exporter</string>
+                      </object>
+                    </element>
+                    <element index="1">
+                      <object class="java.io.File">
+                        <string>bin/smos-grid-point-exporter.vmoptions</string>
+                      </object>
+                    </element>
+                  </property>
+                </serializedBean>
+                <condition>context.getInstallationComponentById("SMOS") == null || !context.getInstallationComponentById("SMOS").isSelected()
+</condition>
+              </action>
+              <action id="3030" beanClass="com.install4j.runtime.beans.actions.text.FixCrLfAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="files" type="array" class="java.io.File" length="2">
+                    <element index="0">
+                      <object class="java.io.File">
+                        <string>etc</string>
+                      </object>
+                    </element>
+                    <element index="1">
+                      <object class="java.io.File">
+                        <string>bin</string>
+                      </object>
+                    </element>
+                  </property>
+                </serializedBean>
+                <condition>Util.isUnixInstaller()</condition>
+              </action>
+              <action name="Add gpt VM Options" id="3251" beanClass="com.install4j.runtime.beans.actions.misc.AddVmOptionsAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="launcherId" type="string">781</property>
+                  <property name="vmOptions" type="array" elementType="string" length="1">
+                    <element index="0">-Xmx${installer:maxHeapSize}</element>
+                  </property>
+                </serializedBean>
+              </action>
+              <action name="Add pconvert VM Options" id="3252" beanClass="com.install4j.runtime.beans.actions.misc.AddVmOptionsAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="launcherId" type="string">1113</property>
+                  <property name="vmOptions" type="array" elementType="string" length="1">
+                    <element index="0">-Xmx${installer:maxHeapSize}</element>
+                  </property>
+                </serializedBean>
+              </action>
+            </actions>
+            <formComponents>
+              <formComponent id="3254" beanClass="com.install4j.runtime.beans.formcomponents.ProgressComponent">
+                <serializedBean>
+                  <property name="initialStatusMessage" type="string">${i18n:WizardPreparing}</property>
+                </serializedBean>
+              </formComponent>
+            </formComponents>
+          </screen>
+          <screen id="1564" beanClass="com.install4j.runtime.beans.screens.FileAssociationsScreen">
+            <actions>
+              <action name="Win x64 (.dim)" id="1568" beanClass="com.install4j.runtime.beans.actions.desktop.CreateFileAssociationAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="description" type="string">SNAP standard I/O file (BEAM-DIMAP format)</property>
+                  <property name="extension" type="string">dim</property>
+                  <property name="launcherId" type="string">656</property>
+                  <property name="winAdditionalParameters" type="string">--open</property>
+                  <property name="windowsIconFile">
+                    <object class="com.install4j.api.beans.ExternalFile">
+                      <string>./images/SNAP_icon_256.ico</string>
+                    </object>
+                  </property>
+                </serializedBean>
+              </action>
+              <action name="Win x86 (.dim)" id="1570" beanClass="com.install4j.runtime.beans.actions.desktop.CreateFileAssociationAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="description" type="string">SNAP standard I/O file (BEAM-DIMAP format)</property>
+                  <property name="extension" type="string">dim</property>
+                  <property name="launcherId" type="string">538</property>
+                  <property name="winAdditionalParameters" type="string">--open</property>
+                  <property name="windowsIconFile">
+                    <object class="com.install4j.api.beans.ExternalFile">
+                      <string>./images/SNAP_icon_256.ico</string>
+                    </object>
+                  </property>
+                </serializedBean>
+              </action>
+              <action name="Win x64 (.snap)" id="1565" beanClass="com.install4j.runtime.beans.actions.desktop.CreateFileAssociationAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="description" type="string">Session file saved by SNAP</property>
+                  <property name="extension" type="string">snap</property>
+                  <property name="launcherId" type="string">656</property>
+                  <property name="winAdditionalParameters" type="string">--open</property>
+                  <property name="windowsIconFile">
+                    <object class="com.install4j.api.beans.ExternalFile">
+                      <string>./images/SNAP_icon_256.ico</string>
+                    </object>
+                  </property>
+                </serializedBean>
+              </action>
+              <action name="Win x86 (.snap)" id="1569" beanClass="com.install4j.runtime.beans.actions.desktop.CreateFileAssociationAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="description" type="string">Session file saved by SNAP</property>
+                  <property name="extension" type="string">snap</property>
+                  <property name="launcherId" type="string">538</property>
+                  <property name="winAdditionalParameters" type="string">--open</property>
+                  <property name="windowsIconFile">
+                    <object class="com.install4j.api.beans.ExternalFile">
+                      <string>./images/SNAP_icon_256.ico</string>
+                    </object>
+                  </property>
+                </serializedBean>
+              </action>
+            </actions>
+            <formComponents>
+              <formComponent id="3261" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent">
+                <serializedBean>
+                  <property name="labelText" type="string">${i18n:SelectAssociationsLabel}</property>
+                </serializedBean>
+              </formComponent>
+              <formComponent id="3262" beanClass="com.install4j.runtime.beans.formcomponents.FileAssociationsComponent" useExternalParametrization="true" externalParametrizationName="File Associations" externalParametrizationMode="include">
+                <serializedBean>
+                  <property name="fillVertical" type="boolean" value="true" />
+                  <property name="showSelectionButtons" type="boolean" value="true" />
+                </serializedBean>
+                <externalParametrizationPropertyNames>
+                  <propertyName>showSelectionButtons</propertyName>
+                  <propertyName>selectionButtonPosition</propertyName>
+                </externalParametrizationPropertyNames>
+              </formComponent>
+            </formComponents>
+          </screen>
+          <screen id="12" beanClass="com.install4j.runtime.beans.screens.FinishedScreen" styleId="3351" finishScreen="true">
+            <styleOverrides>
+              <styleOverride name="Customize banner image" enabled="true">
+                <group id="3352" beanClass="com.install4j.runtime.beans.groups.VerticalFormComponentGroup">
+                  <serializedBean>
+                    <property name="imageEdgeBackgroundColor">
+                      <object class="com.install4j.runtime.beans.LightOrDarkColor">
+                        <object class="java.awt.Color">
+                          <int>25</int>
+                          <int>143</int>
+                          <int>220</int>
+                          <int>255</int>
+                        </object>
+                        <object class="java.awt.Color">
+                          <int>0</int>
+                          <int>74</int>
+                          <int>151</int>
+                          <int>255</int>
+                        </object>
+                      </object>
+                    </property>
+                    <property name="imageFile">
+                      <object class="com.install4j.api.beans.ExternalFile">
+                        <string>./images/SNAP_Banner.jpg</string>
+                      </object>
+                    </property>
+                  </serializedBean>
+                </group>
+              </styleOverride>
+            </styleOverrides>
+            <actions>
+              <action name="Execute Configuration Optimiser" id="2292" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" enabled="false" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="launcherId" type="string">2175</property>
+                </serializedBean>
+                <condition>context.getBooleanVariable("executeConfOptimiserAction") &amp;&amp; !context.isUnattended()</condition>
+              </action>
+              <action name="Unix" id="625" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" actionElevationType="none">
+                <serializedBean>
+                  <property name="launcherId" type="string">539</property>
+                </serializedBean>
+                <condition>context.getBooleanVariable("executeLauncherAction") &amp;&amp; (!context.isUnattended()) &amp;&amp; Util.isUnixInstaller()</condition>
+              </action>
+              <action name="Unix with Python" id="2637" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" actionElevationType="none">
+                <serializedBean>
+                  <property name="arguments" type="array" elementType="string" length="2">
+                    <element index="0">--python</element>
+                    <element index="1">${installer:pythonExecutable}</element>
+                  </property>
+                  <property name="launcherId" type="string">539</property>
+                </serializedBean>
+                <condition>context.getBooleanVariable("executeLauncherWithPythonAction") &amp;&amp; (!context.isUnattended()) &amp;&amp; context.getVariable("pythonExecutable") != null
+   &amp;&amp; context.getBooleanVariable("forcePython") &amp;&amp; Util.isUnixInstaller()</condition>
+              </action>
+              <action name="Mac OS" id="626" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" actionElevationType="none">
+                <serializedBean>
+                  <property name="launcherId" type="string">618</property>
+                </serializedBean>
+                <condition>context.getBooleanVariable("executeLauncherAction") &amp;&amp; (!context.isUnattended()) &amp;&amp; Util.isMacosInstaller()</condition>
+              </action>
+              <action name="Mac OS with Python" id="2629" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="arguments" type="array" elementType="string" length="2">
+                    <element index="0">--python</element>
+                    <element index="1">${installer:pythonExecutable}</element>
+                  </property>
+                  <property name="launcherId" type="string">618</property>
+                </serializedBean>
+                <condition>context.getBooleanVariable("executeLauncherWithPythonAction") &amp;&amp; (!context.isUnattended()) &amp;&amp; context.getVariable("pythonExecutable") != null
+   &amp;&amp; context.getBooleanVariable("forcePython") &amp;&amp; Util.isMacosInstaller() </condition>
+              </action>
+              <action name="Win x86" id="858" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" actionElevationType="none">
+                <serializedBean>
+                  <property name="launcherId" type="string">538</property>
+                </serializedBean>
+                <condition>context.getBooleanVariable("executeLauncherAction") &amp;&amp; (!context.isUnattended()) &amp;&amp; Util.isWindowsInstaller() &amp;&amp; !Util.is64BitWindows()</condition>
+              </action>
+              <action name="Win x86 with Python" id="2638" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" actionElevationType="none">
+                <serializedBean>
+                  <property name="arguments" type="array" elementType="string" length="2">
+                    <element index="0">--python</element>
+                    <element index="1">${installer:pythonExecutable}</element>
+                  </property>
+                  <property name="launcherId" type="string">538</property>
+                </serializedBean>
+                <condition>context.getBooleanVariable("executeLauncherWithPythonAction") &amp;&amp; (!context.isUnattended()) &amp;&amp; context.getVariable("pythonExecutable") != null
+   &amp;&amp; context.getBooleanVariable("forcePython") &amp;&amp; Util.isWindowsInstaller() &amp;&amp; !Util.is64BitWindows()</condition>
+              </action>
+              <action name="Win x64" id="660" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" actionElevationType="none">
+                <serializedBean>
+                  <property name="launcherId" type="string">656</property>
+                </serializedBean>
+                <condition>context.getBooleanVariable("executeLauncherAction") &amp;&amp; (!context.isUnattended()) &amp;&amp; Util.isWindowsInstaller() &amp;&amp; Util.is64BitWindows()</condition>
+              </action>
+              <action name="Win x64 with Python" id="2632" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="arguments" type="array" elementType="string" length="2">
+                    <element index="0">--python</element>
+                    <element index="1">"${installer:pythonExecutable}</element>
+                  </property>
+                  <property name="launcherId" type="string">656</property>
+                </serializedBean>
+                <condition>context.getBooleanVariable("executeLauncherWithPythonAction") &amp;&amp; (!context.isUnattended()) &amp;&amp; context.getVariable("pythonExecutable") != null
+   &amp;&amp; context.getBooleanVariable("forcePython") &amp;&amp; Util.isWindowsInstaller() &amp;&amp; Util.is64BitWindows()</condition>
+              </action>
+              <action name="Win x86" id="675" beanClass="com.install4j.runtime.beans.actions.desktop.CreateDesktopLinkAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="file">
+                    <object class="java.io.File">
+                      <string>bin/snap.exe</string>
+                    </object>
+                  </property>
+                  <property name="name" type="string">${compiler:snapDesktopMenuName}</property>
+                  <property name="startIn">
+                    <object class="java.io.File">
+                      <string>.</string>
+                    </object>
+                  </property>
+                  <property name="winIconFile">
+                    <object class="com.install4j.api.beans.ExternalFile">
+                      <string>./images/SNAP_icon_256.ico</string>
+                    </object>
+                  </property>
+                </serializedBean>
+                <condition>context.getBooleanVariable("createDesktopLinkAction") &amp;&amp; Util.isWindowsInstaller() &amp;&amp; !Util.is64BitWindows()</condition>
+              </action>
+              <action name="Win x64" id="673" beanClass="com.install4j.runtime.beans.actions.desktop.CreateDesktopLinkAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="file">
+                    <object class="java.io.File">
+                      <string>bin/snap64.exe</string>
+                    </object>
+                  </property>
+                  <property name="name" type="string">${compiler:snapDesktopMenuName}</property>
+                  <property name="startIn">
+                    <object class="java.io.File">
+                      <string>.</string>
+                    </object>
+                  </property>
+                  <property name="winIconFile">
+                    <object class="com.install4j.api.beans.ExternalFile">
+                      <string>./images/SNAP_icon_256.ico</string>
+                    </object>
+                  </property>
+                </serializedBean>
+                <condition>context.getBooleanVariable("createDesktopLinkAction") &amp;&amp; Util.isWindowsInstaller() &amp;&amp; Util.is64BitWindows()</condition>
+              </action>
+              <group name="Add a desktop link (Unity)" id="1032" beanClass="com.install4j.runtime.beans.groups.ActionGroup" enabled="false">
+                <serializedBean>
+                  <property name="conditionExpression">
+                    <object class="com.install4j.api.beans.ScriptProperty">
+                      <property name="value" type="string">Util.isUnixInstaller() &amp;&amp; !(Util.isMacosInstaller() || Util.isMacOS())</property>
+                    </object>
+                  </property>
+                </serializedBean>
+                <beans>
+                  <action id="1030" beanClass="com.install4j.runtime.beans.actions.files.MoveFileAction" actionElevationType="elevated">
+                    <serializedBean>
+                      <property name="destinationFile">
+                        <object class="java.io.File">
+                          <string>bin/icon.png</string>
+                        </object>
+                      </property>
+                      <property name="files" type="array" class="java.io.File" length="1">
+                        <element index="0">
+                          <object class="java.io.File">
+                            <string>bin/SNAP_icon_48.jpg</string>
+                          </object>
+                        </element>
+                      </property>
+                    </serializedBean>
+                    <condition>Util.isUnixInstaller() &amp;&amp; !(Util.isMacosInstaller() || Util.isMacOS())</condition>
+                  </action>
+                  <action id="1031" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" actionElevationType="elevated">
+                    <serializedBean>
+                      <property name="files" type="array" class="java.io.File" length="1">
+                        <element index="0">
+                          <object class="java.io.File">
+                            <string>bin/SNAP_icon_48.jpg</string>
+                          </object>
+                        </element>
+                      </property>
+                    </serializedBean>
+                    <condition>Util.isUnixInstaller() &amp;&amp; !(Util.isMacosInstaller() || Util.isMacOS())</condition>
+                  </action>
+                  <action id="1023" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
+                    <serializedBean>
+                      <property name="file">
+                        <object class="java.io.File">
+                          <string>~/Desktop/snap.desktop</string>
+                        </object>
+                      </property>
+                      <property name="text" type="string">[Desktop Entry]
+Version=1.0
+Name=${installer:snapDesktopMenuName}
+Comment=Launches ${installer:snapDesktopMenuName}
+Exec=${installer:sys.installationDir}/bin/snap
+Icon=${installer:sys.installationDir}/bin/icon.png
+Terminal=false
+Type=Application
+Categories=Utility;Application;</property>
+                    </serializedBean>
+                    <condition>Util.isUnixInstaller() &amp;&amp; !(Util.isMacosInstaller() || Util.isMacOS())</condition>
+                  </action>
+                </beans>
+              </group>
+              <action name="Extend PATH" id="1466" beanClass="com.install4j.runtime.beans.actions.misc.ModifyEnvironmentVariableAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="type" type="enum" class="com.install4j.runtime.beans.actions.misc.ModifyStringType" value="APPEND" />
+                  <property name="value" type="string">${installer:sys.installationDir}\bin</property>
+                  <property name="variableName" type="string">PATH</property>
+                </serializedBean>
+                <condition>context.getBooleanVariable("extendPathEnvVar")</condition>
+              </action>
+            </actions>
+            <formComponents>
+              <formComponent id="3290" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent" insetBottom="10">
+                <serializedBean>
+                  <property name="labelText" type="string">${form:finishedMessage}</property>
+                </serializedBean>
+              </formComponent>
+              <formComponent name="Add a desktop link" id="674" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
+                <serializedBean>
+                  <property name="checkboxText" type="string">${i18n:CreateDesktopIcon}</property>
+                  <property name="initiallySelected" type="boolean" value="true" />
+                  <property name="variableName" type="string">createDesktopLinkAction</property>
+                </serializedBean>
+                <visibilityScript>Util.isWindowsInstaller()</visibilityScript>
+              </formComponent>
+              <formComponent name="Extend PATH" id="1465" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
+                <serializedBean>
+                  <property name="checkboxText" type="string">Extend my PATH environment variable</property>
+                  <property name="helpText" type="string">Select this if you want be able to call SNAP's command-line tools from any current working directory.</property>
+                  <property name="initiallySelected" type="boolean" value="true" />
+                  <property name="variableName" type="string">extendPathEnvVar</property>
+                </serializedBean>
+                <visibilityScript>return Util.isWindowsInstaller();</visibilityScript>
+              </formComponent>
+              <formComponent id="1636" beanClass="com.install4j.runtime.beans.formcomponents.SpacerComponent" enabled="false" />
+              <formComponent name="Execute configuration optimiser" id="2290" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" enabled="false">
+                <serializedBean>
+                  <property name="checkboxText" type="string">Run Configuration Optimiser</property>
+                  <property name="variableName" type="string">executeConfOptimiserAction</property>
+                </serializedBean>
+              </formComponent>
+              <formComponent name="Execute launcher" id="182" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
+                <serializedBean>
+                  <property name="checkboxText" type="string">Run SNAP Desktop</property>
+                  <property name="initiallySelected" type="boolean" value="true" />
+                  <property name="variableName" type="string">executeLauncherAction</property>
+                </serializedBean>
+                <visibilityScript>context.getVariable("pythonExecutable") == null || !context.getBooleanVariable("forcePython")</visibilityScript>
+              </formComponent>
+              <formComponent name="Execute launcher with Python" id="2630" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
+                <serializedBean>
+                  <property name="checkboxText" type="string">Run SNAP Desktop and configure Python</property>
+                  <property name="initiallySelected" type="boolean" value="true" />
+                  <property name="variableName" type="string">executeLauncherWithPythonAction</property>
+                </serializedBean>
+                <visibilityScript>context.getVariable("pythonExecutable") != null &amp;&amp; context.getBooleanVariable("forcePython")</visibilityScript>
+              </formComponent>
+              <formComponent id="2639" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
+                <serializedBean>
+                  <property name="labelHtml" type="string">&lt;html&gt;If you don't run SNAP Desktop and the Python configuration now you can run the configuration
+manually later. This is documented in the &lt;b&gt;&lt;a href="https://senbox.atlassian.net/wiki/display/SNAP/How+to+use+the+SNAP+API+from+Python"&gt;SNAP Wiki&lt;/a&gt;&lt;/b&gt;&lt;/html&gt;
+</property>
+                </serializedBean>
+                <visibilityScript>context.getVariable("pythonExecutable") != null &amp;&amp; context.getBooleanVariable("forcePython")</visibilityScript>
+              </formComponent>
+              <formComponent id="1641" beanClass="com.install4j.runtime.beans.formcomponents.SpacerComponent" />
+              <formComponent id="1640" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
+                <serializedBean>
+                  <property name="labelHtml" type="string">&lt;html&gt;Please also consider visiting the &lt;b&gt;&lt;a href="http://step.esa.int/"&gt;STEP website&lt;/a&gt;&lt;/b&gt;.
+STEP is the Science Toolbox Exploitation Platform which provides news,
+documentation, tutorials, and a vibrant user forum for ESA's free open source Earth Observation
+toolboxes.&lt;/html&gt;</property>
+                </serializedBean>
+              </formComponent>
+            </formComponents>
+          </screen>
+        </screens>
+      </application>
+      <application id="uninstaller" beanClass="com.install4j.runtime.beans.applications.UninstallerApplication" styleId="3345" launchInNewProcess="false">
+        <serializedBean>
+          <property name="customMacosExecutableName" type="string">${i18n:UninstallerMenuEntry(${compiler:sys.fullName})}</property>
+          <property name="executableDirectory">
+            <object class="java.io.File">
+              <string>bin</string>
+            </object>
+          </property>
+          <property name="useCustomMacosExecutableName" type="boolean" value="true" />
+        </serializedBean>
+        <styleOverrides>
+          <styleOverride name="Custom watermark" enabled="true">
+            <formComponent name="Watermark" id="3349" beanClass="com.install4j.runtime.beans.formcomponents.SeparatorComponent" />
+          </styleOverride>
+        </styleOverrides>
+        <startup>
+          <screen id="14" beanClass="com.install4j.runtime.beans.screens.StartupScreen" rollbackBarrierExitCode="0">
+            <actions>
+              <action id="20" beanClass="com.install4j.runtime.beans.actions.misc.LoadResponseFileAction" />
+              <action id="21" beanClass="com.install4j.runtime.beans.actions.misc.RequireInstallerPrivilegesAction" actionElevationType="none" />
+              <link id="2358" targetId="1320" />
+              <link id="2359" targetId="2356" />
+            </actions>
+          </screen>
+        </startup>
+        <screens>
+          <screen id="15" beanClass="com.install4j.runtime.beans.screens.UninstallWelcomeScreen" styleId="3351">
+            <styleOverrides>
+              <styleOverride name="Customize banner image" enabled="true">
+                <group id="3352" beanClass="com.install4j.runtime.beans.groups.VerticalFormComponentGroup">
+                  <serializedBean>
+                    <property name="imageEdgeBackgroundColor">
+                      <object class="com.install4j.runtime.beans.LightOrDarkColor">
+                        <object class="java.awt.Color">
+                          <int>25</int>
+                          <int>143</int>
+                          <int>220</int>
+                          <int>255</int>
+                        </object>
+                        <object class="java.awt.Color">
+                          <int>0</int>
+                          <int>74</int>
+                          <int>151</int>
+                          <int>255</int>
+                        </object>
+                      </object>
+                    </property>
+                    <property name="imageFile">
+                      <object class="com.install4j.api.beans.ExternalFile">
+                        <string>./images/SNAP_Banner.jpg</string>
+                      </object>
+                    </property>
+                  </serializedBean>
+                </group>
+              </styleOverride>
+            </styleOverrides>
+            <formComponents>
+              <formComponent id="3300" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent" insetBottom="10">
+                <serializedBean>
+                  <property name="labelText" type="string">${form:welcomeMessage}</property>
+                </serializedBean>
+                <visibilityScript>!context.isConsole()</visibilityScript>
+              </formComponent>
+              <formComponent id="3301" beanClass="com.install4j.runtime.beans.formcomponents.ConsoleHandlerFormComponent">
+                <serializedBean>
+                  <property name="consoleScript">
+                    <object class="com.install4j.api.beans.ScriptProperty">
+                      <property name="value" type="string">String message = context.getMessage("ConfirmUninstall", context.getApplicationName());
+return console.askYesNo(message, true);
+</property>
+                    </object>
+                  </property>
+                </serializedBean>
+              </formComponent>
+            </formComponents>
+          </screen>
+          <screen id="16" beanClass="com.install4j.runtime.beans.screens.UninstallationScreen">
+            <actions>
+              <action id="17" beanClass="com.install4j.runtime.beans.actions.UninstallFilesAction" actionElevationType="elevated" />
+              <action name="Delete installation directory completely" id="2142" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" actionElevationType="elevated">
+                <serializedBean>
+                  <property name="files" type="array" class="java.io.File" length="1">
+                    <element index="0">
+                      <object class="java.io.File">
+                        <string>${installer:sys.installationDir}</string>
+                      </object>
+                    </element>
+                  </property>
+                  <property name="recursive" type="boolean" value="true" />
+                </serializedBean>
+              </action>
+            </actions>
+            <formComponents>
+              <formComponent id="3306" beanClass="com.install4j.runtime.beans.formcomponents.ProgressComponent">
+                <serializedBean>
+                  <property name="initialStatusMessage" type="string">${i18n:UninstallerPreparing}</property>
+                </serializedBean>
+              </formComponent>
+            </formComponents>
+          </screen>
+          <link id="2468" targetId="2352" />
+          <screen id="19" beanClass="com.install4j.runtime.beans.screens.UninstallFailureScreen" finishScreen="true" />
+          <screen id="18" beanClass="com.install4j.runtime.beans.screens.UninstallSuccessScreen" styleId="3351" finishScreen="true">
+            <formComponents>
+              <formComponent id="3310" beanClass="com.install4j.runtime.beans.formcomponents.MultilineLabelComponent" insetBottom="10">
+                <serializedBean>
+                  <property name="labelText" type="string">${form:successMessage}</property>
+                </serializedBean>
+              </formComponent>
+            </formComponents>
+          </screen>
+        </screens>
+      </application>
+    </applications>
+    <styles defaultStyleId="3345">
+      <style name="Standard" id="3345" beanClass="com.install4j.runtime.beans.styles.FormStyle">
+        <formComponents>
+          <formComponent name="Header" id="3346" beanClass="com.install4j.runtime.beans.styles.NestedStyleComponent" insetTop="0" insetBottom="0">
+            <serializedBean>
+              <property name="styleId" type="string">3358</property>
+            </serializedBean>
+          </formComponent>
+          <group name="Main" id="3347" beanClass="com.install4j.runtime.beans.groups.VerticalFormComponentGroup">
+            <beans>
+              <formComponent id="3348" beanClass="com.install4j.runtime.beans.styles.ContentComponent" insetTop="10" insetLeft="20" insetBottom="10" insetRight="20" />
+              <formComponent name="Watermark" id="3349" beanClass="com.install4j.runtime.beans.formcomponents.SeparatorComponent" insetTop="0" insetLeft="5" insetBottom="0" useExternalParametrization="true" externalParametrizationName="Custom watermark" externalParametrizationMode="include">
+                <serializedBean>
+                  <property name="enabledTitleText" type="boolean" value="false" />
+                  <property name="labelText" type="string">install4j</property>
+                </serializedBean>
+                <externalParametrizationPropertyNames>
+                  <propertyName>labelText</propertyName>
+                </externalParametrizationPropertyNames>
+              </formComponent>
+              <formComponent name="Footer" id="3350" beanClass="com.install4j.runtime.beans.styles.NestedStyleComponent" insetTop="0" insetBottom="0">
+                <serializedBean>
+                  <property name="styleId" type="string">3362</property>
+                </serializedBean>
+              </formComponent>
+            </beans>
+          </group>
+        </formComponents>
+      </style>
+      <style name="Banner" id="3351" beanClass="com.install4j.runtime.beans.styles.FormStyle">
+        <formComponents>
+          <group id="3352" beanClass="com.install4j.runtime.beans.groups.VerticalFormComponentGroup" useExternalParametrization="true" externalParametrizationName="Customize banner image" externalParametrizationMode="include">
+            <serializedBean>
+              <property name="backgroundColor">
+                <object class="com.install4j.runtime.beans.LightOrDarkColor">
+                  <object class="java.awt.Color">
+                    <int>255</int>
+                    <int>255</int>
+                    <int>255</int>
+                    <int>255</int>
+                  </object>
+                  <object class="java.awt.Color">
+                    <int>49</int>
+                    <int>52</int>
+                    <int>53</int>
+                    <int>255</int>
+                  </object>
+                </object>
+              </property>
+              <property name="borderSides">
+                <object class="com.install4j.runtime.beans.formcomponents.BorderSides">
+                  <property name="bottom" type="boolean" value="true" />
+                </object>
+              </property>
+              <property name="imageEdgeBackgroundColor">
+                <object class="com.install4j.runtime.beans.LightOrDarkColor">
+                  <object class="java.awt.Color">
+                    <int>25</int>
+                    <int>143</int>
+                    <int>220</int>
+                    <int>255</int>
+                  </object>
+                  <object class="java.awt.Color">
+                    <int>0</int>
+                    <int>74</int>
+                    <int>151</int>
+                    <int>255</int>
+                  </object>
+                </object>
+              </property>
+              <property name="imageEdgeBorder" type="boolean" value="true" />
+              <property name="imageFile">
+                <object class="com.install4j.api.beans.ExternalFile">
+                  <string>${compiler:sys.install4jHome}/resource/styles/wizard.png</string>
+                </object>
+              </property>
+              <property name="insets">
+                <object class="java.awt.Insets">
+                  <int>5</int>
+                  <int>10</int>
+                  <int>10</int>
+                  <int>10</int>
+                </object>
+              </property>
+            </serializedBean>
+            <beans>
+              <formComponent id="3353" beanClass="com.install4j.runtime.beans.styles.ScreenTitleComponent" insetTop="0">
+                <serializedBean>
+                  <property name="labelFontSizePercent" type="int" value="130" />
+                  <property name="labelFontStyle" type="enum" class="com.install4j.runtime.beans.formcomponents.FontStyle" value="BOLD" />
+                  <property name="labelFontType" type="enum" class="com.install4j.runtime.beans.formcomponents.FontType" value="DERIVED" />
+                </serializedBean>
+              </formComponent>
+              <formComponent id="3354" beanClass="com.install4j.runtime.beans.formcomponents.SeparatorComponent" />
+              <formComponent id="3355" beanClass="com.install4j.runtime.beans.styles.ContentComponent" insetTop="10" insetBottom="0" />
+            </beans>
+            <externalParametrizationPropertyNames>
+              <propertyName>imageAnchor</propertyName>
+              <propertyName>imageEdgeBackgroundColor</propertyName>
+              <propertyName>imageFile</propertyName>
+            </externalParametrizationPropertyNames>
+          </group>
+          <formComponent id="3356" beanClass="com.install4j.runtime.beans.styles.NestedStyleComponent" insetBottom="0">
+            <serializedBean>
+              <property name="styleId" type="string">3362</property>
+            </serializedBean>
+          </formComponent>
+        </formComponents>
+      </style>
+      <group name="Style components" id="3357" beanClass="com.install4j.runtime.beans.groups.StyleGroup">
+        <beans>
+          <style name="Standard header" id="3358" beanClass="com.install4j.runtime.beans.styles.FormStyle">
+            <serializedBean>
+              <property name="fillVertical" type="boolean" value="false" />
+              <property name="standalone" type="boolean" value="false" />
+              <property name="verticalAnchor" type="enum" class="com.install4j.api.beans.Anchor" value="NORTH" />
+            </serializedBean>
+            <formComponents>
+              <group id="3359" beanClass="com.install4j.runtime.beans.groups.VerticalFormComponentGroup" useExternalParametrization="true" externalParametrizationName="Customize title bar" externalParametrizationMode="include">
+                <serializedBean>
+                  <property name="backgroundColor">
+                    <object class="com.install4j.runtime.beans.LightOrDarkColor">
+                      <object class="java.awt.Color">
+                        <int>255</int>
+                        <int>255</int>
+                        <int>255</int>
+                        <int>255</int>
+                      </object>
+                      <object class="java.awt.Color">
+                        <int>49</int>
+                        <int>52</int>
+                        <int>53</int>
+                        <int>255</int>
+                      </object>
+                    </object>
+                  </property>
+                  <property name="borderSides">
+                    <object class="com.install4j.runtime.beans.formcomponents.BorderSides">
+                      <property name="bottom" type="boolean" value="true" />
+                    </object>
+                  </property>
+                  <property name="imageAnchor" type="enum" class="com.install4j.api.beans.Anchor" value="NORTHEAST" />
+                  <property name="imageEdgeBorderWidth" type="int" value="2" />
+                  <property name="imageFile">
+                    <object class="com.install4j.api.beans.ExternalFile">
+                      <string>icon:${installer:sys.installerApplicationMode}_header.png</string>
+                    </object>
+                  </property>
+                  <property name="imageInsets">
+                    <object class="java.awt.Insets">
+                      <int>0</int>
+                      <int>5</int>
+                      <int>1</int>
+                      <int>1</int>
+                    </object>
+                  </property>
+                  <property name="insets">
+                    <object class="java.awt.Insets">
+                      <int>0</int>
+                      <int>20</int>
+                      <int>0</int>
+                      <int>10</int>
+                    </object>
+                  </property>
+                </serializedBean>
+                <beans>
+                  <formComponent name="Title" id="3360" beanClass="com.install4j.runtime.beans.styles.ScreenTitleComponent">
+                    <serializedBean>
+                      <property name="labelFontStyle" type="enum" class="com.install4j.runtime.beans.formcomponents.FontStyle" value="BOLD" />
+                      <property name="labelFontType" type="enum" class="com.install4j.runtime.beans.formcomponents.FontType" value="DERIVED" />
+                    </serializedBean>
+                  </formComponent>
+                  <formComponent name="Subtitle" id="3361" beanClass="com.install4j.runtime.beans.styles.ScreenTitleComponent" insetLeft="8">
+                    <serializedBean>
+                      <property name="titleType" type="enum" class="com.install4j.runtime.beans.styles.TitleType" value="SUB_TITLE" />
+                    </serializedBean>
+                  </formComponent>
+                </beans>
+                <externalParametrizationPropertyNames>
+                  <propertyName>backgroundColor</propertyName>
+                  <propertyName>foregroundColor</propertyName>
+                  <propertyName>imageAnchor</propertyName>
+                  <propertyName>imageFile</propertyName>
+                  <propertyName>imageOverlap</propertyName>
+                </externalParametrizationPropertyNames>
+              </group>
+            </formComponents>
+          </style>
+          <style name="Standard footer" id="3362" beanClass="com.install4j.runtime.beans.styles.FormStyle">
+            <serializedBean>
+              <property name="fillVertical" type="boolean" value="false" />
+              <property name="standalone" type="boolean" value="false" />
+              <property name="verticalAnchor" type="enum" class="com.install4j.api.beans.Anchor" value="SOUTH" />
+            </serializedBean>
+            <formComponents>
+              <group id="3363" beanClass="com.install4j.runtime.beans.groups.HorizontalFormComponentGroup">
+                <serializedBean>
+                  <property name="alignFirstLabel" type="boolean" value="false" />
+                  <property name="insets">
+                    <object class="java.awt.Insets">
+                      <int>3</int>
+                      <int>5</int>
+                      <int>8</int>
+                      <int>5</int>
+                    </object>
+                  </property>
+                </serializedBean>
+                <beans>
+                  <formComponent id="3364" beanClass="com.install4j.runtime.beans.formcomponents.SpringComponent" />
+                  <formComponent name="Back button" id="3365" beanClass="com.install4j.runtime.beans.styles.StandardControlButtonComponent">
+                    <serializedBean>
+                      <property name="buttonText" type="string">&lt; ${i18n:ButtonBack}</property>
+                      <property name="controlButtonType" type="enum" class="com.install4j.api.context.ControlButtonType" value="PREVIOUS" />
+                    </serializedBean>
+                  </formComponent>
+                  <formComponent name="Next button" id="3366" beanClass="com.install4j.runtime.beans.styles.StandardControlButtonComponent">
+                    <serializedBean>
+                      <property name="buttonText" type="string">${i18n:ButtonNext} &gt;</property>
+                      <property name="controlButtonType" type="enum" class="com.install4j.api.context.ControlButtonType" value="NEXT" />
+                    </serializedBean>
+                  </formComponent>
+                  <formComponent name="Cancel button" id="3367" beanClass="com.install4j.runtime.beans.styles.StandardControlButtonComponent" insetLeft="5">
+                    <serializedBean>
+                      <property name="buttonText" type="string">${i18n:ButtonCancel}</property>
+                      <property name="controlButtonType" type="enum" class="com.install4j.api.context.ControlButtonType" value="CANCEL" />
+                    </serializedBean>
+                  </formComponent>
+                </beans>
+              </group>
+            </formComponents>
+          </style>
+        </beans>
+      </group>
+    </styles>
+  </installerGui>
+  <mediaSets>
+    <windows name="All SNAP Windows x64" id="2571" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" architecture="64">
+      <excludedLaunchers>
+        <launcher id="538" />
+        <launcher id="539" />
+        <launcher id="618" />
+      </excludedLaunchers>
+      <exclude>
+        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry filesetId="634" />
+        <entry filesetId="637" />
+        <entry filesetId="641" />
+      </exclude>
+      <jreBundle includedJre="windows-amd64-1.8.0.242" />
+    </windows>
+    <windows name="All SNAP Windows x86" id="2584" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" architecture="32">
+      <excludedLaunchers>
+        <launcher id="539" />
+        <launcher id="618" />
+        <launcher id="656" />
+      </excludedLaunchers>
+      <exclude>
+        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry filesetId="634" />
+        <entry filesetId="639" />
+        <entry filesetId="641" />
+      </exclude>
+      <jreBundle includedJre="windows-x86-1.8.0.242" />
+    </windows>
+    <macosFolder name="All SNAP Mac OS X Folder" id="2575" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
+      <excludedLaunchers>
+        <launcher id="538" />
+        <launcher id="539" />
+        <launcher id="656" />
+      </excludedLaunchers>
+      <exclude>
+        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry filesetId="637" />
+        <entry filesetId="639" />
+        <entry filesetId="641" />
+      </exclude>
+      <jreBundle includedJre="macosx-amd64-1.8.0.242" />
+    </macosFolder>
+    <unixInstaller name="All SNAP Unix" id="2578" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
+      <excludedLaunchers>
+        <launcher id="538" />
+        <launcher id="618" />
+        <launcher id="656" />
+      </excludedLaunchers>
+      <exclude>
+        <entry filesetId="634" />
+        <entry filesetId="637" />
+        <entry filesetId="639" />
+      </exclude>
+      <jreBundle includedJre="linux-amd64-1.8.0.242" />
+    </unixInstaller>
+    <windows name="Sentinel SNAP Windows x64" id="2589" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="64">
+      <excludedComponents>
+        <component id="1963" />
+        <component id="3109" />
+      </excludedComponents>
+      <includedDownloadableComponents>
+        <component id="73" />
+        <component id="68" />
+        <component id="306" />
+      </includedDownloadableComponents>
+      <excludedLaunchers>
+        <launcher id="538" />
+        <launcher id="539" />
+        <launcher id="618" />
+        <launcher id="2822" />
+      </excludedLaunchers>
+      <exclude>
+        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="smos" />
+        <entry filesetId="634" />
+        <entry filesetId="637" />
+        <entry filesetId="641" />
+      </exclude>
+      <jreBundle includedJre="windows-amd64-1.8.0.242" />
+    </windows>
+    <windows name="Sentinel SNAP Windows x86" id="2603" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="32">
+      <excludedComponents>
+        <component id="1963" />
+        <component id="3109" />
+      </excludedComponents>
+      <includedDownloadableComponents>
+        <component id="73" />
+        <component id="68" />
+        <component id="306" />
+      </includedDownloadableComponents>
+      <excludedLaunchers>
+        <launcher id="539" />
+        <launcher id="618" />
+        <launcher id="656" />
+        <launcher id="2822" />
+      </excludedLaunchers>
+      <exclude>
+        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="smos" />
+        <entry filesetId="634" />
+        <entry filesetId="639" />
+        <entry filesetId="641" />
+      </exclude>
+      <jreBundle includedJre="windows-x86-1.8.0.242" />
+    </windows>
+    <macosFolder name="Sentinel SNAP Mac OS X Folder" id="2592" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
+      <excludedComponents>
+        <component id="1963" />
+        <component id="3109" />
+      </excludedComponents>
+      <includedDownloadableComponents>
+        <component id="73" />
+        <component id="68" />
+        <component id="306" />
+      </includedDownloadableComponents>
+      <excludedLaunchers>
+        <launcher id="538" />
+        <launcher id="539" />
+        <launcher id="656" />
+        <launcher id="2822" />
+      </excludedLaunchers>
+      <exclude>
+        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="smos" />
+        <entry filesetId="637" />
+        <entry filesetId="639" />
+        <entry filesetId="641" />
+      </exclude>
+      <jreBundle includedJre="macosx-amd64-1.8.0.242" />
+    </macosFolder>
+    <unixInstaller name="Sentinel SNAP Unix" id="2598" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
+      <excludedComponents>
+        <component id="1963" />
+        <component id="3109" />
+      </excludedComponents>
+      <includedDownloadableComponents>
+        <component id="73" />
+        <component id="68" />
+        <component id="306" />
+      </includedDownloadableComponents>
+      <excludedLaunchers>
+        <launcher id="538" />
+        <launcher id="618" />
+        <launcher id="656" />
+        <launcher id="2822" />
+      </excludedLaunchers>
+      <exclude>
+        <entry location="smos" />
+        <entry filesetId="634" />
+        <entry filesetId="637" />
+        <entry filesetId="639" />
+      </exclude>
+      <jreBundle includedJre="linux-amd64-1.8.0.242" />
+    </unixInstaller>
+    <windows name="SMOS SNAP Windows x64" id="2609" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="64">
+      <excludedComponents>
+        <component id="73" />
+        <component id="68" />
+        <component id="306" />
+        <component id="3109" />
+      </excludedComponents>
+      <includedDownloadableComponents>
+        <component id="1963" />
+      </includedDownloadableComponents>
+      <excludedLaunchers>
+        <launcher id="538" />
+        <launcher id="539" />
+        <launcher id="618" />
+      </excludedLaunchers>
+      <excludedBeans>
+        <bean refId="6" />
+      </excludedBeans>
+      <exclude>
+        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="s1tbx" />
+        <entry location="s2tbx" />
+        <entry location="s3tbx" />
+        <entry location="rstb" />
+        <entry filesetId="634" />
+        <entry filesetId="637" />
+        <entry filesetId="641" />
+      </exclude>
+      <jreBundle includedJre="windows-amd64-1.8.0.242" />
+    </windows>
+    <windows name="SMOS SNAP Windows x86" id="2620" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="32">
+      <excludedComponents>
+        <component id="73" />
+        <component id="68" />
+        <component id="306" />
+        <component id="3109" />
+      </excludedComponents>
+      <includedDownloadableComponents>
+        <component id="1963" />
+      </includedDownloadableComponents>
+      <excludedLaunchers>
+        <launcher id="539" />
+        <launcher id="618" />
+        <launcher id="656" />
+      </excludedLaunchers>
+      <excludedBeans>
+        <bean refId="6" />
+      </excludedBeans>
+      <exclude>
+        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="s1tbx" />
+        <entry location="s2tbx" />
+        <entry location="s3tbx" />
+        <entry location="rstb" />
+        <entry filesetId="634" />
+        <entry filesetId="639" />
+        <entry filesetId="641" />
+      </exclude>
+      <jreBundle includedJre="windows-x86-1.8.0.242" />
+    </windows>
+    <macosFolder name="SMOS SNAP Mac OS X Folder" id="2612" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
+      <excludedComponents>
+        <component id="73" />
+        <component id="68" />
+        <component id="306" />
+        <component id="3109" />
+      </excludedComponents>
+      <includedDownloadableComponents>
+        <component id="1963" />
+      </includedDownloadableComponents>
+      <excludedLaunchers>
+        <launcher id="538" />
+        <launcher id="539" />
+        <launcher id="656" />
+      </excludedLaunchers>
+      <excludedBeans>
+        <bean refId="6" />
+      </excludedBeans>
+      <exclude>
+        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="s1tbx" />
+        <entry location="s2tbx" />
+        <entry location="s3tbx" />
+        <entry location="rstb" />
+        <entry filesetId="637" />
+        <entry filesetId="639" />
+        <entry filesetId="641" />
+      </exclude>
+      <jreBundle includedJre="macosx-amd64-1.8.0.242" />
+    </macosFolder>
+    <unixInstaller name="SMOS SNAP Unix" id="2617" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
+      <excludedComponents>
+        <component id="73" />
+        <component id="68" />
+        <component id="306" />
+        <component id="3109" />
+      </excludedComponents>
+      <includedDownloadableComponents>
+        <component id="1963" />
+      </includedDownloadableComponents>
+      <excludedLaunchers>
+        <launcher id="538" />
+        <launcher id="618" />
+        <launcher id="656" />
+      </excludedLaunchers>
+      <excludedBeans>
+        <bean refId="6" />
+      </excludedBeans>
+      <exclude>
+        <entry location="s1tbx" />
+        <entry location="s2tbx" />
+        <entry location="s3tbx" />
+        <entry location="rstb" />
+        <entry filesetId="634" />
+        <entry filesetId="637" />
+        <entry filesetId="639" />
+      </exclude>
+      <jreBundle includedJre="linux-amd64-1.8.0.242" />
+    </unixInstaller>
+    <unixArchive name="Engine Unix Archive" id="859" installDir="snap">
+      <excludedLaunchers>
+        <launcher id="538" />
+        <launcher id="539" />
+        <launcher id="618" />
+        <launcher id="656" />
+      </excludedLaunchers>
+      <exclude>
+        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="smos/modules/docs" />
+        <entry location="smos/modules/ext/org.esa.smostbx.smos-gui" />
+        <entry location="smos/modules/org-esa-smostbx-smos-gui.jar" />
+        <entry filesetId="634" />
+        <entry filesetId="637" />
+        <entry filesetId="639" />
+      </exclude>
+      <jreBundle jreBundleSource="none" />
+    </unixArchive>
+    <macosFolder name="Sentinel SNAP Mac OS X Folder - Universal binaries" id="3551" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
+      <excludedComponents>
+        <component id="1963" />
+        <component id="3109" />
+      </excludedComponents>
+      <includedDownloadableComponents>
+        <component id="73" />
+        <component id="68" />
+        <component id="306" />
+      </includedDownloadableComponents>
+      <excludedLaunchers>
+        <launcher id="538" />
+        <launcher id="539" />
+        <launcher id="656" />
+        <launcher id="2822" />
+      </excludedLaunchers>
+      <exclude>
+        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="smos" />
+        <entry filesetId="637" />
+        <entry filesetId="639" />
+        <entry filesetId="641" />
+      </exclude>
+      <jreBundle bundleType="dynamic" bundleUrl="https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-debugimage_aarch64_mac_hotspot_17.0.6_10.tar.gz" />
+    </macosFolder>
+  </mediaSets>
+  <buildIds buildAll="false">
+    <mediaSet refId="2589" />
+    <mediaSet refId="2598" />
+    <mediaSet refId="3551" />
+  </buildIds>
+  <buildOptions faster="true" disableSigning="true" />
+</install4j>
