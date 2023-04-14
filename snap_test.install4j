@@ -10,7 +10,7 @@
       <variable name="snapGptMenuName" value="SNAP GPT" />
       <variable name="smosGridPointExporter" value="smos-grid-point-exporter" />
     </variables>
-    <jreBundles jdkProviderId="AdoptOpenJDK" release="8/jdk8u332-b09" />
+    <jreBundles jdkProviderId="AdoptOpenJDK" release="17/jdk-17.0.6+10" />
   </application>
   <files missingFilesStrategy="error" defaultUninstallMode="2" launcherOverwriteMode="1">
     <filesets>
@@ -1971,7 +1971,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle jreBundleSource="none" />
     </unixArchive>
-    <macosFolder name="Sentinel SNAP Mac OS X Folder - Universal binaries" id="3551" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
+    <macosFolder name="Sentinel SNAP Mac OS X Folder - Universal binaries" id="3551" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="universal">
       <excludedComponents>
         <component id="1963" />
         <component id="3109" />
