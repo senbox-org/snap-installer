@@ -19,7 +19,9 @@ variables:
   DOCKER_CONTEXT_PATH: "${CI_PROJECT_DIR}"
   DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:latest"
   DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:$CI_COMMIT_REF_NAME"
-  # COMPILE_BRANCH is computed at 'compile' stage, use BRANCH to override it
+  # use BRANCH to override it
+  COMPILE_BRANCH: master
+  RECOMPILE: "true"
 
 stages:
   - compile
@@ -30,9 +32,41 @@ stages:
 
 # Before building the image we need other projects artifacts
 .docker-base:
-  needs: 
-    - job: compile
-      artifacts: true
+  rules:
+    - if: $RECOMPILE == "true"
+      needs: 
+      - job: compile
+        artifacts: true
+    - if: $RECOMPILE == "false"
+      needs:
+        - project: senbox-org/snap-engine
+          job: mvn-build
+          ref: $COMPILE_BRANCH
+          artifacts: true
+        - project: senbox-org/snap-desktop
+          job: mvn-build
+          ref: $COMPILE_BRANCH
+          artifacts: true
+        - project: senbox-org/s1tbx
+          job: mvn-build
+          ref: $COMPILE_BRANCH
+          artifacts: true
+        - project: senbox-org/s2tbx
+          job: mvn-build
+          ref: $COMPILE_BRANCH
+          artifacts: true
+        - project: senbox-org/s3tbx
+          job: mvn-build
+          ref: $COMPILE_BRANCH
+          artifacts: true
+        - project: senbox-org/smos-box
+          job: mvn-build
+          ref: $COMPILE_BRANCH
+          artifacts: true
+        - project: senbox-org/probavbox
+          job: mvn-build
+          ref: $COMPILE_BRANCH
+          artifacts: true
   artifacts:
     expire_in: "1 hour"
     paths:
@@ -46,6 +80,10 @@ compile:
     VERSION: $(mvn --non-recursive help:evaluate -Dexpression=project.version -q -DforceStdout)
     COMPILE_BRANCH: master
   rules:
+    - if: $RECOMPILE == "true"
+      when: always
+    - if: $RECOMPILE == "false"
+      when: never
     - if: $BRANCH
       variables:
         COMPILE_BRANCH: $BRANCH
@@ -53,9 +91,6 @@ compile:
     project: $PROJECT
     branch: $COMPILE_BRANCH
     strategy: depend
-    # job: mvn-build
-    # ref: $COMPILE_BRANCH
-    # artifacts: true
   parallel:
     matrix:
       - PROJECT: senbox-org/snap-engine
@@ -78,6 +113,12 @@ compile:
   #     - "$CI_PROJECT_DIR/s3tbx-kit/target/netbeans_clusters"
   #     - "$CI_PROJECT_DIR/smos-kit/target/netbeans_clusters"
   #     - "$CI_PROJECT_DIR/probavbox-kit/target/netbeans_clusters"
+
+docker-hadolint:
+  when: always
+  rules:
+    - if: $RECOMPILE == "false"
+      when: never
 
 publish:
   stage: publish

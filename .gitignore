@@ -4,4 +4,9 @@
 .idea/
 target/
 updateall.log
-
+*-kit
+*-application
+etc
+snap-*
+LICENSE.html
+Dockerfile

@@ -13,8 +13,7 @@ ARG DOCKER_GID=999
 RUN apt-get -qq update && apt-get -qqy upgrade && apt-get -qqy install gnupg2 locales wget curl bc git
 RUN apt-get -qqy install libxext6 libxrender1 libxtst6 libxi6 libxxf86dga1 libxxf86vm1 libgfortran5 mesa-utils xvfb fonts-dejavu jblas unzip apt-transport-https gnupg && \
     locale-gen en_US.UTF-8 && \
-    rm -rf /var/lib/apt/lists/*
-
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
@@ -31,6 +30,7 @@ RUN apt-get install -y wget apt-transport-https gnupg
 RUN wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | tee /usr/share/keyrings/adoptium.asc
 RUN echo "deb [signed-by=/usr/share/keyrings/adoptium.asc] https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | tee /etc/apt/sources.list.d/adoptium.list
 RUN apt-get -qq update && apt-cache search temurin-8-jdk && apt-get -qqy install temurin-8-jdk && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* && \
     java -version && which java && echo $JAVA_HOME
 
 ENV PATH=${PATH}:$JAVA_HOME/bin/
@@ -67,8 +67,8 @@ RUN mkdir -p /var/maven/.m2
 
 RUN apt-get update && \
 	apt-get -qqy install python3 python3-requests python3-lxml python3-psutil python3-numpy python3-pymysql python3-yaml python3-matplotlib python3-cryptography python3-pip && \
-	apt-get remove python3-pil -qqy && \
-	pip3 install pillow
+	apt-get remove python3-pil -qqy && apt-get clean && rm -rf /var/lib/apt/lists/* && \
+	pip3 install pillow psutil matplotlib lxml cryptography pymysql
 
 # pillow allow to save figures in jpeg format to save disk space
 
@@ -79,7 +79,7 @@ RUN apt-get update && \
 
 ARG INSTALL4J_VERSION=10_0_5
 
-RUN wget https://download.ej-technologies.com/install4j/install4j_linux-x64_${INSTALL4J_VERSION}.deb -O /tmp/install4j_linux.deb && \
+RUN wget https://download.ej-technologies.com/install4j/install4j_linux-x64_${INSTALL4J_VERSION}.deb -O /tmp/install4j_linux.deb --progress=dot:giga && \
 	apt install -qqyf /tmp/install4j_linux.deb && \
 	rm /tmp/install4j_linux.deb
 
@@ -97,17 +97,18 @@ RUN wget https://www.qfs.de/fileadmin/Webdata/pub/qftest/QF-Test-${QFTEST_VERSIO
 ###################
 # USER  SETUP     #
 ###################
-
+WORKDIR /
 RUN mkdir -p /var/maven/.m2
 
-RUN mkdir -p /home/${USER} && \
-	chown 1012:1013 /home/${USER} && \
-    chmod 777 /home/${USER} && \
-    mkdir -p /opt/scripts && \
-    mkdir -p /opt/properties 
+# RUN mkdir -p /home/${USER} && \
+# 	chown 1012:1013 /home/${USER} && \
+#     chmod 777 /home/${USER} && \
+RUN mkdir -p /opt/scripts /opt/properties 
 
-ADD ./docker/build/scripts/* /opt/scripts/
-# ADD ./docker/build/properties/* /opt/properties/
+COPY docker/build/scripts/* /opt/scripts/
+# COPY ./docker/build/properties/* /opt/properties/
+
+ENV DEST=/opt/snap-build
 
 RUN groupadd --gid 1013 ${USER} && \
     addgroup --gid ${DOCKER_GID} docker && \
@@ -118,43 +119,45 @@ RUN mkdir -p /local-update-center && \
     chown ${USER}:${USER} /local-update-center && \
     mkdir -p /opt/scripts && \
     mkdir -p /opt/snap-build && \
-    chown ${USER}:${USER} /opt/snap-build && \
+    chown ${USER}:${USER} ${DEST} && \
     chown 1012:1013 -R /var/maven
 
-ENV DEST=/opt/snap-build
+RUN mkdir -p ${DEST}/snap-installer ${DEST}/snap-installer/files ${DEST}/snap-installer/images \${DEST}/snap-desktop/snap-main/target/ ${DEST}/snap-engine \
+    ${DEST}/snap-desktop/snap-application/target/snap/etc ${DEST}/snap-desktop/snap-application/target/snap/snap \ 
+    ${DEST}/snap-desktop/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/ \
+    ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/s1tbx ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/rstb \
+    ${DEST}/s2tbx/s2tbx-kit/target/netbeans_clusters/s2tbx ${DEST}/s3tbx/s3tbx-kit/target/netbeans_clusters/s3tbx \
+    ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos ${DEST}/probavbox/probavbox-kit/target/netbeans_clusters/probavbox
 
-RUN mkdir -p ${DEST}/snap-installer ${DEST}/snap-installer/target ${DEST}/snap-desktop/snap-main/target/ ${DEST}/snap-engine \
-    ${DEST}/snap-desktop/snap-application/target/snap/etc ${DEST}/snap-desktop/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/ \
-    ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/ ${DEST}/s2tbx/s2tbx-kit/target/netbeans_clusters/ ${DEST}/s3tbx/s3tbx-kit/target/netbeans_clusters/ \
-    ${DEST}/smos-box/smos-kit/target/netbeans_clusters/ ${DEST}/probavbox/probavbox-kit/target/netbeans_clusters/
-
-COPY snap.install4j images LICENSE.txt VERSION.txt files ${DEST}/snap-installer/
-COPY LICENSE.html etc ${DEST}/snap-engine/
+COPY snap.install4j LICENSE.txt VERSION.txt ${DEST}/snap-installer/
+COPY files/ ${DEST}/snap-installer/files/
+COPY images/ ${DEST}/snap-installer/images/
+COPY LICENSE.html ${DEST}/snap-engine/
+COPY etc/ ${DEST}/snap-engine/etc/
 COPY snap-application/target/snap/etc/snap.clusters ${DEST}/snap-desktop/snap-application/target/snap/etc/
 COPY snap-main/target/snap-main.jar ${DEST}/snap-desktop/snap-main/target/
-COPY snap-application/target/snap/platform ${DEST}/snap-desktop/snap-application/target/snap/
-COPY snap-application/target/snap/ide ${DEST}/snap-desktop/snap-application/target/snap/
-COPY snap-application/target/snap/snap ${DEST}/snap-desktop/snap-application/target/snap/
+COPY snap-application/target/snap/platform/ ${DEST}/snap-desktop/snap-application/target/snap/platform/
+COPY snap-application/target/snap/ide/ ${DEST}/snap-desktop/snap-application/target/snap/ide/
+COPY snap-application/target/snap/snap/ ${DEST}/snap-desktop/snap-application/target/snap/snap/
 COPY snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/Performance32.png ${DEST}/snap-desktop/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/
 COPY snap-application/target/snap/THIRDPARTY_LICENSES.txt ${DEST}/snap-desktop/snap-application/target/snap/
-COPY s1tbx-kit/target/netbeans_clusters/s1tbx ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/
-COPY s1tbx-kit/target/netbeans_clusters/rstb ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/
-COPY s2tbx-kit/target/netbeans_clusters/s2tbx ${DEST}/s2tbx/s2tbx-kit/target/netbeans_clusters/
-COPY s3tbx-kit/target/netbeans_clusters/s3tbx ${DEST}/s3tbx/s3tbx-kit/target/netbeans_clusters/
-COPY smos-kit/target/netbeans_clusters/smos ${DEST}/smos-box/smos-kit/target/netbeans_clusters/
-COPY probavbox-kit/target/netbeans_clusters/probavbox ${DEST}/probavbox/probavbox-kit/target/netbeans_clusters/
+COPY s1tbx-kit/target/netbeans_clusters/s1tbx/ ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/s1tbx/
+COPY s1tbx-kit/target/netbeans_clusters/rstb/ ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/rstb/
+COPY s2tbx-kit/target/netbeans_clusters/s2tbx/ ${DEST}/s2tbx/s2tbx-kit/target/netbeans_clusters/s2tbx/
+COPY s3tbx-kit/target/netbeans_clusters/s3tbx/ ${DEST}/s3tbx/s3tbx-kit/target/netbeans_clusters/s3tbx/
+COPY smos-kit/target/netbeans_clusters/smos/ ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos/
+COPY probavbox-kit/target/netbeans_clusters/probavbox/ ${DEST}/probavbox/probavbox-kit/target/netbeans_clusters/probavbox/
+
+# Create installers
+RUN install4jc -v -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macos,windows ${DEST}/snap-installer/snap.install4j && \
+    chmod 777 esa-* && rm *x32* && rm *smos* && rm *sentinel* && rm -rf ${DEST}
+
+# Install snap
+WORKDIR ${USER_HOME_DIR}
+RUN ./*_all_unix*.sh -q && rm ./*_all_unix*.sh
 
 USER ${USER}
-
-RUN install4jc -L ${LICENSE} ${DEST}/snap-installer/snap.install4j && ls ${DEST}/snap-installer/target
-
-COPY ${DEST}/snap-installer/target/esa-snap_all_unix.sh ./target/
-COPY ${DEST}/snap-installer/target/esa-snap_all_macos.dmg ./target/
-COPY ${DEST}/snap-installer/target/esa-snap_all_windows-x64.exe ./target/
-
-RUN echo "Installers have been copied"
-
-RUN sh /usr/local/bin/mvn-entrypoint.sh
+CMD sh /usr/local/bin/mvn-entrypoint.sh
 
 # Default target platform is 'unix'
 # ARG TARGET_PLATFORM=unix
