@@ -149,15 +149,16 @@ COPY smos-kit/target/netbeans_clusters/smos/ ${DEST}/smos-box/smos-kit/target/ne
 COPY probavbox-kit/target/netbeans_clusters/probavbox/ ${DEST}/probavbox/probavbox-kit/target/netbeans_clusters/probavbox/
 
 # Create installers
+ARG LICENSE
 RUN install4jc -v -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macos,windows ${DEST}/snap-installer/snap.install4j && \
-    chmod 777 esa-* && rm *x32* && rm *smos* && rm *sentinel* && rm -rf ${DEST}
+    chmod 777 ${USER_HOME_DIR}/esa-* && rm ${USER_HOME_DIR}/*x32* && rm ${USER_HOME_DIR}/*smos* && rm ${USER_HOME_DIR}/*sentinel* && rm -rf ${DEST}
 
 # Install snap
 WORKDIR ${USER_HOME_DIR}
 RUN ./*_all_unix*.sh -q && rm ./*_all_unix*.sh
 
 USER ${USER}
-CMD sh /usr/local/bin/mvn-entrypoint.sh
+RUN sh /usr/local/bin/mvn-entrypoint.sh
 
 # Default target platform is 'unix'
 # ARG TARGET_PLATFORM=unix
