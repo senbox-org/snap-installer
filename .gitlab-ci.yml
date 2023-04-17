@@ -1,6 +1,6 @@
 include:
   - project: 'to-be-continuous/docker'
-    ref: '3.5.3'
+    ref: '4.0.0'
     file: '/templates/gitlab-ci-docker.yml'
 
 variables:
