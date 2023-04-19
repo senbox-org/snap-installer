@@ -10,7 +10,7 @@
       <variable name="snapGptMenuName" value="SNAP GPT" />
       <variable name="smosGridPointExporter" value="smos-grid-point-exporter" />
     </variables>
-    <jreBundles jdkProviderId="AdoptOpenJDK" release="17/jdk-17.0.6+10" />
+    <jreBundles jdkProviderId="AdoptOpenJDK" release="11/jdk-11.0.16.1+1" />
   </application>
   <files missingFilesStrategy="error" defaultUninstallMode="2" launcherOverwriteMode="1">
     <filesets>
@@ -809,30 +809,6 @@ return success;
                     </serializedBean>
                     <condition>new File(context.getInstallationDirectory(), "s1tbx").isDirectory()</condition>
                   </action>
-                  <action name="Add s2tbx NB cluster" id="138" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
-                    <serializedBean>
-                      <property name="append" type="boolean" value="true" />
-                      <property name="file">
-                        <object class="java.io.File">
-                          <string>etc/snap.clusters</string>
-                        </object>
-                      </property>
-                      <property name="text" type="string">s2tbx\n&#xD;</property>
-                    </serializedBean>
-                    <condition>new File(context.getInstallationDirectory(), "s2tbx").isDirectory()</condition>
-                  </action>
-                  <action name="Add s3tbx NB cluster" id="74" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
-                    <serializedBean>
-                      <property name="append" type="boolean" value="true" />
-                      <property name="file">
-                        <object class="java.io.File">
-                          <string>etc/snap.clusters</string>
-                        </object>
-                      </property>
-                      <property name="text" type="string">s3tbx\n&#xD;</property>
-                    </serializedBean>
-                    <condition>new File(context.getInstallationDirectory(), "s3tbx").isDirectory()</condition>
-                  </action>
                   <action name="Add rstb NB cluster" id="375" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
                     <serializedBean>
                       <property name="append" type="boolean" value="true" />
@@ -868,6 +844,18 @@ return success;
                       <property name="text" type="string">probavbox\n&#xD;</property>
                     </serializedBean>
                     <condition>new File(context.getInstallationDirectory(), "probavbox").isDirectory()</condition>
+                  </action>
+                  <action name="Add opttbx NB cluster" id="3553" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
+                    <serializedBean>
+                      <property name="append" type="boolean" value="true" />
+                      <property name="file">
+                        <object class="java.io.File">
+                          <string>etc/snap.clusters</string>
+                        </object>
+                      </property>
+                      <property name="text" type="string">opttbx\n&#xD;</property>
+                    </serializedBean>
+                    <condition>new File(context.getInstallationDirectory(), "opttbx").isDirectory()</condition>
                   </action>
                 </beans>
               </group>
@@ -1994,7 +1982,7 @@ return console.askYesNo(message, true);
         <entry filesetId="639" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle bundleType="dynamic" bundleUrl="https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-debugimage_aarch64_mac_hotspot_17.0.6_10.tar.gz" />
+      <jreBundle bundleUrl="https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-debugimage_aarch64_mac_hotspot_17.0.6_10.tar.gz" />
     </macosFolder>
   </mediaSets>
   <buildIds buildAll="false">
