@@ -113,7 +113,7 @@ if exist optical-toolbox\pom.xml if %buildOptTBX% EQU true (
 
 if exist smos-box\pom.xml if %buildSMOSBOX% EQU true (
     cd smos-box
-    call mvn clean install -T 6 -DskipTests=%skipTests%
+    call mvn clean install -T 8 -DskipTests=%skipTests%
     if %errorlevel% neq 0 exit /B %errorlevel%
     call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
