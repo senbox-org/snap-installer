@@ -9,9 +9,9 @@ set skipTests=false
 set buildSnapEngine=true
 set buildSnapDesktop=true
 set buildSnapExamples=false
-set buildMwvTBX=true
+set buildMwvTBX=false
 set buildOptTBX=true
-set buildSMOSBOX=true
+set buildSMOSBOX=false
 
 if exist snap-engine\.git (
     cd snap-engine
@@ -69,7 +69,7 @@ call mvn -v
 
 if exist snap-engine\pom.xml if %buildSnapEngine% EQU true (
     cd snap-engine
-    call mvn clean install -T 6 -DskipTests=%skipTests%
+    call mvn clean install -T 8 -DskipTests=%skipTests%
     if %errorlevel% neq 0 exit /B %errorlevel%
     call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
@@ -77,7 +77,7 @@ if exist snap-engine\pom.xml if %buildSnapEngine% EQU true (
 )
 if exist snap-desktop\pom.xml if %buildSnapDesktop% EQU true (
     cd snap-desktop
-    call mvn clean install -T 6 -DskipTests=%skipTests%
+    call mvn clean install -T 8 -DskipTests=%skipTests%
     if %errorlevel% neq 0 exit /B %errorlevel%
     call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
@@ -88,7 +88,7 @@ if exist snap-desktop\pom.xml if %buildSnapDesktop% EQU true (
 )
 if exist snap-examples\pom.xml if %buildSnapExamples% EQU true (
     cd snap-examples
-    call mvn clean install -T 6  -DskipTests=%skipTests%
+    call mvn clean install -T 8  -DskipTests=%skipTests%
     if %errorlevel% neq 0 exit /B %errorlevel%
     call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
@@ -96,9 +96,7 @@ if exist snap-examples\pom.xml if %buildSnapExamples% EQU true (
 )
 if exist microwave-toolbox\pom.xml if %buildMwvTBX% EQU true (
     cd microwave-toolbox
-    call mvn clean
-    if %errorlevel% neq 0 exit /B %errorlevel%
-    call mvn install -T 6 -DskipTests=%skipTests%
+    call mvn clean install -T 8 -DskipTests=%skipTests%
     if %errorlevel% neq 0 exit /B %errorlevel%
     call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
@@ -106,13 +104,12 @@ if exist microwave-toolbox\pom.xml if %buildMwvTBX% EQU true (
 )
 if exist optical-toolbox\pom.xml if %buildOptTBX% EQU true (
     cd optical-toolbox
-    call mvn clean install -DskipTests=%skipTests%
+    call mvn clean install -T 8 -DskipTests=%skipTests%
     if %errorlevel% neq 0 exit /B %errorlevel%
     call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
     cd ..
 )
-
 
 if exist smos-box\pom.xml if %buildSMOSBOX% EQU true (
     cd smos-box
