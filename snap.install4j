@@ -10,7 +10,7 @@
       <variable name="snapGptMenuName" value="SNAP GPT" />
       <variable name="smosGridPointExporter" value="smos-grid-point-exporter" />
     </variables>
-    <jreBundles jdkProviderId="AdoptOpenJDK" release="8/jdk8u332-b09" />
+    <jreBundles jdkProviderId="Liberica" release="11/11.0.19+7" />
   </application>
   <files missingFilesStrategy="error" defaultUninstallMode="2" launcherOverwriteMode="1">
     <filesets>
@@ -44,10 +44,9 @@
       <dirEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/snap" entryMode="subdir" subDirectory="snap" />
       <dirEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/platform" entryMode="subdir" subDirectory="platform" />
       <dirEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/ide" entryMode="subdir" subDirectory="ide" />
-      <dirEntry mountPoint="58" file="../s1tbx/s1tbx-kit/target/netbeans_clusters/s1tbx" entryMode="subdir" subDirectory="s1tbx" />
-      <dirEntry mountPoint="58" file="../s2tbx/s2tbx-kit/target/netbeans_clusters/s2tbx" entryMode="subdir" subDirectory="s2tbx" />
-      <dirEntry mountPoint="58" file="../s3tbx/s3tbx-kit/target/netbeans_clusters/s3tbx" entryMode="subdir" subDirectory="s3tbx" />
-      <dirEntry mountPoint="58" file="../s1tbx/s1tbx-kit/target/netbeans_clusters/rstb" entryMode="subdir" subDirectory="rstb" />
+      <dirEntry mountPoint="58" file="../microwave-toolbox/microwavetbx-kit/target/netbeans_clusters/microwavetbx" entryMode="subdir" subDirectory="microwavetbx" />
+      <dirEntry mountPoint="58" file="../microwave-toolbox/microwavetbx-kit/target/netbeans_clusters/rstb" entryMode="subdir" subDirectory="rstb" />
+      <dirEntry mountPoint="58" file="../optical-toolbox/opttbx-kit/target/netbeans_clusters/opttbx" entryMode="subdir" subDirectory="opttbx" />
       <dirEntry mountPoint="58" file="../smos-box/smos-kit/target/netbeans_clusters/smos" entryMode="subdir" subDirectory="smos" />
       <dirEntry mountPoint="58" file="../probavbox/probavbox-kit/target/netbeans_clusters/probavbox" entryMode="subdir" subDirectory="probavbox" />
       <fileEntry mountPoint="58" file="./LICENSE.txt" />
@@ -76,41 +75,22 @@
           <entry filesetId="641" />
         </include>
       </component>
-      <component name="Sentinel-1 Toolbox" id="73" customizedId="S1TBX" hideHelpButton="true" downloadable="true">
+      <component name="Microwave Toolbox" id="73" customizedId="S1TBX" hideHelpButton="true" downloadable="true">
         <description>Ingestion of SAR data products and dedicated support tools.</description>
         <include>
-          <entry location="s1tbx" />
+          <entry location="microwavetbx" />
         </include>
         <dependencies>
           <component id="76" />
         </dependencies>
       </component>
-      <component name="Sentinel-2 Toolbox" id="72" customizedId="S2TBX" hideHelpButton="true" downloadable="true">
-        <description>Ingestion of Sentinel-2 MSI data products and dedicated support tools.</description>
+      <component name="Optical Toolbox" id="68" customizedId="S3TBX" hideHelpButton="true" downloadable="true">
+        <description>Ingestion of Sentinel-2 MSI, Sentinel-3 OLCI and SLSTR data products and dedicated support tools.</description>
         <include>
-          <entry location="s2tbx" />
+          <entry location="opttbx" />
         </include>
         <dependencies>
           <component id="76" />
-        </dependencies>
-      </component>
-      <component name="Sentinel-3 Toolbox" id="68" customizedId="S3TBX" hideHelpButton="true" downloadable="true">
-        <description>Ingestion of Sentinel-3 OLCI and SLSTR data products and dedicated support tools.</description>
-        <include>
-          <entry location="s3tbx" />
-        </include>
-        <dependencies>
-          <component id="76" />
-        </dependencies>
-      </component>
-      <component name="Radarsat Toolbox" id="306" customizedId="RSTB" hideHelpButton="true" downloadable="true">
-        <description>SAR Polarimetric Tools</description>
-        <include>
-          <entry location="rstb" />
-        </include>
-        <dependencies>
-          <component id="76" />
-          <component id="73" />
         </dependencies>
       </component>
       <component name="SMOS-Box" id="1963" customizedId="SMOS" hideHelpButton="true" downloadable="true">
@@ -807,7 +787,7 @@ return success;
               </action>
               <group name="Add NB clusters" id="141" beanClass="com.install4j.runtime.beans.groups.ActionGroup">
                 <beans>
-                  <action name="Add s1tbx NB cluster" id="140" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
+                  <action name="Add microwavetbx NB cluster" id="140" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
                     <serializedBean>
                       <property name="append" type="boolean" value="true" />
                       <property name="file">
@@ -815,11 +795,11 @@ return success;
                           <string>etc/snap.clusters</string>
                         </object>
                       </property>
-                      <property name="text" type="string">s1tbx\n</property>
+                      <property name="text" type="string">microwavetbx\n</property>
                     </serializedBean>
-                    <condition>new File(context.getInstallationDirectory(), "s1tbx").isDirectory()</condition>
+                    <condition>new File(context.getInstallationDirectory(), "microwavetbx").isDirectory()</condition>
                   </action>
-                  <action name="Add s2tbx NB cluster" id="138" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
+                  <action name="Add opttbx NB cluster" id="74" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
                     <serializedBean>
                       <property name="append" type="boolean" value="true" />
                       <property name="file">
@@ -827,21 +807,9 @@ return success;
                           <string>etc/snap.clusters</string>
                         </object>
                       </property>
-                      <property name="text" type="string">s2tbx\n&#xD;</property>
+                      <property name="text" type="string">opttbx\n&#xD;</property>
                     </serializedBean>
-                    <condition>new File(context.getInstallationDirectory(), "s2tbx").isDirectory()</condition>
-                  </action>
-                  <action name="Add s3tbx NB cluster" id="74" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
-                    <serializedBean>
-                      <property name="append" type="boolean" value="true" />
-                      <property name="file">
-                        <object class="java.io.File">
-                          <string>etc/snap.clusters</string>
-                        </object>
-                      </property>
-                      <property name="text" type="string">s3tbx\n&#xD;</property>
-                    </serializedBean>
-                    <condition>new File(context.getInstallationDirectory(), "s3tbx").isDirectory()</condition>
+                    <condition>new File(context.getInstallationDirectory(), "opttbx").isDirectory()</condition>
                   </action>
                   <action name="Add rstb NB cluster" id="375" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
                     <serializedBean>
@@ -1718,7 +1686,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle includedJre="windows-x86-1.8.0.242" />
     </windows>
-    <macosFolder name="All SNAP Mac OS X Folder" id="2575" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
+    <macosFolder name="All SNAP Mac OS X Folder" id="2575" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" architecture="universal">
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="539" />
@@ -1730,7 +1698,6 @@ return console.askYesNo(message, true);
         <entry filesetId="639" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle includedJre="macosx-amd64-1.8.0.242" />
     </macosFolder>
     <unixInstaller name="All SNAP Unix" id="2578" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
       <excludedLaunchers>
@@ -1752,9 +1719,7 @@ return console.askYesNo(message, true);
       </excludedComponents>
       <includedDownloadableComponents>
         <component id="73" />
-        <component id="72" />
         <component id="68" />
-        <component id="306" />
       </includedDownloadableComponents>
       <excludedLaunchers>
         <launcher id="538" />
@@ -1778,9 +1743,7 @@ return console.askYesNo(message, true);
       </excludedComponents>
       <includedDownloadableComponents>
         <component id="73" />
-        <component id="72" />
         <component id="68" />
-        <component id="306" />
       </includedDownloadableComponents>
       <excludedLaunchers>
         <launcher id="539" />
@@ -1797,32 +1760,6 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle includedJre="windows-x86-1.8.0.242" />
     </windows>
-    <macosFolder name="Sentinel SNAP Mac OS X Folder" id="2592" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
-      <excludedComponents>
-        <component id="1963" />
-        <component id="3109" />
-      </excludedComponents>
-      <includedDownloadableComponents>
-        <component id="73" />
-        <component id="72" />
-        <component id="68" />
-        <component id="306" />
-      </includedDownloadableComponents>
-      <excludedLaunchers>
-        <launcher id="538" />
-        <launcher id="539" />
-        <launcher id="656" />
-        <launcher id="2822" />
-      </excludedLaunchers>
-      <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
-        <entry location="smos" />
-        <entry filesetId="637" />
-        <entry filesetId="639" />
-        <entry filesetId="641" />
-      </exclude>
-      <jreBundle includedJre="macosx-amd64-1.8.0.242" />
-    </macosFolder>
     <unixInstaller name="Sentinel SNAP Unix" id="2598" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
         <component id="1963" />
@@ -1830,9 +1767,7 @@ return console.askYesNo(message, true);
       </excludedComponents>
       <includedDownloadableComponents>
         <component id="73" />
-        <component id="72" />
         <component id="68" />
-        <component id="306" />
       </includedDownloadableComponents>
       <excludedLaunchers>
         <launcher id="538" />
@@ -1851,9 +1786,7 @@ return console.askYesNo(message, true);
     <windows name="SMOS SNAP Windows x64" id="2609" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="64">
       <excludedComponents>
         <component id="73" />
-        <component id="72" />
         <component id="68" />
-        <component id="306" />
         <component id="3109" />
       </excludedComponents>
       <includedDownloadableComponents>
@@ -1882,9 +1815,7 @@ return console.askYesNo(message, true);
     <windows name="SMOS SNAP Windows x86" id="2620" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="32">
       <excludedComponents>
         <component id="73" />
-        <component id="72" />
         <component id="68" />
-        <component id="306" />
         <component id="3109" />
       </excludedComponents>
       <includedDownloadableComponents>
@@ -1910,12 +1841,10 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle includedJre="windows-x86-1.8.0.242" />
     </windows>
-    <macosFolder name="SMOS SNAP Mac OS X Folder" id="2612" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
+    <macosFolder name="SMOS SNAP Mac OS X Folder" id="2612" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="universal">
       <excludedComponents>
         <component id="73" />
-        <component id="72" />
         <component id="68" />
-        <component id="306" />
         <component id="3109" />
       </excludedComponents>
       <includedDownloadableComponents>
@@ -1939,14 +1868,11 @@ return console.askYesNo(message, true);
         <entry filesetId="639" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle includedJre="macosx-amd64-1.8.0.242" />
     </macosFolder>
     <unixInstaller name="SMOS SNAP Unix" id="2617" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
         <component id="73" />
-        <component id="72" />
         <component id="68" />
-        <component id="306" />
         <component id="3109" />
       </excludedComponents>
       <includedDownloadableComponents>
@@ -1989,10 +1915,33 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle jreBundleSource="none" />
     </unixArchive>
+    <macosFolder name="Sentinel SNAP Mac OS X Folder" id="3551" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="universal">
+      <excludedComponents>
+        <component id="1963" />
+        <component id="3109" />
+      </excludedComponents>
+      <includedDownloadableComponents>
+        <component id="73" />
+        <component id="68" />
+      </includedDownloadableComponents>
+      <excludedLaunchers>
+        <launcher id="538" />
+        <launcher id="539" />
+        <launcher id="656" />
+        <launcher id="2822" />
+      </excludedLaunchers>
+      <exclude>
+        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="smos" />
+        <entry filesetId="637" />
+        <entry filesetId="639" />
+        <entry filesetId="641" />
+      </exclude>
+      <jreBundle bundleUrl="https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-debugimage_aarch64_mac_hotspot_17.0.6_10.tar.gz" />
+    </macosFolder>
   </mediaSets>
   <buildIds buildAll="false">
     <mediaSet refId="2589" />
-    <mediaSet refId="2598" />
   </buildIds>
   <buildOptions faster="true" disableSigning="true" />
 </install4j>
