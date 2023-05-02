@@ -75,6 +75,15 @@
           <entry filesetId="641" />
         </include>
       </component>
+      <component name="Radarsat Toolbox" id="3552" hideHelpButton="true" downloadable="true">
+        <description>Ingestion of SAR data products and dedicated support tools.</description>
+        <include>
+          <entry location="rstb" />
+        </include>
+        <dependencies>
+          <component id="76" />
+        </dependencies>
+      </component>
       <component name="Microwave Toolbox" id="73" customizedId="S1TBX" hideHelpButton="true" downloadable="true">
         <description>Ingestion of SAR data products and dedicated support tools.</description>
         <include>
