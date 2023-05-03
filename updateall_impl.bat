@@ -4,12 +4,12 @@ cd %0\..\..
 
 echo Git updates...
 
-set skipTests=true
+set skipTests=false
 
 set buildSnapEngine=true
 set buildSnapDesktop=true
 set buildSnapExamples=false
-set buildMwvTBX=false
+set buildMwvTBX=true
 set buildOptTBX=true
 set buildSMOSBOX=false
 
