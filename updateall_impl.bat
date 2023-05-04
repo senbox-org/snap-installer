@@ -8,7 +8,7 @@ set skipTests=false
 
 set buildSnapEngine=true
 set buildSnapDesktop=true
-set buildSnapExamples=false
+set buildSnapExamples=true
 set buildMwvTBX=true
 set buildOptTBX=true
 set buildSMOSBOX=false
