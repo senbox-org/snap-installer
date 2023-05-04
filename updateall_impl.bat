@@ -11,7 +11,7 @@ set buildSnapDesktop=true
 set buildSnapExamples=true
 set buildMwvTBX=true
 set buildOptTBX=true
-set buildSMOSBOX=false
+set buildSMOSBOX=true
 
 if exist snap-engine\.git (
     cd snap-engine
