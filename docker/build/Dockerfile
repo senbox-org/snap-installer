@@ -196,20 +196,69 @@ COPY --from=base /usr/share/maven ./maven/
 ENV PATH="${USER_HOME_DIR}/bin:${PATH}"
 
 # 'windows' stage
-FROM winamd64/python:windowsservercore-ltsc2022 AS package-windows
-ARG USER=snap
-ARG USER_HOME_DIR="C:\Users\snap\Documents"
-# Setup JDK
-ENV JAVA_HOME=/opt/java/openjdk
-COPY --from=winamd64/eclipse-temurin:11 $JAVA_HOME $JAVA_HOME
-ENV PATH="${JAVA_HOME}\bin:${PATH}"
+# escape=`
+ARG JAVA_VERSION=8u242
+# we use the latest stable if nothing is passed
+ARG POWERSHELL_VERSION=
+
+FROM openjdk:${JAVA_VERSION}-windowsservercore-1809 AS openjdk
+
+FROM mcr.microsoft.com/powershell:${POWERSHELL_VERSION}nanoserver-ltsc2022 AS package-windows
+
+SHELL ["pwsh", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
+
+USER snap
+
+ENV JAVA_HOME=C:\openjdk-8
+
+COPY --from=openjdk $JAVA_HOME $JAVA_HOME
+
+ENV ProgramFiles="C:\Program Files"
+ENV WindowsPATH="C:\Windows\system32;C:\Windows"
+
+ARG USER_HOME_DIR="C:/Users/snap"
+# ARG MAVEN_VERSION=3.9.1
+# ARG SHA=4ae5a0d17f9e6cbe57640c481f426a9184dfb451c2bb7cc7db324da095f616a14e7c482a79240e5286e241d8cd2805ea1cd9c95e38954101c2fa4088baad9a1a
+ARG BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
+
+RUN Invoke-WebRequest -Uri ${env:BASE_URL}/apache-maven-${env:MAVEN_VERSION}-bin.zip -OutFile ${env:TEMP}/apache-maven.zip ; `
+#   if((Get-FileHash -Algorithm SHA512 -Path ${env:TEMP}/apache-maven.zip).Hash.ToLower() -ne ${env:SHA}) { exit 1 } ; `
+  Expand-Archive -Path ${env:TEMP}/apache-maven.zip -Destination C:/ProgramData ; `
+  Move-Item C:/ProgramData/apache-maven-${env:MAVEN_VERSION} C:/ProgramData/Maven ; `
+  New-Item -ItemType Directory -Path C:/ProgramData/Maven/Reference | Out-Null ; `
+  Remove-Item ${env:TEMP}/apache-maven.zip
+
+ENV MAVEN_HOME C:/ProgramData/Maven
+ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
+
+COPY mvn-entrypoint.ps1 C:/ProgramData/Maven/mvn-entrypoint.ps1
+COPY settings-docker.xml C:/ProgramData/Maven/Reference/settings-docker.xml
+
 # Install snap
-WORKDIR ${USER_HOME_DIR}
 COPY --from=base /home/snap/*_all_windows-x64*.exe .
 RUN ./*_all_windows-x64*.exe -q && rm ./*_all_windows-x64*.exe
-# Install Maven 
-ADD https://dlcdn.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip .
-ENV MAVEN_DIR="${USER_HOME_DIR}\apache-maven-3.6.3"
-ENV PATH="${MAVEN_DIR}\bin:${PATH}"
+
+USER snap
+
+ENV PATH="${WindowsPATH};${ProgramFiles}\PowerShell;${JAVA_HOME}\bin;${MAVEN_HOME}\bin"
+
+ENTRYPOINT ["pwsh", "-f", "C:/ProgramData/Maven/mvn-entrypoint.ps1"]
+CMD ["mvn"]
+
+# FROM winamd64/python:windowsservercore-ltsc2022 AS package-windows
+# ARG USER=snap
+# ARG USER_HOME_DIR="C:\Users\snap\Documents"
+# # Setup JDK
+# ENV JAVA_HOME=/opt/java/openjdk
+# COPY --from=winamd64/eclipse-temurin:11 $JAVA_HOME $JAVA_HOME
+# ENV PATH="${JAVA_HOME}\bin:${PATH}"
+# # Install snap
+# WORKDIR ${USER_HOME_DIR}
+# COPY --from=base /home/snap/*_all_windows-x64*.exe .
+# RUN ./*_all_windows-x64*.exe -q && rm ./*_all_windows-x64*.exe
+# # Install Maven 
+# ADD https://dlcdn.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip .
+# ENV MAVEN_DIR="${USER_HOME_DIR}\apache-maven-3.6.3"
+# ENV PATH="${MAVEN_DIR}\bin:${PATH}"
 
 FROM package-${TARGET_PLATFORM} AS executable
