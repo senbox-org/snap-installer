@@ -1,4 +1,4 @@
-FROM ubuntu:22.04 as base
+FROM ubuntu:22.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG USER=snap
@@ -64,12 +64,21 @@ RUN mkdir -p /var/maven/.m2
 ###################
 # SETUP PYTHON 3  #
 ###################
-
 RUN apt-get update && \
-	apt-get -qqy install python3 python3-requests python3-lxml python3-psutil python3-numpy python3-pymysql python3-yaml python3-matplotlib python3-cryptography python3-pip && \
-	apt-get remove python3-pil -qqy && apt-get clean && rm -rf /var/lib/apt/lists/* && \
-	pip3 install pillow psutil matplotlib lxml cryptography pymysql
-
+	apt-get -qqy install \
+    python3 \
+    python3-requests \
+    python3-lxml \
+    python3-psutil \
+    python3-numpy \
+    python3-pymysql \
+    python3-yaml \
+    python3-matplotlib \
+    python3-cryptography \
+    python3-pip \
+&& apt-get remove python3-pil -qqy \
+&& rm -rf /var/lib/apt/lists/* \
+&& pip3 install pillow psutil matplotlib lxml cryptography pymysql
 # pillow allow to save figures in jpeg format to save disk space
 
 
@@ -109,6 +118,7 @@ COPY docker/build/scripts/* /opt/scripts/
 # COPY ./docker/build/properties/* /opt/properties/
 
 ENV DEST=/opt/snap-build
+ENV SNAP_DIR=/opt/snap
 
 RUN groupadd --gid 1013 ${USER} && \
     addgroup --gid ${DOCKER_GID} docker && \
@@ -118,8 +128,9 @@ RUN groupadd --gid 1013 ${USER} && \
 RUN mkdir -p /local-update-center && \
     chown ${USER}:${USER} /local-update-center && \
     mkdir -p /opt/scripts && \
-    mkdir -p /opt/snap-build && \
+    mkdir -p ${DEST} ${SNAP_DIR} && \
     chown ${USER}:${USER} ${DEST} && \
+    chown ${USER}:${USER} ${SNAP_DIR} && \
     chown 1012:1013 -R /var/maven
 
 RUN mkdir -p ${DEST}/snap-installer ${DEST}/snap-installer/files ${DEST}/snap-installer/images \${DEST}/snap-desktop/snap-main/target/ ${DEST}/snap-engine \
@@ -150,8 +161,19 @@ COPY probavbox-kit/target/netbeans_clusters/probavbox/ ${DEST}/probavbox/probavb
 
 # Create installers
 ARG LICENSE
-RUN install4jc -v -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macos,windows ${DEST}/snap-installer/snap.install4j && \
-    chmod 777 ${USER_HOME_DIR}/esa-* && rm ${USER_HOME_DIR}/*x32* && rm ${USER_HOME_DIR}/*smos* && rm ${USER_HOME_DIR}/*sentinel* && rm -rf ${DEST}
+RUN install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder,windows ${DEST}/snap-installer/snap.install4j && \
+    chmod 777 ${USER_HOME_DIR}/esa-* && \
+    rm ${USER_HOME_DIR}/*x32* && rm ${USER_HOME_DIR}/*smos* && rm ${USER_HOME_DIR}/*sentinel* && \
+    rm -rf ${DEST}
+
+# Deploy installers
+ARG UPLOAD_URL
+ARG NEXUS_USER
+ARG NEXUS_PASS
+
+COPY docker/build/scripts/upload.sh /opt/scripts/upload.sh
+
+RUN /opt/scripts/upload.sh ${USER_HOME_DIR} ${NEXUS_USER} ${NEXUS_PASS} ${UPLOAD_URL}
 
 # Install snap
 WORKDIR ${USER_HOME_DIR}
@@ -159,30 +181,3 @@ RUN ./*_all_unix*.sh -q && rm ./*_all_unix*.sh
 
 USER ${USER}
 RUN sh /usr/local/bin/mvn-entrypoint.sh
-
-# Default target platform is 'unix'
-# ARG TARGET_PLATFORM=unix
-
-# # 'unix' stage
-# FROM ubuntu:22.04 as unix
-# ARG DEBIAN_FRONTEND=noninteractive
-# ARG USER=snap
-# ARG USER_HOME_DIR="/home/snap"
-# COPY --from=base /build/snap-installer/target/esa-snap_all_unix.sh USER_HOME_DIR/
-# CMD [ "/home/snap/esa-snap_all_unix.sh" ]
-
-# # 'darwin' stage
-# FROM sickcodes/docker-osx:ventura as darwin
-# ARG USER=snap
-# ARG USER_HOME_DIR="/home/snap"
-# COPY --from=base /build/snap-installer/target/esa-snap_all_macos.dmg USER_HOME_DIR/
-# CMD [ "/home/snap/esa-snap_all_macos.dmg" ]
-
-# # 'windows' stage
-# FROM mcr.microsoft.com/windows/servercore:ltsc2022 as windows
-# ARG USER=snap
-# ARG USER_HOME_DIR="C:\Users\snap\Documents"
-# COPY --from=base /build/snap-installer/target/esa-snap_all_windows-x64.exe USER_HOME_DIR/
-# CMD [ "C:\Users\snap\Documents\esa-snap_all_windows-x64.exe" ]
-
-# FROM package-${TARGET_PLATFORM} AS executable
