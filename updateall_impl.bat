@@ -8,10 +8,10 @@ set skipTests=false
 
 set buildSnapEngine=true
 set buildSnapDesktop=true
-set buildSnapExamples=false
-set buildMwvTBX=false
+set buildSnapExamples=true
+set buildMwvTBX=true
 set buildOptTBX=true
-set buildSMOSBOX=false
+set buildSMOSBOX=true
 
 if exist snap-engine\.git (
     cd snap-engine
@@ -113,7 +113,7 @@ if exist optical-toolbox\pom.xml if %buildOptTBX% EQU true (
 
 if exist smos-box\pom.xml if %buildSMOSBOX% EQU true (
     cd smos-box
-    call mvn clean install -T 6 -DskipTests=%skipTests%
+    call mvn clean install -T 8 -DskipTests=%skipTests%
     if %errorlevel% neq 0 exit /B %errorlevel%
     call mvn nbm:autoupdate
     if %errorlevel% neq 0 exit /B %errorlevel%
