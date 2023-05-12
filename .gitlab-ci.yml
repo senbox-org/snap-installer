@@ -28,7 +28,7 @@ stages:
   - build
   - package-build
   - package-test
-  - publish
+  - windows
 
 build-snap:
   stage: build
@@ -59,15 +59,11 @@ build-toolboxes:
   needs:
     - job: compile
       optional: true
-    - project: senbox-org/s1tbx
+    - project: senbox-org/microwave-toolbox
       job: mvn-build
       ref: $COMPILE_BRANCH
       artifacts: true
-    - project: senbox-org/s2tbx
-      job: mvn-build
-      ref: $COMPILE_BRANCH
-      artifacts: true
-    - project: senbox-org/s3tbx
+    - project: senbox-org/optical-toolbox
       job: mvn-build
       ref: $COMPILE_BRANCH
       artifacts: true
@@ -83,9 +79,8 @@ build-toolboxes:
   artifacts:
     expire_in: 2 hours
     paths:
-      - "$CI_PROJECT_DIR/s1tbx-kit/target/netbeans_clusters"
-      - "$CI_PROJECT_DIR/s2tbx-kit/target/netbeans_clusters"
-      - "$CI_PROJECT_DIR/s3tbx-kit/target/netbeans_clusters"
+      - "$CI_PROJECT_DIR/microwavetbx-kit/target/netbeans_clusters/rstb"
+      - "$CI_PROJECT_DIR/opttbx-kit/target/netbeans_clusters/opttbx"
       - "$CI_PROJECT_DIR/smos-kit/target/netbeans_clusters"
       - "$CI_PROJECT_DIR/probavbox-kit/target/netbeans_clusters"
 
@@ -124,3 +119,42 @@ docker-hadolint:
   rules:
     - if: $RECOMPILE == "false"
       when: never
+
+windows:
+  stage: windows
+  trigger:
+    include: windows.gitlab-ci.yml
+  needs:
+    - docker-kaniko-build
+
+# Report on Github cf https://ecp-ci.gitlab.io/docs/guides/build-status-gitlab.html
+.report-status:
+  image: curlimages/curl  
+  variables:
+    URL: "https://api.github.com/repos/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}/statuses/${CI_COMMIT_SHA}"
+    STATUS_NAME: snap-ci-unix
+  script:
+    # For complete details on the GitHub API please see:
+    # https://docs.github.com/en/rest/commits/statuses?apiVersion=2022-11-28#create-a-commit-status
+    - |-
+      curl -X POST $URL -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GITHUB_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" -d '{"state": "'$CI_JOB_NAME'", "context": "'$STATUS_NAME'", "target_url": "'$CI_PIPELINE_URL'", "description": "Build unix installer"}'
+  environment:
+    name: reporting-github
+  dependencies: []
+
+pending:
+  stage: .pre
+  extends:
+    - .report-status
+
+success:
+  stage: .post
+  extends:
+    - .report-status
+
+failure:
+  stage: .post
+  extends:
+    - .report-status
+  rules:
+    - when: on_failure

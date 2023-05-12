@@ -1,0 +1,53 @@
+include:
+  - project: 'to-be-continuous/docker'
+    ref: '4.0.0'
+    file: '/templates/gitlab-ci-docker.yml'
+
+variables:
+  DOCKER_DIND_BUILD: "true"
+  DOCKER_FILE: "docker/build/windows.Dockerfile"
+  DOCKER_REGISTRY_MIRROR: docker.snap-ci.ovh
+  DOCKER_REGISTRY_USER: $NEXUS_USER
+  DOCKER_REGISTRY_PASSWORD: $NEXUS_PASSWORD
+  DOCKER_CONTEXT_PATH: "${CI_PROJECT_DIR}"
+  DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:win-snapshot-latest"
+  DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:win-latest"
+  DOCKER_TRIVY_ARGS: "${DOCKER_TRIVY_ARGS} --timeout 15m"
+
+docker-dind-build:
+  tags:
+    - shared-windows
+    - windows
+    - windows-1809
+
+# Report on Github cf https://ecp-ci.gitlab.io/docs/guides/build-status-gitlab.html
+.report-status:
+  image: curlimages/curl  
+  variables:
+    URL: "https://api.github.com/repos/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}/statuses/${CI_COMMIT_SHA}"
+    STATUS_NAME: snap-ci-windows
+  script:
+    # For complete details on the GitHub API please see:
+    # https://docs.github.com/en/rest/commits/statuses?apiVersion=2022-11-28#create-a-commit-status
+    - |-
+      curl -X POST $URL -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GITHUB_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" -d '{"state": "'$CI_JOB_NAME'", "context": "'$STATUS_NAME'", "target_url": "'$CI_PIPELINE_URL'", "description": "Build windows installer"}'
+  environment:
+    name: reporting-github
+  dependencies: []
+
+pending:
+  stage: .pre
+  extends:
+    - .report-status
+
+success:
+  stage: .post
+  extends:
+    - .report-status
+
+failure:
+  stage: .post
+  extends:
+    - .report-status
+  rules:
+    - when: on_failure
