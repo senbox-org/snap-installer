@@ -13,6 +13,7 @@ variables:
   DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:win-snapshot-latest"
   DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:win-latest"
   DOCKER_TRIVY_ARGS: "${DOCKER_TRIVY_ARGS} --timeout 15m"
+  DOCKER_BUILD_ARGS: "--build-arg SNAP_WINDOWS_URL=${SNAP_WINDOWS_URL}"
 
 docker-dind-build:
   tags:

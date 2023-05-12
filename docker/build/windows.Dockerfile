@@ -23,9 +23,9 @@ COPY docker/build/maven/settings-docker.xml C:/ProgramData/Maven/apache-maven-3.
 # PIP packages
 RUN py -m pip install pillow psutil matplotlib lxml cryptography pymysql
 
-# USER snap
 ### SNAP ###
-ADD https://nexus.snap-ci.ovh/repository/snap-maven-public/org/esa/snap/installers-snapshot/snap_all_windows/10_0_0/snap_all_windows-10_0_0.exe /c/windows/temp/snap.exe
+ARG SNAP_WINDOWS_URL
+ADD ${SNAP_WINDOWS_URL} /c/windows/temp/snap.exe
 
 RUN /c/windows/temp/snap.exe -y
 

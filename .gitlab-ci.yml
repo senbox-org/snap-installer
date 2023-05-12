@@ -20,14 +20,15 @@ variables:
   DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix-latest"
   DOCKER_TRIVY_ARGS: "${DOCKER_TRIVY_ARGS} --timeout 15m"
   DOCKER_BUILD_ARGS: "--build-arg LICENSE=${INSTALL4J_LICENSE} --build-arg=UPLOAD_URL --build-arg=NEXUS_USER --build-arg=NEXUS_PASS"
-  COMPILE_BRANCH: last-stable
-  RECOMPILE: "false"
+  COMPILE_BRANCH: master
+  RECOMPILE: "true"
 
 stages:
   - compile
   - build
   - package-build
   - package-test
+  - publish
   - windows
 
 build-snap:
@@ -100,6 +101,7 @@ compile:
     - if: $BRANCH
       variables:
         COMPILE_BRANCH: $BRANCH
+  allow_failure: true
   trigger: 
     project: $PROJECT
     branch: $COMPILE_BRANCH
@@ -108,9 +110,8 @@ compile:
     matrix:
       - PROJECT: senbox-org/snap-engine
       - PROJECT: senbox-org/snap-desktop
-      - PROJECT: senbox-org/s1tbx
-      - PROJECT: senbox-org/s2tbx
-      - PROJECT: senbox-org/s3tbx
+      - PROJECT: senbox-org/microwave-toolbox
+      - PROJECT: senbox-org/optical-toolbox
       - PROJECT: senbox-org/smos-box
       - PROJECT: senbox-org/probavbox
 
