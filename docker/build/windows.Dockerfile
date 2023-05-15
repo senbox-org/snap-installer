@@ -24,10 +24,10 @@ COPY docker/build/maven/settings-docker.xml C:/ProgramData/Maven/apache-maven-3.
 RUN py -m pip install pillow psutil matplotlib lxml cryptography pymysql
 
 ### SNAP ###
-ARG SNAP_WINDOWS_URL
-ADD ${SNAP_WINDOWS_URL} /c/windows/temp/snap.exe
+ARG SNAP_WIN_DOWLOAD_URL=https://download.esa.int/step/snap/9.0/installers/esa-snap_all_windows-x64_9_0_0.exe
+ADD ${SNAP_WIN_DOWLOAD_URL} C:/Windows/Temp/snap.exe
 
-RUN /c/windows/temp/snap.exe -y
+RUN C:/Windows/Temp/snap.exe -q && del C:\Windows\Temp\snap.exe
 
 USER snap
 ENTRYPOINT ["pwsh", "-f", "C:/ProgramData/Maven/apache-maven-3.6.3/mvn-entrypoint.ps1"]

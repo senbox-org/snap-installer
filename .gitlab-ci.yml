@@ -31,7 +31,7 @@ stages:
   - publish
   - windows
 
-build-snap:
+build:
   stage: build
   needs:
     - job: compile
@@ -44,22 +44,6 @@ build-snap:
       job: mvn-build
       ref: $COMPILE_BRANCH
       artifacts: true
-  script: echo build-snap
-  artifacts:
-    expire_in: 2 hours
-    paths:
-      - LICENSE.html
-      - etc
-      - "${CI_PROJECT_DIR}/snap-application/target"
-      - "${CI_PROJECT_DIR}/snap-main/target"
-      - "${CI_PROJECT_DIR}/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/Performance32.png"
-
-build-toolboxes:
-  image: registry.hub.docker.com/library/maven:3.6.3
-  stage: build
-  needs:
-    - job: compile
-      optional: true
     - project: senbox-org/microwave-toolbox
       job: mvn-build
       ref: $COMPILE_BRANCH
@@ -72,24 +56,23 @@ build-toolboxes:
       job: mvn-build
       ref: $COMPILE_BRANCH
       artifacts: true
-    - project: senbox-org/probavbox
-      job: mvn-build
-      ref: $COMPILE_BRANCH
-      artifacts: true
-  script: VERSION=$(mvn --non-recursive help:evaluate -Dexpression=project.version -q -DforceStdout)
+  script: echo build-snap
   artifacts:
     expire_in: 2 hours
     paths:
+      - LICENSE.html
+      - etc
+      - "${CI_PROJECT_DIR}/snap-application/target"
+      - "${CI_PROJECT_DIR}/snap-main/target"
+      - "${CI_PROJECT_DIR}/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/Performance32.png"
       - "$CI_PROJECT_DIR/microwavetbx-kit/target/netbeans_clusters/rstb"
       - "$CI_PROJECT_DIR/opttbx-kit/target/netbeans_clusters/opttbx"
       - "$CI_PROJECT_DIR/smos-kit/target/netbeans_clusters"
-      - "$CI_PROJECT_DIR/probavbox-kit/target/netbeans_clusters"
 
 # Before building the image we need other projects artifacts  
 docker-kaniko-build:
   needs:
-    - build-snap
-    - build-toolboxes
+    - build
 
 compile:
   stage: compile
@@ -113,7 +96,6 @@ compile:
       - PROJECT: senbox-org/microwave-toolbox
       - PROJECT: senbox-org/optical-toolbox
       - PROJECT: senbox-org/smos-box
-      - PROJECT: senbox-org/probavbox
 
 docker-hadolint:
   when: always
