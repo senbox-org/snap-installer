@@ -12,16 +12,26 @@ to ``tee`` updateall.bat's output to console and to updateall.log file.
 ## CI pipeline
 
 1. Installers are built inside a container from docker/build/Dockerfile 
-2. Executables files are uploaded to Nexus with `mvn deploy-file` plugin
-3. docker image is published to Nexus as well
+2. Executables files are uploaded to Nexus with `cURL`
+3. docker images are published to Nexus
 
 ## Locally
+
+### Make installers with docker
 
 You can either build it as usual or use docker.
 In case you want to build the docker image locally
 
 `export LICENCE=<install4j_license>`
 
-`docker build -f docker/build/Dockerfile . -t snap/snap-installer:latest --rm --build-arg LICENSE`
+`docker build -f docker/build/Dockerfile . -t snap/snap-installer:latest --rm --build-arg=LICENSE`
 
 Then `docker run -i -l snap-installer snap/snap-installer:latest`
+
+### Build Windows Dockerfile
+
+`export SNAP_WIN_DOWLOAD_URL=<url_to_exe_file>`
+
+If `SNAP_WIN_DOWLOAD_URL` is not provided, snap is downloaded from step website.
+
+`docker build -f docker/build/Dockerfile . -t snap/snap-installer:win-latest --rm --build-arg=SNAP_WIN_DOWLOAD_URL`

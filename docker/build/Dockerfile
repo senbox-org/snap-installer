@@ -97,7 +97,7 @@ RUN wget https://download.ej-technologies.com/install4j/install4j_linux-x64_${IN
 ###################
 
 ARG QFTEST_VERSION=4.7.2
-RUN wget https://www.qfs.de/fileadmin/Webdata/pub/qftest/QF-Test-${QFTEST_VERSION}.tar.gz -O /tmp/QF-Test.tar.gz && \
+RUN wget https://www.qfs.de/fileadmin/Webdata/pub/qftest/QF-Test-${QFTEST_VERSION}.tar.gz -O /tmp/QF-Test.tar.gz -q --progress=dot:giga && \
 	tar -xzvf /tmp/QF-Test.tar.gz -C /opt && \
 	cd /opt/qftest/qftest-${QFTEST_VERSION} &&\
 	./setup.sh &&\
@@ -108,10 +108,6 @@ RUN wget https://www.qfs.de/fileadmin/Webdata/pub/qftest/QF-Test-${QFTEST_VERSIO
 ###################
 WORKDIR /
 RUN mkdir -p /var/maven/.m2
-
-# RUN mkdir -p /home/${USER} && \
-# 	chown 1012:1013 /home/${USER} && \
-#     chmod 777 /home/${USER} && \
 RUN mkdir -p /opt/scripts /opt/properties 
 
 COPY docker/build/scripts/* /opt/scripts/
@@ -136,9 +132,8 @@ RUN mkdir -p /local-update-center && \
 RUN mkdir -p ${DEST}/snap-installer ${DEST}/snap-installer/files ${DEST}/snap-installer/images \${DEST}/snap-desktop/snap-main/target/ ${DEST}/snap-engine \
     ${DEST}/snap-desktop/snap-application/target/snap/etc ${DEST}/snap-desktop/snap-application/target/snap/snap \ 
     ${DEST}/snap-desktop/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/ \
-    ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/s1tbx ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/rstb \
-    ${DEST}/s2tbx/s2tbx-kit/target/netbeans_clusters/s2tbx ${DEST}/s3tbx/s3tbx-kit/target/netbeans_clusters/s3tbx \
-    ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos ${DEST}/probavbox/probavbox-kit/target/netbeans_clusters/probavbox
+    ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos ${DEST}/microwavetbx-kit/target/netbeans_clusters/rstb/ \
+    ${DEST}/opttbx-kit/target/netbeans_clusters/opttbx/
 
 COPY snap.install4j LICENSE.txt VERSION.txt ${DEST}/snap-installer/
 COPY files/ ${DEST}/snap-installer/files/
@@ -152,12 +147,9 @@ COPY snap-application/target/snap/ide/ ${DEST}/snap-desktop/snap-application/tar
 COPY snap-application/target/snap/snap/ ${DEST}/snap-desktop/snap-application/target/snap/snap/
 COPY snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/Performance32.png ${DEST}/snap-desktop/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/
 COPY snap-application/target/snap/THIRDPARTY_LICENSES.txt ${DEST}/snap-desktop/snap-application/target/snap/
-COPY s1tbx-kit/target/netbeans_clusters/s1tbx/ ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/s1tbx/
-COPY s1tbx-kit/target/netbeans_clusters/rstb/ ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/rstb/
-COPY s2tbx-kit/target/netbeans_clusters/s2tbx/ ${DEST}/s2tbx/s2tbx-kit/target/netbeans_clusters/s2tbx/
-COPY s3tbx-kit/target/netbeans_clusters/s3tbx/ ${DEST}/s3tbx/s3tbx-kit/target/netbeans_clusters/s3tbx/
+COPY microwavetbx-kit/target/netbeans_clusters/rstb ${DEST}/microwavetbx-kit/target/netbeans_clusters/rstb/
+COPY opttbx-kit/target/netbeans_clusters/opttbx ${DEST}/opttbx-kit/target/netbeans_clusters/opttbx/
 COPY smos-kit/target/netbeans_clusters/smos/ ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos/
-COPY probavbox-kit/target/netbeans_clusters/probavbox/ ${DEST}/probavbox/probavbox-kit/target/netbeans_clusters/probavbox/
 
 # Create installers
 ARG LICENSE

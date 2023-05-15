@@ -20,8 +20,8 @@ variables:
   DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix-latest"
   DOCKER_TRIVY_ARGS: "${DOCKER_TRIVY_ARGS} --timeout 15m"
   DOCKER_BUILD_ARGS: "--build-arg LICENSE=${INSTALL4J_LICENSE} --build-arg=UPLOAD_URL --build-arg=NEXUS_USER --build-arg=NEXUS_PASS"
-  COMPILE_BRANCH: last-stable
-  RECOMPILE: "false"
+  COMPILE_BRANCH: master
+  RECOMPILE: "true"
 
 stages:
   - compile
@@ -29,8 +29,9 @@ stages:
   - package-build
   - package-test
   - publish
+  - windows
 
-build-snap:
+build:
   stage: build
   needs:
     - job: compile
@@ -43,6 +44,18 @@ build-snap:
       job: mvn-build
       ref: $COMPILE_BRANCH
       artifacts: true
+    - project: senbox-org/microwave-toolbox
+      job: mvn-build
+      ref: $COMPILE_BRANCH
+      artifacts: true
+    - project: senbox-org/optical-toolbox
+      job: mvn-build
+      ref: $COMPILE_BRANCH
+      artifacts: true
+    - project: senbox-org/smos-box
+      job: mvn-build
+      ref: $COMPILE_BRANCH
+      artifacts: true
   script: echo build-snap
   artifacts:
     expire_in: 2 hours
@@ -52,48 +65,14 @@ build-snap:
       - "${CI_PROJECT_DIR}/snap-application/target"
       - "${CI_PROJECT_DIR}/snap-main/target"
       - "${CI_PROJECT_DIR}/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/Performance32.png"
-
-build-toolboxes:
-  image: registry.hub.docker.com/library/maven:3.6.3
-  stage: build
-  needs:
-    - job: compile
-      optional: true
-    - project: senbox-org/s1tbx
-      job: mvn-build
-      ref: $COMPILE_BRANCH
-      artifacts: true
-    - project: senbox-org/s2tbx
-      job: mvn-build
-      ref: $COMPILE_BRANCH
-      artifacts: true
-    - project: senbox-org/s3tbx
-      job: mvn-build
-      ref: $COMPILE_BRANCH
-      artifacts: true
-    - project: senbox-org/smos-box
-      job: mvn-build
-      ref: $COMPILE_BRANCH
-      artifacts: true
-    - project: senbox-org/probavbox
-      job: mvn-build
-      ref: $COMPILE_BRANCH
-      artifacts: true
-  script: VERSION=$(mvn --non-recursive help:evaluate -Dexpression=project.version -q -DforceStdout)
-  artifacts:
-    expire_in: 2 hours
-    paths:
-      - "$CI_PROJECT_DIR/s1tbx-kit/target/netbeans_clusters"
-      - "$CI_PROJECT_DIR/s2tbx-kit/target/netbeans_clusters"
-      - "$CI_PROJECT_DIR/s3tbx-kit/target/netbeans_clusters"
+      - "$CI_PROJECT_DIR/microwavetbx-kit/target/netbeans_clusters/rstb"
+      - "$CI_PROJECT_DIR/opttbx-kit/target/netbeans_clusters/opttbx"
       - "$CI_PROJECT_DIR/smos-kit/target/netbeans_clusters"
-      - "$CI_PROJECT_DIR/probavbox-kit/target/netbeans_clusters"
 
 # Before building the image we need other projects artifacts  
 docker-kaniko-build:
   needs:
-    - build-snap
-    - build-toolboxes
+    - build
 
 compile:
   stage: compile
@@ -105,6 +84,7 @@ compile:
     - if: $BRANCH
       variables:
         COMPILE_BRANCH: $BRANCH
+  allow_failure: true
   trigger: 
     project: $PROJECT
     branch: $COMPILE_BRANCH
@@ -113,14 +93,51 @@ compile:
     matrix:
       - PROJECT: senbox-org/snap-engine
       - PROJECT: senbox-org/snap-desktop
-      - PROJECT: senbox-org/s1tbx
-      - PROJECT: senbox-org/s2tbx
-      - PROJECT: senbox-org/s3tbx
+      - PROJECT: senbox-org/microwave-toolbox
+      - PROJECT: senbox-org/optical-toolbox
       - PROJECT: senbox-org/smos-box
-      - PROJECT: senbox-org/probavbox
 
 docker-hadolint:
   when: always
   rules:
     - if: $RECOMPILE == "false"
       when: never
+
+windows:
+  stage: windows
+  trigger:
+    include: windows.gitlab-ci.yml
+  needs:
+    - docker-kaniko-build
+
+# Report on Github cf https://ecp-ci.gitlab.io/docs/guides/build-status-gitlab.html
+.report-status:
+  image: curlimages/curl  
+  variables:
+    URL: "https://api.github.com/repos/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}/statuses/${CI_COMMIT_SHA}"
+    STATUS_NAME: snap-ci-unix
+  script:
+    # For complete details on the GitHub API please see:
+    # https://docs.github.com/en/rest/commits/statuses?apiVersion=2022-11-28#create-a-commit-status
+    - |-
+      curl -X POST $URL -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GITHUB_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" -d '{"state": "'$CI_JOB_NAME'", "context": "'$STATUS_NAME'", "target_url": "'$CI_PIPELINE_URL'", "description": "Build unix installer"}'
+  environment:
+    name: reporting-github
+  dependencies: []
+
+pending:
+  stage: .pre
+  extends:
+    - .report-status
+
+success:
+  stage: .post
+  extends:
+    - .report-status
+
+failure:
+  stage: .post
+  extends:
+    - .report-status
+  rules:
+    - when: on_failure
