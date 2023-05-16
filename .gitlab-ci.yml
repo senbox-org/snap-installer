@@ -110,6 +110,12 @@ windows:
   needs:
     - docker-kaniko-build
 
+windows-only:
+  stage: windows
+  trigger:
+    include: windows.gitlab-ci.yml
+  when: manual
+
 # Report on Github cf https://ecp-ci.gitlab.io/docs/guides/build-status-gitlab.html
 .report-status:
   image: curlimages/curl  
