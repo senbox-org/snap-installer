@@ -97,7 +97,7 @@ RUN wget https://download.ej-technologies.com/install4j/install4j_linux-x64_${IN
 ###################
 
 ARG QFTEST_VERSION=4.7.2
-RUN wget https://www.qfs.de/fileadmin/Webdata/pub/qftest/QF-Test-${QFTEST_VERSION}.tar.gz -O /tmp/QF-Test.tar.gz && \
+RUN wget https://www.qfs.de/fileadmin/Webdata/pub/qftest/QF-Test-${QFTEST_VERSION}.tar.gz -O /tmp/QF-Test.tar.gz -q --progress=dot:giga && \
 	tar -xzvf /tmp/QF-Test.tar.gz -C /opt && \
 	cd /opt/qftest/qftest-${QFTEST_VERSION} &&\
 	./setup.sh &&\
@@ -140,7 +140,7 @@ RUN mkdir -p ${DEST}/snap-installer ${DEST}/snap-installer/files ${DEST}/snap-in
     ${DEST}/s2tbx/s2tbx-kit/target/netbeans_clusters/s2tbx ${DEST}/s3tbx/s3tbx-kit/target/netbeans_clusters/s3tbx \
     ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos ${DEST}/probavbox/probavbox-kit/target/netbeans_clusters/probavbox
 
-COPY snap.install4j LICENSE.txt VERSION.txt ${DEST}/snap-installer/
+COPY snap_java8.install4j LICENSE.txt VERSION.txt ${DEST}/snap-installer/
 COPY files/ ${DEST}/snap-installer/files/
 COPY images/ ${DEST}/snap-installer/images/
 COPY LICENSE.html ${DEST}/snap-engine/
@@ -161,7 +161,7 @@ COPY probavbox-kit/target/netbeans_clusters/probavbox/ ${DEST}/probavbox/probavb
 
 # Create installers
 ARG LICENSE
-RUN install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder,windows ${DEST}/snap-installer/snap.install4j && \
+RUN install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder,windows ${DEST}/snap-installer/snap_java8.install4j && \
     chmod 777 ${USER_HOME_DIR}/esa-* && \
     rm ${USER_HOME_DIR}/*x32* && rm ${USER_HOME_DIR}/*smos* && rm ${USER_HOME_DIR}/*sentinel* && \
     rm -rf ${DEST}
