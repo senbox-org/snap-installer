@@ -96,12 +96,12 @@ RUN wget https://download.ej-technologies.com/install4j/install4j_linux-x64_${IN
 # SETUP QFTest    #
 ###################
 
-ARG QFTEST_VERSION=4.7.2
-RUN wget https://www.qfs.de/fileadmin/Webdata/pub/qftest/QF-Test-${QFTEST_VERSION}.tar.gz -O /tmp/QF-Test.tar.gz -q --progress=dot:giga && \
-	tar -xzvf /tmp/QF-Test.tar.gz -C /opt && \
-	cd /opt/qftest/qftest-${QFTEST_VERSION} &&\
-	./setup.sh &&\
-	rm /tmp/QF-Test.tar.gz 
+# ARG QFTEST_VERSION=4.7.2
+# RUN wget https://www.qfs.de/fileadmin/Webdata/pub/qftest/QF-Test-${QFTEST_VERSION}.tar.gz -O /tmp/QF-Test.tar.gz -q --progress=dot:giga && \
+# 	tar -xzvf /tmp/QF-Test.tar.gz -C /opt && \
+# 	cd /opt/qftest/qftest-${QFTEST_VERSION} &&\
+# 	./setup.sh &&\
+# 	rm /tmp/QF-Test.tar.gz 
 
 ###################
 # USER  SETUP     #
@@ -165,7 +165,8 @@ COPY probavbox-kit/target/netbeans_clusters/probavbox/ ${DEST}/probavbox/probavb
 ARG LICENSE
 ARG USER_HOME_DIR="/home/snap"
 
-RUN install4jc -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder,windows ${DEST}/snap-installer/snap_java8.install4j && \
+RUN export VERSION=$(mvn --non-recursive help:evaluate -Dexpression=project.version -q -DforceStdout  | tr . _) \
+    install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -V ${VERSION} -s -m unixInstaller,macosFolder,windows ${DEST}/snap-installer/snap_java8.install4j && \
     chmod 777 ${USER_HOME_DIR}/esa-* && \
     rm ${USER_HOME_DIR}/*x32* && rm ${USER_HOME_DIR}/*smos* && rm ${USER_HOME_DIR}/*sentinel* && \
     rm -rf ${DEST}
