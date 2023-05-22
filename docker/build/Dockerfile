@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:22.04 AS base
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG USER=snap
@@ -133,6 +133,8 @@ RUN mkdir -p /local-update-center && \
     chown ${USER}:${USER} ${SNAP_DIR} && \
     chown 1012:1013 -R /var/maven
 
+FROM base AS installer
+
 RUN mkdir -p ${DEST}/snap-installer ${DEST}/snap-installer/files ${DEST}/snap-installer/images \${DEST}/snap-desktop/snap-main/target/ ${DEST}/snap-engine \
     ${DEST}/snap-desktop/snap-application/target/snap/etc ${DEST}/snap-desktop/snap-application/target/snap/snap \ 
     ${DEST}/snap-desktop/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/ \
@@ -161,7 +163,9 @@ COPY probavbox-kit/target/netbeans_clusters/probavbox/ ${DEST}/probavbox/probavb
 
 # Create installers
 ARG LICENSE
-RUN install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder,windows ${DEST}/snap-installer/snap_java8.install4j && \
+ARG USER_HOME_DIR="/home/snap"
+
+RUN install4jc -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder,windows ${DEST}/snap-installer/snap_java8.install4j && \
     chmod 777 ${USER_HOME_DIR}/esa-* && \
     rm ${USER_HOME_DIR}/*x32* && rm ${USER_HOME_DIR}/*smos* && rm ${USER_HOME_DIR}/*sentinel* && \
     rm -rf ${DEST}
@@ -175,9 +179,23 @@ COPY docker/build/scripts/upload.sh /opt/scripts/upload.sh
 
 RUN /opt/scripts/upload.sh ${USER_HOME_DIR} ${NEXUS_USER} ${NEXUS_PASS} ${UPLOAD_URL}
 
+FROM base AS unix
+
+ARG USER_HOME_DIR="/home/snap"
+
 # Install snap
 WORKDIR ${USER_HOME_DIR}
-RUN ./*_all_unix*.sh -q && rm ./*_all_unix*.sh
 
-USER ${USER}
+COPY pom.xml ./pom.xml
+
+RUN export VERSION=$(mvn --non-recursive help:evaluate -Dexpression=project.version -q -DforceStdout  | tr . _) \
+#    URL="https://nexus.snap-ci.ovh/repository/snap-maven-public/org/esa/snap/installers$(echo $([[ "${VERSION}" == *"SNAPSHOT"* ]] && (echo '-snapshots') || (echo '')))/snap_all_unix/${VERSION}/snap_all_unix-${VERSION}.sh" \
+    URL="https://nexus.snap-ci.ovh/repository/snap-maven-public/org/esa/snap/installers-snapshot/snap_all_unix/10_0_0/snap_all_unix-10_0_0.sh" \
+    && echo "Download snap ${VERSION} from ${URL}" \
+    && wget ${URL} --progress=dot:giga \
+    && chmod 777 ${USER_HOME_DIR}/*_all_unix* \
+    && ./*_all_unix*.sh -q \
+    && rm ./*_all_unix*.sh
+
+USER snap
 RUN sh /usr/local/bin/mvn-entrypoint.sh
