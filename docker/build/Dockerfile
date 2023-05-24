@@ -153,7 +153,8 @@ COPY snap-application/target/snap/ide/ ${DEST}/snap-desktop/snap-application/tar
 COPY snap-application/target/snap/snap/ ${DEST}/snap-desktop/snap-application/target/snap/snap/
 COPY snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/Performance32.png ${DEST}/snap-desktop/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/
 COPY snap-application/target/snap/THIRDPARTY_LICENSES.txt ${DEST}/snap-desktop/snap-application/target/snap/
-COPY microwavetbx-kit/target/netbeans_clusters/rstb ${DEST}/microwavetbx-kit/target/netbeans_clusters/rstb/
+# TODO: Restore it once project will compile
+# COPY microwavetbx-kit/target/netbeans_clusters/rstb ${DEST}/microwavetbx-kit/target/netbeans_clusters/rstb/
 COPY opttbx-kit/target/netbeans_clusters/opttbx ${DEST}/opttbx-kit/target/netbeans_clusters/opttbx/
 COPY smos-kit/target/netbeans_clusters/smos/ ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos/
 

@@ -1,6 +1,6 @@
 include:
   - project: 'to-be-continuous/docker'
-    ref: '5.0.2'
+    ref: '5.0.3'
     file: '/templates/gitlab-ci-docker.yml'
 
 variables:
@@ -48,10 +48,10 @@ build:
       job: mvn-build
       ref: $COMPILE_BRANCH
       artifacts: true
-    - project: senbox-org/microwave-toolbox
-      job: mvn-build
-      ref: $COMPILE_BRANCH
-      artifacts: true
+    # - project: senbox-org/microwave-toolbox
+    #   job: mvn-build
+    #   ref: $COMPILE_BRANCH
+    #   artifacts: true
     - project: senbox-org/optical-toolbox
       job: mvn-build
       ref: $COMPILE_BRANCH
@@ -69,23 +69,18 @@ build:
       - "${CI_PROJECT_DIR}/snap-application/target"
       - "${CI_PROJECT_DIR}/snap-main/target"
       - "${CI_PROJECT_DIR}/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/Performance32.png"
-      - "$CI_PROJECT_DIR/microwavetbx-kit/target/netbeans_clusters/rstb"
+      # - "$CI_PROJECT_DIR/microwavetbx-kit/target/netbeans_clusters/rstb"
       - "$CI_PROJECT_DIR/opttbx-kit/target/netbeans_clusters/opttbx"
       - "$CI_PROJECT_DIR/smos-kit/target/netbeans_clusters"
 
 # Before building the image we need other projects artifacts  
 docker-buildah-build:
-  rules:
-    - if: $WINDOWS_ONLY == "true"
-      when: never
   needs:
     - build
 
 compile:
   stage: compile
   rules:
-    - if: $WINDOWS_ONLY == "false"
-      when: never
     - if: $RECOMPILE == "true"
       when: always
     - if: $RECOMPILE == "false"
@@ -102,7 +97,7 @@ compile:
     matrix:
       - PROJECT: senbox-org/snap-engine
       - PROJECT: senbox-org/snap-desktop
-      - PROJECT: senbox-org/microwave-toolbox
+      # - PROJECT: senbox-org/microwave-toolbox
       - PROJECT: senbox-org/optical-toolbox
       - PROJECT: senbox-org/smos-box
 
