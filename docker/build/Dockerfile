@@ -108,10 +108,6 @@ RUN wget https://download.ej-technologies.com/install4j/install4j_linux-x64_${IN
 ###################
 WORKDIR /
 RUN mkdir -p /var/maven/.m2
-
-# RUN mkdir -p /home/${USER} && \
-# 	chown 1012:1013 /home/${USER} && \
-#     chmod 777 /home/${USER} && \
 RUN mkdir -p /opt/scripts /opt/properties 
 
 COPY docker/build/scripts/* /opt/scripts/

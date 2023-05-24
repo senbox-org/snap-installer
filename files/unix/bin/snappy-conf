@@ -5,12 +5,12 @@ temp=`dirname "$0"`
 dir=`cd "$temp" && pwd -P`
 
 usage() {
-    echo "Configures the SNAP-Python interface 'snappy'."
+    echo "Configures the SNAP-Python interface 'esa_snappy'."
     echo ""
     echo "usage: $me <python> [<dir>]"
     echo ""
     echo "    <python>   Full path to Python executable to be used with SNAP, e.g. /user/bin/python3"
-    echo "    <dir>      Directory where the 'snappy' module should be installed. Defaults to ~/.snap/snap-python"
+    echo "    <dir>      Directory where the 'esa_snappy' module should be installed. Defaults to ~/.snap/snap-python"
     echo ""
 }
 
@@ -23,6 +23,6 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     exit 0
 fi
 
-"$dir"/snap --nogui --nosplash --python "$@"
+"$dir"/snap --nogui --nosplash --snappy "$@"
 exit $?
 
