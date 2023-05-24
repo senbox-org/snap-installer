@@ -20,7 +20,7 @@ variables:
   DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix-latest"
   DOCKER_TRIVY_ARGS: "${DOCKER_TRIVY_ARGS} --timeout 15m"
   DOCKER_BUILD_ARGS: "--build-arg LICENSE=${INSTALL4J_LICENSE} --build-arg=UPLOAD_URL --build-arg=NEXUS_USER --build-arg=NEXUS_PASS"
-  COMPILE_BRANCH: master
+  COMPILE_BRANCH: 9-stable
   RECOMPILE: "true"
 
 stages:
