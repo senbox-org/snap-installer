@@ -1,9 +1,10 @@
 include:
   - project: 'to-be-continuous/docker'
-    ref: '4.0.0'
+    ref: '5.0.3'
     file: '/templates/gitlab-ci-docker.yml'
 
 variables:
+  WINDOWS_ONLY: "false"
   BUILD_FOR_INSTALLER: "true"
   MAVEN_OPTS: >-
     -Dhttps.protocols=TLSv1.2
@@ -11,6 +12,7 @@ variables:
     -Dorg.slf4j.simpleLogger.showDateTime=true
     -Djava.awt.headless=true
     -Dmaven.test.skip=true
+  DOCKER_BUILD_TOOL: buildah
   DOCKER_REGISTRY_MIRROR: docker.snap-ci.ovh
   DOCKER_REGISTRY_USER: $NEXUS_USER
   DOCKER_REGISTRY_PASSWORD: $NEXUS_PASSWORD
@@ -33,6 +35,8 @@ stages:
 
 build:
   stage: build
+  rules:
+    - if: $WINDOWS_ONLY == "false"
   needs:
     - job: compile
       optional: true
@@ -70,7 +74,7 @@ build:
       - "$CI_PROJECT_DIR/smos-kit/target/netbeans_clusters"
 
 # Before building the image we need other projects artifacts  
-docker-kaniko-build:
+docker-buildah-build:
   needs:
     - build
 
@@ -97,24 +101,31 @@ compile:
       # - PROJECT: senbox-org/optical-toolbox
       - PROJECT: senbox-org/smos-box
 
-docker-hadolint:
-  when: always
-  rules:
-    - if: $RECOMPILE == "false"
-      when: never
-
 windows:
+  tags:
+    - windows
   stage: windows
-  trigger:
-    include: windows.gitlab-ci.yml
+  extends: docker-buildah-build
+  rules:
+    - if: $WINDOWS_ONLY == "false"
+      when: manual
+    - if: $WINDOWS_ONLY == "true"
+      when: always
+  variables:
+    DOCKER_FILE: "docker/build/windows.Dockerfile"
+    DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:win-snapshot-latest"
+    DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:win-latest"
+    DOCKER_BUILD_ARGS: "--build-arg SNAP_WIN_DOWLOAD_URL=${SNAP_WIN_DOWLOAD_URL}"
+  services: []
   needs:
-    - docker-kaniko-build
+    - job: docker-buildah-build
+      optional: true
 
-windows-only:
-  stage: windows
-  trigger:
-    include: windows.gitlab-ci.yml
-  when: manual
+# docker-hadolint:
+#   when: always
+#   rules:
+#     - if: $RECOMPILE == "false"
+#       when: never
 
 # Report on Github cf https://ecp-ci.gitlab.io/docs/guides/build-status-gitlab.html
 .report-status:
