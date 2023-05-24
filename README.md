@@ -24,7 +24,7 @@ In case you want to build the docker image locally
 
 `export LICENCE=<install4j_license>`
 
-`docker build -f docker/build/Dockerfile . -t snap/snap-installer:latest --rm --build-arg=LICENSE`
+`docker build -f docker/build/Dockerfile . -t snap/snap-installer:latest --rm --build-arg=LICENSE --build-arg UPLOAD_URL="https://nexus.snap-ci.ovh/service/rest/v1/components?repository=snap-intallers" --build-arg NEXUS_USER="$NEXUS_USER" --build-arg NEXUS_PASS="$NEXUS_PASS" -t docker-hosted.snap-ci.ovh/snap/snap-installer:latest`
 
 Then `docker run -i -l snap-installer snap/snap-installer:latest`
 
