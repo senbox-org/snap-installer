@@ -192,7 +192,8 @@ RUN export VERSION=$(mvn --non-recursive help:evaluate -Dexpression=project.vers
     && wget ${URL} --progress=dot:giga \
     && chmod 777 ${USER_HOME_DIR}/*_all_unix* \
     && ./*_all_unix*.sh -q \
-    && rm ./*_all_unix*.sh
+    && rm ./*_all_unix*.sh \
+    && chmod 777 /opt/snap/bin/gpt.vmoptions /opt/snap/bin/gpt.vmoptionsORIGINAL
 
 USER snap
 RUN sh /usr/local/bin/mvn-entrypoint.sh
