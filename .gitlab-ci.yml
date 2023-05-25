@@ -22,6 +22,7 @@ variables:
   DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix-latest"
   DOCKER_TRIVY_ARGS: "${DOCKER_TRIVY_ARGS} --timeout 15m"
   DOCKER_BUILD_ARGS: "--build-arg LICENSE=${INSTALL4J_LICENSE} --build-arg=UPLOAD_URL --build-arg=NEXUS_USER --build-arg=NEXUS_PASS"
+  DOCKER_HADOLINT_ARGS: --failure-threshold error
   COMPILE_BRANCH: last-stable
   RECOMPILE: "false"
 
@@ -37,6 +38,9 @@ build:
   stage: build
   rules:
     - if: $WINDOWS_ONLY == "false"
+    - if: $BRANCH
+      variables:
+        COMPILE_BRANCH: $BRANCH
   needs:
     - job: compile
       optional: true
@@ -101,31 +105,25 @@ compile:
       - PROJECT: senbox-org/optical-toolbox
       - PROJECT: senbox-org/smos-box
 
-windows:
-  tags:
-    - windows
-  stage: windows
-  extends: docker-buildah-build
-  rules:
-    - if: $WINDOWS_ONLY == "false"
-      when: manual
-    - if: $WINDOWS_ONLY == "true"
-      when: always
-  variables:
-    DOCKER_FILE: "docker/build/windows.Dockerfile"
-    DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:win-snapshot-latest"
-    DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:win-latest"
-    DOCKER_BUILD_ARGS: "--build-arg SNAP_WIN_DOWLOAD_URL=${SNAP_WIN_DOWLOAD_URL}"
-  services: []
-  needs:
-    - job: docker-buildah-build
-      optional: true
-
-# docker-hadolint:
-#   when: always
+# windows:
+#   tags:
+#     - windows
+#   stage: windows
+#   extends: docker-buildah-build
 #   rules:
-#     - if: $RECOMPILE == "false"
-#       when: never
+#     - if: $WINDOWS_ONLY == "false"
+#       when: manual
+#     - if: $WINDOWS_ONLY == "true"
+#       when: always
+#   variables:
+#     DOCKER_FILE: "docker/build/windows.Dockerfile"
+#     DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:win-snapshot-latest"
+#     DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:win-latest"
+#     DOCKER_BUILD_ARGS: "--build-arg SNAP_WIN_DOWLOAD_URL=${SNAP_WIN_DOWLOAD_URL}"
+#   services: []
+#   needs:
+#     - job: docker-buildah-build
+#       optional: true
 
 # Report on Github cf https://ecp-ci.gitlab.io/docs/guides/build-status-gitlab.html
 .report-status:

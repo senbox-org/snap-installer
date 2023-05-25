@@ -10,7 +10,7 @@ ARG DOCKER_GID=999
 # SETUP UBUNTU   #
 ##################
 
-RUN apt-get -qq update && apt-get -qqy upgrade && apt-get -qqy install gnupg2 locales wget curl bc git
+RUN apt-get -qq update && apt-get -qqy upgrade && apt-get -qqy install --no-install-recommends gnupg2 locales wget curl bc git ca-certificates
 RUN apt-get -qqy install libxext6 libxrender1 libxtst6 libxi6 libxxf86dga1 libxxf86vm1 libgfortran5 mesa-utils xvfb fonts-dejavu jblas unzip apt-transport-https gnupg && \
     locale-gen en_US.UTF-8 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -26,9 +26,8 @@ ENV LC_ALL en_US.UTF-8
 
 RUN cat /etc/os-release | grep UBUNTU_CODENAME
 # USING ADOPTOPENJDK (Adoptium by Temurin)
-RUN apt-get install -y wget apt-transport-https gnupg
-RUN wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | tee /usr/share/keyrings/adoptium.asc
-RUN echo "deb [signed-by=/usr/share/keyrings/adoptium.asc] https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | tee /etc/apt/sources.list.d/adoptium.list
+RUN wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | apt-key add -
+RUN echo "deb https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | tee /etc/apt/sources.list.d/adoptium.list
 RUN apt-get -qq update && apt-cache search temurin-11-jdk && apt-get -qqy install temurin-11-jdk && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     java -version && which java && echo $JAVA_HOME
@@ -65,7 +64,7 @@ RUN mkdir -p /var/maven/.m2
 # SETUP PYTHON 3  #
 ###################
 RUN apt-get update && \
-	apt-get -qqy install \
+	apt-get -qqy install --no-install-recommends \
     python3 \
     python3-requests \
     python3-lxml \
@@ -78,7 +77,7 @@ RUN apt-get update && \
     python3-pip \
 && apt-get remove python3-pil -qqy \
 && rm -rf /var/lib/apt/lists/* \
-&& pip3 install pillow psutil matplotlib lxml cryptography pymysql
+&& pip3 install --no-cache-dir pillow psutil matplotlib lxml cryptography pymysql
 # pillow allow to save figures in jpeg format to save disk space
 
 
@@ -88,8 +87,8 @@ RUN apt-get update && \
 
 ARG INSTALL4J_VERSION=10_0_5
 
-RUN wget https://download.ej-technologies.com/install4j/install4j_linux-x64_${INSTALL4J_VERSION}.deb -O /tmp/install4j_linux.deb --progress=dot:giga && \
-	apt install -qqyf /tmp/install4j_linux.deb && \
+RUN wget -nv https://download.ej-technologies.com/install4j/install4j_linux-x64_${INSTALL4J_VERSION}.deb -O /tmp/install4j_linux.deb && \
+	apt-get install -qqyf /tmp/install4j_linux.deb && \
 	rm /tmp/install4j_linux.deb
 
 ###################
@@ -190,10 +189,13 @@ RUN export VERSION=$(mvn --non-recursive help:evaluate -Dexpression=project.vers
 #    URL="https://nexus.snap-ci.ovh/repository/snap-maven-public/org/esa/snap/installers$(echo $([[ "${VERSION}" == *"SNAPSHOT"* ]] && (echo '-snapshots') || (echo '')))/snap_all_unix/${VERSION}/snap_all_unix-${VERSION}.sh" \
     URL="https://nexus.snap-ci.ovh/repository/snap-maven-public/org/esa/snap/installers-snapshot/snap_all_unix/10_0_0/snap_all_unix-10_0_0.sh" \
     && echo "Download snap ${VERSION} from ${URL}" \
-    && wget ${URL} --progress=dot:giga \
+    && wget -nv ${URL} \
     && chmod 777 ${USER_HOME_DIR}/*_all_unix* \
     && ./*_all_unix*.sh -q \
     && rm ./*_all_unix*.sh
+# Allow GPT test custom JVM options
+RUN cp /opt/snap/bin/gpt.vmoptions /opt/snap/bin/gpt.vmoptionsORIGINAL \
+    && chmod 777 /opt/snap/bin/gpt.vmoptions /opt/snap/bin/gpt.vmoptionsORIGINAL
 
 USER snap
 RUN sh /usr/local/bin/mvn-entrypoint.sh
