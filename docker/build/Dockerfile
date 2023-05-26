@@ -191,7 +191,7 @@ COPY pom.xml ./pom.xml
 
 RUN export VERSION="$(mvn --non-recursive help:evaluate -Dexpression=project.version -q -DforceStdout  | tr . _)" \
 #    URL="https://nexus.snap-ci.ovh/repository/snap-maven-public/org/esa/snap/installers$(echo $([[ "${VERSION}" == *"SNAPSHOT"* ]] && (echo '-snapshots') || (echo '')))/snap_all_unix/${VERSION}/snap_all_unix-${VERSION}.sh" \
-    URL="https://nexus.snap-ci.ovh/repository/snap-maven-public/org/esa/snap/intallers/snap_all_unix/10_0_0-SNAPSHOT/snap_all_unix-10_0_0-SNAPSHOT.sh" \
+    URL="https://nexus.snap-ci.ovh/repository/snap-maven-public/org/esa/snap/installers-snapshot/snap_all_unix/10_0_0/snap_all_unix-10_0_0.sh" \
     && echo "Download snap ${VERSION} from ${URL}" \
     && wget -nv ${URL} \
     && chmod 777 ${USER_HOME_DIR}/*_all_unix* \

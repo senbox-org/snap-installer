@@ -31,7 +31,7 @@ stages:
   - package-build
   - package-test
   - publish
-  - windows
+  # - windows
 
 build-snap:
   stage: build
@@ -90,6 +90,7 @@ build-toolboxes:
       - "$CI_PROJECT_DIR/s2tbx-kit/target/netbeans_clusters"
       - "$CI_PROJECT_DIR/s3tbx-kit/target/netbeans_clusters"
       - "$CI_PROJECT_DIR/smos-kit/target/netbeans_clusters"
+      - "$CI_PROJECT_DIR/probavbox-kit/target/netbeans_clusters"
 
 # Before building the image we need other projects artifacts  
 docker-buildah-build:
@@ -116,9 +117,11 @@ compile:
     matrix:
       - PROJECT: senbox-org/snap-engine
       - PROJECT: senbox-org/snap-desktop
-      # - PROJECT: senbox-org/microwave-toolbox
-      # - PROJECT: senbox-org/optical-toolbox
+      - PROJECT: senbox-org/s1tbx
+      - PROJECT: senbox-org/s2tbx
+      - PROJECT: senbox-org/s3tbx
       - PROJECT: senbox-org/smos-box
+      - PROJECT: senbox-org/probavbox
 
 # windows:
 #   tags:
