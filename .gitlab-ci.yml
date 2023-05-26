@@ -33,13 +33,8 @@ stages:
   - publish
   - windows
 
-build:
+build-snap:
   stage: build
-  rules:
-    - if: $WINDOWS_ONLY == "false"
-    - if: $BRANCH
-      variables:
-        COMPILE_BRANCH: $BRANCH
   needs:
     - job: compile
       optional: true
@@ -48,18 +43,6 @@ build:
       ref: $COMPILE_BRANCH
       artifacts: true
     - project: senbox-org/snap-desktop
-      job: mvn-build
-      ref: $COMPILE_BRANCH
-      artifacts: true
-    # - project: senbox-org/microwave-toolbox
-    #   job: mvn-build
-    #   ref: $COMPILE_BRANCH
-    #   artifacts: true
-    # - project: senbox-org/optical-toolbox
-    #   job: mvn-build
-    #   ref: $COMPILE_BRANCH
-    #   artifacts: true
-    - project: senbox-org/smos-box
       job: mvn-build
       ref: $COMPILE_BRANCH
       artifacts: true
@@ -72,14 +55,47 @@ build:
       - "${CI_PROJECT_DIR}/snap-application/target"
       - "${CI_PROJECT_DIR}/snap-main/target"
       - "${CI_PROJECT_DIR}/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/Performance32.png"
-      # - "$CI_PROJECT_DIR/microwavetbx-kit/target/netbeans_clusters/rstb"
-      # - "$CI_PROJECT_DIR/opttbx-kit/target/netbeans_clusters/opttbx"
+
+build-toolboxes:
+  image: registry.hub.docker.com/library/maven:3.6.3
+  stage: build
+  needs:
+    - job: compile
+      optional: true
+    - project: senbox-org/s1tbx
+      job: mvn-build
+      ref: $COMPILE_BRANCH
+      artifacts: true
+    - project: senbox-org/s2tbx
+      job: mvn-build
+      ref: $COMPILE_BRANCH
+      artifacts: true
+    - project: senbox-org/s3tbx
+      job: mvn-build
+      ref: $COMPILE_BRANCH
+      artifacts: true
+    - project: senbox-org/smos-box
+      job: mvn-build
+      ref: $COMPILE_BRANCH
+      artifacts: true
+    - project: senbox-org/probavbox
+      job: mvn-build
+      ref: $COMPILE_BRANCH
+      artifacts: true
+  script: VERSION=$(mvn --non-recursive help:evaluate -Dexpression=project.version -q -DforceStdout)
+  artifacts:
+    expire_in: 2 hours
+    paths:
+      - "$CI_PROJECT_DIR/s1tbx-kit/target/netbeans_clusters"
+      - "$CI_PROJECT_DIR/s2tbx-kit/target/netbeans_clusters"
+      - "$CI_PROJECT_DIR/s3tbx-kit/target/netbeans_clusters"
       - "$CI_PROJECT_DIR/smos-kit/target/netbeans_clusters"
 
 # Before building the image we need other projects artifacts  
 docker-buildah-build:
   needs:
-    - build
+    - build-snap
+    - build-toolboxes
 
 compile:
   stage: compile
