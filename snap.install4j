@@ -44,8 +44,6 @@
       <dirEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/snap" entryMode="subdir" subDirectory="snap" />
       <dirEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/platform" entryMode="subdir" subDirectory="platform" />
       <dirEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/ide" entryMode="subdir" subDirectory="ide" />
-      <!-- <dirEntry mountPoint="58" file="../microwave-toolbox/microwavetbx-kit/target/netbeans_clusters/microwavetbx" entryMode="subdir" subDirectory="microwavetbx" />
-      <dirEntry mountPoint="58" file="../microwave-toolbox/microwavetbx-kit/target/netbeans_clusters/rstb" entryMode="subdir" subDirectory="rstb" /> -->
       <dirEntry mountPoint="58" file="../optical-toolbox/opttbx-kit/target/netbeans_clusters/opttbx" entryMode="subdir" subDirectory="opttbx" />
       <dirEntry mountPoint="58" file="../smos-box/smos-kit/target/netbeans_clusters/smos" entryMode="subdir" subDirectory="smos" />
       <fileEntry mountPoint="58" file="./LICENSE.txt" />
@@ -554,6 +552,117 @@ problems after SNAP version upgrades.</property>
             </serializedBean>
             <condition>!context.getBooleanVariable("sys.confirmedUpdateInstallation")</condition>
           </screen>
+          <screen name="Python executable" id="230" beanClass="com.install4j.runtime.beans.screens.FormScreen">
+            <serializedBean>
+              <property name="subTitle" type="string">Which is your preferred Python version?</property>
+              <property name="title" type="string">Select Python</property>
+            </serializedBean>
+            <formComponents>
+              <group id="249" beanClass="com.install4j.runtime.beans.groups.HorizontalFormComponentGroup">
+                <beans>
+                  <formComponent id="248" beanClass="com.install4j.runtime.beans.formcomponents.LabelComponent">
+                    <serializedBean>
+                      <property name="labelIconFile">
+                        <object class="com.install4j.api.beans.ExternalFile">
+                          <string>./images/python-powered.png</string>
+                        </object>
+                      </property>
+                    </serializedBean>
+                  </formComponent>
+                  <formComponent id="234" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
+                    <serializedBean>
+                      <property name="labelHtml" type="string">&lt;html&gt;If you are a &lt;a href="https://www.python.org/downloads/"&gt;Python&lt;/a&gt; developer, you can use the SNAP Java API from Python, or develop SNAP processor plugins using Python. Below you can specify your preferred Python version by
+the given Python executable to be used. This version of SNAP supports Python 
+versions &lt;b&gt;3.6&lt;/b&gt; to &lt;b&gt;3.10&lt;/b&gt;.</property>
+                    </serializedBean>
+                  </formComponent>
+                </beans>
+              </group>
+              <formComponent id="233" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
+                <serializedBean>
+                  <property name="checkboxText" type="string">Configure SNAP for use with Python</property>
+                  <property name="coupledComponentIds">
+                    <add type="string">232</add>
+                  </property>
+                  <property name="variableName" type="string">forcePython</property>
+                </serializedBean>
+              </formComponent>
+              <formComponent id="232" beanClass="com.install4j.runtime.beans.formcomponents.FileChooserComponent">
+                <serializedBean>
+                  <property name="initialBrowserDirectory" type="string">${installer:sys.userHome}</property>
+                  <property name="labelText" type="string">Python executable:</property>
+                  <property name="validationScript">
+                    <object class="com.install4j.api.beans.ScriptProperty">
+                      <property name="value" type="string">boolean success = true;
+
+String pythonExecutable = file.getPath();
+if (!pythonExecutable.isEmpty()) {
+    ProcessBuilder pb = new ProcessBuilder().command(new String[]{file.getPath(), "--version"});
+    try {
+        Process p = pb.start();
+        // TODO: redirect Python output (= Python version) and validate
+        int exitCode = p.waitFor();
+        if (exitCode != 0) {
+            Util.showErrorMessage("'" + file.getName() + "' failed with exit code " + exitCode);
+            success = false;
+        }
+    } catch (Throwable t) {
+        Util.showErrorMessage("'" + file.getName() + "' failed: " + t.getMessage());
+        success = false;
+    }
+}
+
+return success;
+</property>
+                    </object>
+                  </property>
+                  <property name="variableName" type="string">pythonExecutable</property>
+                </serializedBean>
+                <initScript>if (Util.isWindowsInstaller()) {
+    String[] paths = new String[]{"C:\\Python34", "C:\\Python33", "C:\\Python27"};
+    for (String path : paths) {
+        File file = new File(path, "python.exe");
+        if (file.exists()) {
+            configurationObject.setText(file.getPath());
+            break;
+        }
+    }
+} else {
+    String[] commands = new String[]{"python3", "python"};
+    for (String command : commands) {
+        try {
+            Runtime.getRuntime().exec(command);
+            configurationObject.setText(command);
+            break;
+        } catch (Exception e) {
+            // ok
+        }
+    }
+}
+</initScript>
+              </formComponent>
+              <formComponent name="Win" id="955" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
+                <serializedBean>
+                  <property name="labelHtml" type="string">You may type &lt;b&gt;where python&lt;/b&gt; in a cmd terminal window to find the path to your preferred Python version.</property>
+                </serializedBean>
+                <visibilityScript>Util.isWindowsInstaller()</visibilityScript>
+              </formComponent>
+              <formComponent name="Unix" id="954" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
+                <serializedBean>
+                  <property name="labelHtml" type="string">You may type &lt;b&gt;which python&lt;/b&gt; in a terminal window to find the path to your preferred Python version.</property>
+                </serializedBean>
+                <visibilityScript>Util.isMacosInstaller() || Util.isUnixInstaller()</visibilityScript>
+              </formComponent>
+              <formComponent id="1878" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
+                <serializedBean>
+                  <property name="labelHtml" type="string"> After successful configuration you will find the SNAP Python module &lt;b&gt;esa_snappy&lt;/b&gt; in the directory
+ &lt;b&gt;${installer:sys.userHome}/.snap/snap-python&lt;/b&gt;. The Python interpreter and the location of the
+ esa_snappy module can be changed any time using the &lt;b&gt;bin/snappy-conf&lt;/b&gt; tool.
+</property>
+                </serializedBean>
+              </formComponent>
+            </formComponents>
+          </screen>
           <screen id="8" beanClass="com.install4j.runtime.beans.screens.InstallationScreen" rollbackBarrier="true">
             <actions>
               <action id="9" beanClass="com.install4j.runtime.beans.actions.InstallFilesAction" actionElevationType="elevated" failureStrategy="quit" errorMessage="${i18n:FileCorrupted}" />
@@ -968,7 +1077,7 @@ problems after SNAP version upgrades.</property>
               <action name="Unix with Python" id="2637" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" actionElevationType="none">
                 <serializedBean>
                   <property name="arguments" type="array" elementType="string" length="2">
-                    <element index="0">--python</element>
+                    <element index="0">--snappy</element>
                     <element index="1">${installer:pythonExecutable}</element>
                   </property>
                   <property name="launcherId" type="string">539</property>
@@ -985,7 +1094,7 @@ problems after SNAP version upgrades.</property>
               <action name="Mac OS with Python" id="2629" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" actionElevationType="elevated">
                 <serializedBean>
                   <property name="arguments" type="array" elementType="string" length="2">
-                    <element index="0">--python</element>
+                    <element index="0">--snappy</element>
                     <element index="1">${installer:pythonExecutable}</element>
                   </property>
                   <property name="launcherId" type="string">618</property>
@@ -1002,7 +1111,7 @@ problems after SNAP version upgrades.</property>
               <action name="Win x86 with Python" id="2638" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" actionElevationType="none">
                 <serializedBean>
                   <property name="arguments" type="array" elementType="string" length="2">
-                    <element index="0">--python</element>
+                    <element index="0">--snappy</element>
                     <element index="1">${installer:pythonExecutable}</element>
                   </property>
                   <property name="launcherId" type="string">538</property>
@@ -1019,7 +1128,7 @@ problems after SNAP version upgrades.</property>
               <action name="Win x64 with Python" id="2632" beanClass="com.install4j.runtime.beans.actions.finish.ExecuteLauncherAction" actionElevationType="elevated">
                 <serializedBean>
                   <property name="arguments" type="array" elementType="string" length="2">
-                    <element index="0">--python</element>
+                    <element index="0">--snappy</element>
                     <element index="1">"${installer:pythonExecutable}</element>
                   </property>
                   <property name="launcherId" type="string">656</property>
@@ -1837,7 +1946,9 @@ return console.askYesNo(message, true);
     </macosFolder>
   </mediaSets>
   <buildIds buildAll="false">
+    <mediaSet refId="2589" />
     <mediaSet refId="2598" />
+    <mediaSet refId="3551" />
   </buildIds>
   <buildOptions faster="true" disableSigning="true" />
 </install4j>
