@@ -34,6 +34,29 @@ stages:
   - publish
   - windows
 
+compile:
+  stage: compile
+  rules:
+    - if: $RECOMPILE == "true"
+      when: always
+    - if: $RECOMPILE == "false"
+      when: never
+    - if: $BRANCH
+      variables:
+        COMPILE_BRANCH: $BRANCH
+  allow_failure: true
+  trigger: 
+    project: $PROJECT
+    branch: $COMPILE_BRANCH
+    strategy: depend
+  parallel:
+    matrix:
+      - PROJECT: senbox-org/snap-engine
+      - PROJECT: senbox-org/snap-desktop
+      # - PROJECT: senbox-org/microwave-toolbox
+      - PROJECT: senbox-org/optical-toolbox
+      - PROJECT: senbox-org/smos-box
+
 build:
   stage: build
   rules:
@@ -82,28 +105,8 @@ docker-buildah-build:
   needs:
     - build
 
-compile:
-  stage: compile
-  rules:
-    - if: $RECOMPILE == "true"
-      when: always
-    - if: $RECOMPILE == "false"
-      when: never
-    - if: $BRANCH
-      variables:
-        COMPILE_BRANCH: $BRANCH
+docker-trivy:
   allow_failure: true
-  trigger: 
-    project: $PROJECT
-    branch: $COMPILE_BRANCH
-    strategy: depend
-  parallel:
-    matrix:
-      - PROJECT: senbox-org/snap-engine
-      - PROJECT: senbox-org/snap-desktop
-      # - PROJECT: senbox-org/microwave-toolbox
-      - PROJECT: senbox-org/optical-toolbox
-      - PROJECT: senbox-org/smos-box
 
 # windows:
 #   tags:
