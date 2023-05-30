@@ -3,7 +3,7 @@
 *.iws
 .idea/
 target/
-updateall.log
+updateall_log.txt
 *-kit
 *-application
 etc
