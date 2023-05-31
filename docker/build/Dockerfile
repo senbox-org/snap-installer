@@ -63,33 +63,22 @@ RUN mkdir -p /var/maven/.m2
 ###################
 # SETUP PYTHON 3  #
 ###################
-RUN apt-get update && \
-	apt-get -qqy install --no-install-recommends \
-    python3 \
-    python3-requests \
-    python3-lxml \
-    python3-psutil \
-    python3-numpy \
-    python3-pymysql \
-    python3-yaml \
-    python3-matplotlib \
-    python3-cryptography \
-    python3-pip \
+RUN apt-get update && apt-get -qqy install --no-install-recommends python3 python3-pip \
+    # python3-requests \
+    # python3-lxml \
+    # python3-psutil \
+    # python3-numpy \
+    # python3-pymysql \
+    # python3-yaml \
+    # python3-matplotlib \
+    # python3-cryptography \
+    # python3-pip \
 && apt-get remove python3-pil -qqy \
-&& rm -rf /var/lib/apt/lists/* \
-&& pip3 install --no-cache-dir pillow psutil matplotlib lxml cryptography pymysql
+&& rm -rf /var/lib/apt/lists/*
+#  \
+# && pip3 install --no-cache-dir pillow psutil matplotlib lxml cryptography pymysql
 # pillow allow to save figures in jpeg format to save disk space
 
-
-###################
-# SETUP Install4J #
-###################
-
-ARG INSTALL4J_VERSION=10_0_5
-
-RUN wget -nv https://download.ej-technologies.com/install4j/install4j_linux-x64_${INSTALL4J_VERSION}.deb -O /tmp/install4j_linux.deb && \
-	apt-get install -qqyf /tmp/install4j_linux.deb && \
-	rm /tmp/install4j_linux.deb
 
 ###################
 # SETUP QFTest    #
@@ -134,6 +123,16 @@ RUN mkdir -p /local-update-center && \
 
 FROM base AS installer
 
+###################
+# SETUP Install4J #
+###################
+
+ARG INSTALL4J_VERSION=10_0_5
+
+RUN wget -nv https://download.ej-technologies.com/install4j/install4j_linux-x64_${INSTALL4J_VERSION}.deb -O /tmp/install4j_linux.deb && \
+	apt-get install -qqyf /tmp/install4j_linux.deb && \
+	rm /tmp/install4j_linux.deb
+
 RUN mkdir -p ${DEST}/snap-installer ${DEST}/snap-installer/files ${DEST}/snap-installer/images \${DEST}/snap-desktop/snap-main/target/ ${DEST}/snap-engine \
     ${DEST}/snap-desktop/snap-application/target/snap/etc ${DEST}/snap-desktop/snap-application/target/snap/snap \ 
     ${DEST}/snap-desktop/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/ \
@@ -152,20 +151,21 @@ COPY snap-application/target/snap/ide/ ${DEST}/snap-desktop/snap-application/tar
 COPY snap-application/target/snap/snap/ ${DEST}/snap-desktop/snap-application/target/snap/snap/
 COPY snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/Performance32.png ${DEST}/snap-desktop/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/
 COPY snap-application/target/snap/THIRDPARTY_LICENSES.txt ${DEST}/snap-desktop/snap-application/target/snap/
-# TODO: Restore it once project will compile
-# COPY microwavetbx-kit/target/netbeans_clusters/rstb ${DEST}/microwavetbx-kit/target/netbeans_clusters/rstb/
-COPY opttbx-kit/target/netbeans_clusters/opttbx ${DEST}/opttbx-kit/target/netbeans_clusters/opttbx/
+COPY microwavetbx-kit/target/netbeans_clusters/microwavetbx ${DEST}/microwave-toolbox/microwavetbx-kit/target/netbeans_clusters/microwavetbx/
+COPY microwavetbx-kit/target/netbeans_clusters/rstb ${DEST}/microwave-toolbox/microwavetbx-kit/target/netbeans_clusters/rstb/
+COPY opttbx-kit/target/netbeans_clusters/opttbx ${DEST}/optical-toolbox/opttbx-kit/target/netbeans_clusters/opttbx/
 COPY smos-kit/target/netbeans_clusters/smos/ ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos/
 
 # Create installers
 ARG LICENSE
 ARG USER_HOME_DIR="/home/snap"
 
-RUN export VERSION=$(mvn --non-recursive help:evaluate -Dexpression=project.version -q -DforceStdout  | tr . _) \
-    install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -V ${VERSION} -s -m unixInstaller,macosFolder,windows ${DEST}/snap-installer/snap.install4j && \
+RUN install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder,windows ${DEST}/snap-installer/snap.install4j && \
     chmod 777 ${USER_HOME_DIR}/esa-* && \
     rm ${USER_HOME_DIR}/*x32* && rm ${USER_HOME_DIR}/*smos* && rm ${USER_HOME_DIR}/*sentinel* && \
-    rm -rf ${DEST}
+    rm -rf ${DEST} \
+    && ${USER_HOME_DIR}/*_all_unix* -q \
+    && rm ${USER_HOME_DIR}/*_all_unix*
 
 # Deploy installers
 ARG UPLOAD_URL
@@ -178,23 +178,14 @@ RUN /opt/scripts/upload.sh ${USER_HOME_DIR} ${NEXUS_USER} ${NEXUS_PASS} ${UPLOAD
 
 FROM base AS unix
 
-ARG USER_HOME_DIR="/home/snap"
+ENV SNAP_DIR="/opt/snap"
 
-# Install snap
-WORKDIR ${USER_HOME_DIR}
+WORKDIR ${SNAP_DIR}
 
-COPY pom.xml ./pom.xml
+COPY --from=installer ${SNAP_DIR} ${SNAP_DIR}
 
-RUN export VERSION=$(mvn --non-recursive help:evaluate -Dexpression=project.version -q -DforceStdout  | tr . _) \
-#    URL="https://nexus.snap-ci.ovh/repository/snap-maven-public/org/esa/snap/installers$(echo $([[ "${VERSION}" == *"SNAPSHOT"* ]] && (echo '-snapshots') || (echo '')))/snap_all_unix/${VERSION}/snap_all_unix-${VERSION}.sh" \
-    URL="https://nexus.snap-ci.ovh/repository/snap-maven-public/org/esa/snap/installers-snapshot/snap_all_unix/10_0_0/snap_all_unix-10_0_0.sh" \
-    && echo "Download snap ${VERSION} from ${URL}" \
-    && wget -nv ${URL} \
-    && chmod 777 ${USER_HOME_DIR}/*_all_unix* \
-    && ./*_all_unix*.sh -q \
-    && rm ./*_all_unix*.sh
 # Allow GPT test custom JVM options
-RUN cp /opt/snap/bin/gpt.vmoptions /opt/snap/bin/gpt.vmoptionsORIGINAL \
+RUN chmod 777 -R ${SNAP_DIR} && cp /opt/snap/bin/gpt.vmoptions /opt/snap/bin/gpt.vmoptionsORIGINAL \
     && chmod 777 /opt/snap/bin/gpt.vmoptions /opt/snap/bin/gpt.vmoptionsORIGINAL
 
 USER snap
