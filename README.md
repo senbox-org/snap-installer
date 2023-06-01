@@ -24,14 +24,12 @@ In case you want to build the docker image locally
 
 `export LICENCE=<install4j_license>`
 
-`docker build -f docker/build/Dockerfile . -t snap/snap-installer:latest --rm --build-arg=LICENSE --build-arg UPLOAD_URL="https://nexus.snap-ci.ovh/service/rest/v1/components?repository=snap-intallers" --build-arg NEXUS_USER="$NEXUS_USER" --build-arg NEXUS_PASS="$NEXUS_PASS" -t docker-hosted.snap-ci.ovh/snap/snap-installer:latest`
+`docker build -f docker/build/Dockerfile . --rm --build-arg=LICENSE --build-arg UPLOAD_URL="https://nexus.snap-ci.ovh/service/rest/v1/components?repository=snap-intallers" --build-arg NEXUS_USER="$NEXUS_USER" --build-arg NEXUS_PASS="$NEXUS_PASS" -t docker-hosted.snap-ci.ovh/snap-installer:latest`
 
-Then `docker run -i -l snap-installer snap/snap-installer:latest`
+Then `docker run -i -l snap-installer docker-hosted.snap-ci.ovh/snap-installer:latest`
 
-### Build Windows Dockerfile
+### Pull snap docker image
 
-`export SNAP_WIN_DOWLOAD_URL=<url_to_exe_file>`
+`docker pull docker.snap-ci.ovh/snap-installer:latest`
 
-If `SNAP_WIN_DOWLOAD_URL` is not provided, snap is downloaded from step website.
-
-`docker build -f docker/build/Dockerfile . -t snap/snap-installer:win-latest --rm --build-arg=SNAP_WIN_DOWLOAD_URL`
+Then `docker run -i -l snap-installer docker.snap-ci.ovh/snap-installer:latest`

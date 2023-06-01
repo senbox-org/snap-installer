@@ -1,18 +1,19 @@
 include:
   - project: 'to-be-continuous/docker'
-    ref: '5.0.3'
+    ref: '5.1.0'
     file: '/templates/gitlab-ci-docker.yml'
 
 variables:
-  WINDOWS_ONLY: "false"
   BUILD_FOR_INSTALLER: "true"
+  MAVEN_CLI_OPTS: $MAVEN_CLI_OPTS -U
   MAVEN_OPTS: >-
     -Dhttps.protocols=TLSv1.2
     -Dmaven.repo.local=${MAVEN_CFG_DIR}/repository
     -Dorg.slf4j.simpleLogger.showDateTime=true
     -Djava.awt.headless=true
     -Dmaven.test.skip=true
-  DOCKER_BUILD_TOOL: buildah
+    -Dnetbeans.verify.integrity=false
+  # DOCKER_BUILD_TOOL: buildah
   DOCKER_REGISTRY_MIRROR: docker.snap-ci.ovh
   DOCKER_REGISTRY_USER: $NEXUS_USER
   DOCKER_REGISTRY_PASSWORD: $NEXUS_PASSWORD
@@ -21,7 +22,7 @@ variables:
   DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix-snapshot-latest"
   DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix-latest"
   DOCKER_TRIVY_ARGS: "${DOCKER_TRIVY_ARGS} --timeout 15m"
-  DOCKER_BUILD_ARGS: "--build-arg LICENSE=${INSTALL4J_LICENSE} --build-arg=UPLOAD_URL --build-arg=NEXUS_USER --build-arg=NEXUS_PASS"
+  DOCKER_BUILD_ARGS: "--cache=true --compressed-caching=false --use-new-run --cleanup --build-arg LICENSE=${INSTALL4J_LICENSE} --build-arg=UPLOAD_URL --build-arg=NEXUS_USER --build-arg=NEXUS_PASS --target=unix"
   DOCKER_HADOLINT_ARGS: --failure-threshold error
   COMPILE_BRANCH: last-stable
   RECOMPILE: "false"
@@ -32,8 +33,8 @@ stages:
   - package-build
   - package-test
   - publish
-  - windows
 
+# Trigger child pipelines to get mvn-build artifacts available (optional, but needed when they have expired)
 compile:
   stage: compile
   rules:
@@ -53,17 +54,19 @@ compile:
     matrix:
       - PROJECT: senbox-org/snap-engine
       - PROJECT: senbox-org/snap-desktop
-      # - PROJECT: senbox-org/microwave-toolbox
+      - PROJECT: senbox-org/microwave-toolbox
       - PROJECT: senbox-org/optical-toolbox
       - PROJECT: senbox-org/smos-box
 
+# Fetch artifacts built at compile stage
 build:
   stage: build
   rules:
-    - if: $WINDOWS_ONLY == "false"
     - if: $BRANCH
       variables:
         COMPILE_BRANCH: $BRANCH
+      when: always
+    - when: always
   needs:
     - job: compile
       optional: true
@@ -75,10 +78,10 @@ build:
       job: mvn-build
       ref: $COMPILE_BRANCH
       artifacts: true
-    # - project: senbox-org/microwave-toolbox
-    #   job: mvn-build
-    #   ref: $COMPILE_BRANCH
-    #   artifacts: true
+    - project: senbox-org/microwave-toolbox
+      job: mvn-build
+      ref: $COMPILE_BRANCH
+      artifacts: true
     - project: senbox-org/optical-toolbox
       job: mvn-build
       ref: $COMPILE_BRANCH
@@ -96,49 +99,31 @@ build:
       - "${CI_PROJECT_DIR}/snap-application/target"
       - "${CI_PROJECT_DIR}/snap-main/target"
       - "${CI_PROJECT_DIR}/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/Performance32.png"
-      # - "$CI_PROJECT_DIR/microwavetbx-kit/target/netbeans_clusters/rstb"
+      - "$CI_PROJECT_DIR/microwavetbx-kit/target/netbeans_clusters/microwavetbx"
+      - "$CI_PROJECT_DIR/microwavetbx-kit/target/netbeans_clusters/rstb"
       - "$CI_PROJECT_DIR/opttbx-kit/target/netbeans_clusters/opttbx"
       - "$CI_PROJECT_DIR/smos-kit/target/netbeans_clusters"
 
 # Before building the image we need other projects artifacts  
-docker-buildah-build:
+docker-kaniko-build:
   needs:
-    - build
+    - job: build
+      artifacts: true
 
 docker-trivy:
   allow_failure: true
 
-# windows:
-#   tags:
-#     - windows
-#   stage: windows
-#   extends: docker-buildah-build
-#   rules:
-#     - if: $WINDOWS_ONLY == "false"
-#       when: manual
-#     - if: $WINDOWS_ONLY == "true"
-#       when: always
-#   variables:
-#     DOCKER_FILE: "docker/build/windows.Dockerfile"
-#     DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:win-snapshot-latest"
-#     DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:win-latest"
-#     DOCKER_BUILD_ARGS: "--build-arg SNAP_WIN_DOWLOAD_URL=${SNAP_WIN_DOWLOAD_URL}"
-#   services: []
-#   needs:
-#     - job: docker-buildah-build
-#       optional: true
-
 # Report on Github cf https://ecp-ci.gitlab.io/docs/guides/build-status-gitlab.html
 .report-status:
-  image: curlimages/curl  
+  image: curlimages/curl
   variables:
     URL: "https://api.github.com/repos/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}/statuses/${CI_COMMIT_SHA}"
-    STATUS_NAME: snap-ci-unix
+    STATUS_NAME: snap-ci
   script:
     # For complete details on the GitHub API please see:
     # https://docs.github.com/en/rest/commits/statuses?apiVersion=2022-11-28#create-a-commit-status
     - |-
-      curl -X POST $URL -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GITHUB_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" -d '{"state": "'$CI_JOB_NAME'", "context": "'$STATUS_NAME'", "target_url": "'$CI_PIPELINE_URL'", "description": "Build unix installer"}'
+      curl -X POST $URL -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GITHUB_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" -d '{"state": "'$CI_JOB_NAME'", "context": "'$STATUS_NAME'", "target_url": "'$CI_PIPELINE_URL'", "description": "Build snap docker image"}'
   environment:
     name: reporting-github
   dependencies: []
