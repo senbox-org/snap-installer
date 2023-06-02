@@ -19,8 +19,8 @@ do
         elif [[ "${file}" == *".exe"* ]]
             then
                 EXT="exe"
-            else \
-                EXT="sh"
+        else
+            EXT="sh"
         fi
         if [[ "${file}" == *"SNAPSHOT"* ]]
             then
