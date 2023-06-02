@@ -24,6 +24,7 @@ variables:
   DOCKER_TRIVY_ARGS: "${DOCKER_TRIVY_ARGS} --timeout 15m"
   DOCKER_BUILD_ARGS: "--cache=true --compressed-caching=false --use-new-run --cleanup --build-arg LICENSE=${INSTALL4J_LICENSE} --build-arg=UPLOAD_URL --build-arg=NEXUS_USER --build-arg=NEXUS_PASS --target=unix"
   DOCKER_HADOLINT_ARGS: --failure-threshold error
+  DOCKER_PROD_PUBLISH_STRATEGY: auto
   COMPILE_BRANCH: last-stable
   RECOMPILE: "false"
 
@@ -99,10 +100,10 @@ build:
       - "${CI_PROJECT_DIR}/snap-application/target"
       - "${CI_PROJECT_DIR}/snap-main/target"
       - "${CI_PROJECT_DIR}/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/Performance32.png"
-      - "$CI_PROJECT_DIR/microwavetbx-kit/target/netbeans_clusters/microwavetbx"
-      - "$CI_PROJECT_DIR/microwavetbx-kit/target/netbeans_clusters/rstb"
-      - "$CI_PROJECT_DIR/opttbx-kit/target/netbeans_clusters/opttbx"
-      - "$CI_PROJECT_DIR/smos-kit/target/netbeans_clusters"
+      - "${CI_PROJECT_DIR}/microwavetbx-kit/target/netbeans_clusters/microwavetbx"
+      - "${CI_PROJECT_DIR}/microwavetbx-kit/target/netbeans_clusters/rstb"
+      - "${CI_PROJECT_DIR}/opttbx-kit/target/netbeans_clusters/opttbx"
+      - "${CI_PROJECT_DIR}/smos-kit/target/netbeans_clusters"
 
 # Before building the image we need other projects artifacts  
 docker-kaniko-build:
