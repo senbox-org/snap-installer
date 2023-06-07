@@ -18,8 +18,8 @@ variables:
   DOCKER_REGISTRY_PASSWORD: $NEXUS_PASSWORD
   DOCKER_FILE: "docker/build/Dockerfile"
   DOCKER_CONTEXT_PATH: "${CI_PROJECT_DIR}"
-  DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix-snapshot-latest"
-  DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix-latest"
+  DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:java8-snapshot"
+  DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:java8"
   DOCKER_TRIVY_ARGS: "${DOCKER_TRIVY_ARGS} --timeout 15m"
   DOCKER_BUILD_ARGS: "--build-arg LICENSE=${INSTALL4J_LICENSE} --build-arg=UPLOAD_URL --build-arg=NEXUS_USER --build-arg=NEXUS_PASS"
   COMPILE_BRANCH: 9-stable
@@ -33,6 +33,7 @@ stages:
   - publish
 
 build-snap:
+  image: registry.hub.docker.com/library/maven:3.9.1-eclipse-temurin-8
   stage: build
   needs:
     - job: compile
@@ -56,7 +57,7 @@ build-snap:
       - "${CI_PROJECT_DIR}/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/Performance32.png"
 
 build-toolboxes:
-  image: registry.hub.docker.com/library/maven:3.6.3
+  image: registry.hub.docker.com/library/maven:3.9.1-eclipse-temurin-8
   stage: build
   needs:
     - job: compile
