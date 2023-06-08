@@ -30,7 +30,7 @@ do
             then
                 echo "Uploading ${file} to ${UPLOAD_URL}"
                 curl -u ${NEXUS_USER}:${NEXUS_PASS} --progress-bar \
-                    -F "maven2.groupId=org.esa.snap.${GROUP}" -F "maven2.artifactId=snap_all_${OS}" -F "maven2.version=${VERSION}" \
+                    -F "maven2.groupId=org.esa.snap.${GROUP}" -F "maven2.artifactId=snap_all_${OS}" -F "maven2.version=java8" \
                     -F "maven2.asset1=@${USER_HOME_DIR}/${file}" -F "maven2.asset1.extension=${EXT}" \
                     "${UPLOAD_URL}"
         fi
