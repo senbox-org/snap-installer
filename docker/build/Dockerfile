@@ -1,4 +1,4 @@
-FROM ubuntu:22.04 AS base
+FROM ubuntu:22.04 AS base-java8
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG USER=snap
@@ -121,7 +121,7 @@ RUN mkdir -p /local-update-center && \
     chown ${USER}:${USER} ${SNAP_DIR} && \
     chown 1012:1013 -R /var/maven
 
-FROM base AS installer
+FROM base AS installer-java8
 
 ###################
 # SETUP Install4J #
@@ -179,7 +179,7 @@ COPY docker/build/scripts/upload.sh /opt/scripts/upload.sh
 
 RUN /opt/scripts/upload.sh ${USER_HOME_DIR} ${NEXUS_USER} ${NEXUS_PASS} ${UPLOAD_URL}
 
-FROM base AS unix
+FROM base AS unix-java8
 
 ENV SNAP_DIR="/opt/snap"
 
