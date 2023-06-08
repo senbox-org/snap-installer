@@ -167,8 +167,7 @@ RUN install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder
     chmod 777 ${USER_HOME_DIR}/esa-* && \
     rm ${USER_HOME_DIR}/*x32* && rm ${USER_HOME_DIR}/*smos* && rm ${USER_HOME_DIR}/*sentinel* && \
     rm -rf ${DEST} \
-    && ${USER_HOME_DIR}/*_all_unix* -q \
-    && rm ${USER_HOME_DIR}/*_all_unix*
+    && ${USER_HOME_DIR}/*_all_unix* -q
 
 # Deploy installers
 ARG UPLOAD_URL
