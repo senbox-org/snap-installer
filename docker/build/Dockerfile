@@ -26,8 +26,8 @@ ENV LC_ALL en_US.UTF-8
 
 RUN cat /etc/os-release | grep UBUNTU_CODENAME
 # USING BELLSOFT JDK (Liberica)
-RUN wget -q -O - https://download.bell-sw.com/pki/GPG-KEY-bellsoft | sudo apt-key add -
-RUN echo "deb [arch=amd64] https://apt.bell-sw.com/ stable main" | sudo tee /etc/apt/sources.list.d/bellsoft.list
+RUN wget -q -O - https://download.bell-sw.com/pki/GPG-KEY-bellsoft | apt-key add -
+RUN echo "deb [arch=amd64] https://apt.bell-sw.com/ stable main" | tee /etc/apt/sources.list.d/bellsoft.list
 RUN apt-get -qq update && apt-cache search bellsoft-java11 && apt-get -qqy install bellsoft-java11 && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     java -version && which java && echo $JAVA_HOME
