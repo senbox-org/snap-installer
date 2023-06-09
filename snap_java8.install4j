@@ -49,7 +49,7 @@
       <dirEntry mountPoint="58" file="../s3tbx/s3tbx-kit/target/netbeans_clusters/s3tbx" entryMode="subdir" subDirectory="s3tbx" />
       <dirEntry mountPoint="58" file="../s1tbx/s1tbx-kit/target/netbeans_clusters/rstb" entryMode="subdir" subDirectory="rstb" />
       <dirEntry mountPoint="58" file="../smos-box/smos-kit/target/netbeans_clusters/smos" entryMode="subdir" subDirectory="smos" />
-      <dirEntry mountPoint="58" file="../probavbox/probavbox-kit/target/netbeans_clusters/probavbox" entryMode="subdir" subDirectory="probavbox" />
+      <!-- <dirEntry mountPoint="58" file="../probavbox/probavbox-kit/target/netbeans_clusters/probavbox" entryMode="subdir" subDirectory="probavbox" /> -->
       <fileEntry mountPoint="58" file="./LICENSE.txt" />
       <fileEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/THIRDPARTY_LICENSES.txt" />
       <fileEntry mountPoint="58" file="./VERSION.txt" />

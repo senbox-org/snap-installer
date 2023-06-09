@@ -138,7 +138,8 @@ RUN mkdir -p ${DEST}/snap-installer ${DEST}/snap-installer/files ${DEST}/snap-in
     ${DEST}/snap-desktop/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/ \
     ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/s1tbx ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/rstb \
     ${DEST}/s2tbx/s2tbx-kit/target/netbeans_clusters/s2tbx ${DEST}/s3tbx/s3tbx-kit/target/netbeans_clusters/s3tbx \
-    ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos ${DEST}/probavbox/probavbox-kit/target/netbeans_clusters/probavbox
+    ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos 
+    # ${DEST}/probavbox/probavbox-kit/target/netbeans_clusters/probavbox
 
 COPY snap_java8.install4j LICENSE.txt VERSION.txt ${DEST}/snap-installer/
 COPY files/ ${DEST}/snap-installer/files/
@@ -157,7 +158,7 @@ COPY s1tbx-kit/target/netbeans_clusters/rstb/ ${DEST}/s1tbx/s1tbx-kit/target/net
 COPY s2tbx-kit/target/netbeans_clusters/s2tbx/ ${DEST}/s2tbx/s2tbx-kit/target/netbeans_clusters/s2tbx/
 COPY s3tbx-kit/target/netbeans_clusters/s3tbx/ ${DEST}/s3tbx/s3tbx-kit/target/netbeans_clusters/s3tbx/
 COPY smos-kit/target/netbeans_clusters/smos/ ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos/
-COPY probavbox-kit/target/netbeans_clusters/probavbox/ ${DEST}/probavbox/probavbox-kit/target/netbeans_clusters/probavbox/
+# COPY probavbox-kit/target/netbeans_clusters/probavbox/ ${DEST}/probavbox/probavbox-kit/target/netbeans_clusters/probavbox/
 
 # Create installers
 ARG LICENSE

@@ -78,10 +78,10 @@ build-toolboxes:
       job: mvn-build
       ref: $COMPILE_BRANCH
       artifacts: true
-    - project: senbox-org/probavbox
-      job: mvn-build
-      ref: $COMPILE_BRANCH
-      artifacts: true
+    # - project: senbox-org/probavbox
+    #   job: mvn-build
+    #   ref: $COMPILE_BRANCH
+    #   artifacts: true
   script: VERSION=$(mvn --non-recursive help:evaluate -Dexpression=project.version -q -DforceStdout)
   artifacts:
     expire_in: 2 hours
@@ -90,7 +90,7 @@ build-toolboxes:
       - "$CI_PROJECT_DIR/s2tbx-kit/target/netbeans_clusters"
       - "$CI_PROJECT_DIR/s3tbx-kit/target/netbeans_clusters"
       - "$CI_PROJECT_DIR/smos-kit/target/netbeans_clusters"
-      - "$CI_PROJECT_DIR/probavbox-kit/target/netbeans_clusters"
+      # - "$CI_PROJECT_DIR/probavbox-kit/target/netbeans_clusters"
 
 # Before building the image we need other projects artifacts  
 docker-kaniko-build:
@@ -121,7 +121,7 @@ compile:
       - PROJECT: senbox-org/s2tbx
       - PROJECT: senbox-org/s3tbx
       - PROJECT: senbox-org/smos-box
-      - PROJECT: senbox-org/probavbox
+      # - PROJECT: senbox-org/probavbox
 
 # Report on Github cf https://ecp-ci.gitlab.io/docs/guides/build-status-gitlab.html
 .report-status:
