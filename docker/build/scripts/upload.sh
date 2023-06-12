@@ -13,6 +13,7 @@ do
         export VERSION=$(echo "$file" | grep -oP  "(1[0-9]{1,2})(_)([0-9]*)(_)([0-9]*)(-SNAPSHOT)?")
         export EXT=""
         export GROUP="installers"
+        export REPO="snap-maven-releases"
         if [[ "${file}" == *".dmg"* ]]
             then
                 EXT="dmg"
@@ -25,6 +26,7 @@ do
         if [[ "${file}" == *"SNAPSHOT"* ]]
             then
                 GROUP="installers-snapshot"
+                REPO="snap-maven-snapshot"
         fi
         if [[ "${file}" != "*x32*" ]]
             then
@@ -32,7 +34,7 @@ do
                 curl -u ${NEXUS_USER}:${NEXUS_PASS} --progress-bar \
                     -F "maven2.groupId=org.esa.snap.${GROUP}" -F "maven2.artifactId=snap_all_${OS}" -F "maven2.version=${VERSION}" \
                     -F "maven2.asset1=@${USER_HOME_DIR}/${file}" -F "maven2.asset1.extension=${EXT}" \
-                    "${UPLOAD_URL}"
+                    "${UPLOAD_URL}-${REPO}"
         fi
     fi
 done
