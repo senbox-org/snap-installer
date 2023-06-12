@@ -148,7 +148,10 @@ COPY snap-application/target/snap/etc/snap.clusters ${DEST}/snap-desktop/snap-ap
 COPY snap-main/target/snap-main.jar ${DEST}/snap-desktop/snap-main/target/
 COPY snap-application/target/snap/platform/ ${DEST}/snap-desktop/snap-application/target/snap/platform/
 COPY snap-application/target/snap/ide/ ${DEST}/snap-desktop/snap-application/target/snap/ide/
-COPY snap-application/target/snap/snap/ ${DEST}/snap-desktop/snap-application/target/snap/snap/
+COPY snap-application/target/snap/snap/config/Modules/*.xml ${DEST}/snap-desktop/snap-application/target/snap/snap/config/Modules/
+COPY snap-application/target/snap/snap/core/ ${DEST}/snap-desktop/snap-application/target/snap/snap/core/
+COPY snap-application/target/snap/snap/modules/ ${DEST}/snap-desktop/snap-application/target/snap/snap/modules/
+COPY snap-application/target/snap/snap/modules/* ${DEST}/snap-desktop/snap-application/target/snap/snap/modules/
 COPY snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/Performance32.png ${DEST}/snap-desktop/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/
 COPY snap-application/target/snap/THIRDPARTY_LICENSES.txt ${DEST}/snap-desktop/snap-application/target/snap/
 COPY microwavetbx-kit/target/netbeans_clusters/microwavetbx ${DEST}/microwave-toolbox/microwavetbx-kit/target/netbeans_clusters/microwavetbx/
