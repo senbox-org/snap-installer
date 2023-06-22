@@ -140,6 +140,7 @@ RUN mkdir -p ${DEST}/snap-installer ${DEST}/snap-installer/files ${DEST}/snap-in
     ${DEST}/opttbx-kit/target/netbeans_clusters/opttbx/
 
 COPY snap.install4j LICENSE.txt VERSION.txt ${DEST}/snap-installer/
+COPY certificates/ ${DEST}/certificates/
 COPY files/ ${DEST}/snap-installer/files/
 COPY images/ ${DEST}/snap-installer/images/
 COPY LICENSE.html ${DEST}/snap-engine/
@@ -161,9 +162,10 @@ COPY smos-kit/target/netbeans_clusters/smos/ ${DEST}/smos-box/smos-kit/target/ne
 
 # Create installers
 ARG LICENSE
+ARG MACOS_SIGNING
 ARG USER_HOME_DIR="/home/snap"
 
-RUN install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder,windows ${DEST}/snap-installer/snap.install4j && \
+RUN install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder,windows ${DEST}/snap-installer/snap.install4j --mac-keystore-password=MACOS_SIGNING --disable-notarization  && \
     chmod 777 ${USER_HOME_DIR}/esa-* && \
     rm ${USER_HOME_DIR}/*x32* && rm ${USER_HOME_DIR}/*smos* && rm ${USER_HOME_DIR}/*sentinel* && \
     rm -rf ${DEST} \

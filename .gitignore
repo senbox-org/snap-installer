@@ -9,4 +9,4 @@ updateall_log.txt
 etc
 snap-*
 LICENSE.html
-Dockerfile
+certificates/
