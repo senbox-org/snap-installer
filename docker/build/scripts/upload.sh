@@ -10,7 +10,7 @@ do
     if [[ "${file}" =~ ^esa-snap_all* ]]
     then
         export OS=$(echo "$file" | grep -oP  "(unix|windows|macos)")
-        export VERSION=$(echo "$file" | grep -oP  "(1[0-9]{1,2})(_)([0-9]*)(_)([0-9]*)")
+        export VERSION=pRC10
         export EXT=""
         export GROUP="installers"
         export REPO="snap-maven-releases"
