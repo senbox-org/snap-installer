@@ -69,7 +69,7 @@ build:
     - when: always
   needs:
     - job: compile
-      optional: true
+      # optional: true
     - project: senbox-org/snap-engine
       job: mvn-build
       ref: $COMPILE_BRANCH
