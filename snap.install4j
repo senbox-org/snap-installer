@@ -10,6 +10,7 @@
       <variable name="snapGptMenuName" value="SNAP GPT" />
       <variable name="smosGridPointExporter" value="smos-grid-point-exporter" />
     </variables>
+    <codeSigning macEnabled="true" macPkcs12File="../certificates/apple-dev-certificates.p12" />
     <jreBundles jdkProviderId="Liberica" release="11/11.0.19+7" />
   </application>
   <files missingFilesStrategy="error" defaultUninstallMode="2" launcherOverwriteMode="1">
@@ -1933,5 +1934,5 @@ return console.askYesNo(message, true);
   <buildIds buildAll="false">
     <mediaSet refId="3551" />
   </buildIds>
-  <buildOptions faster="true" disableSigning="true" />
+  <buildOptions faster="true" disableSigning="false" />
 </install4j>

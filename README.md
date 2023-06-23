@@ -28,6 +28,8 @@ In case you want to build the docker image locally
 
 Then `docker run -i -l snap-installer docker-hosted.snap-ci.ovh/snap-installer:latest`
 
+> Note: you have to either create a `certificates` folder at project root and put the snap certificate for macos or edit snap.install4j file.
+
 ### Pull snap docker image
 
 `docker pull docker.snap-ci.ovh/snap-installer:latest`

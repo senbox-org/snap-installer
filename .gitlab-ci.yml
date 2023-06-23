@@ -13,7 +13,6 @@ variables:
     -Djava.awt.headless=true
     -Dmaven.test.skip=true
     -Dnetbeans.verify.integrity=false
-  # DOCKER_BUILD_TOOL: buildah
   DOCKER_REGISTRY_MIRROR: docker.snap-ci.ovh
   DOCKER_REGISTRY_USER: $NEXUS_USER
   DOCKER_REGISTRY_PASSWORD: $NEXUS_PASSWORD
@@ -22,10 +21,10 @@ variables:
   DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix-snapshot-pRC10"
   DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix-pRC10"
   DOCKER_TRIVY_ARGS: "${DOCKER_TRIVY_ARGS} --timeout 15m"
-  DOCKER_BUILD_ARGS: "--cache=true --compressed-caching=false --use-new-run --cleanup --build-arg LICENSE=${INSTALL4J_LICENSE} --build-arg=UPLOAD_URL --build-arg=NEXUS_USER --build-arg=NEXUS_PASS --target=unix"
+  DOCKER_BUILD_ARGS: "--cache=true --compressed-caching=false --use-new-run --cleanup --build-arg LICENSE=${INSTALL4J_LICENSE} --build-arg=UPLOAD_URL --build-arg=NEXUS_USER --build-arg=NEXUS_PASS --build-arg=MACOS_SIGNING --target=unix"
   DOCKER_HADOLINT_ARGS: --failure-threshold error
   DOCKER_PROD_PUBLISH_STRATEGY: auto
-  COMPILE_BRANCH: master
+  COMPILE_BRANCH: release-pRC-10
   RECOMPILE: "true"
 
 stages:
@@ -67,6 +66,11 @@ build:
         COMPILE_BRANCH: $BRANCH
       when: always
     - when: always
+  image: registry.hub.docker.com/library/ubuntu:latest
+  before_script:
+    - apt-get -qq update && apt-get -qqy upgrade && apt-get -qqy install curl
+  script:
+    - curl -s https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer | bash
   needs:
     - job: compile
       # optional: true
@@ -90,10 +94,10 @@ build:
       job: mvn-build
       ref: $COMPILE_BRANCH
       artifacts: true
-  script: echo build-snap
   artifacts:
     expire_in: 2 hours
     paths:
+      - $SECURE_FILES_DOWNLOAD_PATH
       - LICENSE.html
       - etc
       - "${CI_PROJECT_DIR}/snap-application/target"
