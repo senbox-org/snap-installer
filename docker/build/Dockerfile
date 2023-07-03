@@ -187,8 +187,9 @@ WORKDIR ${SNAP_DIR}
 COPY --from=installer ${SNAP_DIR} ${SNAP_DIR}
 
 # Allow GPT test custom JVM options
-RUN chmod 777 -R ${SNAP_DIR} && cp /opt/snap/bin/gpt.vmoptions /opt/snap/bin/gpt.vmoptionsORIGINAL \
-    && chmod 777 /opt/snap/bin/gpt.vmoptions /opt/snap/bin/gpt.vmoptionsORIGINAL
+RUN chmod 777 -R ${SNAP_DIR} && cp ${SNAP_DIR}/bin/gpt.vmoptions ${SNAP_DIR}/bin/gpt.vmoptionsORIGINAL \
+    && chmod 777 ${SNAP_DIR}/bin/gpt.vmoptions \
+    && chmod 777 ${SNAP_DIR}/bin/gpt.vmoptionsORIGINAL
 
 USER snap
 RUN sh /usr/local/bin/mvn-entrypoint.sh
