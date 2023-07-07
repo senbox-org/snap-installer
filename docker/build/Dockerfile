@@ -79,6 +79,15 @@ RUN apt-get update && apt-get -qqy install --no-install-recommends python3 pytho
 # && pip3 install --no-cache-dir pillow psutil matplotlib lxml cryptography pymysql
 # pillow allow to save figures in jpeg format to save disk space
 
+##################
+#     AWS CLI    #
+##################
+
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o awscliv2.zip \
+    && unzip awscliv2.zip \
+    && rm -f awscliv2.zip \
+    && ./aws/install >/dev/null \
+    && rm -rf ./aws
 
 ###################
 # SETUP QFTest    #
