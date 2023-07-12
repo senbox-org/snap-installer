@@ -191,14 +191,16 @@ FROM base AS unix
 
 ENV SNAP_DIR="/home/snap/esa-snap-software"
 
+RUN adduser snap \
+    && mkdir ${SNAP_DIR}
+
 WORKDIR ${SNAP_DIR}
 
 COPY --from=installer ${SNAP_DIR} ${SNAP_DIR}
 
 # Allow GPT test custom JVM options
-RUN chown -hR snap ${SNAP_DIR}/bin && cp ${SNAP_DIR}/bin/gpt.vmoptions ${SNAP_DIR}/bin/gpt.vmoptionsORIGINAL \
-    && chmod 777 ${SNAP_DIR}/bin/gpt.vmoptions \
-    && chmod 777 ${SNAP_DIR}/bin/gpt.vmoptionsORIGINAL
+RUN cp ${SNAP_DIR}/bin/gpt.vmoptions ${SNAP_DIR}/bin/gpt.vmoptionsORIGINAL \
+    && chmod -R 755 ${SNAP_DIR}
 
 USER snap
 RUN sh /usr/local/bin/mvn-entrypoint.sh
