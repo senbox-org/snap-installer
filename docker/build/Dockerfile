@@ -115,7 +115,7 @@ COPY docker/build/scripts/* /opt/scripts/
 # COPY ./docker/build/properties/* /opt/properties/
 
 ENV DEST=/opt/snap-build
-ENV SNAP_DIR=/opt/snap
+ENV SNAP_DIR=/home/snap/esa-snap-software
 
 RUN groupadd --gid 1013 ${USER} && \
     addgroup --gid ${DOCKER_GID} docker && \
@@ -176,7 +176,7 @@ RUN install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder
     chmod 777 ${USER_HOME_DIR}/esa-* && \
     rm ${USER_HOME_DIR}/*x32* && rm ${USER_HOME_DIR}/*smos* && rm ${USER_HOME_DIR}/*sentinel* && \
     rm -rf ${DEST} \
-    && ${USER_HOME_DIR}/*_all_unix* -q
+    && ${USER_HOME_DIR}/*_all_unix* -q -dir /home/snap/esa-snap-software
 
 # Deploy installers
 ARG UPLOAD_URL
@@ -189,7 +189,7 @@ RUN /opt/scripts/upload.sh ${USER_HOME_DIR} ${NEXUS_USER} ${NEXUS_PASS} ${UPLOAD
 
 FROM base AS unix
 
-ENV SNAP_DIR="/opt/snap"
+ENV SNAP_DIR="/home/snap/esa-snap-software"
 
 WORKDIR ${SNAP_DIR}
 
