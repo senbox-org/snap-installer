@@ -196,7 +196,7 @@ WORKDIR ${SNAP_DIR}
 COPY --from=installer ${SNAP_DIR} ${SNAP_DIR}
 
 # Allow GPT test custom JVM options
-RUN chmod 777 -R ${SNAP_DIR} && cp ${SNAP_DIR}/bin/gpt.vmoptions ${SNAP_DIR}/bin/gpt.vmoptionsORIGINAL \
+RUN chown -hR snap ${SNAP_DIR}/bin && cp ${SNAP_DIR}/bin/gpt.vmoptions ${SNAP_DIR}/bin/gpt.vmoptionsORIGINAL \
     && chmod 777 ${SNAP_DIR}/bin/gpt.vmoptions \
     && chmod 777 ${SNAP_DIR}/bin/gpt.vmoptionsORIGINAL
 
