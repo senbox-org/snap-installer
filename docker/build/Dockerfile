@@ -120,7 +120,8 @@ ENV SNAP_DIR=/home/snap/esa-snap-software
 RUN groupadd --gid 1013 ${USER} && \
     addgroup --gid ${DOCKER_GID} docker && \
     useradd --uid 1012 --gid 1013 -m -s /bin/bash ${USER} && \
-    usermod -a -G docker ${USER}
+    usermod -aG docker ${USER} && \
+    usermod -aG sudo ${USER}
 
 RUN mkdir -p /local-update-center && \
     chown ${USER}:${USER} /local-update-center && \
