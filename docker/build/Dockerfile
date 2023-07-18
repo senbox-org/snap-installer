@@ -196,7 +196,7 @@ ENV SNAP_DIR="/home/snap/esa-snap-software"
 
 WORKDIR ${SNAP_DIR}
 
-COPY --from=installer ${SNAP_DIR}/ ${SNAP_DIR}/
+COPY --chown=snap:snap --chmod=755 --from=installer ${SNAP_DIR}/ ${SNAP_DIR}/
 
 # Allow GPT test custom JVM options
 RUN chmod -R 755 ${SNAP_DIR}
