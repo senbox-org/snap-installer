@@ -9,14 +9,18 @@ for file in $(ls ${USER_HOME_DIR});
 do 
     if [[ "${file}" =~ ^esa-snap_all* ]]
     then
+        ls
         export OS=$(echo "$file" | grep -oP  "(unix|windows|macos)")
         export VERSION=pRC10
         export EXT=""
         export GROUP="installers"
         export REPO="snap-maven-releases"
-        if [[ "${file}" == *".dmg"* ]]
+        if [[ "${file}" == *".dmg"* ]] 
             then
                 EXT="dmg"
+        elif [[ "${file}" == *".tgz"* ]]
+            then
+                EXT="tgz"
         elif [[ "${file}" == *".exe"* ]]
             then
                 EXT="exe"
