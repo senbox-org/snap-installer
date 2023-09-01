@@ -5,11 +5,12 @@ export NEXUS_USER=$2
 export NEXUS_PASS=$3
 export UPLOAD_URL=$4
 
+ls ${USER_HOME_DIR}
+
 for file in $(ls ${USER_HOME_DIR});
 do 
     if [[ "${file}" =~ ^esa-snap_all* ]]
     then
-        ls
         export OS=$(echo "$file" | grep -oP  "(unix|windows|macos)")
         export VERSION=pRC10
         export EXT=""

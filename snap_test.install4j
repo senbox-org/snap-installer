@@ -1929,52 +1929,8 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle bundleUrl="https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-debugimage_aarch64_mac_hotspot_17.0.6_10.tar.gz" />
     </macosFolder>
-    <macosArchive name="All SNAP macOS Single Bundle Archive" id="3553" architecture="universal" installDir="snap" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}">
-        <excludedComponents>
-        <component id="1963" />
-      </excludedComponents>
-      <includedDownloadableComponents>
-        <component id="73" />
-        <component id="68" />
-      </includedDownloadableComponents>
-      <excludedLaunchers>
-        <launcher id="538" />
-        <launcher id="539" />
-        <launcher id="656" />
-        <launcher id="2822" />
-      </excludedLaunchers>
-      <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
-        <entry location="smos" />
-        <entry filesetId="637" />
-        <entry filesetId="639" />
-        <entry filesetId="641" />
-      </exclude>
-      <jreBundle bundleUrl="https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-debugimage_aarch64_mac_hotspot_17.0.6_10.tar.gz" />
-    </macosArchive>
-    <macosFolderArchive name="All SNAP macOS Folder Archive" id="3554" archiveType="tgz" architecture="universal" installDir="snap" >
-      <excludedComponents>
-        <component id="1963" />
-      </excludedComponents>
-      <includedDownloadableComponents>
-        <component id="73" />
-        <component id="68" />
-      </includedDownloadableComponents>
-      <excludedLaunchers>
-        <launcher id="538" />
-        <launcher id="539" />
-        <launcher id="656" />
-        <launcher id="2822" />
-      </excludedLaunchers>
-      <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
-        <entry location="smos" />
-        <entry filesetId="637" />
-        <entry filesetId="639" />
-        <entry filesetId="641" />
-      </exclude>
-      <jreBundle bundleUrl="https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-debugimage_aarch64_mac_hotspot_17.0.6_10.tar.gz" />
-    </macosFolderArchive>
+    <macosArchive name="macOS Single Bundle Archive" id="3553" architecture="universal" launcherId="2175" />
+    <macosFolderArchive name="macOS Folder Archive" id="3554" archiveType="tgz" architecture="universal" />
   </mediaSets>
   <buildIds buildAll="false">
     <mediaSet refId="3551" />
