@@ -15,6 +15,10 @@ to ``tee`` updateall.bat's output to console and to updateall.log file.
 2. Executables files are uploaded to Nexus with `cURL`
 3. docker images are published to Nexus
 
+> For MacOS 2 bundles are generated: 
+> `macosFolder` which is not suitable for CI
+> `macosArchive` usable for CI but only *all* installer available at the moment
+
 ## Locally
 
 ### Make installers with docker
