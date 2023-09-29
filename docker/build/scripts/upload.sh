@@ -7,8 +7,10 @@ export UPLOAD_URL=$4
 
 for file in $(ls ${USER_HOME_DIR});
 do 
-    if [[ "${file}" =~ ^esa-snap_all* ]]
+    # if [[ "${file}" =~ ^esa-snap_all* ]]
+    if [[ "${file}" =~ ^esa-snap* ]]
     then
+        echo $file
         export OS=$(echo "$file" | grep -oP  "(unix|windows|macos)")
         export VERSION=pRC10
         export EXT=""
@@ -17,6 +19,10 @@ do
         if [[ "${file}" == *".dmg"* ]]
             then
                 EXT="dmg"
+                if [[ "${file}" == *"archive"* ]]
+                    then
+                        OS="macos_archive"
+                fi
         elif [[ "${file}" == *".exe"* ]]
             then
                 EXT="exe"
