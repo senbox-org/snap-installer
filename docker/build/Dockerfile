@@ -10,7 +10,7 @@ ARG DOCKER_GID=999
 # SETUP UBUNTU   #
 ##################
 
-RUN apt-get -qq update && apt-get -qqy upgrade && apt-get -qqy install --no-install-recommends gnupg2 locales wget curl bc git ca-certificates
+RUN apt-get -qq update && apt-get -qqy upgrade && apt-get -qqy install --no-install-recommends gnupg2 locales wget curl bc git ca-certificates && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN apt-get -qqy install libxext6 libxrender1 libxtst6 libxi6 libxxf86dga1 libxxf86vm1 libgfortran5 mesa-utils xvfb fonts-dejavu jblas unzip apt-transport-https gnupg && \
     locale-gen en_US.UTF-8 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -30,7 +30,7 @@ RUN wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | apt
 RUN echo "deb https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | tee /etc/apt/sources.list.d/adoptium.list
 RUN apt-get -qq update && apt-cache search temurin-8-jdk && apt-get -qqy install temurin-8-jdk && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
-    java -version && which java && echo $JAVA_HOME
+    java -version && which java && echo ${JAVA_HOME}
 
 ENV PATH=${PATH}:$JAVA_HOME/bin/
 
@@ -52,7 +52,7 @@ RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
 
 
 ENV MAVEN_HOME /usr/share/maven
-ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
+ENV MAVEN_CONFIG "${USER_HOME_DIR}/.m2"
 
 COPY docker/build/maven/mvn-entrypoint.sh /usr/local/bin/mvn-entrypoint.sh
 COPY docker/build/maven/settings-docker.xml /usr/share/maven/ref/
@@ -79,6 +79,15 @@ RUN apt-get update && apt-get -qqy install --no-install-recommends python3 pytho
 # && pip3 install --no-cache-dir pillow psutil matplotlib lxml cryptography pymysql
 # pillow allow to save figures in jpeg format to save disk space
 
+##################
+#     AWS CLI    #
+##################
+
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o awscliv2.zip \
+    && unzip awscliv2.zip \
+    && rm -f awscliv2.zip \
+    && ./aws/install >/dev/null \
+    && rm -rf ./aws
 
 ###################
 # SETUP QFTest    #
@@ -106,12 +115,13 @@ COPY docker/build/scripts/* /opt/scripts/
 # COPY ./docker/build/properties/* /opt/properties/
 
 ENV DEST=/opt/snap-build
-ENV SNAP_DIR=/opt/snap
+ENV SNAP_DIR=/home/snap/esa-snap-software
 
 RUN groupadd --gid 1013 ${USER} && \
     addgroup --gid ${DOCKER_GID} docker && \
     useradd --uid 1012 --gid 1013 -m -s /bin/bash ${USER} && \
-    usermod -a -G docker ${USER}
+    usermod -aG docker ${USER} && \
+    usermod -aG sudo ${USER}
 
 RUN mkdir -p /local-update-center && \
     chown ${USER}:${USER} /local-update-center && \
@@ -164,11 +174,13 @@ COPY smos-kit/target/netbeans_clusters/smos/ ${DEST}/smos-box/smos-kit/target/ne
 ARG LICENSE
 ARG USER_HOME_DIR="/home/snap"
 
-RUN install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder,windows ${DEST}/snap-installer/snap_java8.install4j && \
+RUN install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder,macosArchive,windows ${DEST}/snap-installer/snap.install4j && \
     chmod 777 ${USER_HOME_DIR}/esa-* && \
     rm ${USER_HOME_DIR}/*x32* && rm ${USER_HOME_DIR}/*smos* && rm ${USER_HOME_DIR}/*sentinel* && \
-    rm -rf ${DEST} \
-    && ${USER_HOME_DIR}/*_all_unix* -q
+    rm -rf ${DEST}
+
+USER snap
+RUN ${USER_HOME_DIR}/*_all_unix* -q -dir /home/snap/esa-snap-software
 
 # Deploy installers
 ARG UPLOAD_URL
@@ -181,15 +193,14 @@ RUN /opt/scripts/upload.sh ${USER_HOME_DIR} ${NEXUS_USER} ${NEXUS_PASS} ${UPLOAD
 
 FROM basejava8 AS unixjava8
 
-ENV SNAP_DIR="/opt/snap"
+ENV SNAP_DIR="/home/snap/esa-snap-software"
 
 WORKDIR ${SNAP_DIR}
 
-COPY --from=installerjava8 ${SNAP_DIR} ${SNAP_DIR}
+COPY --chown=snap:snap --chmod=755 --from=installerjava8 ${SNAP_DIR} ${SNAP_DIR}
 
 # Allow GPT test custom JVM options
-RUN chmod 777 -R ${SNAP_DIR} && cp /opt/snap/bin/gpt.vmoptions /opt/snap/bin/gpt.vmoptionsORIGINAL \
-    && chmod 777 /opt/snap/bin/gpt.vmoptions /opt/snap/bin/gpt.vmoptionsORIGINAL
+RUN chmod -R 755 ${SNAP_DIR}
 
 USER snap
 RUN sh /usr/local/bin/mvn-entrypoint.sh
