@@ -10,7 +10,7 @@ ARG DOCKER_GID=999
 # SETUP UBUNTU   #
 ##################
 
-RUN apt-get -qq update && apt-get -qqy upgrade && apt-get -qqy install --no-install-recommends gnupg2 locales wget curl bc git ca-certificates && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get -qq update && apt-get -qqy upgrade && apt-get -qqy install gnupg2 locales wget curl bc git ca-certificates
 RUN apt-get -qqy install libxext6 libxrender1 libxtst6 libxi6 libxxf86dga1 libxxf86vm1 libgfortran5 mesa-utils xvfb fonts-dejavu jblas unzip apt-transport-https gnupg && \
     locale-gen en_US.UTF-8 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -131,65 +131,65 @@ RUN mkdir -p /local-update-center && \
     chown ${USER}:${USER} ${SNAP_DIR} && \
     chown 1012:1013 -R /var/maven
 
-FROM basejava8 AS installerjava8
+# FROM basejava8 AS installerjava8
 
-###################
-# SETUP Install4J #
-###################
+# ###################
+# # SETUP Install4J #
+# ###################
 
-ARG INSTALL4J_VERSION=10_0_5
+# ARG INSTALL4J_VERSION=10_0_5
 
-RUN wget -nv https://download.ej-technologies.com/install4j/install4j_linux-x64_${INSTALL4J_VERSION}.deb -O /tmp/install4j_linux.deb && \
-	apt-get install -qqyf /tmp/install4j_linux.deb && \
-	rm /tmp/install4j_linux.deb
+# RUN wget -nv https://download.ej-technologies.com/install4j/install4j_linux-x64_${INSTALL4J_VERSION}.deb -O /tmp/install4j_linux.deb && \
+# 	apt-get install -qqyf /tmp/install4j_linux.deb && \
+# 	rm /tmp/install4j_linux.deb
 
-RUN mkdir -p ${DEST}/snap-installer ${DEST}/snap-installer/files ${DEST}/snap-installer/images \${DEST}/snap-desktop/snap-main/target/ ${DEST}/snap-engine \
-    ${DEST}/snap-desktop/snap-application/target/snap/etc ${DEST}/snap-desktop/snap-application/target/snap/snap \ 
-    ${DEST}/snap-desktop/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/ \
-    ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/s1tbx ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/rstb \
-    ${DEST}/s2tbx/s2tbx-kit/target/netbeans_clusters/s2tbx ${DEST}/s3tbx/s3tbx-kit/target/netbeans_clusters/s3tbx \
-    ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos 
-    # ${DEST}/probavbox/probavbox-kit/target/netbeans_clusters/probavbox
+# RUN mkdir -p ${DEST}/snap-installer ${DEST}/snap-installer/files ${DEST}/snap-installer/images \${DEST}/snap-desktop/snap-main/target/ ${DEST}/snap-engine \
+#     ${DEST}/snap-desktop/snap-application/target/snap/etc ${DEST}/snap-desktop/snap-application/target/snap/snap \ 
+#     ${DEST}/snap-desktop/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/ \
+#     ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/s1tbx ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/rstb \
+#     ${DEST}/s2tbx/s2tbx-kit/target/netbeans_clusters/s2tbx ${DEST}/s3tbx/s3tbx-kit/target/netbeans_clusters/s3tbx \
+#     ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos 
+#     # ${DEST}/probavbox/probavbox-kit/target/netbeans_clusters/probavbox
 
-COPY snap_java8.install4j LICENSE.txt VERSION.txt ${DEST}/snap-installer/
-COPY files/ ${DEST}/snap-installer/files/
-COPY images/ ${DEST}/snap-installer/images/
-COPY LICENSE.html ${DEST}/snap-engine/
-COPY etc/ ${DEST}/snap-engine/etc/
-COPY snap-application/target/snap/etc/snap.clusters ${DEST}/snap-desktop/snap-application/target/snap/etc/
-COPY snap-main/target/snap-main.jar ${DEST}/snap-desktop/snap-main/target/
-COPY snap-application/target/snap/platform/ ${DEST}/snap-desktop/snap-application/target/snap/platform/
-COPY snap-application/target/snap/ide/ ${DEST}/snap-desktop/snap-application/target/snap/ide/
-COPY snap-application/target/snap/snap/ ${DEST}/snap-desktop/snap-application/target/snap/snap/
-COPY snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/Performance32.png ${DEST}/snap-desktop/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/
-COPY snap-application/target/snap/THIRDPARTY_LICENSES.txt ${DEST}/snap-desktop/snap-application/target/snap/
-COPY s1tbx-kit/target/netbeans_clusters/s1tbx/ ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/s1tbx/
-COPY s1tbx-kit/target/netbeans_clusters/rstb/ ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/rstb/
-COPY s2tbx-kit/target/netbeans_clusters/s2tbx/ ${DEST}/s2tbx/s2tbx-kit/target/netbeans_clusters/s2tbx/
-COPY s3tbx-kit/target/netbeans_clusters/s3tbx/ ${DEST}/s3tbx/s3tbx-kit/target/netbeans_clusters/s3tbx/
-COPY smos-kit/target/netbeans_clusters/smos/ ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos/
-# COPY probavbox-kit/target/netbeans_clusters/probavbox/ ${DEST}/probavbox/probavbox-kit/target/netbeans_clusters/probavbox/
+# COPY snap_java8.install4j LICENSE.txt VERSION.txt ${DEST}/snap-installer/
+# COPY files/ ${DEST}/snap-installer/files/
+# COPY images/ ${DEST}/snap-installer/images/
+# COPY LICENSE.html ${DEST}/snap-engine/
+# COPY etc/ ${DEST}/snap-engine/etc/
+# COPY snap-application/target/snap/etc/snap.clusters ${DEST}/snap-desktop/snap-application/target/snap/etc/
+# COPY snap-main/target/snap-main.jar ${DEST}/snap-desktop/snap-main/target/
+# COPY snap-application/target/snap/platform/ ${DEST}/snap-desktop/snap-application/target/snap/platform/
+# COPY snap-application/target/snap/ide/ ${DEST}/snap-desktop/snap-application/target/snap/ide/
+# COPY snap-application/target/snap/snap/ ${DEST}/snap-desktop/snap-application/target/snap/snap/
+# COPY snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/Performance32.png ${DEST}/snap-desktop/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/
+# COPY snap-application/target/snap/THIRDPARTY_LICENSES.txt ${DEST}/snap-desktop/snap-application/target/snap/
+# COPY s1tbx-kit/target/netbeans_clusters/s1tbx/ ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/s1tbx/
+# COPY s1tbx-kit/target/netbeans_clusters/rstb/ ${DEST}/s1tbx/s1tbx-kit/target/netbeans_clusters/rstb/
+# COPY s2tbx-kit/target/netbeans_clusters/s2tbx/ ${DEST}/s2tbx/s2tbx-kit/target/netbeans_clusters/s2tbx/
+# COPY s3tbx-kit/target/netbeans_clusters/s3tbx/ ${DEST}/s3tbx/s3tbx-kit/target/netbeans_clusters/s3tbx/
+# COPY smos-kit/target/netbeans_clusters/smos/ ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos/
+# # COPY probavbox-kit/target/netbeans_clusters/probavbox/ ${DEST}/probavbox/probavbox-kit/target/netbeans_clusters/probavbox/
 
-# Create installers
-ARG LICENSE
-ARG USER_HOME_DIR="/home/snap"
+# # Create installers
+# ARG LICENSE
+# ARG USER_HOME_DIR="/home/snap"
 
-RUN install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder,macosArchive,windows ${DEST}/snap-installer/snap.install4j && \
-    chmod 777 ${USER_HOME_DIR}/esa-* && \
-    rm ${USER_HOME_DIR}/*x32* && rm ${USER_HOME_DIR}/*smos* && rm ${USER_HOME_DIR}/*sentinel* && \
-    rm -rf ${DEST}
+# RUN install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder,macosArchive,windows ${DEST}/snap-installer/snap.install4j && \
+#     chmod 777 ${USER_HOME_DIR}/esa-* && \
+#     rm ${USER_HOME_DIR}/*x32* && rm ${USER_HOME_DIR}/*smos* && rm ${USER_HOME_DIR}/*sentinel* && \
+#     rm -rf ${DEST}
 
-USER snap
-RUN ${USER_HOME_DIR}/*_all_unix* -q -dir /home/snap/esa-snap-software
+# USER snap
+# RUN ${USER_HOME_DIR}/*_all_unix* -q -dir /home/snap/esa-snap-software
 
-# Deploy installers
-ARG UPLOAD_URL
-ARG NEXUS_USER
-ARG NEXUS_PASS
+# # Deploy installers
+# ARG UPLOAD_URL
+# ARG NEXUS_USER
+# ARG NEXUS_PASS
 
-COPY docker/build/scripts/upload.sh /opt/scripts/upload.sh
+# COPY docker/build/scripts/upload.sh /opt/scripts/upload.sh
 
-RUN /opt/scripts/upload.sh ${USER_HOME_DIR} ${NEXUS_USER} ${NEXUS_PASS} ${UPLOAD_URL}
+# RUN /opt/scripts/upload.sh ${USER_HOME_DIR} ${NEXUS_USER} ${NEXUS_PASS} ${UPLOAD_URL}
 
 FROM basejava8 AS unixjava8
 
@@ -197,7 +197,10 @@ ENV SNAP_DIR="/home/snap/esa-snap-software"
 
 WORKDIR ${SNAP_DIR}
 
-COPY --chown=snap:snap --chmod=755 --from=installerjava8 ${SNAP_DIR} ${SNAP_DIR}
+# COPY --chown=snap:snap --chmod=755 --from=installerjava8 ${SNAP_DIR} ${SNAP_DIR}
+RUN curl -fsSL -o ${SNAP_DIR}/esa-snap_all_unix_9_0_0.sh https://download.esa.int/step/snap/9.0/installers/esa-snap_all_unix_9_0_0.sh --progress-bar && \
+    ${SNAP_DIR}/esa-snap_all_unix_9_0_0.sh -q -dir ${SNAP_DIR} && \
+    rm ${SNAP_DIR}/esa-snap_all_unix_9_0_0.sh
 
 # Allow GPT test custom JVM options
 RUN chmod -R 755 ${SNAP_DIR}
