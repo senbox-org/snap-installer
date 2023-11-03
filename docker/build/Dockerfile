@@ -32,7 +32,7 @@ RUN apt-get -qq update && apt-cache search temurin-8-jdk && apt-get -qqy install
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     java -version && which java && echo ${JAVA_HOME}
 
-ENV PATH=${PATH}:$JAVA_HOME/bin/
+ENV PATH=${PATH}:${JAVA_HOME}/bin/
 
 
 ###################
@@ -43,7 +43,7 @@ ARG MAVEN_VERSION=3.9.2
 ARG SHA=900bdeeeae550d2d2b3920fe0e00e41b0069f32c019d566465015bdd1b3866395cbe016e22d95d25d51d3a5e614af2c83ec9b282d73309f644859bbad08b63db
 ARG MVN_URL=https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries
 
-RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
+RUN mkdir -p /usr/share/maven /usr/share/maven/ref /var/maven/.m2 \
   && curl -fsSL -o /tmp/apache-maven.tar.gz ${MVN_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
   && echo "${SHA}  /tmp/apache-maven.tar.gz" | sha512sum -c - \
   && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \
@@ -51,13 +51,10 @@ RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
   && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 
 
-ENV MAVEN_HOME /usr/share/maven
-ENV MAVEN_CONFIG "${USER_HOME_DIR}/.m2"
+ENV MAVEN_HOME=/usr/share/maven MAVEN_CONFIG="${USER_HOME_DIR}/.m2"
 
 COPY docker/build/maven/mvn-entrypoint.sh /usr/local/bin/mvn-entrypoint.sh
 COPY docker/build/maven/settings-docker.xml /usr/share/maven/ref/
-
-RUN mkdir -p /var/maven/.m2
 
 
 ###################
@@ -83,7 +80,7 @@ RUN apt-get update && apt-get -qqy install --no-install-recommends python3 pytho
 #     AWS CLI    #
 ##################
 
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o awscliv2.zip \
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o awscliv2.zip --progress-bar \
     && unzip awscliv2.zip \
     && rm -f awscliv2.zip \
     && ./aws/install >/dev/null \
@@ -104,18 +101,13 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o awscliv2.
 # USER  SETUP     #
 ###################
 WORKDIR /
-RUN mkdir -p /var/maven/.m2
 
-# RUN mkdir -p /home/${USER} && \
-# 	chown 1012:1013 /home/${USER} && \
-#     chmod 777 /home/${USER} && \
 RUN mkdir -p /opt/scripts /opt/properties 
 
 COPY docker/build/scripts/* /opt/scripts/
 # COPY ./docker/build/properties/* /opt/properties/
 
-ENV DEST=/opt/snap-build
-ENV SNAP_DIR=/home/snap/esa-snap-software
+ENV DEST=/opt/snap-build SNAP_DIR=/home/snap/esa-snap-software
 
 RUN groupadd --gid 1013 ${USER} && \
     addgroup --gid ${DOCKER_GID} docker && \
@@ -130,6 +122,11 @@ RUN mkdir -p /local-update-center && \
     chown ${USER}:${USER} ${DEST} && \
     chown ${USER}:${USER} ${SNAP_DIR} && \
     chown 1012:1013 -R /var/maven
+
+#############################################
+# DO NOT NEED BUILD SNAP FOR THIS VERSION.  #
+# NEXT STEP JUST DOWNLOAD THE WANTED RELEASE#
+#############################################
 
 # FROM basejava8 AS installerjava8
 
@@ -193,19 +190,19 @@ RUN mkdir -p /local-update-center && \
 
 FROM basejava8 AS unixjava8
 
-ENV SNAP_DIR="/home/snap/esa-snap-software"
-ENV SNAP_INSTALLER="esa-snap_all_unix_9_0_0.sh"
+ENV SNAP_DIR="/home/snap/esa-snap-software" SNAP_INSTALLER="esa-snap_all_unix_9_0_0.sh"
 
 WORKDIR ${SNAP_DIR}
 
-# COPY --chown=snap:snap --chmod=755 --from=installerjava8 ${SNAP_DIR} ${SNAP_DIR}
-RUN curl -fsSL -o /tmp/${SNAP_INSTALLER} https://download.esa.int/step/snap/9.0/installers/${SNAP_INSTALLER} --progress-bar && \
-    chmod +x /tmp/${SNAP_INSTALLER} && \
-    /tmp/${SNAP_INSTALLER} -q -dir ${SNAP_DIR} && \
-    rm /tmp/${SNAP_INSTALLER}
-
-# Allow GPT test custom JVM options
-RUN chmod -R 755 ${SNAP_DIR}
-
 USER snap
+
+# COPY --chown=snap:snap --chmod=755 --from=installerjava8 ${SNAP_DIR} ${SNAP_DIR}
+RUN chown snap:snap /home/snap && \
+    curl -o /tmp/${SNAP_INSTALLER} https://download.esa.int/step/snap/9.0/installers/${SNAP_INSTALLER} --progress-bar && \
+    chmod +x /tmp/${SNAP_INSTALLER} && \
+    /tmp/${SNAP_INSTALLER} -q -dir ${SNAP_DIR} -console && \
+    rm /tmp/${SNAP_INSTALLER} && \
+    # Allow GPT test custom JVM options
+    chmod -R 755 ${SNAP_DIR}
+
 RUN sh /usr/local/bin/mvn-entrypoint.sh
