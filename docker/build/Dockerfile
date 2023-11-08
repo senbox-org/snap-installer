@@ -198,8 +198,12 @@ WORKDIR ${SNAP_DIR}
 
 COPY --chown=snap:snap --chmod=755 --from=installer ${SNAP_DIR}/ ${SNAP_DIR}/
 
-# Allow GPT test custom JVM options
-RUN chmod -R 755 ${SNAP_DIR}
+# Create testData path
+RUN mkdir -p /home/snap/testData && \
+    chown snap:snap /home/snap/testData && \
+    chmod -R 755 /home/snap/testData && \
+    # Allow GPT test custom JVM options
+    chmod -R 755 ${SNAP_DIR}
 
 USER snap
 RUN sh /usr/local/bin/mvn-entrypoint.sh
