@@ -204,7 +204,7 @@ RUN chown snap:snap /home/snap && \
     # Allow GPT test custom JVM options
     chmod -R 755 ${SNAP_DIR}
 
-RUN mkdir /home/snap/testData && chown snap:snap /home/snap/testData && chmod -R 755 /home/snap/testData
+RUN mkdir -p /home/snap/testData && chown snap:snap /home/snap/testData && chmod -R 755 /home/snap/testData
 
 USER snap
 
