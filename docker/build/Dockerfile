@@ -194,7 +194,6 @@ ENV SNAP_DIR="/home/snap/esa-snap-software" SNAP_INSTALLER="esa-snap_all_unix_9_
 
 WORKDIR ${SNAP_DIR}
 
-USER snap
 
 # COPY --chown=snap:snap --chmod=755 --from=installerjava8 ${SNAP_DIR} ${SNAP_DIR}
 RUN chown snap:snap /home/snap && \
@@ -206,5 +205,7 @@ RUN chown snap:snap /home/snap && \
     chmod -R 755 ${SNAP_DIR}
 
 RUN mkdir /home/snap/testData && chown snap:snap /home/snap/testData && chmod -R 755 /home/snap/testData
+
+USER snap
 
 RUN sh /usr/local/bin/mvn-entrypoint.sh
