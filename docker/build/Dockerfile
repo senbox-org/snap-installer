@@ -201,9 +201,9 @@ WORKDIR ${SNAP_DIR}
 COPY --chown=snap:snap --chmod=755 --from=installer ${SNAP_DIR}/ ${SNAP_DIR}/
 
 # Create folders
-RUN mkdir -p /home/snap/testData /home/snap/result /home/snap/tmp /builds && \
-    chown snap:snap /home/snap/testData /home/snap/result /home/snap/tmp /builds && \
-    chmod -R 755 /home/snap/testData /home/snap/result /home/snap/tmp /builds && \
+RUN mkdir -p /home/snap/testData /home/snap/result /home/snap/tmp /home/snap/.local /builds && \
+    chown snap:snap /home/snap/testData /home/snap/result /home/snap/tmp /home/snap/.local /builds && \
+    chmod -R 755 /home/snap/testData /home/snap/result /home/snap/tmp /home/snap/.local /builds && \
     # Allow GPT test custom JVM options
     chmod -R 755 ${SNAP_DIR}
 
