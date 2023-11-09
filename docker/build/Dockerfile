@@ -196,13 +196,13 @@ WORKDIR ${SNAP_DIR}
 
 
 # COPY --chown=snap:snap --chmod=755 --from=installerjava8 ${SNAP_DIR} ${SNAP_DIR}
-RUN chown snap:snap /home/snap && \
+RUN chown -R snap:snap /home/snap && \
     curl -o /tmp/${SNAP_INSTALLER} https://download.esa.int/step/snap/9.0/installers/${SNAP_INSTALLER} --progress-bar && \
     chmod +x /tmp/${SNAP_INSTALLER} && \
     /tmp/${SNAP_INSTALLER} -q -dir ${SNAP_DIR} -console && \
     rm /tmp/${SNAP_INSTALLER} && \
     # Allow GPT test custom JVM options
-    chmod -R 755 ${SNAP_DIR}
+    chown -R ${SNAP_DIR} && chmod -R 755 ${SNAP_DIR}
 
 RUN mkdir -p /home/snap/testData && chown snap:snap /home/snap/testData && chmod -R 755 /home/snap/testData
 
