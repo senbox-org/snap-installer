@@ -129,7 +129,9 @@ RUN mkdir -p /local-update-center && \
     mkdir -p ${DEST} ${SNAP_DIR} && \
     chown ${USER}:${USER} ${DEST} && \
     chown ${USER}:${USER} ${SNAP_DIR} && \
-    chown 1012:1013 -R /var/maven
+    chown 1012:1013 -R /var/maven && \
+    mkdir -p ${MAVEN_CONFIG} && \
+    chown ${USER}:${USER} -R ${MAVEN_CONFIG}
 
 FROM base AS installer
 
