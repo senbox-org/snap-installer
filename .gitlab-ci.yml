@@ -5,7 +5,7 @@ include:
 
 variables:
   BUILD_FOR_INSTALLER: "true"
-  MAVEN_CLI_OPTS: $MAVEN_CLI_OPTS -U
+  MAVEN_CLI_OPTS: $MAVEN_CLI_OPTS -U -q
   MAVEN_OPTS: >-
     -Dhttps.protocols=TLSv1.2
     -Dmaven.repo.local=${MAVEN_CFG_DIR}/repository
@@ -13,7 +13,6 @@ variables:
     -Djava.awt.headless=true
     -Dmaven.test.skip=true
     -Dnetbeans.verify.integrity=false
-  # DOCKER_BUILD_TOOL: buildah
   DOCKER_REGISTRY_MIRROR: docker.snap-ci.ovh
   DOCKER_REGISTRY_USER: $NEXUS_USER
   DOCKER_REGISTRY_PASSWORD: $NEXUS_PASSWORD
@@ -71,7 +70,7 @@ build:
     - when: on_success
   needs:
     - job: compile
-      # optional: true
+      optional: true
     - project: senbox-org/snap-engine
       job: mvn-build
       ref: $COMPILE_BRANCH
