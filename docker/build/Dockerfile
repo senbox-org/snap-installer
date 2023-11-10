@@ -123,12 +123,11 @@ RUN groupadd --gid 1013 ${USER} && \
     usermod -aG docker ${USER} && \
     usermod -aG sudo ${USER}
 
-RUN mkdir -p /local-update-center && \
+RUN mkdir -p /local-update-center /builds && \
     chown ${USER}:${USER} /local-update-center && \
     mkdir -p /opt/scripts && \
     mkdir -p ${DEST} ${SNAP_DIR} && \
-    chown ${USER}:${USER} ${DEST} && \
-    chown ${USER}:${USER} ${SNAP_DIR} && \
+    chown -R ${USER}:${USER} ${DEST} ${SNAP_DIR} /home/snap /builds && \
     chown 1012:1013 -R /var/maven && \
     mkdir -p ${MAVEN_CONFIG} && \
     chown ${USER}:${USER} -R ${MAVEN_CONFIG}
@@ -181,7 +180,7 @@ RUN install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder
     rm -rf ${DEST}
 
 USER snap
-RUN ${USER_HOME_DIR}/*_all_unix* -q -dir /home/snap/esa-snap-software
+RUN ${USER_HOME_DIR}/*_all_unix* -q -dir /home/snap/esa-snap-software && rm ${USER_HOME_DIR}/*_all_unix*
 
 # Deploy installers
 ARG UPLOAD_URL
@@ -201,9 +200,9 @@ WORKDIR ${SNAP_DIR}
 COPY --chown=snap:snap --chmod=755 --from=installer ${SNAP_DIR}/ ${SNAP_DIR}/
 
 # Create folders
-RUN mkdir -p /home/snap/testData /home/snap/result /home/snap/tmp /home/snap/.local /builds && \
-    chown snap:snap /home/snap/testData /home/snap/result /home/snap/tmp /home/snap/.local /builds && \
-    chmod -R 755 /home/snap/testData /home/snap/result /home/snap/tmp /home/snap/.local /builds && \
+RUN mkdir -p /home/snap/testData && \
+    chown snap:snap /home/snap/testData && \
+    chmod -R 755 /home/snap/testData && \
     # Allow GPT test custom JVM options
     chmod -R 755 ${SNAP_DIR}
 
