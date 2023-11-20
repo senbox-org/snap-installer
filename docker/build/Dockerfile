@@ -204,9 +204,12 @@ RUN chown -R snap:snap /home/snap && \
     # Allow GPT test custom JVM options
     chown -R snap:snap ${SNAP_DIR} && chmod -R 755 ${SNAP_DIR}
 
-RUN mkdir -p /home/snap/testData /home/snap/.snap && \
-    chown -R snap:snap /home/snap/testData /home/snap/.snap && \
-    chmod -R 755 /home/snap/testData /home/snap/.snap
+# Update modules
+RUN ${SNAP_DIR}/bin/snap --nosplash --nogui --modules --update-all
+
+RUN mkdir -p /home/snap/testData /home/snap/.snap /home/snap/tmp && \
+    chown -R snap:snap /home/snap/testData /home/snap/.snap /home/snap/tmp && \
+    chmod -R 755 /home/snap/testData /home/snap/.snap /home/snap/tmp
 
 USER snap
 
