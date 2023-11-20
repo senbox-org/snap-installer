@@ -104,7 +104,7 @@ WORKDIR /
 
 RUN mkdir -p /opt/scripts /opt/properties 
 
-COPY docker/build/scripts/ /opt/scripts/
+COPY docker/build/scripts/*.sh /opt/scripts/
 # COPY ./docker/build/properties/* /opt/properties/
 
 ENV DEST=/opt/snap-build SNAP_DIR=/home/snap/esa-snap-software
