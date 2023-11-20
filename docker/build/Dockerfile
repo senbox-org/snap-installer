@@ -205,7 +205,8 @@ RUN chown -R snap:snap /home/snap && \
     chown -R snap:snap ${SNAP_DIR} && chmod -R 755 ${SNAP_DIR}
 
 # Update modules
-RUN ${SNAP_DIR}/bin/snap --nosplash --nogui --modules --update-all
+RUN chmod +x /opt/scripts/moduleUpdate.sh && \
+    /opt/scripts/moduleUpdate.sh
 
 RUN mkdir -p /home/snap/testData /home/snap/.snap /home/snap/tmp && \
     chown -R snap:snap /home/snap/testData /home/snap/.snap /home/snap/tmp && \
