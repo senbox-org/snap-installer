@@ -1,6 +1,6 @@
 #!bin/bash
 
-home/snap/esa-snap-software/bin/snap --nosplash --nogui --modules --refresh --update-all 2>&1 | tee /tmp/update.log &
+/home/snap/esa-snap-software/bin/snap --nosplash --nogui --modules --refresh --update-all 2>&1 | tee /tmp/update.log &
 export MODULE_UPDATE_PID=`echo $!`
 export IDX=0
 while [ -d "/proc/${MODULE_UPDATE_PID}" ]

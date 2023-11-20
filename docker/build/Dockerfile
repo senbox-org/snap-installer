@@ -194,7 +194,6 @@ ENV SNAP_DIR="/home/snap/esa-snap-software" SNAP_INSTALLER="esa-snap_all_unix_9_
 
 WORKDIR ${SNAP_DIR}
 
-
 # COPY --chown=snap:snap --chmod=755 --from=installerjava8 ${SNAP_DIR} ${SNAP_DIR}
 RUN chown -R snap:snap /home/snap && \
     curl -o /tmp/${SNAP_INSTALLER} https://download.esa.int/step/snap/9.0/installers/${SNAP_INSTALLER} --progress-bar && \
@@ -208,7 +207,7 @@ COPY docker/build/scripts/moduleUpdate.sh /opt/scripts/moduleUpdate.sh
 
 # Update modules
 RUN chmod +x /opt/scripts/moduleUpdate.sh && \
-    /opt/scripts/moduleUpdate.sh
+    /bin/bash /opt/scripts/moduleUpdate.sh
 
 RUN mkdir -p /home/snap/testData /home/snap/.snap /home/snap/tmp && \
     chown -R snap:snap /home/snap/testData /home/snap/.snap /home/snap/tmp && \
