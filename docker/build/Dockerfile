@@ -204,6 +204,8 @@ RUN chown -R snap:snap /home/snap && \
     # Allow GPT test custom JVM options
     chown -R snap:snap ${SNAP_DIR} && chmod -R 755 ${SNAP_DIR}
 
+COPY /docker/build/scripts/moduleUpdate.sh /opt/scripts/moduleUpdate.sh
+
 # Update modules
 RUN chmod +x /opt/scripts/moduleUpdate.sh && \
     /opt/scripts/moduleUpdate.sh
