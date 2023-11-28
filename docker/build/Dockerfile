@@ -180,7 +180,7 @@ RUN install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder
     rm -rf ${DEST}
 
 USER snap
-RUN ${USER_HOME_DIR}/*_all_unix* -q -dir /home/snap/esa-snap-software && rm ${USER_HOME_DIR}/*_all_unix*
+RUN ${USER_HOME_DIR}/*_all_unix* -q -dir /home/snap/esa-snap-software
 
 # Deploy installers
 ARG UPLOAD_URL
