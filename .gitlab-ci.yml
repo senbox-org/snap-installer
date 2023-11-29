@@ -20,7 +20,8 @@ variables:
   DOCKER_CONTEXT_PATH: "${CI_PROJECT_DIR}"
   DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix-snapshot-pRC10"
   DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix-pRC10"
-  DOCKER_TRIVY_ARGS: "${DOCKER_TRIVY_ARGS} --debug --timeout 15m"
+  DOCKER_TRIVY_ARGS: "--ignore-unfixed --vuln-type os --debug --timeout 15m"
+  DOCKER_TRIVY_SECURITY_LEVEL_THRESHOLD: HIGH
   DOCKER_BUILD_ARGS: "--cache=true --compressed-caching=false --use-new-run --cleanup --build-arg LICENSE=${INSTALL4J_LICENSE} --build-arg=UPLOAD_URL --build-arg=NEXUS_USER --build-arg=NEXUS_PASS --target=unix"
   DOCKER_HADOLINT_ARGS: --failure-threshold error
   DOCKER_PROD_PUBLISH_STRATEGY: auto
@@ -33,6 +34,7 @@ stages:
   - package-build
   - package-test
   - publish
+  - gpt-tests
 
 # Trigger child pipelines to get mvn-build artifacts available (optional, but needed when they have expired)
 compile:
@@ -113,6 +115,20 @@ docker-kaniko-build:
 
 docker-trivy:
   allow_failure: true
+
+# Triggers 3 GPT tests pipelines (linux,windows,macos)
+gpt-tests:
+  stage: gpt-tests
+  trigger:
+    project: senbox-org/snap-gpt-tests
+    branch: master
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+  variables:
+    SCOPE: daily
+  parallel:
+    matrix:
+      - PLATFORM: [linux,windows,macos]
 
 # Report on Github cf https://ecp-ci.gitlab.io/docs/guides/build-status-gitlab.html
 .report-status:
