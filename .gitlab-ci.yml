@@ -124,11 +124,13 @@ gpt-tests:
     branch: master
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
+  inherit:
+    variables: false
   variables:
     SCOPE: daily
   parallel:
     matrix:
-      - PLATFORM: [linux,windows,macos]
+      - PLATFORM: [linux,windows,darwin]
 
 # Report on Github cf https://ecp-ci.gitlab.io/docs/guides/build-status-gitlab.html
 .report-status:
