@@ -11,21 +11,21 @@ variables:
     -Dmaven.repo.local=${MAVEN_CFG_DIR}/repository
     -Dorg.slf4j.simpleLogger.showDateTime=true
     -Djava.awt.headless=true
-    -Dmaven.test.skip=true
     -Dnetbeans.verify.integrity=false
+  # -Dmaven.test.skip=true
   DOCKER_REGISTRY_MIRROR: docker.snap-ci.ovh
   DOCKER_REGISTRY_USER: $NEXUS_USER
   DOCKER_REGISTRY_PASSWORD: $NEXUS_PASSWORD
   DOCKER_FILE: "docker/build/Dockerfile"
   DOCKER_CONTEXT_PATH: "${CI_PROJECT_DIR}"
-  DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix-snapshot-pRC10"
-  DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix-pRC10"
+  DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix-snapshot-RC10"
+  DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix-RC10"
   DOCKER_TRIVY_ARGS: "--ignore-unfixed --vuln-type os --debug --timeout 15m"
   DOCKER_TRIVY_SECURITY_LEVEL_THRESHOLD: HIGH
   DOCKER_BUILD_ARGS: "--cache=true --compressed-caching=false --use-new-run --cleanup --build-arg LICENSE=${INSTALL4J_LICENSE} --build-arg=UPLOAD_URL --build-arg=NEXUS_USER --build-arg=NEXUS_PASS --target=unix"
   DOCKER_HADOLINT_ARGS: --failure-threshold error
   DOCKER_PROD_PUBLISH_STRATEGY: auto
-  COMPILE_BRANCH: master
+  COMPILE_BRANCH: release-RC10
   RECOMPILE: "true"
 
 stages:
