@@ -134,9 +134,6 @@ docker-kaniko-build:
     - job: build
       artifacts: true
 
-docker-trivy:
-  allow_failure: true
-
 # Triggers 3 GPT tests pipelines (linux,windows,macos)
 gpt-tests:
   stage: gpt-tests
@@ -152,6 +149,7 @@ gpt-tests:
   parallel:
     matrix:
       - PLATFORM: [linux,windows,darwin]
+  allow_failure: true
 
 # Report on Github cf https://ecp-ci.gitlab.io/docs/guides/build-status-gitlab.html
 .report-status:
