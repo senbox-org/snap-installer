@@ -30,15 +30,13 @@ variables:
 
 stages:
   - compile
-  - build-engine
   - build
   - package-build
   - package-test
   - publish
   - gpt-tests
 
-# Trigger child pipelines to get mvn-build artifacts available (optional, but needed when they have expired)
-compile:
+.compile:
   stage: compile
   rules:
     - if: $RECOMPILE == "true"
@@ -48,20 +46,33 @@ compile:
     - if: $BRANCH
       variables:
         COMPILE_BRANCH: $BRANCH
+
+compile-snap-engine:
+  extends: .compile
+  trigger: 
+    project: senbox-org/snap-engine
+    branch: $COMPILE_BRANCH
+    strategy: depend
+
+# Trigger child pipelines to get mvn-build artifacts available (optional, but needed when they have expired)
+compile:
+  extends: .compile
   trigger: 
     project: $PROJECT
     branch: $COMPILE_BRANCH
     strategy: depend
   parallel:
     matrix:
-      - PROJECT: senbox-org/snap-engine
       - PROJECT: senbox-org/snap-desktop
       - PROJECT: senbox-org/microwave-toolbox
       - PROJECT: senbox-org/optical-toolbox
       - PROJECT: senbox-org/smos-box
+  needs:
+    - job: compile-snap-engine
 
-build-engine:
-  stage: build-engine
+# Fetch artifacts built at compile stage
+build:
+  stage: build
   rules:
     - if: $BRANCH
       variables:
@@ -76,27 +87,6 @@ build-engine:
     - project: senbox-org/snap-engine
       job: mvn-build
       ref: $COMPILE_BRANCH
-      artifacts: true
-  script: echo build-engine
-  artifacts:
-      expire_in: 2 hours
-      paths:
-        - LICENSE.html
-        - etc
-
-# Fetch artifacts built at compile stage
-build:
-  stage: build
-  rules:
-    - if: $BRANCH
-      variables:
-        COMPILE_BRANCH: $BRANCH
-      when: on_success
-    - if: $RECOMPILE == "false"
-      when: always
-    - when: on_success
-  needs:
-    - job: build-engine
       artifacts: true
     - project: senbox-org/snap-desktop
       job: mvn-build
