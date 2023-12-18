@@ -12,7 +12,7 @@ variables:
     -Dorg.slf4j.simpleLogger.showDateTime=true
     -Djava.awt.headless=true
     -Dnetbeans.verify.integrity=false
-    -Dmaven.test.skip=true
+  #-Dmaven.test.skip=true
   DOCKER_REGISTRY_MIRROR: docker.snap-ci.ovh
   DOCKER_REGISTRY_USER: $NEXUS_USER
   DOCKER_REGISTRY_PASSWORD: $NEXUS_PASSWORD
