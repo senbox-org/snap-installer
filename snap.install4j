@@ -1941,7 +1941,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle bundleUrl="https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-debugimage_aarch64_mac_hotspot_17.0.6_10.tar.gz" />
     </macosFolder>
-    <macosArchive name="macOS Single Bundle Archive" id="3558" architecture="universal" launcherId="3557" mediaFileName="${compiler:sys.shortName}-archive_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
+    <macosArchive name="macOS Single Bundle Archive" id="3558" architecture="universal" launcherId="618" mediaFileName="${compiler:sys.shortName}-archive_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="539" />
