@@ -182,7 +182,7 @@
     </launcher>
     <launcher name="snap-mac-test" id="3557" checkUpdater="true">
       <executable name="snap-mac-test" executableDir="bin" executableMode="gui" checkConsoleParameter="true" />
-      <java mainClass="org.esa.snap.runtime.Launcher">
+      <java mainClass="org.esa.snap.runtime.Launcher" vmParameters="-Dsnap.mainClass=org.esa.snap.main &quot;-Dsnap.home=${launcher:sys.launcherDirectory}/..&quot; -Dinstall4j.noLoggingFix=true">
         <classPath>
           <archive location="snap/modules/ext/org.esa.snap.snap-core/org-esa-snap/snap-runtime.jar" failOnError="false" />
         </classPath>
