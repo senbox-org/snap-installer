@@ -182,7 +182,11 @@
     </launcher>
     <launcher name="snap-mac-test" id="3557" checkUpdater="true">
       <executable name="snap-mac-test" executableDir="bin" executableMode="gui" checkConsoleParameter="true" />
-      <java mainClass="snap/modules/ext/org.esa.snap.snap-core/org-esa-snap/snap-runtime.jar" />
+      <java mainClass="org.esa.snap.runtime.Launcher" vmParameters="-Dsnap.mainClass=org.esa.snap.main &quot;-Dsnap.home=${launcher:sys.launcherDirectory}/..&quot; -Dinstall4j.noLoggingFix=true">
+        <classPath>
+          <archive location="snap/modules/ext/org.esa.snap.snap-core/org-esa-snap/snap-runtime.jar" failOnError="false" />
+        </classPath>
+      </java>
       <vmOptionsFile mode="content">
         <content># Enter one VM parameter per line
 # For example, to adjust the maximum memory usage to 512 MB, uncomment the following line:
@@ -1941,12 +1945,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle bundleUrl="https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-debugimage_aarch64_mac_hotspot_17.0.6_10.tar.gz" />
     </macosFolder>
-    <macosArchive name="macOS Single Bundle Archive" id="3558" architecture="universal" launcherId="3557" mediaFileName="${compiler:sys.shortName}-archive_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
-      <excludedLaunchers>
-        <launcher id="538" />
-        <launcher id="539" />
-        <launcher id="656" />
-      </excludedLaunchers>
+    <macosArchive name="macOS Single Bundle Archive" id="3558" mediaFileName="${compiler:sys.shortName}-archive_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="universal" launcherId="3557">
       <exclude>
         <entry location="bin/SNAP_icon_48.jpg" />
         <entry filesetId="637" />
