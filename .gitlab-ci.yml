@@ -11,15 +11,15 @@ variables:
     -Dmaven.repo.local=${MAVEN_CFG_DIR}/repository
     -Dorg.slf4j.simpleLogger.showDateTime=true
     -Djava.awt.headless=true
-    -Dmaven.test.skip=true
     -Dnetbeans.verify.integrity=false
+    -Dmaven.test.skip=true
   DOCKER_REGISTRY_MIRROR: docker.snap-ci.ovh
   DOCKER_REGISTRY_USER: $NEXUS_USER
   DOCKER_REGISTRY_PASSWORD: $NEXUS_PASSWORD
   DOCKER_FILE: "docker/build/Dockerfile"
   DOCKER_CONTEXT_PATH: "${CI_PROJECT_DIR}"
-  DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix-snapshot-pRC10"
-  DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix-pRC10"
+  DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix-snapshot"
+  DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix"
   DOCKER_TRIVY_ARGS: "--ignore-unfixed --vuln-type os --debug --timeout 15m"
   DOCKER_TRIVY_SECURITY_LEVEL_THRESHOLD: HIGH
   DOCKER_BUILD_ARGS: "--cache=true --compressed-caching=false --use-new-run --cleanup --build-arg LICENSE=${INSTALL4J_LICENSE} --build-arg=UPLOAD_URL --build-arg=NEXUS_USER --build-arg=NEXUS_PASS --target=unix"
@@ -36,8 +36,7 @@ stages:
   - publish
   - gpt-tests
 
-# Trigger child pipelines to get mvn-build artifacts available (optional, but needed when they have expired)
-compile:
+.compile:
   stage: compile
   rules:
     - if: $RECOMPILE == "true"
@@ -47,17 +46,32 @@ compile:
     - if: $BRANCH
       variables:
         COMPILE_BRANCH: $BRANCH
+    - if: $CI_COMMIT_TAG
+      variables:
+        COMPILE_BRANCH: $CI_COMMIT_TAG
+
+compile-snap-engine:
+  extends: .compile
+  trigger: 
+    project: senbox-org/snap-engine
+    branch: $COMPILE_BRANCH
+    strategy: depend
+
+# Trigger child pipelines to get mvn-build artifacts available (optional, but needed when they have expired)
+compile:
+  extends: .compile
   trigger: 
     project: $PROJECT
     branch: $COMPILE_BRANCH
     strategy: depend
   parallel:
     matrix:
-      - PROJECT: senbox-org/snap-engine
       - PROJECT: senbox-org/snap-desktop
       - PROJECT: senbox-org/microwave-toolbox
       - PROJECT: senbox-org/optical-toolbox
       - PROJECT: senbox-org/smos-box
+  needs:
+    - job: compile-snap-engine
 
 # Fetch artifacts built at compile stage
 build:
@@ -113,9 +127,6 @@ docker-kaniko-build:
     - job: build
       artifacts: true
 
-docker-trivy:
-  allow_failure: true
-
 # Triggers 3 GPT tests pipelines (linux,windows,macos)
 gpt-tests:
   stage: gpt-tests
@@ -146,6 +157,7 @@ gpt-tests:
   environment:
     name: reporting-github
   dependencies: []
+  retry: 2
 
 pending:
   stage: .pre
