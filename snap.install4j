@@ -185,6 +185,13 @@
       <java mainClass="org.esa.snap.nbexec.Launcher" vmParameters="-Dsnap.mainClass=org.esa.snap.main.Main &quot;-Dsnap.home=${launcher:sys.launcherDirectory}/..&quot; -Dinstall4j.noLoggingFix=true -Dsun.java2d.noddraw=true -Dsun.awt.nopixfmt=true -Dsun.java2d.dpiaware=false -Dorg.netbeans.level=INFO -Dsnap.debug=true -Xmx4G">
         <classPath>
           <archive location="snap/core/snap-main.jar" failOnError="false" />
+          <scanDirectory location="platform/modules" failOnError="false" />
+          <scanDirectory location="platform/lib" failOnError="false" />
+          <scanDirectory location="platform/modules/ext" failOnError="false" />
+          <scanDirectory location="snap/modules" failOnError="false" />
+          <scanDirectory location="s1tbx/modules" failOnError="false" />
+          <scanDirectory location="s2tbx/modules" failOnError="false" />
+          <scanDirectory location="s3tbx/modules" failOnError="false" />
         </classPath>
       </java>
       <vmOptionsFile mode="content">
