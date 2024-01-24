@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<install4j version="10.0.5" transformSequenceNumber="10">
+<install4j version="10.0.6" transformSequenceNumber="10">
   <directoryPresets config="../snap-desktop/snap-application/target/snap/THIRDPARTY_LICENSES.txt" />
   <application name="ESA SNAP" applicationId="0941-5747-6134-5911" mediaDir="./target" compression="9" commonExternalFiles="true" shrinkRuntime="false" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="10.0.0-SNAPSHOT" allPathsRelative="true" macVolumeId="69e291547ea53333" javaMinVersion="1.8" allowBetaVM="true" jdkMode="jdk">
     <variables>
@@ -1672,7 +1672,7 @@ return console.askYesNo(message, true);
     </styles>
   </installerGui>
   <mediaSets>
-    <windows name="All SNAP Windows x64" id="2571" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" architecture="64">
+    <windows name="All SNAP Windows x64" id="2571" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" architecture="64">
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="539" />
@@ -1686,7 +1686,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle includedJre="windows-amd64-1.8.0.242" />
     </windows>
-    <windows name="All SNAP Windows x86" id="2584" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" architecture="32">
+    <windows name="All SNAP Windows x86" id="2584" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" architecture="32">
       <excludedLaunchers>
         <launcher id="539" />
         <launcher id="618" />
@@ -1700,7 +1700,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle includedJre="windows-x86-1.8.0.242" />
     </windows>
-    <macosFolder name="All SNAP Mac OS X Folder" id="2575" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" architecture="universal">
+    <macosFolder name="All SNAP Mac OS X Folder" id="2575" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" architecture="universal">
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="539" />
@@ -1713,7 +1713,7 @@ return console.askYesNo(message, true);
         <entry filesetId="641" />
       </exclude>
     </macosFolder>
-    <unixInstaller name="All SNAP Unix" id="2578" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
+    <unixInstaller name="All SNAP Unix" id="2578" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="618" />
@@ -1726,7 +1726,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle includedJre="linux-amd64-1.8.0.242" />
     </unixInstaller>
-    <windows name="Sentinel SNAP Windows x64" id="2589" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="64">
+    <windows name="Sentinel SNAP Windows x64" id="2589" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="64">
       <excludedComponents>
         <component id="1963" />
       </excludedComponents>
@@ -1749,7 +1749,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle includedJre="windows-amd64-1.8.0.242" />
     </windows>
-    <windows name="Sentinel SNAP Windows x86" id="2603" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="32">
+    <windows name="Sentinel SNAP Windows x86" id="2603" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="32">
       <excludedComponents>
         <component id="1963" />
       </excludedComponents>
@@ -1772,7 +1772,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle includedJre="windows-x86-1.8.0.242" />
     </windows>
-    <unixInstaller name="Sentinel SNAP Unix" id="2598" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
+    <unixInstaller name="Sentinel SNAP Unix" id="2598" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
         <component id="1963" />
       </excludedComponents>
@@ -1794,7 +1794,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle includedJre="linux-amd64-1.8.0.242" />
     </unixInstaller>
-    <windows name="SMOS SNAP Windows x64" id="2609" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="64">
+    <windows name="SMOS SNAP Windows x64" id="2609" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="64">
       <excludedComponents>
         <component id="73" />
         <component id="68" />
@@ -1822,7 +1822,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle includedJre="windows-amd64-1.8.0.242" />
     </windows>
-    <windows name="SMOS SNAP Windows x86" id="2620" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="32">
+    <windows name="SMOS SNAP Windows x86" id="2620" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="32">
       <excludedComponents>
         <component id="73" />
         <component id="68" />
@@ -1850,7 +1850,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle includedJre="windows-x86-1.8.0.242" />
     </windows>
-    <macosFolder name="SMOS SNAP Mac OS X Folder" id="2612" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="universal">
+    <macosFolder name="SMOS SNAP Mac OS X Folder" id="2612" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="universal">
       <excludedComponents>
         <component id="73" />
         <component id="68" />
@@ -1877,7 +1877,7 @@ return console.askYesNo(message, true);
         <entry filesetId="641" />
       </exclude>
     </macosFolder>
-    <unixInstaller name="SMOS SNAP Unix" id="2617" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0">
+    <unixInstaller name="SMOS SNAP Unix" id="2617" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
         <component id="73" />
         <component id="68" />
@@ -1904,7 +1904,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle includedJre="linux-amd64-1.8.0.242" />
     </unixInstaller>
-    <unixArchive name="Engine Unix Archive" id="859" installDir="snap">
+    <unixArchive name="Engine Unix Archive" id="859" installDir="esa-snap">
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="539" />
@@ -1922,7 +1922,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle jreBundleSource="none" />
     </unixArchive>
-    <macosFolder name="Sentinel SNAP Mac OS X Folder" id="3551" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="universal">
+    <macosFolder name="Sentinel SNAP Mac OS X Folder" id="3551" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="universal">
       <excludedComponents>
         <component id="1963" />
       </excludedComponents>
