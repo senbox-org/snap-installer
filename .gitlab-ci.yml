@@ -18,8 +18,8 @@ variables:
   DOCKER_REGISTRY_PASSWORD: $NEXUS_PASSWORD
   DOCKER_FILE: "docker/build/Dockerfile"
   DOCKER_CONTEXT_PATH: "${CI_PROJECT_DIR}"
-  DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:10.0.0-RC1-snapshot"
-  DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:10.0.0-RC1"
+  DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:10.0.0-RC2-snapshot"
+  DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:10.0.0-RC2"
   DOCKER_TRIVY_ARGS: "--ignore-unfixed --vuln-type os --debug --timeout 15m"
   DOCKER_TRIVY_SECURITY_LEVEL_THRESHOLD: HIGH
   DOCKER_BUILD_ARGS: "--cache=true --compressed-caching=false --use-new-run --cleanup --build-arg LICENSE=${INSTALL4J_LICENSE} --build-arg=UPLOAD_URL --build-arg=NEXUS_USER --build-arg=NEXUS_PASS --target=unix"
@@ -77,13 +77,24 @@ compile:
 build:
   stage: build
   rules:
-    - if: $BRANCH
-      variables:
-        COMPILE_BRANCH: $BRANCH
-      when: on_success
-    - if: $RECOMPILE == "false"
-      when: always
-    - when: on_success
+  - if: $CI_PIPELINE_SOURCE == "schedule"
+    variables:
+      MAVEN_CLI_OPTS: >-
+        --no-transfer-progress
+        --batch-mode
+        --errors
+        --fail-at-end
+        --show-version
+        -DdeployAtEnd=false
+        -Denable.long.tests=true
+    when: on_success
+  - if: $BRANCH
+    variables:
+      COMPILE_BRANCH: $BRANCH
+    when: on_success
+  - if: $RECOMPILE == "false"
+    when: always
+  - when: on_success
   needs:
     - job: compile
       optional: true
