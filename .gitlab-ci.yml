@@ -12,20 +12,20 @@ variables:
     -Dorg.slf4j.simpleLogger.showDateTime=true
     -Djava.awt.headless=true
     -Dnetbeans.verify.integrity=false
-    -Dmaven.test.skip=true
+  #-Dmaven.test.skip=true
   DOCKER_REGISTRY_MIRROR: docker.snap-ci.ovh
   DOCKER_REGISTRY_USER: $NEXUS_USER
   DOCKER_REGISTRY_PASSWORD: $NEXUS_PASSWORD
   DOCKER_FILE: "docker/build/Dockerfile"
   DOCKER_CONTEXT_PATH: "${CI_PROJECT_DIR}"
-  DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix-snapshot"
-  DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:unix"
+  DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:10.0.0-RC2-snapshot"
+  DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:10.0.0-RC2"
   DOCKER_TRIVY_ARGS: "--ignore-unfixed --vuln-type os --debug --timeout 15m"
   DOCKER_TRIVY_SECURITY_LEVEL_THRESHOLD: HIGH
   DOCKER_BUILD_ARGS: "--cache=true --compressed-caching=false --use-new-run --cleanup --build-arg LICENSE=${INSTALL4J_LICENSE} --build-arg=UPLOAD_URL --build-arg=NEXUS_USER --build-arg=NEXUS_PASS --target=unix"
   DOCKER_HADOLINT_ARGS: --failure-threshold error
   DOCKER_PROD_PUBLISH_STRATEGY: auto
-  COMPILE_BRANCH: master
+  COMPILE_BRANCH: 10.0.0-RC1
   RECOMPILE: "true"
 
 stages:
@@ -77,13 +77,24 @@ compile:
 build:
   stage: build
   rules:
-    - if: $BRANCH
-      variables:
-        COMPILE_BRANCH: $BRANCH
-      when: on_success
-    - if: $RECOMPILE == "false"
-      when: always
-    - when: on_success
+  - if: $CI_PIPELINE_SOURCE == "schedule"
+    variables:
+      MAVEN_CLI_OPTS: >-
+        --no-transfer-progress
+        --batch-mode
+        --errors
+        --fail-at-end
+        --show-version
+        -DdeployAtEnd=false
+        -Denable.long.tests=true
+    when: on_success
+  - if: $BRANCH
+    variables:
+      COMPILE_BRANCH: $BRANCH
+    when: on_success
+  - if: $RECOMPILE == "false"
+    when: always
+  - when: on_success
   needs:
     - job: compile
       optional: true
@@ -132,7 +143,7 @@ gpt-tests:
   stage: gpt-tests
   trigger:
     project: senbox-org/snap-gpt-tests
-    branch: master
+    branch: 10.0.0-RC1
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
   inherit:
@@ -142,6 +153,7 @@ gpt-tests:
   parallel:
     matrix:
       - PLATFORM: [linux,windows,darwin]
+  allow_failure: true
 
 # Report on Github cf https://ecp-ci.gitlab.io/docs/guides/build-status-gitlab.html
 .report-status:
