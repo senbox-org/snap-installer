@@ -143,7 +143,7 @@ gpt-tests:
   stage: gpt-tests
   trigger:
     project: senbox-org/snap-gpt-tests
-    branch: 10.0.0-RC1
+    branch: 10.x
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
   inherit:
