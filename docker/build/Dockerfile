@@ -25,12 +25,19 @@ ENV LC_ALL en_US.UTF-8
 ##################
 
 RUN cat /etc/os-release | grep UBUNTU_CODENAME
-# USING ADOPTOPENJDK (Adoptium by Temurin)
-RUN wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | apt-key add -
-RUN echo "deb https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | tee /etc/apt/sources.list.d/adoptium.list
-RUN apt-get -qq update && apt-cache search temurin-11-jdk && apt-get -qqy install temurin-11-jdk && \
+# USING BELLSOFT JDK (Liberica)
+RUN wget -q -O - https://download.bell-sw.com/pki/GPG-KEY-bellsoft | apt-key add -
+RUN echo "deb [arch=amd64] https://apt.bell-sw.com/ stable main" | tee /etc/apt/sources.list.d/bellsoft.list
+RUN apt-get -qq update && apt-cache search bellsoft-java11 && apt-get -qqy install bellsoft-java11 && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     java -version && which java && echo $JAVA_HOME
+
+# USING ADOPTOPENJDK (Adoptium by Temurin)
+# RUN wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | apt-key add -
+# RUN echo "deb https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | tee /etc/apt/sources.list.d/adoptium.list
+# RUN apt-get -qq update && apt-cache search temurin-11-jdk && apt-get -qqy install temurin-11-jdk && \
+#     apt-get clean && rm -rf /var/lib/apt/lists/* && \
+#     java -version && which java && echo $JAVA_HOME
 
 ENV PATH=${PATH}:$JAVA_HOME/bin/
 
