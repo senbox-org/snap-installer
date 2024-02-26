@@ -25,7 +25,7 @@ variables:
   DOCKER_BUILD_ARGS: "--cache=true --compressed-caching=false --use-new-run --cleanup --build-arg LICENSE=${INSTALL4J_LICENSE} --build-arg=UPLOAD_URL --build-arg=NEXUS_USER --build-arg=NEXUS_PASS --target=unix"
   DOCKER_HADOLINT_ARGS: --failure-threshold error
   DOCKER_PROD_PUBLISH_STRATEGY: auto
-  COMPILE_BRANCH: 10.0.0-RC1
+  COMPILE_BRANCH: 10.x
   RECOMPILE: "true"
 
 stages:
