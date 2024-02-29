@@ -37,7 +37,7 @@
       <mountPoint id="645" root="642" />
     </mountPoints>
     <entries>
-      <fileEntry mountPoint="611" file="./images/SNAP_icon_48.jpg" />
+      <fileEntry mountPoint="611" file="./images/SNAP_icon_48.png" />
       <fileEntry mountPoint="646" file="../snap-desktop/snap-application/target/snap/etc/snap.clusters" />
       <dirEntry mountPoint="646" file="../snap-engine/etc" fileMode="666" overrideFileMode="true" subDirectory="etc" />
       <fileEntry mountPoint="1017" file="../snap-desktop/snap-main/target/snap-main.jar" />
@@ -204,27 +204,27 @@
           <property name="customIconImageFiles">
             <add>
               <object class="com.install4j.api.beans.ExternalFile">
-                <string>./images/SNAP_icon_16.jpg</string>
+                <string>./images/SNAP_icon_16.png</string>
               </object>
             </add>
             <add>
               <object class="com.install4j.api.beans.ExternalFile">
-                <string>./images/SNAP_icon_32.jpg</string>
+                <string>./images/SNAP_icon_32.png</string>
               </object>
             </add>
             <add>
               <object class="com.install4j.api.beans.ExternalFile">
-                <string>./images/SNAP_icon_48.jpg</string>
+                <string>./images/SNAP_icon_48.png</string>
               </object>
             </add>
             <add>
               <object class="com.install4j.api.beans.ExternalFile">
-                <string>./images/SNAP_icon_128.jpg</string>
+                <string>./images/SNAP_icon_128.png</string>
               </object>
             </add>
             <add>
               <object class="com.install4j.api.beans.ExternalFile">
-                <string>./images/SNAP_icon_512.jpg</string>
+                <string>./images/SNAP_icon_512.png</string>
               </object>
             </add>
           </property>
@@ -253,7 +253,7 @@
                 <property name="imageAnchor" type="enum" class="com.install4j.api.beans.Anchor" value="NORTHEAST" />
                 <property name="imageFile">
                   <object class="com.install4j.api.beans.ExternalFile">
-                    <string>./images/SNAP_icon_64.jpg</string>
+                    <string>./images/SNAP_icon_64.png</string>
                   </object>
                 </property>
               </serializedBean>
@@ -1206,7 +1206,7 @@ return success;
                       <property name="files" type="array" class="java.io.File" length="1">
                         <element index="0">
                           <object class="java.io.File">
-                            <string>bin/SNAP_icon_48.jpg</string>
+                            <string>bin/SNAP_icon_48.png</string>
                           </object>
                         </element>
                       </property>
@@ -1218,7 +1218,7 @@ return success;
                       <property name="files" type="array" class="java.io.File" length="1">
                         <element index="0">
                           <object class="java.io.File">
-                            <string>bin/SNAP_icon_48.jpg</string>
+                            <string>bin/SNAP_icon_48.png</string>
                           </object>
                         </element>
                       </property>
@@ -1679,7 +1679,7 @@ return console.askYesNo(message, true);
         <launcher id="618" />
       </excludedLaunchers>
       <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="bin/SNAP_icon_48.png" />
         <entry filesetId="634" />
         <entry filesetId="637" />
         <entry filesetId="641" />
@@ -1693,7 +1693,7 @@ return console.askYesNo(message, true);
         <launcher id="656" />
       </excludedLaunchers>
       <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="bin/SNAP_icon_48.png" />
         <entry filesetId="634" />
         <entry filesetId="639" />
         <entry filesetId="641" />
@@ -1707,7 +1707,7 @@ return console.askYesNo(message, true);
         <launcher id="656" />
       </excludedLaunchers>
       <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="bin/SNAP_icon_48.png" />
         <entry filesetId="637" />
         <entry filesetId="639" />
         <entry filesetId="641" />
@@ -1741,7 +1741,7 @@ return console.askYesNo(message, true);
         <launcher id="2822" />
       </excludedLaunchers>
       <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="bin/SNAP_icon_48.png" />
         <entry location="smos" />
         <entry filesetId="634" />
         <entry filesetId="637" />
@@ -1764,7 +1764,7 @@ return console.askYesNo(message, true);
         <launcher id="2822" />
       </excludedLaunchers>
       <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="bin/SNAP_icon_48.png" />
         <entry location="smos" />
         <entry filesetId="634" />
         <entry filesetId="639" />
@@ -1811,7 +1811,7 @@ return console.askYesNo(message, true);
         <bean refId="6" />
       </excludedBeans>
       <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="bin/SNAP_icon_48.png" />
         <entry location="s1tbx" />
         <entry location="s2tbx" />
         <entry location="s3tbx" />
@@ -1839,7 +1839,7 @@ return console.askYesNo(message, true);
         <bean refId="6" />
       </excludedBeans>
       <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="bin/SNAP_icon_48.png" />
         <entry location="s1tbx" />
         <entry location="s2tbx" />
         <entry location="s3tbx" />
@@ -1867,7 +1867,7 @@ return console.askYesNo(message, true);
         <bean refId="6" />
       </excludedBeans>
       <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="bin/SNAP_icon_48.png" />
         <entry location="s1tbx" />
         <entry location="s2tbx" />
         <entry location="s3tbx" />
@@ -1912,7 +1912,7 @@ return console.askYesNo(message, true);
         <launcher id="656" />
       </excludedLaunchers>
       <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="bin/SNAP_icon_48.png" />
         <entry location="smos/modules/docs" />
         <entry location="smos/modules/ext/org.esa.smostbx.smos-gui" />
         <entry location="smos/modules/org-esa-smostbx-smos-gui.jar" />
@@ -1937,7 +1937,7 @@ return console.askYesNo(message, true);
         <launcher id="2822" />
       </excludedLaunchers>
       <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="bin/SNAP_icon_48.png" />
         <entry location="smos" />
         <entry filesetId="637" />
         <entry filesetId="639" />
@@ -1947,7 +1947,7 @@ return console.askYesNo(message, true);
     </macosFolder>
     <macosArchive name="macOS Single Bundle Archive" id="3558" mediaFileName="${compiler:sys.shortName}-archive_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="universal" launcherId="3557">
       <exclude>
-        <entry location="bin/SNAP_icon_48.jpg" />
+        <entry location="bin/SNAP_icon_48.png" />
         <entry filesetId="637" />
         <entry filesetId="639" />
         <entry filesetId="641" />
