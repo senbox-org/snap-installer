@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<install4j version="10.0.6" transformSequenceNumber="10">
+<install4j version="10.0.7" transformSequenceNumber="10">
   <directoryPresets config="../snap-desktop/snap-application/target/snap/THIRDPARTY_LICENSES.txt" />
   <application name="ESA SNAP" applicationId="0941-5747-6134-5911" mediaDir="./target" compression="9" commonExternalFiles="true" shrinkRuntime="false" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="10.0.0-RC2" allPathsRelative="true" macVolumeId="69e291547ea53333" javaMinVersion="1.8" allowBetaVM="true" jdkMode="jdk">
     <variables>
@@ -1705,6 +1705,7 @@ return console.askYesNo(message, true);
         <launcher id="538" />
         <launcher id="539" />
         <launcher id="656" />
+        <launcher id="3557" />
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.png" />
@@ -1953,9 +1954,23 @@ return console.askYesNo(message, true);
         <entry filesetId="641" />
       </exclude>
     </macosArchive>
+    <macosFolder name="macOS Folder" id="3559" customInstallBaseDir="esa-snap" installerName="${i18n:InstallerName(${compiler:sys.fullName})}-arm" architecture="aarch64" signLaunchers="true">
+      <excludedLaunchers>
+        <launcher id="538" />
+        <launcher id="539" />
+        <launcher id="656" />
+        <launcher id="3557" />
+      </excludedLaunchers>
+      <exclude>
+        <entry filesetId="637" />
+        <entry filesetId="639" />
+        <entry filesetId="641" />
+      </exclude>
+      <jreBundle usePack200="false" />
+    </macosFolder>
   </mediaSets>
   <buildIds buildAll="false">
-    <mediaSet refId="3551" />
+    <mediaSet refId="3559" />
   </buildIds>
   <buildOptions faster="true" disableSigning="true" />
 </install4j>
