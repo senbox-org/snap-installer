@@ -138,7 +138,7 @@ FROM base AS installer
 # SETUP Install4J #
 ###################
 
-ARG INSTALL4J_VERSION=10_0_5
+ARG INSTALL4J_VERSION=10_0_7
 
 RUN wget -nv https://download.ej-technologies.com/install4j/install4j_linux-x64_${INSTALL4J_VERSION}.deb -O /tmp/install4j_linux.deb && \
 	apt-get install -qqyf /tmp/install4j_linux.deb && \
