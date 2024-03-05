@@ -1954,7 +1954,7 @@ return console.askYesNo(message, true);
         <entry filesetId="641" />
       </exclude>
     </macosArchive>
-    <macosFolder name="macOS Folder" id="3559" customInstallBaseDir="esa-snap" installerName="${i18n:InstallerName(${compiler:sys.fullName})}-arm" architecture="aarch64" signLaunchers="true">
+    <macosFolder name="All SNAP Mac OS X Folder for ARM" id="3561" mediaFileName="${compiler:sys.shortName}-arm_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" architecture="aarch64">
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="539" />
@@ -1962,11 +1962,11 @@ return console.askYesNo(message, true);
         <launcher id="3557" />
       </excludedLaunchers>
       <exclude>
+        <entry location="bin/SNAP_icon_48.png" />
         <entry filesetId="637" />
         <entry filesetId="639" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle usePack200="false" />
     </macosFolder>
   </mediaSets>
   <buildIds buildAll="false">

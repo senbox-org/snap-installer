@@ -16,6 +16,14 @@ do
         export EXT=""
         export GROUP="installers"
         export REPO="snap-maven-releases"
+        export TYPE="all"
+        if [[ "${file}" == *"sentinel"* ]]
+            then
+                TYPE="sentinel"
+        elif [[ "${file}" == *"smos"* ]]
+            then
+                TYPE="smos"
+        fi
         if [[ "${file}" == *".dmg"* ]]
             then
                 EXT="dmg"
@@ -40,7 +48,7 @@ do
             then
                 echo "Uploading ${file} to ${REPO}"
                 curl -u ${NEXUS_USER}:${NEXUS_PASS} --progress-bar \
-                    -F "maven2.groupId=org.esa.snap.${GROUP}" -F "maven2.artifactId=snap_all_${OS}" -F "maven2.version=${VERSION}" \
+                    -F "maven2.groupId=org.esa.snap.${GROUP}" -F "maven2.artifactId=snap_${TYPE}_${OS}" -F "maven2.version=${VERSION}" \
                     -F "maven2.asset1=@${USER_HOME_DIR}/${file}" -F "maven2.asset1.extension=${EXT}" \
                     "${UPLOAD_URL}=${REPO}"
         fi
