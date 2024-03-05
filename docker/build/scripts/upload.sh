@@ -22,6 +22,9 @@ do
                 if [[ "${file}" == *"archive"* ]]
                     then
                         OS="macos_archive"
+                elif [[ "${file}" == *"arm"* ]]
+                    then
+                        OS="macos_arm"
                 fi
         elif [[ "${file}" == *".exe"* ]]
             then
