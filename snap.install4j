@@ -1968,6 +1968,21 @@ return console.askYesNo(message, true);
         <entry filesetId="641" />
       </exclude>
     </macosFolder>
+    <macosFolder name="All SNAP Mac OS X Folder for Intel" id="3564" mediaFileName="${compiler:sys.shortName}-intel_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
+      <excludedLaunchers>
+        <launcher id="538" />
+        <launcher id="539" />
+        <launcher id="656" />
+        <launcher id="3557" />
+      </excludedLaunchers>
+      <exclude>
+        <entry location="bin/SNAP_icon_48.png" />
+        <entry filesetId="637" />
+        <entry filesetId="639" />
+        <entry filesetId="641" />
+      </exclude>
+      <jreBundle usePack200="false" />
+    </macosFolder>
   </mediaSets>
   <buildIds buildAll="false">
     <mediaSet refId="3559" />

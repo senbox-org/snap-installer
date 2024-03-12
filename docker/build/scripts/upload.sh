@@ -33,6 +33,9 @@ do
                 elif [[ "${file}" == *"arm"* ]]
                     then
                         OS="macos_arm"
+                elif [[ "${file}" == *"intel"* ]]
+                    then
+                        OS="macos_intel"
                 fi
         elif [[ "${file}" == *".exe"* ]]
             then
