@@ -20,7 +20,7 @@
 
     <groupId>org.esa.snap</groupId>
     <artifactId>snap-installer</artifactId>
-    <version>10.0.0-RC2</version>
+    <version>10.0.0</version>
     <packaging>jar</packaging>    
     <name>SNAP Installer Project</name>
 
