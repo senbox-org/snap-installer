@@ -42,6 +42,7 @@ do
                 EXT="exe"
         else
             EXT="sh"
+            chmod +x $file
         fi
         if [[ "${file}" == *"SNAPSHOT"* ]]
             then

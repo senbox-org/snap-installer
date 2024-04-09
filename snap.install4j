@@ -114,7 +114,7 @@
   </files>
   <launchers>
     <launcher name="SNAP Desktop Win x86" id="538" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap.exe" />
-    <launcher name="SNAP Desktop Unix" id="539" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap" />
+    <launcher name="SNAP Desktop Linux" id="539" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap" />
     <launcher name="SNAP Desktop Mac OS" id="618" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin/snap.app" />
     <launcher name="SNAP Desktop Win x64" id="656" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap64.exe" />
     <launcher name="SNAP GPT" id="781" excludeFromMenu="true">
@@ -179,22 +179,6 @@
           <archive location="snap/modules/ext/org.esa.snap.snap-core/org-esa-snap/snap-runtime.jar" failOnError="false" />
         </classPath>
       </java>
-    </launcher>
-    <launcher name="snap-mac-test" id="3557" checkUpdater="true">
-      <executable name="snap-mac-test" executableDir="bin" executableMode="gui" checkConsoleParameter="true" />
-      <java mainClass="org.esa.snap.runtime.Launcher" vmParameters="-Dsnap.mainClass=org.esa.snap.main &quot;-Dsnap.home=${launcher:sys.launcherDirectory}/..&quot; -Dinstall4j.noLoggingFix=true">
-        <classPath>
-          <archive location="snap/modules/ext/org.esa.snap.snap-core/org-esa-snap/snap-runtime.jar" failOnError="false" />
-        </classPath>
-      </java>
-      <vmOptionsFile mode="content">
-        <content># Enter one VM parameter per line
-# For example, to adjust the maximum memory usage to 512 MB, uncomment the following line:
-# -Xmx512m
-# To include another file, uncomment the following line:
-# -include-options [path to other .vmoption file]
--Xmx10G</content>
-      </vmOptionsFile>
     </launcher>
   </launchers>
   <installerGui>
@@ -1904,7 +1888,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle includedJre="linux-amd64-1.8.0.242" />
     </unixInstaller>
-    <unixArchive name="Engine Unix Archive" id="859" installDir="esa-snap">
+    <unixArchive name="Engine Linux Archive" id="859" installDir="esa-snap">
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="539" />
@@ -1958,7 +1942,6 @@ return console.askYesNo(message, true);
         <launcher id="538" />
         <launcher id="539" />
         <launcher id="656" />
-        <launcher id="3557" />
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.png" />
@@ -1972,7 +1955,6 @@ return console.askYesNo(message, true);
         <launcher id="538" />
         <launcher id="539" />
         <launcher id="656" />
-        <launcher id="3557" />
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.png" />
