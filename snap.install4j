@@ -114,7 +114,7 @@
   </files>
   <launchers>
     <launcher name="SNAP Desktop Win x86" id="538" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap.exe" />
-    <launcher name="SNAP Desktop Unix" id="539" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap" />
+    <launcher name="SNAP Desktop Linux" id="539" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap" />
     <launcher name="SNAP Desktop Mac OS" id="618" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin/snap.app" />
     <launcher name="SNAP Desktop Win x64" id="656" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap64.exe" />
     <launcher name="SNAP GPT" id="781" excludeFromMenu="true">
@@ -179,22 +179,6 @@
           <archive location="snap/modules/ext/org.esa.snap.snap-core/org-esa-snap/snap-runtime.jar" failOnError="false" />
         </classPath>
       </java>
-    </launcher>
-    <launcher name="snap-mac-test" id="3557" checkUpdater="true">
-      <executable name="snap-mac-test" executableDir="bin" executableMode="gui" checkConsoleParameter="true" />
-      <java mainClass="org.esa.snap.runtime.Launcher" vmParameters="-Dsnap.mainClass=org.esa.snap.main &quot;-Dsnap.home=${launcher:sys.launcherDirectory}/..&quot; -Dinstall4j.noLoggingFix=true">
-        <classPath>
-          <archive location="snap/modules/ext/org.esa.snap.snap-core/org-esa-snap/snap-runtime.jar" failOnError="false" />
-        </classPath>
-      </java>
-      <vmOptionsFile mode="content">
-        <content># Enter one VM parameter per line
-# For example, to adjust the maximum memory usage to 512 MB, uncomment the following line:
-# -Xmx512m
-# To include another file, uncomment the following line:
-# -include-options [path to other .vmoption file]
--Xmx10G</content>
-      </vmOptionsFile>
     </launcher>
   </launchers>
   <installerGui>
@@ -1705,7 +1689,6 @@ return console.askYesNo(message, true);
         <launcher id="538" />
         <launcher id="539" />
         <launcher id="656" />
-        <launcher id="3557" />
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.png" />
@@ -1714,7 +1697,7 @@ return console.askYesNo(message, true);
         <entry filesetId="641" />
       </exclude>
     </macosFolder>
-    <unixInstaller name="All SNAP Unix" id="2578" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
+    <unixInstaller name="All SNAP Linux" id="2578" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="618" />
@@ -1773,7 +1756,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle includedJre="windows-x86-1.8.0.242" />
     </windows>
-    <unixInstaller name="Sentinel SNAP Unix" id="2598" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
+    <unixInstaller name="Sentinel SNAP Linux" id="2598" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
         <component id="1963" />
       </excludedComponents>
@@ -1878,7 +1861,7 @@ return console.askYesNo(message, true);
         <entry filesetId="641" />
       </exclude>
     </macosFolder>
-    <unixInstaller name="SMOS SNAP Unix" id="2617" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
+    <unixInstaller name="SMOS SNAP Linux" id="2617" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
         <component id="73" />
         <component id="68" />
@@ -1905,7 +1888,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle includedJre="linux-amd64-1.8.0.242" />
     </unixInstaller>
-    <unixArchive name="Engine Unix Archive" id="859" installDir="esa-snap">
+    <unixArchive name="Engine Linux Archive" id="859" installDir="esa-snap">
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="539" />
@@ -1959,7 +1942,6 @@ return console.askYesNo(message, true);
         <launcher id="538" />
         <launcher id="539" />
         <launcher id="656" />
-        <launcher id="3557" />
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.png" />
@@ -1973,7 +1955,6 @@ return console.askYesNo(message, true);
         <launcher id="538" />
         <launcher id="539" />
         <launcher id="656" />
-        <launcher id="3557" />
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.png" />
@@ -1985,7 +1966,17 @@ return console.askYesNo(message, true);
     </macosFolder>
   </mediaSets>
   <buildIds buildAll="false">
-    <mediaSet refId="3559" />
+    <mediaSet refId="2571" />
+    <mediaSet refId="2578" />
+    <mediaSet refId="2589" />
+    <mediaSet refId="2598" />
+    <mediaSet refId="2609" />
+    <mediaSet refId="2612" />
+    <mediaSet refId="2617" />
+    <mediaSet refId="859" />
+    <mediaSet refId="3551" />
+    <mediaSet refId="3561" />
+    <mediaSet refId="3564" />
   </buildIds>
   <buildOptions faster="true" disableSigning="true" />
 </install4j>
