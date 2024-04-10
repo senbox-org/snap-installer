@@ -11,7 +11,7 @@ do
     if [[ "${file}" =~ ^esa-snap* ]]
     then
         echo $file
-        export OS=$(echo "$file" | grep -oP  "(unix|windows|macos)")
+        export OS=$(echo "$file" | grep -oP  "(linux|windows|macos)")
         export VERSION="10.0.0"
         export EXT=""
         export GROUP="installers"
