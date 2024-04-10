@@ -1966,17 +1966,7 @@ return console.askYesNo(message, true);
     </macosFolder>
   </mediaSets>
   <buildIds buildAll="false">
-    <mediaSet refId="2571" />
-    <mediaSet refId="2578" />
-    <mediaSet refId="2589" />
-    <mediaSet refId="2598" />
-    <mediaSet refId="2609" />
-    <mediaSet refId="2612" />
-    <mediaSet refId="2617" />
-    <mediaSet refId="859" />
-    <mediaSet refId="3551" />
-    <mediaSet refId="3561" />
-    <mediaSet refId="3564" />
+    <mediaSet refId="3559" />
   </buildIds>
   <buildOptions faster="true" disableSigning="true" />
 </install4j>
