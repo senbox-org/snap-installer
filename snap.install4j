@@ -1834,7 +1834,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle includedJre="windows-x86-1.8.0.242" />
     </windows>
-    <macosFolder name="SMOS SNAP Mac OS X Folder" id="2612" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="universal">
+    <macosFolder name="SMOS SNAP Mac OS X Folder for Intel" id="2612" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
         <component id="73" />
         <component id="68" />
@@ -1906,7 +1906,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle jreBundleSource="none" />
     </unixArchive>
-    <macosFolder name="Sentinel SNAP Mac OS X Folder" id="3551" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="universal">
+    <macosFolder name="Sentinel SNAP Mac OS X Folder for Intel" id="3551" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
         <component id="1963" />
       </excludedComponents>
@@ -1929,14 +1929,6 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle bundleUrl="https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-debugimage_aarch64_mac_hotspot_17.0.6_10.tar.gz" />
     </macosFolder>
-    <!-- <macosArchive name="macOS Single Bundle Archive" id="3558" mediaFileName="${compiler:sys.shortName}-archive_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="universal" launcherId="3557">
-      <exclude>
-        <entry location="bin/SNAP_icon_48.png" />
-        <entry filesetId="637" />
-        <entry filesetId="639" />
-        <entry filesetId="641" />
-      </exclude>
-    </macosArchive> -->
     <macosFolder name="All SNAP Mac OS X Folder for ARM" id="3561" mediaFileName="${compiler:sys.shortName}-arm_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" architecture="aarch64">
       <excludedLaunchers>
         <launcher id="538" />
@@ -1964,9 +1956,60 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle usePack200="false" />
     </macosFolder>
+    <macosFolder name="Sentinel SNAP Mac OS X Folder for ARM" id="3566" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="aarch64">
+      <excludedComponents>
+        <component id="1963" />
+      </excludedComponents>
+      <includedDownloadableComponents>
+        <component id="73" />
+        <component id="68" />
+      </includedDownloadableComponents>
+      <excludedLaunchers>
+        <launcher id="538" />
+        <launcher id="539" />
+        <launcher id="656" />
+        <launcher id="2822" />
+      </excludedLaunchers>
+      <exclude>
+        <entry location="bin/SNAP_icon_48.png" />
+        <entry location="smos" />
+        <entry filesetId="637" />
+        <entry filesetId="639" />
+        <entry filesetId="641" />
+      </exclude>
+      <jreBundle bundleUrl="https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-debugimage_aarch64_mac_hotspot_17.0.6_10.tar.gz" />
+    </macosFolder>
+    <macosFolder name="SMOS SNAP Mac OS X Folder for ARM" id="3570" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="aarch64">
+      <excludedComponents>
+        <component id="73" />
+        <component id="68" />
+      </excludedComponents>
+      <includedDownloadableComponents>
+        <component id="1963" />
+      </includedDownloadableComponents>
+      <excludedLaunchers>
+        <launcher id="538" />
+        <launcher id="539" />
+        <launcher id="656" />
+      </excludedLaunchers>
+      <excludedBeans>
+        <bean refId="6" />
+      </excludedBeans>
+      <exclude>
+        <entry location="bin/SNAP_icon_48.png" />
+        <entry location="s1tbx" />
+        <entry location="s2tbx" />
+        <entry location="s3tbx" />
+        <entry location="rstb" />
+        <entry filesetId="637" />
+        <entry filesetId="639" />
+        <entry filesetId="641" />
+      </exclude>
+    </macosFolder>
   </mediaSets>
   <buildIds>
-    <mediaSet refId="3559" />
+    <mediaSet refId="2571" />
+    <mediaSet refId="2575" />
   </buildIds>
   <buildOptions faster="true" disableSigning="true" />
 </install4j>
