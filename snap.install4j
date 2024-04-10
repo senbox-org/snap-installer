@@ -1697,7 +1697,7 @@ return console.askYesNo(message, true);
         <entry filesetId="641" />
       </exclude>
     </macosFolder>
-    <unixInstaller name="All SNAP Linux" id="2578" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
+    <unixInstaller name="All SNAP Linux" id="2578" mediaFileName="${compiler:sys.shortName}_all_linux_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true">
       <excludedLaunchers>
         <launcher id="538" />
         <launcher id="618" />
@@ -1756,7 +1756,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle includedJre="windows-x86-1.8.0.242" />
     </windows>
-    <unixInstaller name="Sentinel SNAP Linux" id="2598" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
+    <unixInstaller name="Sentinel SNAP Linux" id="2598" mediaFileName="${compiler:sys.shortName}_sentinel_linux_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
         <component id="1963" />
       </excludedComponents>
@@ -1861,7 +1861,7 @@ return console.askYesNo(message, true);
         <entry filesetId="641" />
       </exclude>
     </macosFolder>
-    <unixInstaller name="SMOS SNAP Linux" id="2617" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
+    <unixInstaller name="SMOS SNAP Linux" id="2617" mediaFileName="${compiler:sys.shortName}_smos_linux_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
         <component id="73" />
         <component id="68" />
@@ -1929,14 +1929,14 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle bundleUrl="https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-debugimage_aarch64_mac_hotspot_17.0.6_10.tar.gz" />
     </macosFolder>
-    <macosArchive name="macOS Single Bundle Archive" id="3558" mediaFileName="${compiler:sys.shortName}-archive_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="universal" launcherId="3557">
+    <!-- <macosArchive name="macOS Single Bundle Archive" id="3558" mediaFileName="${compiler:sys.shortName}-archive_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="universal" launcherId="3557">
       <exclude>
         <entry location="bin/SNAP_icon_48.png" />
         <entry filesetId="637" />
         <entry filesetId="639" />
         <entry filesetId="641" />
       </exclude>
-    </macosArchive>
+    </macosArchive> -->
     <macosFolder name="All SNAP Mac OS X Folder for ARM" id="3561" mediaFileName="${compiler:sys.shortName}-arm_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" architecture="aarch64">
       <excludedLaunchers>
         <launcher id="538" />
@@ -1965,18 +1965,8 @@ return console.askYesNo(message, true);
       <jreBundle usePack200="false" />
     </macosFolder>
   </mediaSets>
-  <buildIds buildAll="false">
-    <mediaSet refId="2571" />
-    <mediaSet refId="2578" />
-    <mediaSet refId="2589" />
-    <mediaSet refId="2598" />
-    <mediaSet refId="2609" />
-    <mediaSet refId="2612" />
-    <mediaSet refId="2617" />
-    <mediaSet refId="859" />
-    <mediaSet refId="3551" />
-    <mediaSet refId="3561" />
-    <mediaSet refId="3564" />
+  <buildIds>
+    <mediaSet refId="3559" />
   </buildIds>
   <buildOptions faster="true" disableSigning="true" />
 </install4j>
