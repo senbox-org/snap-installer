@@ -1965,7 +1965,7 @@ return console.askYesNo(message, true);
       <jreBundle usePack200="false" />
     </macosFolder>
   </mediaSets>
-  <buildIds buildAll="false">
+  <buildIds>
     <mediaSet refId="3559" />
   </buildIds>
   <buildOptions faster="true" disableSigning="true" />
