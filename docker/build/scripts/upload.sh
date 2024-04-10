@@ -11,8 +11,8 @@ do
     if [[ "${file}" =~ ^esa-snap* ]]
     then
         echo $file
-        export OS=$(echo "$file" | grep -oP  "(unix|windows|macos)")
-        export VERSION="11.0.0-SNAPSHOT"
+        export OS=$(echo "$file" | grep -oP  "(linux|windows|macos)")
+        export VERSION="10.0.0"
         export EXT=""
         export GROUP="installers"
         export REPO="snap-maven-releases"
