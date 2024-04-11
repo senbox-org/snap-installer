@@ -42,7 +42,6 @@ do
                 EXT="exe"
         else
             EXT="sh"
-            chmod +x "${USER_HOME_DIR}/${file}"
         fi
         if [[ "${file}" == *"SNAPSHOT"* ]]
             then

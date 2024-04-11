@@ -180,6 +180,8 @@ RUN install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder
     # rm ${USER_HOME_DIR}/*smos* && rm ${USER_HOME_DIR}/*sentinel* && \
     rm -rf ${DEST}
 
+RUN chmod +x ${USER_HOME_DIR}/*linux*
+
 USER snap
 RUN ${USER_HOME_DIR}/*_all_linux* -q -dir /home/snap/esa-snap-software
 
