@@ -198,6 +198,7 @@ ENV SNAP_DIR="/home/snap/esa-snap-software"
 WORKDIR ${SNAP_DIR}
 
 COPY --chown=snap:snap --chmod=755 --from=installer ${SNAP_DIR}/ ${SNAP_DIR}/
+COPY snap.auxdata.properties ${SNAP_DIR}/etc/snap.auxdata.properties
 
 # Create folders
 RUN mkdir -p /home/snap/testData && \
