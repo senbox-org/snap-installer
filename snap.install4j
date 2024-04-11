@@ -1834,7 +1834,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle includedJre="windows-x86-1.8.0.242" />
     </windows>
-    <macosFolder name="SMOS SNAP Mac OS X Folder Intel" id="2612" mediaFileName="${compiler:sys.shortName}_intel_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
+    <macosFolder name="SMOS SNAP Mac OS X Folder for Intel" id="2612" mediaFileName="${compiler:sys.shortName}-intel_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
         <component id="73" />
         <component id="68" />
@@ -1906,7 +1906,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle jreBundleSource="none" />
     </unixArchive>
-    <macosFolder name="Sentinel SNAP Mac OS X Folder Intel" id="3551" mediaFileName="${compiler:sys.shortName}_intel_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
+    <macosFolder name="Sentinel SNAP Mac OS X Folder for Intel" id="3551" mediaFileName="${compiler:sys.shortName}-intel_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
         <component id="1963" />
       </excludedComponents>
@@ -1964,7 +1964,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle usePack200="false" />
     </macosFolder>
-    <macosFolder name="Sentinel SNAP Mac OS X Folder ARM" id="3566" mediaFileName="${compiler:sys.shortName}_arm_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="aarch64">
+    <macosFolder name="Sentinel SNAP Mac OS X Folder for ARM" id="3566" mediaFileName="${compiler:sys.shortName}-arm_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="aarch64">
       <excludedComponents>
         <component id="1963" />
       </excludedComponents>
@@ -1987,7 +1987,7 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle bundleUrl="https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-debugimage_aarch64_mac_hotspot_17.0.6_10.tar.gz" />
     </macosFolder>
-    <macosFolder name="SMOS SNAP Mac OS X Folder ARM" id="3571" mediaFileName="${compiler:sys.shortName}_arm_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="aarch64">
+    <macosFolder name="SMOS SNAP Mac OS X Folder for ARM" id="3570" mediaFileName="${compiler:sys.shortName}-arm_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="aarch64">
       <excludedComponents>
         <component id="73" />
         <component id="68" />
