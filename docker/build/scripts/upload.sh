@@ -47,7 +47,7 @@ do
             then
                 GROUP="installers-snapshot"
         fi
-        if [[ "${file}" != "*x32*" ]]
+        if [[ "${file}" != "*x32*" && "${OS}" =~ "(linux|windows|macos)" ]]
             then
                 echo "Uploading ${file} to ${REPO}"
                 curl -u ${NEXUS_USER}:${NEXUS_PASS} --progress-bar \
