@@ -5,6 +5,7 @@ include:
 
 variables:
   BUILD_FOR_INSTALLER: "true"
+  MAVEN_DEPLOY_ARGS: deploy
   MAVEN_CLI_OPTS: $MAVEN_CLI_OPTS -U -q
   MAVEN_OPTS: >-
     -Dhttps.protocols=TLSv1.2
