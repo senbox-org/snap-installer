@@ -1,6 +1,6 @@
 include:
   - project: 'to-be-continuous/docker'
-    ref: '5.7.1'
+    ref: '5.10.1'
     file: '/templates/gitlab-ci-docker.yml'
 
 variables:
@@ -12,7 +12,7 @@ variables:
     -Dorg.slf4j.simpleLogger.showDateTime=true
     -Djava.awt.headless=true
     -Dnetbeans.verify.integrity=false
-    -Dmaven.test.skip=true
+  # -Dmaven.test.skip=true
   DOCKER_REGISTRY_MIRROR: docker.snap-ci.ovh
   DOCKER_REGISTRY_USER: $NEXUS_USER
   DOCKER_REGISTRY_PASSWORD: $NEXUS_PASSWORD
@@ -26,7 +26,13 @@ variables:
   DOCKER_HADOLINT_ARGS: --failure-threshold error
   DOCKER_PROD_PUBLISH_STRATEGY: auto
   COMPILE_BRANCH: master
-  RECOMPILE: "true"
+  # RECOMPILE: "true"
+  RECOMPILE:
+    description: When other projects should be recompiled or if artifacts are already safe to get from COMPILE_BRANCH
+    value: "true"
+    options:
+    - "true"
+    - "false"
 
 stages:
   - compile
@@ -36,6 +42,7 @@ stages:
   - publish
   - gpt-tests
 
+# Compile other projects first to get freshly built artifacts
 .compile:
   stage: compile
   rules:
