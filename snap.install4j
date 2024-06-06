@@ -1105,7 +1105,7 @@ return success;
                 <serializedBean>
                   <property name="arguments" type="array" elementType="string" length="2">
                     <element index="0">--snappy</element>
-                    <element index="1">${installer:pythonExecutable}</element>
+                    <element index="1">"${installer:pythonExecutable}"</element>
                   </property>
                   <property name="launcherId" type="string">538</property>
                 </serializedBean>
@@ -1122,7 +1122,7 @@ return success;
                 <serializedBean>
                   <property name="arguments" type="array" elementType="string" length="2">
                     <element index="0">--snappy</element>
-                    <element index="1">"${installer:pythonExecutable}</element>
+                    <element index="1">"${installer:pythonExecutable}"</element>
                   </property>
                   <property name="launcherId" type="string">656</property>
                 </serializedBean>
