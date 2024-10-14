@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<install4j version="10.0.5" transformSequenceNumber="10">
+<install4j version="10.0.7" transformSequenceNumber="10">
   <directoryPresets config="../snap-desktop/snap-application/target/snap/THIRDPARTY_LICENSES.txt" />
   <application name="ESA SNAP" applicationId="0941-5747-6134-5911" mediaDir="./target" compression="9" commonExternalFiles="true" shrinkRuntime="false" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="11.0.0" allPathsRelative="true" macVolumeId="69e291547ea53333" javaMinVersion="11" allowBetaVM="true" jdkMode="jdk">
     <variables>
@@ -47,7 +47,6 @@
       <dirEntry mountPoint="58" file="../microwave-toolbox/microwavetbx-kit/target/netbeans_clusters/microwavetbx" entryMode="subdir" subDirectory="microwavetbx" />
       <dirEntry mountPoint="58" file="../microwave-toolbox/microwavetbx-kit/target/netbeans_clusters/rstb" entryMode="subdir" subDirectory="rstb" />
       <dirEntry mountPoint="58" file="../optical-toolbox/opttbx-kit/target/netbeans_clusters/opttbx" entryMode="subdir" subDirectory="opttbx" />
-      <dirEntry mountPoint="58" file="../esa-snappy/target/nbm/netbeans/extra" entryMode="subdir" subDirectory="esasnappy" />
       <dirEntry mountPoint="58" file="../smos-box/smos-kit/target/netbeans_clusters/smos" entryMode="subdir" subDirectory="smos" />
       <fileEntry mountPoint="58" file="./LICENSE.txt" />
       <fileEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/THIRDPARTY_LICENSES.txt" />
@@ -110,12 +109,6 @@
         <dependencies>
           <component id="76" />
         </dependencies>
-      </component>
-      <component name="ESA Snappy" id="3571" downloadable="true">
-        <description>Ingestion of a bi-directional Java-Python bridge.</description>
-        <include>
-          <entry location="esasnappy" />
-        </include>
       </component>
     </components>
   </files>
@@ -815,18 +808,6 @@ return success;
                       <property name="text" type="string">opttbx\n&#xD;</property>
                     </serializedBean>
                     <condition>new File(context.getInstallationDirectory(), "opttbx").isDirectory()</condition>
-                  </action>
-                  <action name="Add esasnappy NB cluster" id="3572" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
-                    <serializedBean>
-                      <property name="append" type="boolean" value="true" />
-                      <property name="file">
-                        <object class="java.io.File">
-                          <string>etc/snap.clusters</string>
-                        </object>
-                      </property>
-                      <property name="text" type="string">esasnappy\n&#xD;</property>
-                    </serializedBean>
-                    <condition>new File(context.getInstallationDirectory(), "esasnappy").isDirectory()</condition>
                   </action>
                   <action name="Add rstb NB cluster" id="375" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
                     <serializedBean>
@@ -1948,6 +1929,14 @@ return console.askYesNo(message, true);
       </exclude>
       <jreBundle bundleUrl="https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-debugimage_aarch64_mac_hotspot_17.0.6_10.tar.gz" />
     </macosFolder>
+    <!-- <macosArchive name="macOS Single Bundle Archive" id="3558" mediaFileName="${compiler:sys.shortName}-archive_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="universal" launcherId="3557">
+      <exclude>
+        <entry location="bin/SNAP_icon_48.png" />
+        <entry filesetId="637" />
+        <entry filesetId="639" />
+        <entry filesetId="641" />
+      </exclude>
+    </macosArchive> -->
     <macosFolder name="All SNAP Mac OS X Folder for ARM" id="3561" mediaFileName="${compiler:sys.shortName}-arm_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" architecture="aarch64">
       <excludedLaunchers>
         <launcher id="538" />
@@ -2026,8 +2015,8 @@ return console.askYesNo(message, true);
       </exclude>
     </macosFolder>
   </mediaSets>
-  <buildIds buildAll="false">
-    <mediaSet refId="2571" />
+  <buildIds>
+    <mediaSet refId="3559" />
   </buildIds>
   <buildOptions faster="true" disableSigning="true" />
 </install4j>
