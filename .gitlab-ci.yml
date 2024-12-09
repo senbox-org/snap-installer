@@ -66,8 +66,17 @@ compile-snap-engine:
     branch: $COMPILE_BRANCH
     strategy: depend
 
+compile-snap-desktop:
+  extends: .compile
+  trigger: 
+    project: senbox-org/snap-desktop
+    branch: $COMPILE_BRANCH
+    strategy: depend
+  needs:
+    - job: compile-snap-engine
+
 # Trigger child pipelines to get mvn-build artifacts available (optional, but needed when they have expired)
-compile:
+compile-others:
   extends: .compile
   trigger: 
     project: $PROJECT
@@ -75,12 +84,13 @@ compile:
     strategy: depend
   parallel:
     matrix:
-      - PROJECT: senbox-org/snap-desktop
+      # - PROJECT: senbox-org/snap-desktop
       - PROJECT: senbox-org/microwave-toolbox
       - PROJECT: senbox-org/optical-toolbox
       - PROJECT: senbox-org/smos-box
   needs:
     - job: compile-snap-engine
+    - job: compile-snap-desktop
 
 # Fetch artifacts built at compile stage
 build:
