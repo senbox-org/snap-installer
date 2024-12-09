@@ -115,7 +115,7 @@ build:
     when: always
   - when: on_success
   needs:
-    - job: compile
+    - job: compile-others
       optional: true
     - project: senbox-org/snap-engine
       job: mvn-build
