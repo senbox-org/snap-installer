@@ -28,7 +28,7 @@ RUN cat /etc/os-release | grep UBUNTU_CODENAME
 # USING BELLSOFT JDK (Liberica)
 RUN wget -q -O - https://download.bell-sw.com/pki/GPG-KEY-bellsoft | apt-key add -
 RUN echo "deb [arch=amd64] https://apt.bell-sw.com/ stable main" | tee /etc/apt/sources.list.d/bellsoft.list
-RUN apt-get -qq update && apt-cache search bellsoft-java11 && apt-get -qqy install bellsoft-java11 && \
+RUN apt-get -qq update && apt-cache search bellsoft-java21 && apt-get -qqy install bellsoft-java21 && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     java -version && which java && echo $JAVA_HOME
 
@@ -39,8 +39,10 @@ ENV PATH=${PATH}:$JAVA_HOME/bin/
 # SETUP MAVEN     #
 ###################
 
-ARG MAVEN_VERSION=3.9.2
-ARG SHA=900bdeeeae550d2d2b3920fe0e00e41b0069f32c019d566465015bdd1b3866395cbe016e22d95d25d51d3a5e614af2c83ec9b282d73309f644859bbad08b63db
+# ARG MAVEN_VERSION=3.9.2
+# ARG SHA=900bdeeeae550d2d2b3920fe0e00e41b0069f32c019d566465015bdd1b3866395cbe016e22d95d25d51d3a5e614af2c83ec9b282d73309f644859bbad08b63db
+ARG MAVEN_VERSION=3.9.9
+ARG SHA=a555254d6b53d267965a3404ecb14e53c3827c09c3b94b5678835887ab404556bfaf78dcfe03ba76fa2508649dca8531c74bca4d5846513522404d48e8c4ac8b
 ARG MVN_URL=https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries
 
 RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
