@@ -47,6 +47,7 @@
       <dirEntry mountPoint="58" file="../microwave-toolbox/microwavetbx-kit/target/netbeans_clusters/microwavetbx" entryMode="subdir" subDirectory="microwavetbx" />
       <dirEntry mountPoint="58" file="../microwave-toolbox/microwavetbx-kit/target/netbeans_clusters/rstb" entryMode="subdir" subDirectory="rstb" />
       <dirEntry mountPoint="58" file="../optical-toolbox/opttbx-kit/target/netbeans_clusters/opttbx" entryMode="subdir" subDirectory="opttbx" />
+      <dirEntry mountPoint="58" file="../esa-snappy/target/nbm/netbeans/extra" entryMode="subdir" subDirectory="esasnappy" />
       <dirEntry mountPoint="58" file="../smos-box/smos-kit/target/netbeans_clusters/smos" entryMode="subdir" subDirectory="smos" />
       <fileEntry mountPoint="58" file="./LICENSE.txt" />
       <fileEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/THIRDPARTY_LICENSES.txt" />
@@ -87,6 +88,15 @@
         <description>Ingestion of SAR data products and dedicated support tools.</description>
         <include>
           <entry location="microwavetbx" />
+        </include>
+        <dependencies>
+          <component id="76" />
+        </dependencies>
+      </component>
+      <component name="ESA Snappy" id="3573" hideHelpButton="true" downloadable="true">
+        <description>Ingestion of Sentinel-2 MSI, Sentinel-3 OLCI and SLSTR data products and dedicated support tools.</description>
+        <include>
+          <entry location="esasnappy" />
         </include>
         <dependencies>
           <component id="76" />
@@ -579,7 +589,7 @@ versions up to &lt;b&gt;3.12&lt;/b&gt;. We strongly recommend to use one of the 
                   </property>
                   <property name="variableName" type="string">forcePython</property>
                 </serializedBean>
-                <initScript>getConfigurationObject()).setSelected(false);</initScript>
+                <initScript>configurationObject.setSelected(false);</initScript>
               </formComponent>
               <formComponent id="232" beanClass="com.install4j.runtime.beans.formcomponents.FileChooserComponent" resetInitOnPrevious="true">
                 <serializedBean>
@@ -609,11 +619,11 @@ if (!pythonExecutable.isEmpty()) {
         Process process = Runtime.getRuntime().exec(new String[]{file.getPath(), "-m", "pip", "install", "-i", "https://test.pypi.org/simple/", "--extra-index-url", "https://pypi.org/simple", "esa-snappy"});
         process.waitFor();
         
-        final String progressMsg = "Installing esa_snappy Python package from PyPi repository...";
-        Util.showMessage(progressMsg);
+        //final String progressMsg = "Installing esa_snappy Python package from PyPi repository...";
+        //Util.showMessage(progressMsg);
 
         if (process.exitValue() != 0) {
-            final String failMsg = "Could not install esa_snappy Python package from PyPi repository. Please check your environment.";
+            final String failMsg = "Could not install esa_snappy Python package from PyPi repository. Please check your environment. ";
             Util.showErrorMessage(failMsg);
             success = false;
         } else {
@@ -633,28 +643,7 @@ return success;
                   </property>
                   <property name="variableName" type="string">pythonExecutable</property>
                 </serializedBean>
-                <initScript>if (Util.isWindowsInstaller()) {
-    String[] paths = new String[]{"C:\\Python34", "C:\\Python33", "C:\\Python27"};
-    for (String path : paths) {
-        File file = new File(path, "python.exe");
-        if (file.exists()) {
-            configurationObject.setText(file.getPath());
-            break;
-        }
-    }
-} else {
-    String[] commands = new String[]{"python3", "python"};
-    for (String command : commands) {
-        try {
-            Runtime.getRuntime().exec(command);
-            configurationObject.setText(command);
-            break;
-        } catch (Exception e) {
-            // ok
-        }
-    }
-}
-configurationObject.setText("");
+                <initScript>configurationObject.setText("");
 </initScript>
               </formComponent>
               <formComponent name="Win" id="955" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
@@ -867,6 +856,18 @@ configurationObject.setText("");
                       <property name="text" type="string">probavbox\n&#xD;</property>
                     </serializedBean>
                     <condition>new File(context.getInstallationDirectory(), "probavbox").isDirectory()</condition>
+                  </action>
+                  <action name="Add esasnappy NB cluster" id="3571" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
+                    <serializedBean>
+                      <property name="append" type="boolean" value="true" />
+                      <property name="file">
+                        <object class="java.io.File">
+                          <string>etc/snap.clusters</string>
+                        </object>
+                      </property>
+                      <property name="text" type="string">esasnappy\n&#xD;</property>
+                    </serializedBean>
+                    <condition>new File(context.getInstallationDirectory(), "esasnappy").isDirectory()</condition>
                   </action>
                 </beans>
               </group>
