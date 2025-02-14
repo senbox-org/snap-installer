@@ -10,7 +10,7 @@ usage() {
     echo "usage: $me <python> [<dir>]"
     echo ""
     echo "    <python>   Full path to Python executable to be used with SNAP, e.g. /user/bin/python3"
-    echo "    <dir>      Directory where the 'esa_snappy' module should be installed. Defaults to ~/.snap/snap-python"
+    echo "    <dir>       Directory where the 'esa_snappy' package should have been installed. Default is the site-packages directory of the Python installation."
     echo ""
 }
 

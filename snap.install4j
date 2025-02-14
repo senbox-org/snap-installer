@@ -581,9 +581,8 @@ problems after SNAP version upgrades.</property>
                       specify your preferred Python version by the given Python executable to be used. This version
                       of SNAP supports Python versions up to &lt;b&gt;3.12&lt;/b&gt;.
                       We recommend to use one of the most recent Python distributions available from
-                      &lt;a href="https://www.python.org/"&gt;python.org&lt;/a&gt; or
-                      &lt;a href="https://docs.anaconda.com/anaconda/install/"&gt;Anaconda&lt;/a&gt; /
-                      &lt;a href="https://docs.anaconda.com/miniconda/install/"&gt;Miniconda&lt;/a&gt;.
+                      &lt;a href="https://docs.anaconda.com/anaconda/install/"&gt;Anaconda&lt;/a&gt; or
+                      &lt;a href="https://docs.anaconda.com/miniconda/install/"&gt;Miniconda&lt;/a&gt; which come with user-friendly installers.
                &lt;br&gt;&lt;br&gt;
                      After selection of a Python executable below, the esa_snappy Python package will be downloaded
                      and installed from the &lt;a href="https://www.python.org/"&gt;Python Package Index&lt;/a&gt;
