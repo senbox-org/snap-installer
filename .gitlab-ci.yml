@@ -39,8 +39,8 @@ variables:
 stages:
   - compile
   - build
-  # - package-build
-  # - package-test
+  - package-build
+  - package-test
   # - publish
   - gpt-tests
 
