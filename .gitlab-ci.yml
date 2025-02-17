@@ -39,7 +39,7 @@ variables:
 stages:
   - compile
   - build
-  # - package-build
+  - package-build
   # - package-test
   # - publish
   - gpt-tests
@@ -154,10 +154,11 @@ build:
 #       - "${CI_PROJECT_DIR}/smos-kit/target/netbeans_clusters"
 
 # Before building the image we need other projects artifacts  
-# docker-kaniko-build:
-#   needs:
-#     - job: build
-#       artifacts: true
+docker-kaniko-build:
+  # needs:
+  #   - job: build
+  #     artifacts: true
+  script: echo "KANIKO"
 
 # Triggers 3 GPT tests pipelines (linux,windows,macos)
 gpt-tests:
