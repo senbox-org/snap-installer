@@ -200,6 +200,7 @@ success:
   stage: .post
   # extends:
   #   - .report-status
+  script: echo "OK"
 
 failure:
   stage: .post
