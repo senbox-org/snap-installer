@@ -38,7 +38,7 @@ variables:
 
 stages:
   - compile
-  # - build
+  - build
   # - package-build
   # - package-test
   # - publish
