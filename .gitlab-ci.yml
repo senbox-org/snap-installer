@@ -169,6 +169,7 @@ docker-publish:
 # Triggers 3 GPT tests pipelines (linux,windows,macos)
 gpt-tests:
   stage: gpt-tests
+  image: curlimages/curl
   # trigger:
   #   project: senbox-org/snap-gpt-tests
   #   branch: $COMPILE_BRANCH
