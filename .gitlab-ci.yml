@@ -40,7 +40,7 @@ stages:
   - compile
   - build
   - package-build
-  # - package-test
+  - package-test
   # - publish
   - gpt-tests
 
@@ -159,6 +159,9 @@ docker-kaniko-build:
   #   - job: build
   #     artifacts: true
   script: echo "KANIKO"
+
+docker-healthcheck:
+  script: echo "HEALTHCHECK"
 
 # Triggers 3 GPT tests pipelines (linux,windows,macos)
 gpt-tests:
