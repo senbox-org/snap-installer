@@ -96,7 +96,7 @@ stages:
 # Fetch artifacts built at compile stage
 build:
   stage: build
-  script: echo "BUILD"
+  script: echo "BUILD $COMPILE_BRANCH"
 #   rules:
 #   - if: $CI_PIPELINE_SOURCE == "schedule"
 #     variables:
