@@ -38,10 +38,10 @@ variables:
 
 stages:
   - compile
-  - build
-  - package-build
-  - package-test
-  - publish
+  # - build
+  # - package-build
+  # - package-test
+  # - publish
   - gpt-tests
 
 # Compile other projects first to get freshly built artifacts
@@ -58,104 +58,105 @@ stages:
     - if: $CI_COMMIT_TAG
       variables:
         COMPILE_BRANCH: $CI_COMMIT_TAG
+  script: echo $COMPILE_BRANCH
 
-compile-snap-engine:
-  extends: .compile
-  trigger: 
-    project: senbox-org/snap-engine
-    branch: $COMPILE_BRANCH
-    strategy: depend
+# compile-snap-engine:
+#   extends: .compile
+#   trigger: 
+#     project: senbox-org/snap-engine
+#     branch: $COMPILE_BRANCH
+#     strategy: depend
 
-compile-snap-desktop:
-  extends: .compile
-  trigger: 
-    project: senbox-org/snap-desktop
-    branch: $COMPILE_BRANCH
-    strategy: depend
-  needs:
-    - job: compile-snap-engine
+# compile-snap-desktop:
+#   extends: .compile
+#   trigger: 
+#     project: senbox-org/snap-desktop
+#     branch: $COMPILE_BRANCH
+#     strategy: depend
+#   needs:
+#     - job: compile-snap-engine
 
-# Trigger child pipelines to get mvn-build artifacts available (optional, but needed when they have expired)
-compile-others:
-  extends: .compile
-  trigger: 
-    project: $PROJECT
-    branch: $COMPILE_BRANCH
-    strategy: depend
-  parallel:
-    matrix:
-      # - PROJECT: senbox-org/snap-desktop
-      - PROJECT: senbox-org/microwave-toolbox
-      - PROJECT: senbox-org/optical-toolbox
-      - PROJECT: senbox-org/smos-box
-  needs:
-    - job: compile-snap-engine
-    - job: compile-snap-desktop
+# # Trigger child pipelines to get mvn-build artifacts available (optional, but needed when they have expired)
+# compile-others:
+#   extends: .compile
+#   trigger: 
+#     project: $PROJECT
+#     branch: $COMPILE_BRANCH
+#     strategy: depend
+#   parallel:
+#     matrix:
+#       # - PROJECT: senbox-org/snap-desktop
+#       - PROJECT: senbox-org/microwave-toolbox
+#       - PROJECT: senbox-org/optical-toolbox
+#       - PROJECT: senbox-org/smos-box
+#   needs:
+#     - job: compile-snap-engine
+#     - job: compile-snap-desktop
 
 # Fetch artifacts built at compile stage
-build:
-  stage: build
-  rules:
-  - if: $CI_PIPELINE_SOURCE == "schedule"
-    variables:
-      MAVEN_CLI_OPTS: >-
-        --no-transfer-progress
-        --batch-mode
-        --errors
-        --fail-at-end
-        --show-version
-        -DdeployAtEnd=false
-        -Denable.long.tests=true
-    when: on_success
-  - if: $BRANCH
-    variables:
-      COMPILE_BRANCH: $BRANCH
-    when: on_success
-  - if: $RECOMPILE == "false"
-    when: always
-  - when: on_success
-  needs:
-    - job: compile-others
-      optional: true
-    - project: senbox-org/snap-engine
-      job: mvn-build
-      ref: $COMPILE_BRANCH
-      artifacts: true
-    - project: senbox-org/snap-desktop
-      job: mvn-build
-      ref: $COMPILE_BRANCH
-      artifacts: true
-    - project: senbox-org/microwave-toolbox
-      job: mvn-build
-      ref: $COMPILE_BRANCH
-      artifacts: true
-    - project: senbox-org/optical-toolbox
-      job: mvn-build
-      ref: $COMPILE_BRANCH
-      artifacts: true
-    - project: senbox-org/smos-box
-      job: mvn-build
-      ref: $COMPILE_BRANCH
-      artifacts: true
-  script: echo build-snap
-  artifacts:
-    expire_in: 2 hours
-    paths:
-      - LICENSE.html
-      - etc
-      - "${CI_PROJECT_DIR}/snap-application/target"
-      - "${CI_PROJECT_DIR}/snap-main/target"
-      - "${CI_PROJECT_DIR}/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/Performance32.png"
-      - "${CI_PROJECT_DIR}/microwavetbx-kit/target/netbeans_clusters/microwavetbx"
-      - "${CI_PROJECT_DIR}/microwavetbx-kit/target/netbeans_clusters/rstb"
-      - "${CI_PROJECT_DIR}/opttbx-kit/target/netbeans_clusters/opttbx"
-      - "${CI_PROJECT_DIR}/smos-kit/target/netbeans_clusters"
+# build:
+#   stage: build
+#   rules:
+#   - if: $CI_PIPELINE_SOURCE == "schedule"
+#     variables:
+#       MAVEN_CLI_OPTS: >-
+#         --no-transfer-progress
+#         --batch-mode
+#         --errors
+#         --fail-at-end
+#         --show-version
+#         -DdeployAtEnd=false
+#         -Denable.long.tests=true
+#     when: on_success
+#   - if: $BRANCH
+#     variables:
+#       COMPILE_BRANCH: $BRANCH
+#     when: on_success
+#   - if: $RECOMPILE == "false"
+#     when: always
+#   - when: on_success
+#   needs:
+#     - job: compile-others
+#       optional: true
+#     - project: senbox-org/snap-engine
+#       job: mvn-build
+#       ref: $COMPILE_BRANCH
+#       artifacts: true
+#     - project: senbox-org/snap-desktop
+#       job: mvn-build
+#       ref: $COMPILE_BRANCH
+#       artifacts: true
+#     - project: senbox-org/microwave-toolbox
+#       job: mvn-build
+#       ref: $COMPILE_BRANCH
+#       artifacts: true
+#     - project: senbox-org/optical-toolbox
+#       job: mvn-build
+#       ref: $COMPILE_BRANCH
+#       artifacts: true
+#     - project: senbox-org/smos-box
+#       job: mvn-build
+#       ref: $COMPILE_BRANCH
+#       artifacts: true
+#   script: echo build-snap
+#   artifacts:
+#     expire_in: 2 hours
+#     paths:
+#       - LICENSE.html
+#       - etc
+#       - "${CI_PROJECT_DIR}/snap-application/target"
+#       - "${CI_PROJECT_DIR}/snap-main/target"
+#       - "${CI_PROJECT_DIR}/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/Performance32.png"
+#       - "${CI_PROJECT_DIR}/microwavetbx-kit/target/netbeans_clusters/microwavetbx"
+#       - "${CI_PROJECT_DIR}/microwavetbx-kit/target/netbeans_clusters/rstb"
+#       - "${CI_PROJECT_DIR}/opttbx-kit/target/netbeans_clusters/opttbx"
+#       - "${CI_PROJECT_DIR}/smos-kit/target/netbeans_clusters"
 
 # Before building the image we need other projects artifacts  
-docker-kaniko-build:
-  needs:
-    - job: build
-      artifacts: true
+# docker-kaniko-build:
+#   needs:
+#     - job: build
+#       artifacts: true
 
 # Triggers 3 GPT tests pipelines (linux,windows,macos)
 gpt-tests:
@@ -174,35 +175,35 @@ gpt-tests:
       - PLATFORM: [linux,windows,darwin]
   allow_failure: true
 
-# Report on Github cf https://ecp-ci.gitlab.io/docs/guides/build-status-gitlab.html
-.report-status:
-  image: curlimages/curl
-  variables:
-    URL: "https://api.github.com/repos/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}/statuses/${CI_COMMIT_SHA}"
-    STATUS_NAME: snap-ci
-  script:
-    # For complete details on the GitHub API please see:
-    # https://docs.github.com/en/rest/commits/statuses?apiVersion=2022-11-28#create-a-commit-status
-    - |-
-      curl -X POST $URL -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GITHUB_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" -d '{"state": "'$CI_JOB_NAME'", "context": "'$STATUS_NAME'", "target_url": "'$CI_PIPELINE_URL'", "description": "Build snap docker image"}'
-  environment:
-    name: reporting-github
-  dependencies: []
-  retry: 2
+# # Report on Github cf https://ecp-ci.gitlab.io/docs/guides/build-status-gitlab.html
+# .report-status:
+#   image: curlimages/curl
+#   variables:
+#     URL: "https://api.github.com/repos/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}/statuses/${CI_COMMIT_SHA}"
+#     STATUS_NAME: snap-ci
+#   script:
+#     # For complete details on the GitHub API please see:
+#     # https://docs.github.com/en/rest/commits/statuses?apiVersion=2022-11-28#create-a-commit-status
+#     - |-
+#       curl -X POST $URL -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GITHUB_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" -d '{"state": "'$CI_JOB_NAME'", "context": "'$STATUS_NAME'", "target_url": "'$CI_PIPELINE_URL'", "description": "Build snap docker image"}'
+#   environment:
+#     name: reporting-github
+#   dependencies: []
+#   retry: 2
 
-pending:
-  stage: .pre
-  extends:
-    - .report-status
+# pending:
+#   stage: .pre
+#   extends:
+#     - .report-status
 
 success:
   stage: .post
-  extends:
-    - .report-status
+  # extends:
+  #   - .report-status
 
 failure:
   stage: .post
-  extends:
-    - .report-status
+  # extends:
+  #   - .report-status
   rules:
     - when: on_failure
