@@ -169,18 +169,23 @@ docker-publish:
 # Triggers 3 GPT tests pipelines (linux,windows,macos)
 gpt-tests:
   stage: gpt-tests
-  trigger:
-    project: senbox-org/snap-gpt-tests
-    branch: $COMPILE_BRANCH
+  # trigger:
+  #   project: senbox-org/snap-gpt-tests
+  #   branch: $COMPILE_BRANCH
+  script:
+    - |
+      curl -X POST --fail -F token=$TRIGGER_GPT_TESTS_TOKEN -F ref=$COMPILE_BRANCH -F "variables[SCOPE]=daily" -F "variables[PLATFORM]=linux" https://gitlab.com/api/v4/projects/43939974/trigger/pipeline &
+      curl -X POST --fail -F token=$TRIGGER_GPT_TESTS_TOKEN -F ref=$COMPILE_BRANCH -F "variables[SCOPE]=daily" -F "variables[PLATFORM]=windows" https://gitlab.com/api/v4/projects/43939974/trigger/pipeline &
+      curl -X POST --fail -F token=$TRIGGER_GPT_TESTS_TOKEN -F ref=$COMPILE_BRANCH -F "variables[SCOPE]=daily" -F "variables[PLATFORM]=darwin" https://gitlab.com/api/v4/projects/43939974/trigger/pipeline &
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
-  inherit:
-    variables: false
-  variables:
-    SCOPE: daily
-  parallel:
-    matrix:
-      - PLATFORM: [linux,windows,darwin]
+  # inherit:
+  #   variables: false
+  # variables:
+  #   SCOPE: daily
+  # parallel:
+  #   matrix:
+  #     - PLATFORM: [linux,windows,darwin]
   allow_failure: true
 
 # # Report on Github cf https://ecp-ci.gitlab.io/docs/guides/build-status-gitlab.html
