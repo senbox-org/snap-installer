@@ -206,5 +206,6 @@ failure:
   stage: .post
   # extends:
   #   - .report-status
+  script: echo "NOK"
   rules:
     - when: on_failure
