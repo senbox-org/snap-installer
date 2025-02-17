@@ -38,9 +38,9 @@ variables:
 
 stages:
   - compile
-  - build
-  - package-build
-  - package-test
+  # - build
+  # - package-build
+  # - package-test
   # - publish
   - gpt-tests
 
@@ -94,8 +94,9 @@ stages:
 #     - job: compile-snap-desktop
 
 # Fetch artifacts built at compile stage
-# build:
-#   stage: build
+build:
+  stage: build
+  script: echo "BUILD"
 #   rules:
 #   - if: $CI_PIPELINE_SOURCE == "schedule"
 #     variables:
@@ -191,10 +192,11 @@ gpt-tests:
 #   dependencies: []
 #   retry: 2
 
-# pending:
-#   stage: .pre
-#   extends:
-#     - .report-status
+pending:
+  stage: .pre
+  # extends:
+  #   - .report-status
+  script: echo "PRE"
 
 success:
   stage: .post
