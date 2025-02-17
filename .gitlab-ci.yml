@@ -41,7 +41,7 @@ stages:
   - build
   - package-build
   - package-test
-  # - publish
+  - publish
   - gpt-tests
 
 # Compile other projects first to get freshly built artifacts
@@ -162,6 +162,9 @@ docker-kaniko-build:
 
 docker-healthcheck:
   script: echo "HEALTHCHECK"
+
+docker-publish:
+  script: echo "PUBLISH"
 
 # Triggers 3 GPT tests pipelines (linux,windows,macos)
 gpt-tests:
