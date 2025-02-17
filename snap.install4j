@@ -47,6 +47,7 @@
       <dirEntry mountPoint="58" file="../microwave-toolbox/microwavetbx-kit/target/netbeans_clusters/microwavetbx" entryMode="subdir" subDirectory="microwavetbx" />
       <dirEntry mountPoint="58" file="../microwave-toolbox/microwavetbx-kit/target/netbeans_clusters/rstb" entryMode="subdir" subDirectory="rstb" />
       <dirEntry mountPoint="58" file="../optical-toolbox/opttbx-kit/target/netbeans_clusters/opttbx" entryMode="subdir" subDirectory="opttbx" />
+      <dirEntry mountPoint="58" file="../esa-snappy/target/nbm/netbeans/extra" entryMode="subdir" subDirectory="esasnappy" />
       <dirEntry mountPoint="58" file="../smos-box/smos-kit/target/netbeans_clusters/smos" entryMode="subdir" subDirectory="smos" />
       <fileEntry mountPoint="58" file="./LICENSE.txt" />
       <fileEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/THIRDPARTY_LICENSES.txt" />
@@ -87,6 +88,15 @@
         <description>Ingestion of SAR data products and dedicated support tools.</description>
         <include>
           <entry location="microwavetbx" />
+        </include>
+        <dependencies>
+          <component id="76" />
+        </dependencies>
+      </component>
+      <component name="ESA Snappy" id="3573" hideHelpButton="true" downloadable="true">
+        <description>Ingestion of Sentinel-2 MSI, Sentinel-3 OLCI and SLSTR data products and dedicated support tools.</description>
+        <include>
+          <entry location="esasnappy" />
         </include>
         <dependencies>
           <component id="76" />
@@ -564,43 +574,67 @@ problems after SNAP version upgrades.</property>
                   </formComponent>
                   <formComponent id="234" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
                     <serializedBean>
-                      <property name="labelHtml" type="string">&lt;html&gt;If you are a &lt;a href="https://www.python.org/downloads/"&gt;Python&lt;/a&gt; developer, you can use the SNAP Java API from Python, or develop SNAP processor plugins using Python. Below you can specify your preferred Python version by
-the given Python executable to be used. This version of SNAP supports Python 
-versions &lt;b&gt;3.6&lt;/b&gt; to &lt;b&gt;3.10&lt;/b&gt;.</property>
+                      <property name="labelHtml" type="string">&lt;html&gt;If you are a
+                      &lt;a href="https://www.python.org/"&gt;Python&lt;/a&gt; developer,
+                      you can use the SNAP Java API from Python, or develop SNAP processor plugins using Python.
+                      Below you can
+                      specify your preferred Python version by the given Python executable to be used. This version
+                      of SNAP supports Python versions up to &lt;b&gt;3.12&lt;/b&gt;.
+                      We recommend to use one of the most recent Python distributions available from
+                      &lt;a href="https://docs.anaconda.com/anaconda/install/"&gt;Anaconda&lt;/a&gt; or
+                      &lt;a href="https://docs.anaconda.com/miniconda/install/"&gt;Miniconda&lt;/a&gt; which come with user-friendly installers.
+               &lt;br&gt;&lt;br&gt;
+                     After selection of a Python executable below, the esa_snappy Python package will be downloaded
+                     and installed from the &lt;a href="https://www.python.org/"&gt;Python Package Index&lt;/a&gt;
+                     into the site-packages folder of your Python installation. When completed, proceed with the
+                     SNAP installation.
+                     &lt;/html&gt;</property>
                     </serializedBean>
                   </formComponent>
                 </beans>
               </group>
-              <formComponent id="233" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent">
+              <formComponent id="233" beanClass="com.install4j.runtime.beans.formcomponents.CheckboxComponent" resetInitOnPrevious="true">
                 <serializedBean>
-                  <property name="checkboxText" type="string">Configure SNAP for use with Python</property>
+                  <property name="checkboxText" type="string">Install esa_snappy Python package and configure SNAP for use with Python</property>
                   <property name="coupledComponentIds">
                     <add type="string">232</add>
                   </property>
                   <property name="variableName" type="string">forcePython</property>
                 </serializedBean>
+                <initScript>configurationObject.setSelected(false);</initScript>
               </formComponent>
-              <formComponent id="232" beanClass="com.install4j.runtime.beans.formcomponents.FileChooserComponent">
+              <formComponent id="232" beanClass="com.install4j.runtime.beans.formcomponents.FileChooserComponent" resetInitOnPrevious="true">
                 <serializedBean>
                   <property name="initialBrowserDirectory" type="string">${installer:sys.userHome}</property>
                   <property name="labelText" type="string">Python executable:</property>
                   <property name="validationScript">
                     <object class="com.install4j.api.beans.ScriptProperty">
-                      <property name="value" type="string">boolean success = true;
+                      <property name="value" type="string">import java.nio.charset.StandardCharsets;
+boolean success = true;
 
 String pythonExecutable = file.getPath();
 if (!pythonExecutable.isEmpty()) {
-    ProcessBuilder pb = new ProcessBuilder().command(new String[]{file.getPath(), "--version"});
+    //ProcessBuilder pb = new ProcessBuilder().command(new String[]{file.getPath(), "--version"});
+    //ProcessBuilder pb = new ProcessBuilder().command(new String[]{file.getPath(), "-m", "pip --version"});
+
     try {
-        Process p = pb.start();
-        // TODO: redirect Python output (= Python version) and validate
-        int exitCode = p.waitFor();
-        if (exitCode != 0) {
-            Util.showErrorMessage("'" + file.getName() + "' failed with exit code " + exitCode);
+        //Process process = Runtime.getRuntime().exec(new String[]{file.getPath(), "-m", "pip", "install", "-i", "https://test.pypi.org/simple/", "--extra-index-url", "https://pypi.org/simple", "esa-snappy"});
+        Process process = Runtime.getRuntime().exec(new String[]{file.getPath(), "-m", "pip", "install", "esa-snappy"});
+        process.waitFor();
+        
+        if (process.exitValue() != 0) {
+            final String failMsg = "Could not install esa_snappy Python package from PyPi repository." +
+                                   " Please check your Python environment.";
+            Util.showErrorMessage(failMsg);
             success = false;
+        } else {
+            final String successMsg = "Successfully installed esa_snappy Python package from PyPi repository." +
+            " SNAP-Python configuration will now be completed automatically." +
+            "Click Ok and continue with SNAP installation.";
+            Util.showMessage(successMsg);
         }
-    } catch (Throwable t) {
-        Util.showErrorMessage("'" + file.getName() + "' failed: " + t.getMessage());
+    } catch (IOException | InterruptedException e) {
+        Util.showErrorMessage("'" + file.getName() + "' failed: " + e.getMessage());
         success = false;
     }
 }
@@ -611,27 +645,7 @@ return success;
                   </property>
                   <property name="variableName" type="string">pythonExecutable</property>
                 </serializedBean>
-                <initScript>if (Util.isWindowsInstaller()) {
-    String[] paths = new String[]{"C:\\Python34", "C:\\Python33", "C:\\Python27"};
-    for (String path : paths) {
-        File file = new File(path, "python.exe");
-        if (file.exists()) {
-            configurationObject.setText(file.getPath());
-            break;
-        }
-    }
-} else {
-    String[] commands = new String[]{"python3", "python"};
-    for (String command : commands) {
-        try {
-            Runtime.getRuntime().exec(command);
-            configurationObject.setText(command);
-            break;
-        } catch (Exception e) {
-            // ok
-        }
-    }
-}
+                <initScript>configurationObject.setText("");
 </initScript>
               </formComponent>
               <formComponent name="Win" id="955" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
@@ -648,10 +662,14 @@ return success;
               </formComponent>
               <formComponent id="1878" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
                 <serializedBean>
-                  <property name="labelHtml" type="string"> After successful configuration you will find the SNAP Python module &lt;b&gt;esa_snappy&lt;/b&gt; in the directory
- &lt;b&gt;${installer:sys.userHome}/.snap/snap-python&lt;/b&gt;. The Python interpreter and the location of the
- esa_snappy module can be changed any time using the &lt;b&gt;bin/snappy-conf&lt;/b&gt; tool.
-</property>
+                  <property name="labelHtml" type="string"> After successful configuration you will find the SNAP Python
+                  module &lt;b&gt;esa_snappy&lt;/b&gt; in the site-packages folder of your Python installation.
+                  The Python interpreter and the location of the esa_snappy module can be changed any time
+                  by manually installing esa_snappy with &lt;b&gt;pip&lt;/b&gt; and using
+                  the &lt;b&gt;bin/snappy-conf&lt;/b&gt; tool in your SNAP installation folder.
+                  See more details in the
+                  &lt;a href="https://senbox.atlassian.net/wiki/spaces/SNAP/pages/3114106881/Installation+and+configuration+of+the+SNAP-Python+esa_snappy+interface+SNAP+version+12/"&gt;SNAP documentation&lt;/a&gt;.
+                  </property>
                 </serializedBean>
               </formComponent>
             </formComponents>
@@ -844,6 +862,18 @@ return success;
                       <property name="text" type="string">probavbox\n&#xD;</property>
                     </serializedBean>
                     <condition>new File(context.getInstallationDirectory(), "probavbox").isDirectory()</condition>
+                  </action>
+                  <action name="Add esasnappy NB cluster" id="3571" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
+                    <serializedBean>
+                      <property name="append" type="boolean" value="true" />
+                      <property name="file">
+                        <object class="java.io.File">
+                          <string>etc/snap.clusters</string>
+                        </object>
+                      </property>
+                      <property name="text" type="string">esasnappy\n&#xD;</property>
+                    </serializedBean>
+                    <condition>new File(context.getInstallationDirectory(), "esasnappy").isDirectory()</condition>
                   </action>
                 </beans>
               </group>
@@ -2009,6 +2039,8 @@ return console.askYesNo(message, true);
   </mediaSets>
   <buildIds buildAll="false">
     <mediaSet refId="2589" />
+    <mediaSet refId="2598" />
+    <mediaSet refId="3566" />
   </buildIds>
   <buildOptions faster="true" disableSigning="true" />
 </install4j>
