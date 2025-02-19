@@ -83,11 +83,11 @@ compile-others:
     branch: $COMPILE_BRANCH
     strategy: depend
   parallel:
-    matrix:
-      # - PROJECT: senbox-org/snap-desktop
+    matrix:      
       - PROJECT: senbox-org/microwave-toolbox
       - PROJECT: senbox-org/optical-toolbox
-      - PROJECT: senbox-org/smos-box
+      # - PROJECT: senbox-org/smos-box
+      - PROJECT: senbox-org/esa-snappy
   needs:
     - job: compile-snap-engine
     - job: compile-snap-desktop
@@ -133,7 +133,8 @@ build:
       job: mvn-build
       ref: $COMPILE_BRANCH
       artifacts: true
-    - project: senbox-org/smos-box
+    # - project: senbox-org/smos-box
+    - project: senbox-org/esa-snappy
       job: mvn-build
       ref: $COMPILE_BRANCH
       artifacts: true
@@ -149,7 +150,8 @@ build:
       - "${CI_PROJECT_DIR}/microwavetbx-kit/target/netbeans_clusters/microwavetbx"
       - "${CI_PROJECT_DIR}/microwavetbx-kit/target/netbeans_clusters/rstb"
       - "${CI_PROJECT_DIR}/opttbx-kit/target/netbeans_clusters/opttbx"
-      - "${CI_PROJECT_DIR}/smos-kit/target/netbeans_clusters"
+      # - "${CI_PROJECT_DIR}/smos-kit/target/netbeans_clusters"
+      - "${CI_PROJECT_DIR}/esa-snappy/target/nbm/netbeans/extra"
 
 # Before building the image we need other projects artifacts  
 docker-kaniko-build:

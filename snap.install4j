@@ -10,7 +10,7 @@
       <variable name="snapGptMenuName" value="SNAP GPT" />
       <variable name="smosGridPointExporter" value="smos-grid-point-exporter" />
     </variables>
-    <jreBundles jdkProviderId="Liberica" release="21/21.0.5+11" />
+    <jreBundles jdkProviderId="Liberica" release="21/21.0.6" />
   </application>
   <files missingFilesStrategy="error" defaultUninstallMode="2" launcherOverwriteMode="1">
     <filesets>
@@ -1698,7 +1698,7 @@ return console.askYesNo(message, true);
         <entry filesetId="637" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle includedJre="windows-amd64-1.8.0.242" />
+      <jreBundle includedJre="windows-amd64-21.0.6" />
     </windows>
     <windows name="All SNAP Windows x86" id="2584" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" architecture="32">
       <excludedLaunchers>
@@ -1712,7 +1712,7 @@ return console.askYesNo(message, true);
         <entry filesetId="639" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle includedJre="windows-x86-1.8.0.242" />
+      <jreBundle includedJre="windows-x86-21.0.6" />
     </windows>
     <macosFolder name="All SNAP Mac OS X Folder" id="2575" mediaFileName="${compiler:sys.shortName}_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" architecture="universal">
       <excludedLaunchers>
@@ -1738,7 +1738,7 @@ return console.askYesNo(message, true);
         <entry filesetId="637" />
         <entry filesetId="639" />
       </exclude>
-      <jreBundle includedJre="linux-amd64-1.8.0.242" />
+      <jreBundle includedJre="linux-amd64-21.0.6" />
     </unixInstaller>
     <windows name="Sentinel SNAP Windows x64" id="2589" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="64">
       <excludedComponents>
@@ -1761,7 +1761,7 @@ return console.askYesNo(message, true);
         <entry filesetId="637" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle includedJre="windows-amd64-1.8.0.242" />
+      <jreBundle includedJre="windows-amd64-21.0.6" />
     </windows>
     <windows name="Sentinel SNAP Windows x86" id="2603" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="32">
       <excludedComponents>
@@ -1784,7 +1784,7 @@ return console.askYesNo(message, true);
         <entry filesetId="639" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle includedJre="windows-x86-1.8.0.242" />
+      <jreBundle includedJre="windows-x86-21.0.6" />
     </windows>
     <unixInstaller name="Sentinel SNAP Linux" id="2598" mediaFileName="${compiler:sys.shortName}_sentinel_linux_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
@@ -1806,7 +1806,7 @@ return console.askYesNo(message, true);
         <entry filesetId="637" />
         <entry filesetId="639" />
       </exclude>
-      <jreBundle includedJre="linux-amd64-1.8.0.242" />
+      <jreBundle includedJre="linux-amd64-21.0.6" />
     </unixInstaller>
     <windows name="SMOS SNAP Windows x64" id="2609" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="64">
       <excludedComponents>
@@ -1834,7 +1834,7 @@ return console.askYesNo(message, true);
         <entry filesetId="637" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle includedJre="windows-amd64-1.8.0.242" />
+      <jreBundle includedJre="windows-amd64-21.0.6" />
     </windows>
     <windows name="SMOS SNAP Windows x86" id="2620" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="32">
       <excludedComponents>
@@ -1862,7 +1862,7 @@ return console.askYesNo(message, true);
         <entry filesetId="639" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle includedJre="windows-x86-1.8.0.242" />
+      <jreBundle includedJre="windows-x86-21.0.6" />
     </windows>
     <macosFolder name="SMOS SNAP Mac OS X Folder for Intel" id="2612" mediaFileName="${compiler:sys.shortName}-intel_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
@@ -1916,7 +1916,7 @@ return console.askYesNo(message, true);
         <entry filesetId="637" />
         <entry filesetId="639" />
       </exclude>
-      <jreBundle includedJre="linux-amd64-1.8.0.242" />
+      <jreBundle includedJre="linux-amd64-21.0.6" />
     </unixInstaller>
     <unixArchive name="Engine Linux Archive" id="859" installDir="esa-snap">
       <excludedLaunchers>
@@ -1957,7 +1957,7 @@ return console.askYesNo(message, true);
         <entry filesetId="639" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle bundleUrl="https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-debugimage_aarch64_mac_hotspot_17.0.6_10.tar.gz" />
+      <jreBundle bundleUrl="https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.6%2B7/OpenJDK21U-debugimage_aarch64_mac_hotspot_21.0.6_7.tar.gz" />
     </macosFolder>
     <macosFolder name="All SNAP Mac OS X Folder for ARM" id="3561" mediaFileName="${compiler:sys.shortName}-arm_all_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" includeAllDownloadableComponents="true" architecture="aarch64">
       <excludedLaunchers>
@@ -2007,7 +2007,7 @@ return console.askYesNo(message, true);
         <entry filesetId="639" />
         <entry filesetId="641" />
       </exclude>
-      <jreBundle bundleUrl="https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-debugimage_aarch64_mac_hotspot_17.0.6_10.tar.gz" />
+      <jreBundle bundleUrl="https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.6%2B7/OpenJDK21U-debugimage_aarch64_mac_hotspot_21.0.6_7.tar.gz" />
     </macosFolder>
     <macosFolder name="SMOS SNAP Mac OS X Folder for ARM" id="3570" mediaFileName="${compiler:sys.shortName}-arm_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="aarch64">
       <excludedComponents>

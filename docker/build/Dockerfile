@@ -150,7 +150,7 @@ RUN mkdir -p ${DEST}/snap-installer ${DEST}/snap-installer/files ${DEST}/snap-in
     ${DEST}/snap-desktop/snap-application/target/snap/etc ${DEST}/snap-desktop/snap-application/target/snap/snap \ 
     ${DEST}/snap-desktop/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/ \
     ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos ${DEST}/microwavetbx-kit/target/netbeans_clusters/rstb/ \
-    ${DEST}/opttbx-kit/target/netbeans_clusters/opttbx/
+    ${DEST}/opttbx-kit/target/netbeans_clusters/opttbx/ ${DEST}/esa-snappy/target/nbm/netbeans/extra/
 
 COPY snap.install4j LICENSE.txt VERSION.txt ${DEST}/snap-installer/
 COPY files/ ${DEST}/snap-installer/files/
@@ -171,6 +171,7 @@ COPY microwavetbx-kit/target/netbeans_clusters/microwavetbx ${DEST}/microwave-to
 COPY microwavetbx-kit/target/netbeans_clusters/rstb ${DEST}/microwave-toolbox/microwavetbx-kit/target/netbeans_clusters/rstb/
 COPY opttbx-kit/target/netbeans_clusters/opttbx ${DEST}/optical-toolbox/opttbx-kit/target/netbeans_clusters/opttbx/
 COPY smos-kit/target/netbeans_clusters/smos/ ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos/
+COPY esa-snappy/target/nbm/netbeans/extra/ ${DEST}/esa-snappy/target/nbm/netbeans/extra/
 
 # Create installers
 ARG LICENSE
