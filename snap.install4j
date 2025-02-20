@@ -48,7 +48,7 @@
       <dirEntry mountPoint="58" file="../microwave-toolbox/microwavetbx-kit/target/netbeans_clusters/rstb" entryMode="subdir" subDirectory="rstb" />
       <dirEntry mountPoint="58" file="../optical-toolbox/opttbx-kit/target/netbeans_clusters/opttbx" entryMode="subdir" subDirectory="opttbx" />
       <dirEntry mountPoint="58" file="../esa-snappy/target/nbm/netbeans/extra" entryMode="subdir" subDirectory="esasnappy" />
-      <dirEntry mountPoint="58" file="../smos-box/smos-kit/target/netbeans_clusters/smos" entryMode="subdir" subDirectory="smos" />
+      <!-- <dirEntry mountPoint="58" file="../smos-box/smos-kit/target/netbeans_clusters/smos" entryMode="subdir" subDirectory="smos" /> -->
       <fileEntry mountPoint="58" file="./LICENSE.txt" />
       <fileEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/THIRDPARTY_LICENSES.txt" />
       <fileEntry mountPoint="58" file="./VERSION.txt" />
@@ -111,7 +111,7 @@
           <component id="76" />
         </dependencies>
       </component>
-      <component name="SMOS-Box" id="1963" customizedId="SMOS" hideHelpButton="true" downloadable="true">
+      <!-- <component name="SMOS-Box" id="1963" customizedId="SMOS" hideHelpButton="true" downloadable="true">
         <description>Ingestion of SMOS data products and dedicated support tools.</description>
         <include>
           <entry location="smos" />
@@ -119,7 +119,7 @@
         <dependencies>
           <component id="76" />
         </dependencies>
-      </component>
+      </component> -->
     </components>
   </files>
   <launchers>
@@ -182,14 +182,14 @@
         <file path="./images/perf_icon_512.png" />
       </iconImageFiles>
     </launcher>
-    <launcher name="SMOS Grid-Point-Exporter" id="2822" excludeFromMenu="true">
+    <!-- <launcher name="SMOS Grid-Point-Exporter" id="2822" excludeFromMenu="true">
       <executable name="${compiler:smosGridPointExporter}" executableDir="bin" redirectStderr="false" executableMode="console" changeWorkingDirectory="false" dpiAware="false" />
       <java mainClass="org.esa.snap.runtime.Launcher" vmParameters="-Dsnap.mainClass=org.esa.smos.gui.export.GridPointExporter &quot;-Dsnap.home=${launcher:sys.launcherDirectory}/..&quot;  -Djava.awt.headless=true -Dinstall4j.noLoggingFix=true">
         <classPath>
           <archive location="snap/modules/ext/org.esa.snap.snap-core/org-esa-snap/snap-runtime.jar" failOnError="false" />
         </classPath>
       </java>
-    </launcher>
+    </launcher> -->
   </launchers>
   <installerGui>
     <applications>
@@ -839,7 +839,7 @@ return success;
                     </serializedBean>
                     <condition>new File(context.getInstallationDirectory(), "rstb").isDirectory()</condition>
                   </action>
-                  <action name="Add smos NB cluster" id="2074" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
+                  <!-- <action name="Add smos NB cluster" id="2074" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
                     <serializedBean>
                       <property name="append" type="boolean" value="true" />
                       <property name="file">
@@ -850,7 +850,7 @@ return success;
                       <property name="text" type="string">smos\n</property>
                     </serializedBean>
                     <condition>new File(context.getInstallationDirectory(), "smos").isDirectory()</condition>
-                  </action>
+                  </action> -->
                   <action name="Add probavbox NB cluster" id="3125" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
                     <serializedBean>
                       <property name="append" type="boolean" value="true" />
@@ -921,7 +921,7 @@ return success;
                   </property>
                 </serializedBean>
               </action>
-              <action name="Delete grid-point-exporter if smos not installed" id="2951" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" actionElevationType="elevated">
+              <!-- <action name="Delete grid-point-exporter if smos not installed" id="2951" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" actionElevationType="elevated">
                 <serializedBean>
                   <property name="files" type="array" class="java.io.File" length="2">
                     <element index="0">
@@ -938,7 +938,7 @@ return success;
                 </serializedBean>
                 <condition>context.getInstallationComponentById("SMOS") == null || !context.getInstallationComponentById("SMOS").isSelected()
 </condition>
-              </action>
+              </action> -->
               <action id="3030" beanClass="com.install4j.runtime.beans.actions.text.FixCrLfAction" actionElevationType="elevated">
                 <serializedBean>
                   <property name="files" type="array" class="java.io.File" length="2">
@@ -1756,7 +1756,7 @@ return console.askYesNo(message, true);
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.png" />
-        <entry location="smos" />
+        <!-- <entry location="smos" /> -->
         <entry filesetId="634" />
         <entry filesetId="637" />
         <entry filesetId="641" />
@@ -1779,7 +1779,7 @@ return console.askYesNo(message, true);
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.png" />
-        <entry location="smos" />
+        <!-- <entry location="smos" /> -->
         <entry filesetId="634" />
         <entry filesetId="639" />
         <entry filesetId="641" />
@@ -1801,14 +1801,14 @@ return console.askYesNo(message, true);
         <launcher id="2822" />
       </excludedLaunchers>
       <exclude>
-        <entry location="smos" />
+        <!-- <entry location="smos" /> -->
         <entry filesetId="634" />
         <entry filesetId="637" />
         <entry filesetId="639" />
       </exclude>
       <jreBundle includedJre="linux-amd64-21.0.6" />
     </unixInstaller>
-    <windows name="SMOS SNAP Windows x64" id="2609" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="64">
+    <!-- <windows name="SMOS SNAP Windows x64" id="2609" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="64">
       <excludedComponents>
         <component id="73" />
         <component id="68" />
@@ -1835,8 +1835,8 @@ return console.askYesNo(message, true);
         <entry filesetId="641" />
       </exclude>
       <jreBundle includedJre="windows-amd64-21.0.6" />
-    </windows>
-    <windows name="SMOS SNAP Windows x86" id="2620" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="32">
+    </windows> -->
+    <!-- <windows name="SMOS SNAP Windows x86" id="2620" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="32">
       <excludedComponents>
         <component id="73" />
         <component id="68" />
@@ -1863,8 +1863,8 @@ return console.askYesNo(message, true);
         <entry filesetId="641" />
       </exclude>
       <jreBundle includedJre="windows-x86-21.0.6" />
-    </windows>
-    <macosFolder name="SMOS SNAP Mac OS X Folder for Intel" id="2612" mediaFileName="${compiler:sys.shortName}-intel_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
+    </windows> -->
+    <!-- <macosFolder name="SMOS SNAP Mac OS X Folder for Intel" id="2612" mediaFileName="${compiler:sys.shortName}-intel_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
         <component id="73" />
         <component id="68" />
@@ -1890,8 +1890,8 @@ return console.askYesNo(message, true);
         <entry filesetId="639" />
         <entry filesetId="641" />
       </exclude>
-    </macosFolder>
-    <unixInstaller name="SMOS SNAP Linux" id="2617" mediaFileName="${compiler:sys.shortName}_smos_linux_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
+    </macosFolder> -->
+    <!-- <unixInstaller name="SMOS SNAP Linux" id="2617" mediaFileName="${compiler:sys.shortName}_smos_linux_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
       <excludedComponents>
         <component id="73" />
         <component id="68" />
@@ -1917,7 +1917,7 @@ return console.askYesNo(message, true);
         <entry filesetId="639" />
       </exclude>
       <jreBundle includedJre="linux-amd64-21.0.6" />
-    </unixInstaller>
+    </unixInstaller> -->
     <unixArchive name="Engine Linux Archive" id="859" installDir="esa-snap">
       <excludedLaunchers>
         <launcher id="538" />
@@ -1927,9 +1927,9 @@ return console.askYesNo(message, true);
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.png" />
-        <entry location="smos/modules/docs" />
-        <entry location="smos/modules/ext/org.esa.smostbx.smos-gui" />
-        <entry location="smos/modules/org-esa-smostbx-smos-gui.jar" />
+        <!-- <entry location="smos/modules/docs" /> -->
+        <!-- <entry location="smos/modules/ext/org.esa.smostbx.smos-gui" /> -->
+        <!-- <entry location="smos/modules/org-esa-smostbx-smos-gui.jar" /> -->
         <entry filesetId="634" />
         <entry filesetId="637" />
         <entry filesetId="639" />
@@ -1952,7 +1952,7 @@ return console.askYesNo(message, true);
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.png" />
-        <entry location="smos" />
+        <!-- <entry location="smos" /> -->
         <entry filesetId="637" />
         <entry filesetId="639" />
         <entry filesetId="641" />
@@ -2002,14 +2002,14 @@ return console.askYesNo(message, true);
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.png" />
-        <entry location="smos" />
+        <!-- <entry location="smos" /> -->
         <entry filesetId="637" />
         <entry filesetId="639" />
         <entry filesetId="641" />
       </exclude>
       <jreBundle bundleUrl="https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.6%2B7/OpenJDK21U-debugimage_aarch64_mac_hotspot_21.0.6_7.tar.gz" />
     </macosFolder>
-    <macosFolder name="SMOS SNAP Mac OS X Folder for ARM" id="3570" mediaFileName="${compiler:sys.shortName}-arm_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="aarch64">
+    <!-- <macosFolder name="SMOS SNAP Mac OS X Folder for ARM" id="3570" mediaFileName="${compiler:sys.shortName}-arm_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="aarch64">
       <excludedComponents>
         <component id="73" />
         <component id="68" />
@@ -2035,7 +2035,7 @@ return console.askYesNo(message, true);
         <entry filesetId="639" />
         <entry filesetId="641" />
       </exclude>
-    </macosFolder>
+    </macosFolder> -->
   </mediaSets>
   <buildIds buildAll="false">
     <mediaSet refId="2589" />
