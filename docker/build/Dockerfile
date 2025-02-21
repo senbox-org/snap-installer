@@ -174,7 +174,7 @@ COPY microwavetbx-kit/target/netbeans_clusters/microwavetbx ${DEST}/microwave-to
 COPY microwavetbx-kit/target/netbeans_clusters/rstb ${DEST}/microwave-toolbox/microwavetbx-kit/target/netbeans_clusters/rstb/
 COPY opttbx-kit/target/netbeans_clusters/opttbx ${DEST}/optical-toolbox/opttbx-kit/target/netbeans_clusters/opttbx/
 # COPY smos-kit/target/netbeans_clusters/smos/ ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos/
-COPY esa-snappy/target/nbm/netbeans/extra/ ${DEST}/esa-snappy/target/nbm/netbeans/extra/
+COPY target/nbm/netbeans/extra/ ${DEST}/esa-snappy/target/nbm/netbeans/extra/
 
 # Create installers
 ARG LICENSE
