@@ -586,7 +586,7 @@ problems after SNAP version upgrades.</property>
                &lt;br&gt;&lt;br&gt;
                      After selection of a Python executable below, the esa_snappy Python package will be downloaded
                      and installed from the &lt;a href="https://www.python.org/"&gt;Python Package Index&lt;/a&gt;
-                     into the site-packages folder of your Python installation. When completed, proceed with the
+                     into the site-packages folder of your Python installation. Please wait for the confirmation dialog, then proceed with the
                      SNAP installation.
                      &lt;/html&gt;</property>
                     </serializedBean>
