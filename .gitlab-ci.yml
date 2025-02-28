@@ -27,7 +27,7 @@ variables:
   DOCKER_HADOLINT_ARGS: --failure-threshold error
   DOCKER_PROD_PUBLISH_STRATEGY: auto
   DOCKER_BUILD_CACHE_DISABLED: "true"
-  COMPILE_BRANCH: master
+  COMPILE_BRANCH: 12.x
   # RECOMPILE: "true"
   RECOMPILE:
     description: When other projects should be recompiled or if artifacts are already safe to get from COMPILE_BRANCH
