@@ -124,7 +124,9 @@
   </files>
   <launchers>
     <launcher name="SNAP Desktop Win x86" id="538" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap.exe" />
-    <launcher name="SNAP Desktop Linux" id="539" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap" />
+    <launcher name="SNAP Desktop Linux" id="539" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap" >
+        <desktopFile>Icon=${installer:sys.installationDir}/.install4j/i4j_extf_5_1buu1c8_1ysf7r.png</desktopFile>
+    </launcher>
     <launcher name="SNAP Desktop Mac OS" id="618" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin/snap.app" />
     <launcher name="SNAP Desktop Win x64" id="656" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap64.exe" />
     <launcher name="SNAP GPT" id="781" excludeFromMenu="true">
