@@ -35,9 +35,13 @@ variables:
     options:
     - "true"
     - "false"
+  PROJECT_IDS: "45963970 45964007 46471532 44112186"  # Microwave, Optical, ESA-Snappy, Smos Box
+  GITLAB_API_URL: "https://gitlab.com/api/v4"
 
 stages:
   - compile
+  - compile-wait
+  - compile-fetch
   - build
   - package-build
   - package-test
@@ -76,21 +80,85 @@ compile-snap-desktop:
     - job: compile-snap-engine
 
 # Trigger child pipelines to get mvn-build artifacts available (optional, but needed when they have expired)
-compile-others:
-  extends: .compile
-  trigger: 
-    project: $PROJECT
-    branch: $COMPILE_BRANCH
-    strategy: depend
-  parallel:
-    matrix:      
-      - PROJECT: senbox-org/microwave-toolbox
-      - PROJECT: senbox-org/optical-toolbox
-      # - PROJECT: senbox-org/smos-box
-      - PROJECT: senbox-org/esa-snappy
+# compile-others:
+#   extends: .compile
+#   trigger: 
+#     project: $PROJECT
+#     branch: $COMPILE_BRANCH
+#     strategy: depend
+#   parallel:
+#     matrix:      
+#       - PROJECT: senbox-org/microwave-toolbox
+#       - PROJECT: senbox-org/optical-toolbox
+#       # - PROJECT: senbox-org/smos-box
+#       - PROJECT: senbox-org/esa-snappy
+#   needs:
+#     - job: compile-snap-engine
+#     - job: compile-snap-desktop
+
+compile-others-trigger-pipelines:
+  stage: compile
+  image: curlimages/curl
+  script:
+    - echo "Triggering pipelines for projects $PROJECT_IDS"
+    - |
+      for PROJECT_ID in $PROJECT_IDS; do
+        RESPONSE=$(curl --silent --request POST "$GITLAB_API_URL/projects/$PROJECT_ID/trigger/pipeline" \
+          --form "token=$CI_JOB_TOKEN" \
+          --form "ref=$COMPILE_BRANCH")
+        PIPELINE_ID=$(echo "$RESPONSE" | jq -r '.id')
+        echo "Triggered pipeline $PIPELINE_ID for project $PROJECT_ID"
+        echo "$PROJECT_ID=$PIPELINE_ID" >> pipeline.env
+      done
+  artifacts:
+    reports:
+      dotenv: pipeline.env
   needs:
     - job: compile-snap-engine
     - job: compile-snap-desktop
+
+compile-others-wait-for-pipelines:
+  stage: compile-wait
+  image: curlimages/curl
+  script:
+    - source pipeline.env
+    - echo "Waiting for pipelines to finish..."
+    - |
+      for PROJECT_ID in $PROJECT_IDS; do
+        PIPELINE_ID=$(grep "$PROJECT_ID=" pipeline.env | cut -d '=' -f2)
+        echo "Checking pipeline $PIPELINE_ID for project $PROJECT_ID..."
+        while true; do
+          STATUS=$(curl --silent --header "PRIVATE-TOKEN: $CI_JOB_TOKEN" "$GITLAB_API_URL/projects/$PROJECT_ID/pipelines/$PIPELINE_ID" | jq -r '.status')
+          echo "Pipeline $PIPELINE_ID status: $STATUS"
+          if [[ "$STATUS" == "success" ]]; then
+            echo "Pipeline $PIPELINE_ID completed successfully!"
+            break
+          elif [[ "$STATUS" == "failed" || "$STATUS" == "canceled" ]]; then
+            echo "Pipeline $PIPELINE_ID failed or was canceled!"
+            exit 1
+          fi
+          sleep 10
+        done
+      done
+
+compile-others-fetch-artifacts:
+  stage: compile-fetch
+  image: curlimages/curl
+  script:
+    - source pipeline.env
+    - mkdir -p artifacts
+    - |
+      for PROJECT_ID in $PROJECT_IDS; do
+        PIPELINE_ID=$(grep "$PROJECT_ID=" pipeline.env | cut -d '=' -f2)
+        echo "Fetching job list for pipeline $PIPELINE_ID in project $PROJECT_ID..."
+        JOB_ID=$(curl --silent --header "PRIVATE-TOKEN: $CI_JOB_TOKEN" "$GITLAB_API_URL/projects/$PROJECT_ID/pipelines/$PIPELINE_ID/jobs" | jq -r '.[] | select(.name=="mvn-build" and .status=="success") | .id' | head -n 1)
+        echo "Downloading artifacts from job $JOB_ID in project $PROJECT_ID..."
+        curl --silent --header "PRIVATE-TOKEN: $CI_JOB_TOKEN" "$GITLAB_API_URL/projects/$PROJECT_ID/jobs/$JOB_ID/artifacts" --output "artifacts/artifacts_$PROJECT_ID.zip"
+      done
+  artifacts:
+    expire_in: 2 hours
+    paths:
+      - artifacts/**
 
 # Fetch artifacts built at compile stage
 build:
@@ -115,29 +183,30 @@ build:
     when: always
   - when: on_success
   needs:
-    - job: compile-others
-      optional: true
-    - project: senbox-org/snap-engine
-      job: mvn-build
-      ref: $COMPILE_BRANCH
-      artifacts: true
-    - project: senbox-org/snap-desktop
-      job: mvn-build
-      ref: $COMPILE_BRANCH
-      artifacts: true
-    - project: senbox-org/microwave-toolbox
-      job: mvn-build
-      ref: $COMPILE_BRANCH
-      artifacts: true
-    - project: senbox-org/optical-toolbox
-      job: mvn-build
-      ref: $COMPILE_BRANCH
-      artifacts: true
-    # - project: senbox-org/smos-box
-    - project: senbox-org/esa-snappy
-      job: mvn-build
-      ref: $COMPILE_BRANCH
-      artifacts: true
+    - job: compile-others-fetch-artifacts
+    # - job: compile-others
+    #   optional: true
+    # - project: senbox-org/snap-engine
+    #   job: mvn-build
+    #   ref: $COMPILE_BRANCH
+    #   artifacts: true
+    # - project: senbox-org/snap-desktop
+    #   job: mvn-build
+    #   ref: $COMPILE_BRANCH
+    #   artifacts: true
+    # - project: senbox-org/microwave-toolbox
+    #   job: mvn-build
+    #   ref: $COMPILE_BRANCH
+    #   artifacts: true
+    # - project: senbox-org/optical-toolbox
+    #   job: mvn-build
+    #   ref: $COMPILE_BRANCH
+    #   artifacts: true
+    # # - project: senbox-org/smos-box
+    # - project: senbox-org/esa-snappy
+    #   job: mvn-build
+    #   ref: $COMPILE_BRANCH
+    #   artifacts: true
   script: echo build-snap
   artifacts:
     expire_in: 2 hours
@@ -150,7 +219,7 @@ build:
       - "${CI_PROJECT_DIR}/microwavetbx-kit/target/netbeans_clusters/microwavetbx"
       - "${CI_PROJECT_DIR}/microwavetbx-kit/target/netbeans_clusters/rstb"
       - "${CI_PROJECT_DIR}/opttbx-kit/target/netbeans_clusters/opttbx"
-      # - "${CI_PROJECT_DIR}/smos-kit/target/netbeans_clusters"
+      - "${CI_PROJECT_DIR}/smos-kit/target/netbeans_clusters"
       - "${CI_PROJECT_DIR}/esasnappy-kit/target/nbm/netbeans/extra"
 
 # Before building the image we need other projects artifacts  
