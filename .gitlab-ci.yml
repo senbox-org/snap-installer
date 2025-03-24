@@ -105,10 +105,9 @@ compile-others-trigger-pipelines:
   script:
     - echo "Triggering pipelines for projects $PROJECT_IDS"
     - |
-      for PROJECT_ID in $PROJECT_IDS; do
-        RESPONSE=$(curl --silent --request POST "$GITLAB_API_URL/projects/$PROJECT_ID/trigger/pipeline" \
-          --form "token=$CI_JOB_TOKEN" \
-          --form "ref=$COMPILE_BRANCH")
+      for PROJECT_ID in $PROJECT_IDS; do        
+        RESPONSE=$(curl -X POST --fail -F token=$CI_JOB_TOKEN -F ref=main https://gitlab.com/api/v4/projects/$PROJECT_ID/trigger/pipeline)
+        echo "RESPONSE $RESPONSE"
         PIPELINE_ID=$(echo "$RESPONSE" | jq -r '.id')
         echo "Triggered pipeline $PIPELINE_ID for project $PROJECT_ID"
         echo "$PROJECT_ID=$PIPELINE_ID" >> pipeline.env
