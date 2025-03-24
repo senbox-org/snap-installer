@@ -98,7 +98,10 @@ compile-snap-desktop:
 
 compile-others-trigger-pipelines:
   stage: compile
-  image: curlimages/curl
+  image: alpine
+  before_script:
+    - apk add --no-cache curl
+    - apk add --no-cache jq
   script:
     - echo "Triggering pipelines for projects $PROJECT_IDS"
     - |
@@ -119,7 +122,10 @@ compile-others-trigger-pipelines:
 
 compile-others-wait-for-pipelines:
   stage: compile-wait
-  image: curlimages/curl
+  image: alpine
+  before_script:
+    - apk add --no-cache curl
+    - apk add --no-cache jq
   script:
     - source pipeline.env
     - echo "Waiting for pipelines to finish..."
@@ -143,7 +149,10 @@ compile-others-wait-for-pipelines:
 
 compile-others-fetch-artifacts:
   stage: compile-fetch
-  image: curlimages/curl
+  image: alpine
+  before_script:
+    - apk add --no-cache curl
+    - apk add --no-cache jq
   script:
     - source pipeline.env
     - mkdir -p artifacts
