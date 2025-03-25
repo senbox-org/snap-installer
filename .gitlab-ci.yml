@@ -119,12 +119,12 @@ compile-others-trigger-pipelines:
         echo "Triggered pipeline $PIPELINE_ID for project $PROJECT_ID"
         echo "$PROJECT_ID=$PIPELINE_ID" >> pipeline.env
       done
-  artifacts:
-    paths:
-      - pipeline.env
   needs:
     - job: compile-snap-engine
     - job: compile-snap-desktop
+  artifacts:
+    paths:
+      - pipeline.env
 
 compile-others-wait-for-pipelines:
   extends: .compile
@@ -152,8 +152,8 @@ compile-others-wait-for-pipelines:
         done
         sleep 30
       done
-  dependencies:
-    - compile-others-trigger-pipelines
+  needs:
+    - job: compile-others-trigger-pipelines
   artifacts:
     paths:
       - pipeline.env
@@ -177,6 +177,8 @@ compile-others-fetch-artifacts:
         curl --silent --location --output "artifacts_$PROJECT_ID.zip" --header "PRIVATE-TOKEN: $CI_JOB_TOKEN" "$GITLAB_API_URL/projects/$PROJECT_ID/jobs/$JOB_ID/artifacts"
         unzip artifacts_$PROJECT_ID.zip -d artifacts
       done
+  needs:
+    - job: compile-others-wait-for-pipelines
   artifacts:
     expire_in: 2 hours
     paths:
