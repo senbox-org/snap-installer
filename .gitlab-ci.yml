@@ -136,6 +136,7 @@ compile-others-wait-for-pipelines:
     - echo "Waiting for pipelines to finish..."
     - |
       while true; do
+        FINISHED=0        
         echo "$PROJECTS" | jq -c '.[]' | while read -r item; do
           PROJECT_ID=$(echo "$item" | jq -r '.ID')
           PIPELINE_ID=$(grep "$PROJECT_ID=" pipeline.env | cut -d '=' -f2)
@@ -144,13 +145,18 @@ compile-others-wait-for-pipelines:
           echo "Pipeline $PIPELINE_ID status: $STATUS"
           if [[ "$STATUS" == "success" ]]; then
             echo "Pipeline $PIPELINE_ID completed successfully!"
-            break
+            FINISHED=$((FINISHED + 1))            
           elif [[ "$STATUS" == "failed" || "$STATUS" == "canceled" ]]; then
             echo "Pipeline $PIPELINE_ID failed or was canceled!"
             exit 1
           fi          
         done
-        sleep 30
+        PROJECTS_COUNT=echo "$PROJECTS" | jq 'length'
+        if [[ "$FINISHED" == "$PROJECTS_COUNT" ]]; then 
+          break
+        else
+        fi
+          sleep 30
       done
   needs:
     - job: compile-others-trigger-pipelines
