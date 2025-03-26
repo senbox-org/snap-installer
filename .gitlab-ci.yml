@@ -174,7 +174,6 @@ compile-others-fetch-artifacts:
     - apk add --no-cache jq
     - mkdir artifacts
   script:
-    - source pipeline.env    
     - |
       for item in $(echo "$PROJECTS" | jq -c '.[]'); do
         PROJECT_ID=$(echo "$item" | jq -r '.ID')
