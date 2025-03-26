@@ -154,9 +154,9 @@ compile-others-wait-for-pipelines:
         PROJECTS_COUNT=echo "$PROJECTS" | jq 'length'
         if [[ "$FINISHED" == "$PROJECTS_COUNT" ]]; then 
           break
-        else
-        fi
+        else        
           sleep 30
+        fi
       done
   needs:
     - job: compile-others-trigger-pipelines
