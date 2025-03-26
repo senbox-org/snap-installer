@@ -145,7 +145,7 @@ compile-others-wait-for-pipelines:
           echo "Pipeline $PIPELINE_ID status: $STATUS"
           if [[ "$STATUS" == "success" ]]; then
             echo "Pipeline $PIPELINE_ID completed successfully!"
-            FINISHED=$((FINISHED + 1))            
+            FINISHED=$(($FINISHED + 1))            
           elif [[ "$STATUS" == "failed" || "$STATUS" == "canceled" ]]; then
             echo "Pipeline $PIPELINE_ID failed or was canceled!"
             exit 1
@@ -154,7 +154,7 @@ compile-others-wait-for-pipelines:
         PROJECTS_COUNT=$(echo "$PROJECTS" | jq 'length')
         echo "Projects: $PROJECTS_COUNT"
         echo "Finished: $FINISHED"
-        if [[ "$FINISHED" == "$PROJECTS_COUNT" ]]; then 
+        if [ $FINISHED -eq $PROJECTS_COUNT ]; then 
           break
         else        
           sleep 30
