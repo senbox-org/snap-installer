@@ -110,7 +110,7 @@ compile-others-trigger-pipelines:
   script:
     - echo "Triggering pipelines for projects $PROJECT_IDS"
     - |
-      echo "$PROJECTS" | jq -c '.[]' | while read -r item; do
+      for item in $(echo "$PROJECTS" | jq -c '.[]'); do
         PROJECT_ID=$(echo "$item" | jq -r '.ID')
         TOKEN=$(echo "$item" | jq -r '.TOKEN')
         RESPONSE=$(curl -X POST --fail -F token=$TOKEN -F ref=$COMPILE_BRANCH https://gitlab.com/api/v4/projects/$PROJECT_ID/trigger/pipeline)
@@ -137,7 +137,7 @@ compile-others-wait-for-pipelines:
     - |
       while true; do
         FINISHED=0        
-        echo "$PROJECTS" | jq -c '.[]' | while read -r item; do
+        for item in $(echo "$PROJECTS" | jq -c '.[]'); do
           PROJECT_ID=$(echo "$item" | jq -r '.ID')
           PIPELINE_ID=$(grep "$PROJECT_ID=" pipeline.env | cut -d '=' -f2)
           echo "Checking pipeline $PIPELINE_ID for project $PROJECT_ID..."
@@ -145,7 +145,7 @@ compile-others-wait-for-pipelines:
           echo "Pipeline $PIPELINE_ID status: $STATUS"
           if [[ "$STATUS" == "success" ]]; then
             echo "Pipeline $PIPELINE_ID completed successfully!"
-            FINISHED=$(($FINISHED + 1))            
+            FINISHED=$(($FINISHED + 1))
           elif [[ "$STATUS" == "failed" || "$STATUS" == "canceled" ]]; then
             echo "Pipeline $PIPELINE_ID failed or was canceled!"
             exit 1
@@ -176,7 +176,7 @@ compile-others-fetch-artifacts:
   script:
     - source pipeline.env    
     - |
-      echo "$PROJECTS" | jq -c '.[]' | while read -r item; do
+      for item in $(echo "$PROJECTS" | jq -c '.[]'); do
         PROJECT_ID=$(echo "$item" | jq -r '.ID')
         PIPELINE_ID=$(grep "$PROJECT_ID=" pipeline.env | cut -d '=' -f2)
         echo "Fetching job list for pipeline $PIPELINE_ID in project $PROJECT_ID..."
