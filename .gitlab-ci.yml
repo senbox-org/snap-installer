@@ -151,7 +151,7 @@ compile-others-wait-for-pipelines:
             exit 1
           fi          
         done
-        PROJECTS_COUNT=echo "$PROJECTS" | jq 'length'
+        PROJECTS_COUNT=$(echo "$PROJECTS" | jq 'length')
         if [[ "$FINISHED" == "$PROJECTS_COUNT" ]]; then 
           break
         else        
