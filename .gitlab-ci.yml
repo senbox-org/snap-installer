@@ -183,17 +183,17 @@ compile-others-fetch-artifacts:
         JOB_ID=$(curl --silent --header "PRIVATE-TOKEN: $CI_JOB_TOKEN" "$GITLAB_API_URL/projects/$PROJECT_ID/pipelines/$PIPELINE_ID/jobs" | jq -r '.[] | select(.name=="mvn-build" and .status=="success") | .id' | head -n 1)
         echo "Downloading artifacts from job $JOB_ID in project $PROJECT_ID..."
         curl --silent --location --output "artifacts_$PROJECT_ID.zip" --header "PRIVATE-TOKEN: $CI_JOB_TOKEN" "$GITLAB_API_URL/projects/$PROJECT_ID/jobs/$JOB_ID/artifacts"
-        if [[ "$TOKEN" == "$TRIGGER_TOKEN_MICROWAVE" ]]
+        if [[ "$TOKEN" == "$TRIGGER_TOKEN_MICROWAVE" ]]; then
           unzip artifacts_$PROJECT_ID.zip "microwavetbx-kit/target/netbeans_clusters/microwavetbx/*" -d artifacts
           unzip artifacts_$PROJECT_ID.zip "microwavetbx-kit/target/netbeans_clusters/rstb/*" -d artifacts
         fi
-        if [[ "$TOKEN" == "$TRIGGER_TOKEN_OPTICAL" ]]
+        if [[ "$TOKEN" == "$TRIGGER_TOKEN_OPTICAL" ]]; then
           unzip artifacts_$PROJECT_ID.zip "opttbx-kit/target/netbeans_clusters/opttbx/*" -d artifacts          
         fi
-        if [[ "$TOKEN" == "$TRIGGER_TOKEN_ESA_SNAPPY" ]]
+        if [[ "$TOKEN" == "$TRIGGER_TOKEN_ESA_SNAPPY" ]]; then
           unzip artifacts_$PROJECT_ID.zip "esasnappy-kit/target/nbm/netbeans/extra/*" -d artifacts          
         fi
-        if [[ "$TOKEN" == "$TRIGGER_TOKEN_SMOS_BOX" ]]
+        if [[ "$TOKEN" == "$TRIGGER_TOKEN_SMOS_BOX" ]]; then
           unzip artifacts_$PROJECT_ID.zip "smos-kit/target/netbeans_clusters/*" -d artifacts          
         fi
         rm artifacts_$PROJECT_ID.zip
