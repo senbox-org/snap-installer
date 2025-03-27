@@ -177,12 +177,26 @@ compile-others-fetch-artifacts:
     - |
       for item in $(echo "$PROJECTS" | jq -c '.[]'); do
         PROJECT_ID=$(echo "$item" | jq -r '.ID')
+        TOKEN=$(echo "$item" | jq -r '.TOKEN')
         PIPELINE_ID=$(grep "$PROJECT_ID=" pipeline.env | cut -d '=' -f2)
         echo "Fetching job list for pipeline $PIPELINE_ID in project $PROJECT_ID..."
         JOB_ID=$(curl --silent --header "PRIVATE-TOKEN: $CI_JOB_TOKEN" "$GITLAB_API_URL/projects/$PROJECT_ID/pipelines/$PIPELINE_ID/jobs" | jq -r '.[] | select(.name=="mvn-build" and .status=="success") | .id' | head -n 1)
         echo "Downloading artifacts from job $JOB_ID in project $PROJECT_ID..."
         curl --silent --location --output "artifacts_$PROJECT_ID.zip" --header "PRIVATE-TOKEN: $CI_JOB_TOKEN" "$GITLAB_API_URL/projects/$PROJECT_ID/jobs/$JOB_ID/artifacts"
-        unzip artifacts_$PROJECT_ID.zip -d artifacts
+        if [[ "$TOKEN" == "$TRIGGER_TOKEN_MICROWAVE" ]]
+          unzip artifacts_$PROJECT_ID.zip "microwavetbx-kit/target/netbeans_clusters/microwavetbx/*" -d artifacts
+          unzip artifacts_$PROJECT_ID.zip "microwavetbx-kit/target/netbeans_clusters/rstb/*" -d artifacts
+        fi
+        if [[ "$TOKEN" == "$TRIGGER_TOKEN_OPTICAL" ]]
+          unzip artifacts_$PROJECT_ID.zip "opttbx-kit/target/netbeans_clusters/opttbx/*" -d artifacts          
+        fi
+        if [[ "$TOKEN" == "$TRIGGER_TOKEN_ESA_SNAPPY" ]]
+          unzip artifacts_$PROJECT_ID.zip "esasnappy-kit/target/nbm/netbeans/extra/*" -d artifacts          
+        fi
+        if [[ "$TOKEN" == "$TRIGGER_TOKEN_SMOS_BOX" ]]
+          unzip artifacts_$PROJECT_ID.zip "smos-kit/target/netbeans_clusters/*" -d artifacts          
+        fi
+        rm artifacts_$PROJECT_ID.zip
       done
   needs:
     - job: compile-others-wait-for-pipelines
