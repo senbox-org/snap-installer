@@ -108,7 +108,7 @@ compile-snap-engine:
   before_script:
     - apk add --no-cache curl
     - apk add --no-cache jq
-    - mkdir artifacts
+    - mkdir -p artifacts
   script:    
     - |
       PROJECT_ID=$(echo "$PROJECT_ENGINE" | jq -r '.ID')
@@ -147,7 +147,7 @@ compile-snap-desktop:
   before_script:
     - apk add --no-cache curl
     - apk add --no-cache jq
-    - mkdir artifacts
+    - mkdir -p artifacts
   script:    
     - |
       PROJECT_ID=$(echo "$PROJECT_DESKTOP" | jq -r '.ID')
@@ -254,7 +254,7 @@ compile-others-fetch-artifacts:
   before_script:
     - apk add --no-cache curl
     - apk add --no-cache jq
-    - mkdir artifacts
+    - mkdir -p artifacts
   script:
     - |
       for item in $(echo "$PROJECTS" | jq -c '.[]'); do
