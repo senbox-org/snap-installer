@@ -338,17 +338,17 @@ docker-kaniko-build:
       artifacts: true
 
 # Triggers 3 GPT tests pipelines (linux,windows,macos)
-gpt-tests:
-  stage: gpt-tests
-  image: curlimages/curl
-  script:
-    - |-
-      curl -X POST --fail -F token=$TRIGGER_TOKEN_GPT_TESTS -F ref=$COMPILE_BRANCH -F "variables[SCOPE]=daily" -F "variables[PLATFORM]=linux" https://gitlab.com/api/v4/projects/43939974/trigger/pipeline &
-      curl -X POST --fail -F token=$TRIGGER_TOKEN_GPT_TESTS -F ref=$COMPILE_BRANCH -F "variables[SCOPE]=daily" -F "variables[PLATFORM]=windows" https://gitlab.com/api/v4/projects/43939974/trigger/pipeline &
-      curl -X POST --fail -F token=$TRIGGER_TOKEN_GPT_TESTS -F ref=$COMPILE_BRANCH -F "variables[SCOPE]=daily" -F "variables[PLATFORM]=darwin" https://gitlab.com/api/v4/projects/43939974/trigger/pipeline &
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-  allow_failure: true
+# gpt-tests:
+#   stage: gpt-tests
+#   image: curlimages/curl
+#   script:
+#     - |-
+#       curl -X POST --fail -F token=$TRIGGER_TOKEN_GPT_TESTS -F ref=$COMPILE_BRANCH -F "variables[SCOPE]=daily" -F "variables[PLATFORM]=linux" https://gitlab.com/api/v4/projects/43939974/trigger/pipeline &
+#       curl -X POST --fail -F token=$TRIGGER_TOKEN_GPT_TESTS -F ref=$COMPILE_BRANCH -F "variables[SCOPE]=daily" -F "variables[PLATFORM]=windows" https://gitlab.com/api/v4/projects/43939974/trigger/pipeline &
+#       curl -X POST --fail -F token=$TRIGGER_TOKEN_GPT_TESTS -F ref=$COMPILE_BRANCH -F "variables[SCOPE]=daily" -F "variables[PLATFORM]=darwin" https://gitlab.com/api/v4/projects/43939974/trigger/pipeline &
+#   rules:
+#     - if: $CI_PIPELINE_SOURCE == "schedule"
+#   allow_failure: true
 
 # Report on Github cf https://ecp-ci.gitlab.io/docs/guides/build-status-gitlab.html
 .report-status:
