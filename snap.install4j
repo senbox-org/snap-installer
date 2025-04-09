@@ -48,7 +48,6 @@
       <dirEntry mountPoint="58" file="../microwave-toolbox/microwavetbx-kit/target/netbeans_clusters/rstb" entryMode="subdir" subDirectory="rstb" />
       <dirEntry mountPoint="58" file="../optical-toolbox/opttbx-kit/target/netbeans_clusters/opttbx" entryMode="subdir" subDirectory="opttbx" />
       <dirEntry mountPoint="58" file="../esa-snappy/target/nbm/netbeans/extra" entryMode="subdir" subDirectory="esasnappy" />
-      <!-- <dirEntry mountPoint="58" file="../smos-box/smos-kit/target/netbeans_clusters/smos" entryMode="subdir" subDirectory="smos" /> -->
       <fileEntry mountPoint="58" file="./LICENSE.txt" />
       <fileEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/THIRDPARTY_LICENSES.txt" />
       <fileEntry mountPoint="58" file="./VERSION.txt" />
@@ -111,21 +110,12 @@
           <component id="76" />
         </dependencies>
       </component>
-      <!-- <component name="SMOS-Box" id="1963" customizedId="SMOS" hideHelpButton="true" downloadable="true">
-        <description>Ingestion of SMOS data products and dedicated support tools.</description>
-        <include>
-          <entry location="smos" />
-        </include>
-        <dependencies>
-          <component id="76" />
-        </dependencies>
-      </component> -->
     </components>
   </files>
   <launchers>
     <launcher name="SNAP Desktop Win x86" id="538" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap.exe" />
-    <launcher name="SNAP Desktop Linux" id="539" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap" >
-        <desktopFile>Icon=${installer:sys.installationDir}/.install4j/i4j_extf_5_1buu1c8_1ysf7r.png</desktopFile>
+    <launcher name="SNAP Desktop Linux" id="539" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap">
+      <desktopFile>Icon=${installer:sys.installationDir}/.install4j/i4j_extf_5_1buu1c8_1ysf7r.png</desktopFile>
     </launcher>
     <launcher name="SNAP Desktop Mac OS" id="618" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin/snap.app" />
     <launcher name="SNAP Desktop Win x64" id="656" external="true" menuName="${compiler:snapDesktopMenuName}" externalFile="bin\snap64.exe" />
@@ -184,14 +174,6 @@
         <file path="./images/perf_icon_512.png" />
       </iconImageFiles>
     </launcher>
-    <!-- <launcher name="SMOS Grid-Point-Exporter" id="2822" excludeFromMenu="true">
-      <executable name="${compiler:smosGridPointExporter}" executableDir="bin" redirectStderr="false" executableMode="console" changeWorkingDirectory="false" dpiAware="false" />
-      <java mainClass="org.esa.snap.runtime.Launcher" vmParameters="-Dsnap.mainClass=org.esa.smos.gui.export.GridPointExporter &quot;-Dsnap.home=${launcher:sys.launcherDirectory}/..&quot;  -Djava.awt.headless=true -Dinstall4j.noLoggingFix=true">
-        <classPath>
-          <archive location="snap/modules/ext/org.esa.snap.snap-core/org-esa-snap/snap-runtime.jar" failOnError="false" />
-        </classPath>
-      </java>
-    </launcher> -->
   </launchers>
   <installerGui>
     <applications>
@@ -576,19 +558,21 @@ problems after SNAP version upgrades.</property>
                   </formComponent>
                   <formComponent id="234" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
                     <serializedBean>
-                      <property name="labelHtml" type="string">&lt;html&gt;If you are a
+                      <property name="labelHtml" type="string">&lt;html&gt;
+                      SNAP supports Python versions from &lt;b&gt;3.9&lt;/b&gt; to &lt;b&gt;3.12&lt;/b&gt;. If you are a
                       &lt;a href="https://www.python.org/"&gt;Python&lt;/a&gt; developer,
-                      you can use the SNAP Java API from Python, or develop SNAP processor plugins using Python.
-                      Below you can
-                      specify your preferred Python version by the given Python executable to be used. This version
-                      of SNAP supports Python versions from &lt;b&gt;3.9&lt;/b&gt; to &lt;b&gt;3.12&lt;/b&gt;.
-                      We recommend to use one of the most recent Python distributions available from
+                      you can use the SNAP Java API from Python or build SNAP processor plugins with Python.
+                      &lt;br&gt;&lt;br&gt;
+                      Specify your preferred Python executable below.
+                      We recommend to use the latest Python distributions from
                       &lt;a href="https://docs.anaconda.com/anaconda/install/"&gt;Anaconda&lt;/a&gt; or
-                      &lt;a href="https://docs.anaconda.com/miniconda/install/"&gt;Miniconda&lt;/a&gt; which come with user-friendly installers.
-               &lt;br&gt;&lt;br&gt;
-                     After selection of a Python executable below, the esa_snappy Python package will be downloaded
-                     and installed from the &lt;a href="https://www.python.org/"&gt;Python Package Index&lt;/a&gt;
-                     into the site-packages folder of your Python installation. Please wait for the confirmation dialog, then proceed with the
+                      &lt;a href="https://docs.anaconda.com/miniconda/install/"&gt;Miniconda&lt;/a&gt;.
+                      &lt;br&gt;&lt;br&gt;
+                      If you opted for another installation method, please refer to our
+                      &lt;a href="https://senbox.atlassian.net/wiki/spaces/SNAP/pages/3114106881/Installation+and+configuration+of+the+SNAP-Python+esa_snappy+interface+SNAP+version+12/"&gt;SNAP documentation&lt;/a&gt;
+                      before proceeding.
+                      &lt;br&gt;&lt;br&gt;
+                     After selection of a Python executable below, please wait for the confirmation dialog, then proceed with the
                      SNAP installation.
                      &lt;/html&gt;</property>
                     </serializedBean>
@@ -650,26 +634,12 @@ return success;
                 <initScript>configurationObject.setText("");
 </initScript>
               </formComponent>
-              <formComponent name="Win" id="955" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
-                <serializedBean>
-                  <property name="labelHtml" type="string">You may type &lt;b&gt;where python&lt;/b&gt; in a cmd terminal window to find the path to your preferred Python version.</property>
-                </serializedBean>
-                <visibilityScript>Util.isWindowsInstaller()</visibilityScript>
-              </formComponent>
-              <formComponent name="Unix" id="954" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
-                <serializedBean>
-                  <property name="labelHtml" type="string">You may type &lt;b&gt;which python&lt;/b&gt; in a terminal window to find the path to your preferred Python version.</property>
-                </serializedBean>
-                <visibilityScript>Util.isMacosInstaller() || Util.isUnixInstaller()</visibilityScript>
-              </formComponent>
+
               <formComponent id="1878" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
                 <serializedBean>
-                  <property name="labelHtml" type="string"> After successful configuration you will find the SNAP Python
-                  module &lt;b&gt;esa_snappy&lt;/b&gt; in the site-packages folder of your Python installation.
-                  The Python interpreter and the location of the esa_snappy module can be changed any time
-                  by manually installing esa_snappy with &lt;b&gt;pip&lt;/b&gt; and using
-                  the &lt;b&gt;bin/snappy-conf&lt;/b&gt; tool in your SNAP installation folder.
-                  See more details in the
+                  <property name="labelHtml" type="string">
+                  The Python executable and the location of the esa_snappy Python package can be changed any time,
+                  see details in the
                   &lt;a href="https://senbox.atlassian.net/wiki/spaces/SNAP/pages/3114106881/Installation+and+configuration+of+the+SNAP-Python+esa_snappy+interface+SNAP+version+12/"&gt;SNAP documentation&lt;/a&gt;.
                   </property>
                 </serializedBean>
@@ -841,18 +811,6 @@ return success;
                     </serializedBean>
                     <condition>new File(context.getInstallationDirectory(), "rstb").isDirectory()</condition>
                   </action>
-                  <!-- <action name="Add smos NB cluster" id="2074" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
-                    <serializedBean>
-                      <property name="append" type="boolean" value="true" />
-                      <property name="file">
-                        <object class="java.io.File">
-                          <string>etc/snap.clusters</string>
-                        </object>
-                      </property>
-                      <property name="text" type="string">smos\n</property>
-                    </serializedBean>
-                    <condition>new File(context.getInstallationDirectory(), "smos").isDirectory()</condition>
-                  </action> -->
                   <action name="Add probavbox NB cluster" id="3125" beanClass="com.install4j.runtime.beans.actions.text.WriteTextFileAction" actionElevationType="elevated">
                     <serializedBean>
                       <property name="append" type="boolean" value="true" />
@@ -923,24 +881,6 @@ return success;
                   </property>
                 </serializedBean>
               </action>
-              <!-- <action name="Delete grid-point-exporter if smos not installed" id="2951" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" actionElevationType="elevated">
-                <serializedBean>
-                  <property name="files" type="array" class="java.io.File" length="2">
-                    <element index="0">
-                      <object class="java.io.File">
-                        <string>bin/smos-grid-point-exporter</string>
-                      </object>
-                    </element>
-                    <element index="1">
-                      <object class="java.io.File">
-                        <string>bin/smos-grid-point-exporter.vmoptions</string>
-                      </object>
-                    </element>
-                  </property>
-                </serializedBean>
-                <condition>context.getInstallationComponentById("SMOS") == null || !context.getInstallationComponentById("SMOS").isSelected()
-</condition>
-              </action> -->
               <action id="3030" beanClass="com.install4j.runtime.beans.actions.text.FixCrLfAction" actionElevationType="elevated">
                 <serializedBean>
                   <property name="files" type="array" class="java.io.File" length="2">
@@ -1743,9 +1683,6 @@ return console.askYesNo(message, true);
       <jreBundle includedJre="linux-amd64-21.0.6" />
     </unixInstaller>
     <windows name="Sentinel SNAP Windows x64" id="2589" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="64">
-      <excludedComponents>
-        <component id="1963" />
-      </excludedComponents>
       <includedDownloadableComponents>
         <component id="73" />
         <component id="68" />
@@ -1754,11 +1691,9 @@ return console.askYesNo(message, true);
         <launcher id="538" />
         <launcher id="539" />
         <launcher id="618" />
-        <launcher id="2822" />
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.png" />
-        <!-- <entry location="smos" /> -->
         <entry filesetId="634" />
         <entry filesetId="637" />
         <entry filesetId="641" />
@@ -1766,9 +1701,6 @@ return console.askYesNo(message, true);
       <jreBundle includedJre="windows-amd64-21.0.6" />
     </windows>
     <windows name="Sentinel SNAP Windows x86" id="2603" mediaFileName="${compiler:sys.shortName}_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="32">
-      <excludedComponents>
-        <component id="1963" />
-      </excludedComponents>
       <includedDownloadableComponents>
         <component id="73" />
         <component id="68" />
@@ -1777,11 +1709,9 @@ return console.askYesNo(message, true);
         <launcher id="539" />
         <launcher id="618" />
         <launcher id="656" />
-        <launcher id="2822" />
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.png" />
-        <!-- <entry location="smos" /> -->
         <entry filesetId="634" />
         <entry filesetId="639" />
         <entry filesetId="641" />
@@ -1789,9 +1719,6 @@ return console.askYesNo(message, true);
       <jreBundle includedJre="windows-x86-21.0.6" />
     </windows>
     <unixInstaller name="Sentinel SNAP Linux" id="2598" mediaFileName="${compiler:sys.shortName}_sentinel_linux_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
-      <excludedComponents>
-        <component id="1963" />
-      </excludedComponents>
       <includedDownloadableComponents>
         <component id="73" />
         <component id="68" />
@@ -1800,126 +1727,14 @@ return console.askYesNo(message, true);
         <launcher id="538" />
         <launcher id="618" />
         <launcher id="656" />
-        <launcher id="2822" />
       </excludedLaunchers>
       <exclude>
-        <!-- <entry location="smos" /> -->
         <entry filesetId="634" />
         <entry filesetId="637" />
         <entry filesetId="639" />
       </exclude>
       <jreBundle includedJre="linux-amd64-21.0.6" />
     </unixInstaller>
-    <!-- <windows name="SMOS SNAP Windows x64" id="2609" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="64">
-      <excludedComponents>
-        <component id="73" />
-        <component id="68" />
-      </excludedComponents>
-      <includedDownloadableComponents>
-        <component id="1963" />
-      </includedDownloadableComponents>
-      <excludedLaunchers>
-        <launcher id="538" />
-        <launcher id="539" />
-        <launcher id="618" />
-      </excludedLaunchers>
-      <excludedBeans>
-        <bean refId="6" />
-      </excludedBeans>
-      <exclude>
-        <entry location="bin/SNAP_icon_48.png" />
-        <entry location="s1tbx" />
-        <entry location="s2tbx" />
-        <entry location="s3tbx" />
-        <entry location="rstb" />
-        <entry filesetId="634" />
-        <entry filesetId="637" />
-        <entry filesetId="641" />
-      </exclude>
-      <jreBundle includedJre="windows-amd64-21.0.6" />
-    </windows> -->
-    <!-- <windows name="SMOS SNAP Windows x86" id="2620" mediaFileName="${compiler:sys.shortName}_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="32">
-      <excludedComponents>
-        <component id="73" />
-        <component id="68" />
-      </excludedComponents>
-      <includedDownloadableComponents>
-        <component id="1963" />
-      </includedDownloadableComponents>
-      <excludedLaunchers>
-        <launcher id="539" />
-        <launcher id="618" />
-        <launcher id="656" />
-      </excludedLaunchers>
-      <excludedBeans>
-        <bean refId="6" />
-      </excludedBeans>
-      <exclude>
-        <entry location="bin/SNAP_icon_48.png" />
-        <entry location="s1tbx" />
-        <entry location="s2tbx" />
-        <entry location="s3tbx" />
-        <entry location="rstb" />
-        <entry filesetId="634" />
-        <entry filesetId="639" />
-        <entry filesetId="641" />
-      </exclude>
-      <jreBundle includedJre="windows-x86-21.0.6" />
-    </windows> -->
-    <!-- <macosFolder name="SMOS SNAP Mac OS X Folder for Intel" id="2612" mediaFileName="${compiler:sys.shortName}-intel_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
-      <excludedComponents>
-        <component id="73" />
-        <component id="68" />
-      </excludedComponents>
-      <includedDownloadableComponents>
-        <component id="1963" />
-      </includedDownloadableComponents>
-      <excludedLaunchers>
-        <launcher id="538" />
-        <launcher id="539" />
-        <launcher id="656" />
-      </excludedLaunchers>
-      <excludedBeans>
-        <bean refId="6" />
-      </excludedBeans>
-      <exclude>
-        <entry location="bin/SNAP_icon_48.png" />
-        <entry location="s1tbx" />
-        <entry location="s2tbx" />
-        <entry location="s3tbx" />
-        <entry location="rstb" />
-        <entry filesetId="637" />
-        <entry filesetId="639" />
-        <entry filesetId="641" />
-      </exclude>
-    </macosFolder> -->
-    <!-- <unixInstaller name="SMOS SNAP Linux" id="2617" mediaFileName="${compiler:sys.shortName}_smos_linux_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
-      <excludedComponents>
-        <component id="73" />
-        <component id="68" />
-      </excludedComponents>
-      <includedDownloadableComponents>
-        <component id="1963" />
-      </includedDownloadableComponents>
-      <excludedLaunchers>
-        <launcher id="538" />
-        <launcher id="618" />
-        <launcher id="656" />
-      </excludedLaunchers>
-      <excludedBeans>
-        <bean refId="6" />
-      </excludedBeans>
-      <exclude>
-        <entry location="s1tbx" />
-        <entry location="s2tbx" />
-        <entry location="s3tbx" />
-        <entry location="rstb" />
-        <entry filesetId="634" />
-        <entry filesetId="637" />
-        <entry filesetId="639" />
-      </exclude>
-      <jreBundle includedJre="linux-amd64-21.0.6" />
-    </unixInstaller> -->
     <unixArchive name="Engine Linux Archive" id="859" installDir="esa-snap">
       <excludedLaunchers>
         <launcher id="538" />
@@ -1929,9 +1744,6 @@ return console.askYesNo(message, true);
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.png" />
-        <!-- <entry location="smos/modules/docs" /> -->
-        <!-- <entry location="smos/modules/ext/org.esa.smostbx.smos-gui" /> -->
-        <!-- <entry location="smos/modules/org-esa-smostbx-smos-gui.jar" /> -->
         <entry filesetId="634" />
         <entry filesetId="637" />
         <entry filesetId="639" />
@@ -1939,9 +1751,6 @@ return console.askYesNo(message, true);
       <jreBundle jreBundleSource="none" />
     </unixArchive>
     <macosFolder name="Sentinel SNAP Mac OS X Folder for Intel" id="3551" mediaFileName="${compiler:sys.shortName}-intel_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0">
-      <excludedComponents>
-        <component id="1963" />
-      </excludedComponents>
       <includedDownloadableComponents>
         <component id="73" />
         <component id="68" />
@@ -1950,11 +1759,9 @@ return console.askYesNo(message, true);
         <launcher id="538" />
         <launcher id="539" />
         <launcher id="656" />
-        <launcher id="2822" />
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.png" />
-        <!-- <entry location="smos" /> -->
         <entry filesetId="637" />
         <entry filesetId="639" />
         <entry filesetId="641" />
@@ -1989,9 +1796,6 @@ return console.askYesNo(message, true);
       <jreBundle usePack200="false" />
     </macosFolder>
     <macosFolder name="Sentinel SNAP Mac OS X Folder for ARM" id="3566" mediaFileName="${compiler:sys.shortName}-arm_sentinel_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="aarch64">
-      <excludedComponents>
-        <component id="1963" />
-      </excludedComponents>
       <includedDownloadableComponents>
         <component id="73" />
         <component id="68" />
@@ -2000,49 +1804,18 @@ return console.askYesNo(message, true);
         <launcher id="538" />
         <launcher id="539" />
         <launcher id="656" />
-        <launcher id="2822" />
       </excludedLaunchers>
       <exclude>
         <entry location="bin/SNAP_icon_48.png" />
-        <!-- <entry location="smos" /> -->
         <entry filesetId="637" />
         <entry filesetId="639" />
         <entry filesetId="641" />
       </exclude>
       <jreBundle bundleUrl="https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.6%2B7/OpenJDK21U-debugimage_aarch64_mac_hotspot_21.0.6_7.tar.gz" />
     </macosFolder>
-    <!-- <macosFolder name="SMOS SNAP Mac OS X Folder for ARM" id="3570" mediaFileName="${compiler:sys.shortName}-arm_smos_${compiler:sys.platform}_${compiler:sys.version}" installDir="esa-snap" downloadURL="http://step.esa.int/downloads/2.0" architecture="aarch64">
-      <excludedComponents>
-        <component id="73" />
-        <component id="68" />
-      </excludedComponents>
-      <includedDownloadableComponents>
-        <component id="1963" />
-      </includedDownloadableComponents>
-      <excludedLaunchers>
-        <launcher id="538" />
-        <launcher id="539" />
-        <launcher id="656" />
-      </excludedLaunchers>
-      <excludedBeans>
-        <bean refId="6" />
-      </excludedBeans>
-      <exclude>
-        <entry location="bin/SNAP_icon_48.png" />
-        <entry location="s1tbx" />
-        <entry location="s2tbx" />
-        <entry location="s3tbx" />
-        <entry location="rstb" />
-        <entry filesetId="637" />
-        <entry filesetId="639" />
-        <entry filesetId="641" />
-      </exclude>
-    </macosFolder> -->
   </mediaSets>
   <buildIds buildAll="false">
     <mediaSet refId="2589" />
-    <mediaSet refId="2598" />
-    <mediaSet refId="3566" />
   </buildIds>
   <buildOptions faster="true" disableSigning="true" />
 </install4j>
