@@ -155,6 +155,9 @@ build:
 
 # Before building the image we need other projects artifacts  
 docker-kaniko-build:
+  before_script:
+    - echo "Listing working directory:"
+    - ls
   needs:
     - job: build
       artifacts: true
@@ -165,9 +168,9 @@ gpt-tests:
   image: curlimages/curl
   script:
     - |-
-      curl -X POST --fail -F token=$TRIGGER_GPT_TESTS_TOKEN -F ref=$COMPILE_BRANCH -F "variables[SCOPE]=daily" -F "variables[PLATFORM]=linux" https://gitlab.com/api/v4/projects/43939974/trigger/pipeline &
-      curl -X POST --fail -F token=$TRIGGER_GPT_TESTS_TOKEN -F ref=$COMPILE_BRANCH -F "variables[SCOPE]=daily" -F "variables[PLATFORM]=windows" https://gitlab.com/api/v4/projects/43939974/trigger/pipeline &
-      curl -X POST --fail -F token=$TRIGGER_GPT_TESTS_TOKEN -F ref=$COMPILE_BRANCH -F "variables[SCOPE]=daily" -F "variables[PLATFORM]=darwin" https://gitlab.com/api/v4/projects/43939974/trigger/pipeline &
+      curl -X POST --fail -F token=$TRIGGER_TOKEN_GPT_TESTS -F ref=$COMPILE_BRANCH -F "variables[SCOPE]=daily" -F "variables[PLATFORM]=linux" https://gitlab.com/api/v4/projects/43939974/trigger/pipeline &
+      curl -X POST --fail -F token=$TRIGGER_TOKEN_GPT_TESTS -F ref=$COMPILE_BRANCH -F "variables[SCOPE]=daily" -F "variables[PLATFORM]=windows" https://gitlab.com/api/v4/projects/43939974/trigger/pipeline &
+      curl -X POST --fail -F token=$TRIGGER_TOKEN_GPT_TESTS -F ref=$COMPILE_BRANCH -F "variables[SCOPE]=daily" -F "variables[PLATFORM]=darwin" https://gitlab.com/api/v4/projects/43939974/trigger/pipeline &
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
   allow_failure: true
