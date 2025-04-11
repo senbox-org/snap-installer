@@ -155,9 +155,6 @@ build:
 
 # Before building the image we need other projects artifacts  
 docker-kaniko-build:
-  before_script:
-    - echo "Listing working directory:"
-    - ls
   needs:
     - job: build
       artifacts: true
