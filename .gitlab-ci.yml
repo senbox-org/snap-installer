@@ -159,6 +159,10 @@ docker-kaniko-build:
     - job: build
       artifacts: true
 
+docker-publish:
+  before_script:
+    - dnf install -y gawk
+
 # Triggers 3 GPT tests pipelines (linux,windows,macos)
 gpt-tests:
   stage: gpt-tests
