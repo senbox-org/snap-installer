@@ -161,6 +161,7 @@ docker-kaniko-build:
 
 docker-publish:
   before_script:
+    - !reference [.docker-scripts]
     - dnf install -y gawk
 
 # Triggers 3 GPT tests pipelines (linux,windows,macos)
