@@ -329,7 +329,7 @@ build:
       - "${CI_PROJECT_DIR}/microwavetbx-kit/target/netbeans_clusters/rstb"
       - "${CI_PROJECT_DIR}/opttbx-kit/target/netbeans_clusters/opttbx"
       - "${CI_PROJECT_DIR}/smos-kit/target/netbeans_clusters"
-      - "${CI_PROJECT_DIR}/esasnappy-kit/target/nbm/netbeans/extra"
+      - "${CI_PROJECT_DIR}/esasnappy-kit/target/nbm/clusters/extra"
 
 # Before building the image we need other projects artifacts  
 docker-kaniko-build:
