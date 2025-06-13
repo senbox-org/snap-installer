@@ -273,7 +273,7 @@ compile-others-fetch-artifacts:
           unzip artifacts_$PROJECT_ID.zip "opttbx-kit/target/netbeans_clusters/opttbx/*" -d artifacts          
         fi
         if [[ "$TOKEN" == "$TRIGGER_TOKEN_ESA_SNAPPY" ]]; then
-          unzip artifacts_$PROJECT_ID.zip "esasnappy-kit/target/nbm/netbeans/extra/*" -d artifacts          
+          unzip artifacts_$PROJECT_ID.zip "esasnappy-kit/target/nbm/clusters/extra/*" -d artifacts          
         fi
         if [[ "$TOKEN" == "$TRIGGER_TOKEN_SMOS_BOX" ]]; then
           unzip artifacts_$PROJECT_ID.zip "smos-kit/target/netbeans_clusters/*" -d artifacts          
