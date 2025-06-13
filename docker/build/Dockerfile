@@ -179,7 +179,7 @@ COPY esasnappy-kit/target/nbm/clusters/extra/ ${DEST}/esa-snappy/esasnappy-kit/t
 ARG LICENSE
 ARG USER_HOME_DIR="/home/snap"
 
-RUN install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder,windows ${DEST}/snap-installer/snap.install4j && \
+RUN pwd && ls -al && install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder,windows ${DEST}/snap-installer/snap.install4j && \
     chmod 777 ${USER_HOME_DIR}/esa-* && \
     rm ${USER_HOME_DIR}/*x32* && \
     # rm ${USER_HOME_DIR}/*smos* && rm ${USER_HOME_DIR}/*sentinel* && \
