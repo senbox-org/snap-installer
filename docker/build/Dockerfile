@@ -146,7 +146,9 @@ RUN wget -nv https://download.ej-technologies.com/install4j/install4j_linux-x64_
 	apt-get install -qqyf /tmp/install4j_linux.deb && \
 	rm /tmp/install4j_linux.deb
 
-RUN mkdir -p ${DEST}/snap-installer ${DEST}/snap-installer/files ${DEST}/snap-installer/images \${DEST}/snap-desktop/snap-main/target/ ${DEST}/snap-engine \
+RUN mkdir -p ${DEST}/snap-installer \
+    ${DEST}/snap-installer/files ${DEST}/snap-installer/images \
+    ${DEST}/snap-desktop/snap-main/target/ ${DEST}/snap-engine \
     ${DEST}/snap-desktop/snap-application/target/snap/etc ${DEST}/snap-desktop/snap-application/target/snap/snap \ 
     ${DEST}/snap-desktop/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/ \
     ${DEST}/microwavetbx-kit/target/netbeans_clusters/rstb/ \
@@ -178,6 +180,8 @@ COPY esasnappy-kit/target/nbm/clusters/extra/ ${DEST}/esa-snappy/esasnappy-kit/t
 # Create installers
 ARG LICENSE
 ARG USER_HOME_DIR="/home/snap"
+
+RUN ls -al "\${DEST}"
 
 RUN pwd && ls -al && install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder,windows ${DEST}/snap-installer/snap.install4j && \
     chmod 777 ${USER_HOME_DIR}/esa-* && \
