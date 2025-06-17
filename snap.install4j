@@ -48,7 +48,7 @@
       <dirEntry mountPoint="58" file="../microwave-toolbox/microwavetbx-kit/target/netbeans_clusters/rstb" entryMode="subdir" subDirectory="rstb" />
       <dirEntry mountPoint="58" file="../optical-toolbox/opttbx-kit/target/netbeans_clusters/opttbx" entryMode="subdir" subDirectory="opttbx" />
       <dirEntry mountPoint="58" file="../esa-snappy/esasnappy-kit/target/nbm/clusters/extra" entryMode="subdir" subDirectory="esasnappy" />
-      <dirEntry mountPoint="58" file="../smos-kit/target/netbeans_clusters/smos" entryMode="subdir" subDirectory="smos" />
+      <dirEntry mountPoint="58" file="../smos-box/smos-kit/target/netbeans_clusters/smos" entryMode="subdir" subDirectory="smos" />
       <fileEntry mountPoint="58" file="./LICENSE.txt" />
       <fileEntry mountPoint="58" file="../snap-desktop/snap-application/target/snap/THIRDPARTY_LICENSES.txt" />
       <fileEntry mountPoint="58" file="./VERSION.txt" />
