@@ -146,14 +146,15 @@ RUN wget -nv https://download.ej-technologies.com/install4j/install4j_linux-x64_
 	apt-get install -qqyf /tmp/install4j_linux.deb && \
 	rm /tmp/install4j_linux.deb
 
-RUN mkdir -p ${DEST}/snap-installer ${DEST}/snap-installer/files ${DEST}/snap-installer/images \${DEST}/snap-desktop/snap-main/target/ ${DEST}/snap-engine \
+RUN mkdir -p ${DEST}/snap-installer \
+    ${DEST}/snap-installer/files ${DEST}/snap-installer/images \
+    ${DEST}/snap-desktop/snap-main/target/ ${DEST}/snap-engine \
     ${DEST}/snap-desktop/snap-application/target/snap/etc ${DEST}/snap-desktop/snap-application/target/snap/snap \ 
     ${DEST}/snap-desktop/snap-smart-configurator-ui/src/main/resources/org/esa/snap/smart/configurator/ui/ \
     ${DEST}/microwavetbx-kit/target/netbeans_clusters/rstb/ \
     ${DEST}/opttbx-kit/target/netbeans_clusters/opttbx/ \
-    ${DEST}/esa-snappy/target/nbm/clusters/extra/
-
-# ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos
+    ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos/ \
+    ${DEST}/esa-snappy/esasnappy-kit/target/nbm/clusters/extra/
 
 COPY snap.install4j LICENSE.txt VERSION.txt ${DEST}/snap-installer/
 COPY files/ ${DEST}/snap-installer/files/
@@ -173,14 +174,14 @@ COPY snap-application/target/snap/THIRDPARTY_LICENSES.txt ${DEST}/snap-desktop/s
 COPY microwavetbx-kit/target/netbeans_clusters/microwavetbx ${DEST}/microwave-toolbox/microwavetbx-kit/target/netbeans_clusters/microwavetbx/
 COPY microwavetbx-kit/target/netbeans_clusters/rstb ${DEST}/microwave-toolbox/microwavetbx-kit/target/netbeans_clusters/rstb/
 COPY opttbx-kit/target/netbeans_clusters/opttbx ${DEST}/optical-toolbox/opttbx-kit/target/netbeans_clusters/opttbx/
-# COPY smos-kit/target/netbeans_clusters/smos/ ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos/
-COPY esasnappy-kit/target/nbm/clusters/extra/ ${DEST}/esa-snappy/target/nbm/clusters/extra/
+COPY smos-kit/target/netbeans_clusters/smos/ ${DEST}/smos-box/smos-kit/target/netbeans_clusters/smos/
+COPY esasnappy-kit/target/nbm/clusters/extra/ ${DEST}/esa-snappy/esasnappy-kit/target/nbm/clusters/extra/
 
 # Create installers
 ARG LICENSE
 ARG USER_HOME_DIR="/home/snap"
 
-RUN install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder,windows ${DEST}/snap-installer/snap.install4j && \
+RUN cd ${DEST}/snap-installer && install4jc -q -d ${USER_HOME_DIR} -L ${LICENSE} -m unixInstaller,macosFolder,windows ${DEST}/snap-installer/snap.install4j && \
     chmod 777 ${USER_HOME_DIR}/esa-* && \
     rm ${USER_HOME_DIR}/*x32* && \
     # rm ${USER_HOME_DIR}/*smos* && rm ${USER_HOME_DIR}/*sentinel* && \
