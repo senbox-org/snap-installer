@@ -19,7 +19,7 @@ variables:
   DOCKER_REGISTRY_PASSWORD: $NEXUS_PASSWORD
   DOCKER_FILE: "docker/build/Dockerfile"
   DOCKER_CONTEXT_PATH: "${CI_PROJECT_DIR}"
-  DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:13.0.0-snapshot"
+  DOCKER_SNAPSHOT_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:13.0.0-rc1"
   DOCKER_RELEASE_IMAGE: "$NEXUS_URL/$CI_PROJECT_NAME:13.0.0"
   DOCKER_TRIVY_ARGS: "--ignore-unfixed --vuln-type os --debug --timeout 15m"
   DOCKER_TRIVY_SECURITY_LEVEL_THRESHOLD: CRITICAL
@@ -27,7 +27,7 @@ variables:
   DOCKER_HADOLINT_ARGS: --failure-threshold error
   DOCKER_PROD_PUBLISH_STRATEGY: auto
   DOCKER_BUILD_CACHE_DISABLED: "true"
-  COMPILE_BRANCH: master
+  COMPILE_BRANCH: 13.x
   # RECOMPILE: "true"
   RECOMPILE:
     description: When other projects should be recompiled or if artifacts are already safe to get from COMPILE_BRANCH
