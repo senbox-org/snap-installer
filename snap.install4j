@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="10.0.7" transformSequenceNumber="10">
   <directoryPresets config="../snap-desktop/snap-application/target/snap/THIRDPARTY_LICENSES.txt" />
-  <application name="ESA SNAP" applicationId="0941-5747-6134-5911" mediaDir="./target" compression="9" commonExternalFiles="true" shrinkRuntime="false" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="13.0.0-SNAPSHOT" allPathsRelative="true" macVolumeId="69e291547ea53333" javaMinVersion="21" allowBetaVM="true" jdkMode="jdk">
+  <application name="ESA SNAP" applicationId="0941-5747-6134-5911" mediaDir="./target" compression="9" commonExternalFiles="true" shrinkRuntime="false" shortName="esa-snap" publisher="European Space Agency" publisherWeb="http://www.esa.int/ESA" version="14.0.0-SNAPSHOT" allPathsRelative="true" macVolumeId="69e291547ea53333" javaMinVersion="21" allowBetaVM="true" jdkMode="jdk">
     <variables>
       <variable name="snapDesktopName" value="snap" />
       <variable name="snapGptName" value="gpt" />
