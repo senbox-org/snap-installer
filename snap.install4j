@@ -574,19 +574,21 @@ problems after SNAP version upgrades.</property>
                   </formComponent>
                   <formComponent id="234" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
                     <serializedBean>
-                      <property name="labelHtml" type="string">&lt;html&gt;If you are a
+                      <property name="labelHtml" type="string">&lt;html&gt;
+                      SNAP supports Python versions from &lt;b&gt;3.9&lt;/b&gt; to &lt;b&gt;3.13&lt;/b&gt;. If you are a
                       &lt;a href="https://www.python.org/"&gt;Python&lt;/a&gt; developer,
-                      you can use the SNAP Java API from Python, or develop SNAP processor plugins using Python.
-                      Below you can
-                      specify your preferred Python version by the given Python executable to be used. This version
-                      of SNAP supports Python versions up to &lt;b&gt;3.12&lt;/b&gt;.
-                      We recommend to use one of the most recent Python distributions available from
+                      you can use the SNAP Java API from Python or build SNAP processor plugins with Python.
+                      &lt;br&gt;&lt;br&gt;
+                      Specify your preferred Python executable below.
+                      We recommend to use the latest Python distributions from
                       &lt;a href="https://docs.anaconda.com/anaconda/install/"&gt;Anaconda&lt;/a&gt; or
-                      &lt;a href="https://docs.anaconda.com/miniconda/install/"&gt;Miniconda&lt;/a&gt; which come with user-friendly installers.
-               &lt;br&gt;&lt;br&gt;
-                     After selection of a Python executable below, the esa_snappy Python package will be downloaded
-                     and installed from the &lt;a href="https://www.python.org/"&gt;Python Package Index&lt;/a&gt;
-                     into the site-packages folder of your Python installation. Please wait for the confirmation dialog, then proceed with the
+                      &lt;a href="https://docs.anaconda.com/miniconda/install/"&gt;Miniconda&lt;/a&gt;.
+                      &lt;br&gt;&lt;br&gt;
+                      If you opted for another installation method, please refer to our
+                      &lt;a href="https://senbox.atlassian.net/wiki/spaces/SNAP/pages/3114106881/Installation+and+configuration+of+the+SNAP-Python+esa_snappy+interface+SNAP+version+12/"&gt;SNAP documentation&lt;/a&gt;
+                      before proceeding.
+                      &lt;br&gt;&lt;br&gt;
+                     After selection of a Python executable below, please wait for the confirmation dialog, then proceed with the
                      SNAP installation.
                      &lt;/html&gt;</property>
                     </serializedBean>
@@ -624,7 +626,7 @@ if (!pythonExecutable.isEmpty()) {
         
         if (process.exitValue() != 0) {
             final String failMsg = "Could not install esa_snappy Python package from PyPi repository." +
-                                   " Please check your Python environment.";
+                                   " Please check your Python environment, and if selected Python version is supported.";
             Util.showErrorMessage(failMsg);
             success = false;
         } else {
@@ -648,26 +650,12 @@ return success;
                 <initScript>configurationObject.setText("");
 </initScript>
               </formComponent>
-              <formComponent name="Win" id="955" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
-                <serializedBean>
-                  <property name="labelHtml" type="string">You may type &lt;b&gt;where python&lt;/b&gt; in a cmd terminal window to find the path to your preferred Python version.</property>
-                </serializedBean>
-                <visibilityScript>Util.isWindowsInstaller()</visibilityScript>
-              </formComponent>
-              <formComponent name="Unix" id="954" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
-                <serializedBean>
-                  <property name="labelHtml" type="string">You may type &lt;b&gt;which python&lt;/b&gt; in a terminal window to find the path to your preferred Python version.</property>
-                </serializedBean>
-                <visibilityScript>Util.isMacosInstaller() || Util.isUnixInstaller()</visibilityScript>
-              </formComponent>
+
               <formComponent id="1878" beanClass="com.install4j.runtime.beans.formcomponents.MultilineHtmlLabelComponent">
                 <serializedBean>
-                  <property name="labelHtml" type="string"> After successful configuration you will find the SNAP Python
-                  module &lt;b&gt;esa_snappy&lt;/b&gt; in the site-packages folder of your Python installation.
-                  The Python interpreter and the location of the esa_snappy module can be changed any time
-                  by manually installing esa_snappy with &lt;b&gt;pip&lt;/b&gt; and using
-                  the &lt;b&gt;bin/snappy-conf&lt;/b&gt; tool in your SNAP installation folder.
-                  See more details in the
+                  <property name="labelHtml" type="string">
+                  The Python executable and the location of the esa_snappy Python package can be changed any time,
+                  see details in the
                   &lt;a href="https://senbox.atlassian.net/wiki/spaces/SNAP/pages/3114106881/Installation+and+configuration+of+the+SNAP-Python+esa_snappy+interface+SNAP+version+12/"&gt;SNAP documentation&lt;/a&gt;.
                   </property>
                 </serializedBean>
