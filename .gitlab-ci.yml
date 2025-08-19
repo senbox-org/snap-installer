@@ -80,7 +80,7 @@ compile-snap-engine:
     - |
       PROJECT_ID=$(echo "$PROJECT_ENGINE" | jq -r '.ID')
       TOKEN=$(echo "$PROJECT_ENGINE" | jq -r '.TOKEN')      
-      RESPONSE=$(curl -X POST --fail -F token=$TOKEN -F ref=$COMPILE_BRANCH https://gitlab.com/api/v4/projects/$PROJECT_ID/trigger/pipeline)
+      RESPONSE=$(curl --max-time 15 -X POST --fail -F token=$TOKEN -F BUILD_FOR_INSTALLER=$BUILD_FOR_INSTALLER -F ref=$COMPILE_BRANCH https://gitlab.com/api/v4/projects/$PROJECT_ID/trigger/pipeline)
       echo "RESPONSE $RESPONSE"
       PIPELINE_ID=$(echo "$RESPONSE" | jq -r '.id')
       echo "Triggered pipeline $PIPELINE_ID for project $PROJECT_ID"
@@ -119,7 +119,7 @@ compile-snap-desktop:
     - |
       PROJECT_ID=$(echo "$PROJECT_DESKTOP" | jq -r '.ID')
       TOKEN=$(echo "$PROJECT_DESKTOP" | jq -r '.TOKEN')      
-      RESPONSE=$(curl --max-time 15 -X POST --fail -F token=$TOKEN -F ref=$COMPILE_BRANCH https://gitlab.com/api/v4/projects/$PROJECT_ID/trigger/pipeline)
+      RESPONSE=$(curl --max-time 15 -X POST --fail -F token=$TOKEN -F BUILD_FOR_INSTALLER=$BUILD_FOR_INSTALLER -F ref=$COMPILE_BRANCH https://gitlab.com/api/v4/projects/$PROJECT_ID/trigger/pipeline)
       echo "RESPONSE $RESPONSE"
       PIPELINE_ID=$(echo "$RESPONSE" | jq -r '.id')
       echo "Triggered pipeline $PIPELINE_ID for project $PROJECT_ID"
@@ -162,7 +162,7 @@ compile-others-trigger-pipelines:
       for item in $(echo "$PROJECTS" | jq -c '.[]'); do
         PROJECT_ID=$(echo "$item" | jq -r '.ID')
         TOKEN=$(echo "$item" | jq -r '.TOKEN')
-        RESPONSE=$(curl --max-time 15 -X POST --fail -F token=$TOKEN -F ref=$COMPILE_BRANCH https://gitlab.com/api/v4/projects/$PROJECT_ID/trigger/pipeline)
+        RESPONSE=$(curl --max-time 15 -X POST --fail -F token=$TOKEN -F BUILD_FOR_INSTALLER=$BUILD_FOR_INSTALLER -F ref=$COMPILE_BRANCH https://gitlab.com/api/v4/projects/$PROJECT_ID/trigger/pipeline)
         echo "RESPONSE $RESPONSE"
         PIPELINE_ID=$(echo "$RESPONSE" | jq -r '.id')
         echo "Triggered pipeline $PIPELINE_ID for project $PROJECT_ID"
