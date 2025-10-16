@@ -62,12 +62,12 @@ stages:
       when: always
     - if: $RECOMPILE == "false"
       when: never
-    - if: $BRANCH
-      variables:
-        COMPILE_BRANCH: $BRANCH
     - if: $CI_COMMIT_TAG
       variables:
         COMPILE_BRANCH: $CI_COMMIT_TAG
+    - if: $BRANCH
+      variables:
+        COMPILE_BRANCH: $BRANCH
 
 compile-snap-engine:
   extends: .compile
