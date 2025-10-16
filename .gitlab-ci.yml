@@ -27,7 +27,7 @@ variables:
   DOCKER_HADOLINT_ARGS: --failure-threshold error
   DOCKER_PROD_PUBLISH_STRATEGY: auto
   DOCKER_BUILD_CACHE_DISABLED: "true"
-  COMPILE_BRANCH: master
+  COMPILE_BRANCH: ${CI_COMMIT_REF_NAME}
   # RECOMPILE: "true"
   RECOMPILE:
     description: When other projects should be recompiled or if artifacts are already safe to get from COMPILE_BRANCH
@@ -111,6 +111,8 @@ compile-snap-engine:
     - mkdir -p artifacts
   script:    
     - |
+      echo "Ref is $COMPILE_BRANCH"
+      printenv | sort
       PROJECT_ID=$(echo "$PROJECT_ENGINE" | jq -r '.ID')
       TOKEN=$(echo "$PROJECT_ENGINE" | jq -r '.TOKEN')      
       RESPONSE=$(curl -X POST --fail -F token=$TOKEN -F ref=$COMPILE_BRANCH https://gitlab.com/api/v4/projects/$PROJECT_ID/trigger/pipeline)
