@@ -27,7 +27,7 @@ variables:
   DOCKER_HADOLINT_ARGS: --failure-threshold error
   DOCKER_PROD_PUBLISH_STRATEGY: auto
   DOCKER_BUILD_CACHE_DISABLED: "true"
-  COMPILE_BRANCH: ${CI_COMMIT_REF_NAME}
+  COMPILE_BRANCH: feat-ci-trigger
   # RECOMPILE: "true"
   RECOMPILE:
     description: When other projects should be recompiled or if artifacts are already safe to get from COMPILE_BRANCH
@@ -58,6 +58,9 @@ stages:
 .compile:
   stage: compile
   rules:
+    - if: $CI_COMMIT_REF_NAME
+      variables:
+        COMPILE_BRANCH: $CI_COMMIT_REF_NAME
     - if: $RECOMPILE == "true"
       when: always
     - if: $RECOMPILE == "false"
