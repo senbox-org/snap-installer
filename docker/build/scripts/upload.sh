@@ -12,7 +12,7 @@ do
     then
         echo $file
         export OS=$(echo "$file" | grep -oP  "(linux|windows|macos)")
-        export VERSION="15.0.0-SNAPSHOT"
+        export VERSION="15.0.0"
         export EXT=""
         export GROUP="installers"
         export REPO="snap-maven-releases"
