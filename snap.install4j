@@ -265,9 +265,56 @@
                 <serializedBean>
                   <property name="script">
                     <object class="com.install4j.api.beans.ScriptProperty">
-                      <property name="value" type="string">String userHome = System.getProperty("user.home");
-return new File(userHome, ".snap");
-</property>
+                      <property name="value" type="string"><![CDATA[
+String home = System.getProperty("user.home");
+java.io.File conf = new java.io.File(
+        context.getInstallationDirectory(), "etc/snap.conf");
+String value = null;
+
+if (conf.isFile()) {
+    String text = new String(
+        java.nio.file.Files.readAllBytes(conf.toPath()),
+        java.nio.charset.StandardCharsets.UTF_8);
+
+    java.util.regex.Pattern optionsPattern = java.util.regex.Pattern.compile(
+        "(?m)^\\s*default_options\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\r\\n#]*))");
+    java.util.regex.Matcher optionsMatcher = optionsPattern.matcher(text);
+
+    if (optionsMatcher.find()) {
+        String options = optionsMatcher.group(1) != null
+                ? optionsMatcher.group(1)
+                : optionsMatcher.group(2) != null
+                    ? optionsMatcher.group(2)
+                    : optionsMatcher.group(3).trim();
+
+        java.util.regex.Pattern userdirPattern = java.util.regex.Pattern.compile(
+            "-J-Dsnap\\.userdir=(?:\"([^\"]*)\"|([^\\s]+))");
+        java.util.regex.Matcher userdirMatcher = userdirPattern.matcher(options);
+
+        if (userdirMatcher.find()) {
+            value = userdirMatcher.group(1) != null
+                    ? userdirMatcher.group(1)
+                    : userdirMatcher.group(2);
+        }
+    }
+}
+
+if (value == null || value.isEmpty()) {
+    value = new java.io.File(home, ".snap").getPath();
+}
+
+value = value.replace("${HOME}", home);
+value = value.replace("$HOME", home);
+String defaultUserdirRoot = System.getenv("DEFAULT_USERDIR_ROOT");
+if (defaultUserdirRoot == null || defaultUserdirRoot.isEmpty()) {
+    defaultUserdirRoot = new java.io.File(
+        home, "AppData\\Roaming\\SNAP").getPath();
+}
+value = value.replace("${DEFAULT_USERDIR_ROOT}", defaultUserdirRoot);
+value = value.replace("$DEFAULT_USERDIR_ROOT", defaultUserdirRoot);
+
+return new java.io.File(value);
+                      ]]></property>
                     </object>
                   </property>
                   <property name="variableName" type="string">snapEngineUserDir</property>
@@ -277,9 +324,82 @@ return new File(userHome, ".snap");
                 <serializedBean>
                   <property name="script">
                     <object class="com.install4j.api.beans.ScriptProperty">
-                      <property name="value" type="string">String userHome = System.getProperty("user.home");
-return new File(userHome, Util.isWindowsInstaller() ? "AppData\\Roaming\\SNAP" : ".snap/system");
-</property>
+                      <property name="value" type="string"><![CDATA[
+String home = System.getProperty("user.home");
+boolean windows = Util.isWindowsInstaller();
+boolean mac = Util.isMacOS() || Util.isMacosInstaller();
+java.io.File conf = new java.io.File(
+        context.getInstallationDirectory(), "etc/snap.conf");
+String value = null;
+
+if (conf.isFile()) {
+    String key = mac ? "default_mac_userdir" : "default_userdir";
+    String text = new String(
+        java.nio.file.Files.readAllBytes(conf.toPath()),
+        java.nio.charset.StandardCharsets.UTF_8);
+
+    java.util.regex.Pattern p = java.util.regex.Pattern.compile(
+        "(?m)^\\s*" + java.util.regex.Pattern.quote(key)
+        + "\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\r\\n#]*))");
+    java.util.regex.Matcher m = p.matcher(text);
+
+    if (m.find()) {
+        value = m.group(1) != null ? m.group(1)
+             : m.group(2) != null ? m.group(2)
+             : m.group(3).trim();
+    }
+}
+
+if (value == null || value.isEmpty()) {
+    value = new java.io.File(
+        home, windows ? "AppData\\Roaming\\SNAP" : ".snap/system"
+    ).getPath();
+}
+
+value = value.replace("${HOME}", home);
+value = value.replace("$HOME", home);
+
+if (windows && (value.contains("${DEFAULT_USERDIR_ROOT}")
+        || value.contains("$DEFAULT_USERDIR_ROOT"))) {
+    String appData = System.getenv("APPDATA");
+    if (appData == null || appData.isEmpty()) {
+        appData = new java.io.File(home, "AppData\\Roaming").getPath();
+    }
+
+    String snapRoot = new java.io.File(appData, "SNAP").getPath();
+    String directPath = value
+        .replace("${DEFAULT_USERDIR_ROOT}", appData)
+        .replace("$DEFAULT_USERDIR_ROOT", appData);
+    String snapRootPath = value
+        .replace("${DEFAULT_USERDIR_ROOT}", snapRoot)
+        .replace("$DEFAULT_USERDIR_ROOT", snapRoot);
+
+    java.io.File directDir = new java.io.File(directPath);
+    java.io.File snapRootDir = new java.io.File(snapRootPath);
+    String normalizedValue = value.replace('\\', '/');
+    boolean standardDefault = normalizedValue.equals(
+            "${DEFAULT_USERDIR_ROOT}/SNAP")
+        || normalizedValue.equals("$DEFAULT_USERDIR_ROOT/SNAP");
+
+    if (directDir.exists() && !snapRootDir.exists()) {
+        value = directPath;
+    } else if (snapRootDir.exists() && !directDir.exists()) {
+        value = snapRootPath;
+    } else {
+        value = standardDefault ? directPath : snapRootPath;
+    }
+} else {
+    String defaultUserdirRoot = System.getenv("DEFAULT_USERDIR_ROOT");
+    if (defaultUserdirRoot == null || defaultUserdirRoot.isEmpty()) {
+        defaultUserdirRoot = new java.io.File(
+            home, "AppData\\Roaming\\SNAP").getPath();
+    }
+    value = value.replace("${DEFAULT_USERDIR_ROOT}", defaultUserdirRoot);
+    value = value.replace("$DEFAULT_USERDIR_ROOT", defaultUserdirRoot);
+}
+
+return new java.io.File(value);
+                      ]]></property>
                     </object>
                   </property>
                   <property name="variableName" type="string">snapDesktopUserDir</property>
@@ -398,7 +518,7 @@ return console.askOkCancel(message, true);
               <property name="subTitle" type="string">Delete SNAP's configuration data and user settings?</property>
               <property name="title" type="string">SNAP User Data</property>
             </serializedBean>
-            <condition>context.getVariable("snapEngineUserDir") != null || context.getVariable("snapDesktopUserDir") != null </condition>
+            <condition>((context instanceof com.install4j.api.context.UninstallerContext) || context.getBooleanVariable("sys.confirmedUpdateInstallation")) &amp;&amp; (context.getVariable("snapEngineUserDir") != null || context.getVariable("snapDesktopUserDir") != null)</condition>
             <actions>
               <action name="Delete SNAP Desktop dirs" id="2353" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" actionElevationType="elevated">
                 <serializedBean>
@@ -411,7 +531,7 @@ return console.askOkCancel(message, true);
                   </property>
                   <property name="recursive" type="boolean" value="true" />
                 </serializedBean>
-                <condition>context.getVariable("deleteSnapDir").equals("DESKTOP")</condition>
+                <condition>"DESKTOP".equals(context.getVariable("deleteSnapDir"))</condition>
               </action>
               <action name="Delete all SNAP Engine dirs" id="2467" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" actionElevationType="elevated">
                 <serializedBean>
@@ -429,7 +549,7 @@ return console.askOkCancel(message, true);
                   </property>
                   <property name="recursive" type="boolean" value="true" />
                 </serializedBean>
-                <condition>context.getVariable("deleteSnapDir").equals("ALL")</condition>
+                <condition>"ALL".equals(context.getVariable("deleteSnapDir"))</condition>
               </action>
             </actions>
             <formComponents>
@@ -1344,8 +1464,169 @@ toolboxes.&lt;/html&gt;</property>
             <actions>
               <action id="20" beanClass="com.install4j.runtime.beans.actions.misc.LoadResponseFileAction" />
               <action id="21" beanClass="com.install4j.runtime.beans.actions.misc.RequireInstallerPrivilegesAction" actionElevationType="none" />
-              <link id="2358" targetId="1320" />
-              <link id="2359" targetId="2356" />
+
+              <action name="Read NetBeans userdir from snap.conf" id="5001" beanClass="com.install4j.runtime.beans.actions.control.SetVariableAction">
+                <serializedBean>
+                  <property name="script">
+                    <object class="com.install4j.api.beans.ScriptProperty">
+                      <property name="value" type="string"><![CDATA[
+              java.io.File conf = new java.io.File(
+                      context.getInstallationDirectory(), "etc/snap.conf");
+
+              String value = null;
+              String home = System.getProperty("user.home");
+              boolean windows = com.install4j.api.Util.isWindowsInstaller();
+              boolean mac = com.install4j.api.Util.isMacOS()
+                      || com.install4j.api.Util.isMacosInstaller();
+
+              if (conf.isFile()) {
+                  String key = mac ? "default_mac_userdir" : "default_userdir";
+                  java.util.regex.Pattern p = java.util.regex.Pattern.compile(
+                      "(?m)^\\s*" + java.util.regex.Pattern.quote(key)
+                      + "\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\r\\n#]*))");
+
+                  String text = new String(
+                      java.nio.file.Files.readAllBytes(conf.toPath()),
+                      java.nio.charset.StandardCharsets.UTF_8);
+
+                  java.util.regex.Matcher m = p.matcher(text);
+                  if (m.find()) {
+                      value = m.group(1) != null ? m.group(1)
+                           : m.group(2) != null ? m.group(2)
+                           : m.group(3).trim();
+                  }
+              }
+
+              if (value == null || value.isEmpty()) {
+                  value = new java.io.File(
+                      home,
+                      windows ? "AppData\\Roaming\\SNAP" : ".snap/system"
+                  ).getPath();
+              }
+
+              value = value.replace("${HOME}", home);
+              value = value.replace("$HOME", home);
+
+              if (windows && (value.contains("${DEFAULT_USERDIR_ROOT}")
+                      || value.contains("$DEFAULT_USERDIR_ROOT"))) {
+                  String appData = System.getenv("APPDATA");
+                  if (appData == null || appData.isEmpty()) {
+                      appData = new java.io.File(
+                          home, "AppData\\Roaming").getPath();
+                  }
+
+                  String snapRoot = new java.io.File(appData, "SNAP").getPath();
+                  String directPath = value
+                      .replace("${DEFAULT_USERDIR_ROOT}", appData)
+                      .replace("$DEFAULT_USERDIR_ROOT", appData);
+                  String snapRootPath = value
+                      .replace("${DEFAULT_USERDIR_ROOT}", snapRoot)
+                      .replace("$DEFAULT_USERDIR_ROOT", snapRoot);
+
+                  java.io.File directDir = new java.io.File(directPath);
+                  java.io.File snapRootDir = new java.io.File(snapRootPath);
+                  String normalizedValue = value.replace('\\', '/');
+                  boolean standardDefault = normalizedValue.equals(
+                          "${DEFAULT_USERDIR_ROOT}/SNAP")
+                      || normalizedValue.equals("$DEFAULT_USERDIR_ROOT/SNAP");
+
+                  if (directDir.exists() && !snapRootDir.exists()) {
+                      value = directPath;
+                  } else if (snapRootDir.exists() && !directDir.exists()) {
+                      value = snapRootPath;
+                  } else {
+                      value = standardDefault ? directPath : snapRootPath;
+                  }
+              } else {
+                  String defaultUserdirRoot = System.getenv(
+                      "DEFAULT_USERDIR_ROOT");
+                  if (defaultUserdirRoot == null
+                          || defaultUserdirRoot.isEmpty()) {
+                      defaultUserdirRoot = new java.io.File(
+                          home, "AppData\\Roaming\\SNAP").getPath();
+                  }
+                  value = value.replace(
+                      "${DEFAULT_USERDIR_ROOT}", defaultUserdirRoot);
+                  value = value.replace(
+                      "$DEFAULT_USERDIR_ROOT", defaultUserdirRoot);
+              }
+
+              return new java.io.File(value);
+                      ]]></property>
+                    </object>
+                  </property>
+                  <property name="variableName" type="string">snapDesktopUserDir</property>
+                </serializedBean>
+              </action>
+
+              <action name="Read Engine userdir from snap.conf" id="5002" beanClass="com.install4j.runtime.beans.actions.control.SetVariableAction">
+                <serializedBean>
+                  <property name="script">
+                    <object class="com.install4j.api.beans.ScriptProperty">
+                      <property name="value" type="string"><![CDATA[
+                          java.io.File conf = new java.io.File(
+                                  context.getInstallationDirectory(), "etc/snap.conf");
+
+                          String value = null;
+
+                          if (conf.isFile()) {
+                              String text = new String(
+                                  java.nio.file.Files.readAllBytes(conf.toPath()),
+                                  java.nio.charset.StandardCharsets.UTF_8);
+
+                              java.util.regex.Pattern optionsPattern =
+                                  java.util.regex.Pattern.compile(
+                                      "(?m)^\\s*default_options\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\r\\n#]*))");
+
+                              java.util.regex.Matcher optionsMatcher =
+                                  optionsPattern.matcher(text);
+
+                              if (optionsMatcher.find()) {
+                                  String options = optionsMatcher.group(1) != null
+                                          ? optionsMatcher.group(1)
+                                          : optionsMatcher.group(2) != null
+                                              ? optionsMatcher.group(2)
+                                              : optionsMatcher.group(3).trim();
+
+                                  java.util.regex.Pattern userdirPattern =
+                                      java.util.regex.Pattern.compile(
+                                          "-J-Dsnap\\.userdir=(?:\"([^\"]*)\"|([^\\s]+))");
+
+                                  java.util.regex.Matcher userdirMatcher =
+                                          userdirPattern.matcher(options);
+
+                                  if (userdirMatcher.find()) {
+                                      value = userdirMatcher.group(1) != null
+                                              ? userdirMatcher.group(1)
+                                              : userdirMatcher.group(2);
+                                  }
+                              }
+                          }
+
+                          if (value == null || value.isEmpty()) {
+                              value = new java.io.File(
+                                  System.getProperty("user.home"), ".snap").getPath();
+                          }
+
+                          String home = System.getProperty("user.home");
+                          String defaultUserdirRoot = System.getenv("DEFAULT_USERDIR_ROOT");
+                          if (defaultUserdirRoot == null || defaultUserdirRoot.isEmpty()) {
+                              defaultUserdirRoot = new java.io.File(
+                                  home, "AppData\\Roaming\\SNAP").getPath();
+                          }
+                          value = value.replace("${HOME}", home);
+                          value = value.replace("$HOME", home);
+                          value = value.replace("${DEFAULT_USERDIR_ROOT}", defaultUserdirRoot);
+                          value = value.replace("$DEFAULT_USERDIR_ROOT", defaultUserdirRoot);
+
+                          return new java.io.File(value);
+                      ]]></property>
+                    </object>
+                  </property>
+                  <property name="variableName" type="string">snapEngineUserDir</property>
+                </serializedBean>
+              </action>
+
             </actions>
           </screen>
         </startup>
